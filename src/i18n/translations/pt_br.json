@@ -1,6 +1,8 @@
 {
-    "translation": {
-      "About": "Sobre"
-    }
+  "translation": {
+    "About": "Sobre",
+    "Portfolio": "Portfólio",
+    "Experience": "Experiência",
+    "Contact": "Contato"
   }
-  
+}
