@@ -17,7 +17,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Header toggleTheme={toggleTheme}></Header>
+      <Header toggleTheme={toggleTheme} />
     </ThemeProvider>
   );
 };

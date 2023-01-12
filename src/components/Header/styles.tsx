@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-scroll';
+import { FaSun, FaMoon } from 'react-icons/fa';
+import { CircleFlag } from 'react-circle-flags';
 
 export const Navbar = styled.header`
   display: flex;
@@ -7,27 +9,25 @@ export const Navbar = styled.header`
   align-items: center;
   position: sticky;
   top: 0;
-  /* margin-top: -80px; */
   height: 80px;
   z-index: 10;
   font-size: 1rem;
-  background: #000;
-
-  /* @media screen and (max-width: 960px) {
-    transition: 0.8s all ease;
-  } */
+  background: ${props => props.theme.colors.background};
 `;
 
 export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  height: 80px;
+  height: 100%;
   width: 100%;
   padding: 0 24px;
   z-index: 1;
 `;
 
-export const NavLogo = styled.img``;
+export const NavLogo = styled(Link)`
+  user-select: none;
+  cursor: pointer;
+`;
 
 export const MobileIcon = styled.div`
   display: none;
@@ -39,8 +39,12 @@ export const MobileIcon = styled.div`
     right: 0;
     transform: translate(-100%, 25%);
     font-size: 1.8rem;
-    color: #fff;
+    color: ${props => props.theme.colors.text};
     cursor: pointer;
+
+    &:hover {
+      color: ${props => props.theme.colors.accent};
+    }
   }
 `;
 
@@ -57,47 +61,90 @@ export const NavMenu = styled.ul`
 `;
 
 export const NavItem = styled.li`
-  height: 80px;
+  height: 50px;
 `;
 
 export const NavLinks = styled(Link)`
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  justify-content: center;
   height: 100%;
-  color: #fff;
+  padding: 5px 2rem;
+  color: ${props => props.theme.colors.text};
   text-decoration: none;
+  user-select: none;
+  transition: 0.3s;
   cursor: pointer;
 
-  &.active {
-    border-bottom: 3px solid #01bf71;
+  &:hover {
+    color: ${props => props.theme.colors.accent};
   }
+
+  &.active {
+    border-bottom: 3px solid ${props => props.theme.colors.accent};
+  }
+`;
+
+interface MobileMenuProps {
+  isOpen: boolean;
+  onClick: React.MouseEventHandler<HTMLUListElement>;
+}
+
+export const MobileMenu = styled.ul<MobileMenuProps>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  height: calc(100vh - 80px);
+  width: 100%;
+  gap: 10vh;
+  padding: 20% 0;
+  transform: translateX(${props => (props.isOpen ? '0' : '100%')});
+  font-size: 2rem;
+  color: ${props => props.theme.colors.text};
+  background: ${props => props.theme.colors.background};
+  list-style: none;
+  transition: 0.5s transform;
+
+  @media screen and (max-width: 568px) {
+    gap: 10px;
+  }
+`;
+
+export const MobileBtns = styled.nav`
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
 `;
 
 export const NavBtns = styled.nav`
   display: flex;
   align-items: center;
-
+  gap: 10px;
+  
   @media screen and (max-width: 768px) {
     display: none;
   }
 `;
 
-export const ToggleBtn = styled.button`
-  border-radius: 50px;
-  background: #01bf71;
-  white-space: nowrap;
-  padding: 10px 22px;
-  color: #010606;
-  font-size: 1rem;
-  outline: none;
-  bottom: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  text-decoration: none;
+export const Sun = styled(FaSun)`
+  position: absolute;
+  transform: translate(2px, 1px);
+  font-size: 1.5rem;
+  text-align: center;
+  user-select: none;
+`;
 
-  &:hover {
-    background: #fff;
-    color: #010606;
-  }
+export const Moon = styled(FaMoon)`
+  position: absolute;
+  transform: translate(0, 2px);
+  font-size: 1.5rem;
+  text-align: center;
+  user-select: none;
+`;
+
+export const Flag = styled(CircleFlag)`
+  position: absolute;
+  transform: translate(-1px, -36px);
 `;

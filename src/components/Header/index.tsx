@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ThemeContext } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
@@ -17,7 +17,11 @@ import {
   NavLinks,
   NavLogo,
   NavMenu,
-  ToggleBtn,
+  Sun,
+  Moon,
+  Flag,
+  MobileMenu,
+  MobileBtns,
 } from './styles';
 
 interface Props {
@@ -27,34 +31,95 @@ interface Props {
 const Header: React.FC<Props> = ({ toggleTheme }) => {
   const { t, i18n } = useTranslation();
   const { colors, title } = useContext(ThemeContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  function toggleLanguage() {
+    i18n.changeLanguage(i18n.language === 'pt_br' ? 'en' : 'pt_br');
+  }
 
   return (
-    <Navbar>
-      <Nav>
-        <NavLogo src={Logo} />
-        <MobileIcon>
-          <Hamburger />
-        </MobileIcon>
-        <NavMenu>
-          {LINKS.map(link => (
-            <NavItem key={link.id}>
-              <NavLinks to={link.name}>{t(link.name)}</NavLinks>
-            </NavItem>
-          ))}
-        </NavMenu>
-        <NavBtns>
+    <>
+      <Navbar>
+        <Nav>
+          <NavLogo to="/" smooth={true} duration={500} onClick={() => setIsOpen(false)}>
+            <img src={Logo} alt="logo" width="90px" />
+          </NavLogo>
+          <MobileIcon>
+            <Hamburger toggled={isOpen} toggle={() => setIsOpen(!isOpen)} />
+          </MobileIcon>
+          <NavMenu>
+            {LINKS.map(link => (
+              <NavItem key={link.id}>
+                <NavLinks to={link.name}>{t(link.name)}</NavLinks>
+              </NavItem>
+            ))}
+          </NavMenu>
+          <NavBtns>
+            <Switch
+              onChange={toggleTheme}
+              checked={title === 'dark'}
+              checkedIcon={false}
+              uncheckedIcon={false}
+              offHandleColor="#555"
+              onHandleColor="#555"
+              checkedHandleIcon={<Moon color={colors.text} />}
+              uncheckedHandleIcon={<Sun color="gold" />}
+              offColor="#555"
+              onColor="#555"
+              width={60}
+              height={30}
+            />
+            <Switch
+              onChange={toggleLanguage}
+              checked={i18n.language === 'en'}
+              checkedIcon={false}
+              uncheckedIcon={false}
+              checkedHandleIcon={<Flag countryCode="us" width={30} />}
+              uncheckedHandleIcon={<Flag countryCode="br" width={30} />}
+              offColor="#555"
+              onColor="#555"
+              width={60}
+              height={30}
+            />
+          </NavBtns>
+        </Nav>
+      </Navbar>
+      <MobileMenu isOpen={isOpen} onClick={() => setIsOpen(false)}>
+        {LINKS.map(link => (
+          <NavItem key={link.id}>
+            <NavLinks to={link.name}>{t(link.name)}</NavLinks>
+          </NavItem>
+        ))}
+        <MobileBtns onClick={e => e.stopPropagation()}>
           <Switch
             onChange={toggleTheme}
             checked={title === 'dark'}
             checkedIcon={false}
             uncheckedIcon={false}
-            offColor={colors.accent}
-            onColor={colors.textSecondary}
+            offHandleColor="#555"
+            onHandleColor="#555"
+            checkedHandleIcon={<Moon color={colors.text} />}
+            uncheckedHandleIcon={<Sun color="gold" />}
+            offColor="#555"
+            onColor="#555"
+            width={60}
+            height={30}
           />
-          <ToggleBtn>d/l</ToggleBtn>
-        </NavBtns>
-      </Nav>
-    </Navbar>
+          <Switch
+            onChange={toggleLanguage}
+            checked={i18n.language === 'en'}
+            checkedIcon={false}
+            uncheckedIcon={false}
+            checkedHandleIcon={<Flag countryCode="us" width={30} />}
+            uncheckedHandleIcon={<Flag countryCode="br" width={30} />}
+            offColor="#555"
+            onColor="#555"
+            width={60}
+            height={30}
+          />
+        </MobileBtns>
+      </MobileMenu>
+    </>
   );
 };
 export default Header;
