@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
@@ -37,11 +37,26 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
     i18n.changeLanguage(i18n.language === 'pt_br' ? 'en' : 'pt_br');
   }
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
+
   return (
     <>
       <Navbar>
         <Nav>
-          <NavLogo to="/" smooth={true} duration={500} onClick={() => setIsOpen(false)}>
+          <NavLogo
+            to="Home"
+            spy={true}
+            smooth={true}
+            offset={-80}
+            duration={500}
+            onClick={() => setIsOpen(false)}
+          >
             <img src={Logo} alt="logo" width="90px" />
           </NavLogo>
           <MobileIcon>
@@ -50,7 +65,9 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
           <NavMenu>
             {LINKS.map(link => (
               <NavItem key={link.id}>
-                <NavLinks to={link.name}>{t(link.name)}</NavLinks>
+                <NavLinks to={link.name} spy={true} smooth={true} offset={-80} duration={500}>
+                  {t(link.name)}
+                </NavLinks>
               </NavItem>
             ))}
           </NavMenu>
@@ -87,7 +104,16 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
       <MobileMenu isOpen={isOpen} onClick={() => setIsOpen(false)}>
         {LINKS.map(link => (
           <NavItem key={link.id}>
-            <NavLinks to={link.name}>{t(link.name)}</NavLinks>
+            <NavLinks
+              to={link.name}
+              spy={true}
+              smooth={true}
+              offset={-80}
+              duration={500}
+              onClick={() => setIsOpen(false)}
+            >
+              {t(link.name)}
+            </NavLinks>
           </NavItem>
         ))}
         <MobileBtns onClick={e => e.stopPropagation()}>

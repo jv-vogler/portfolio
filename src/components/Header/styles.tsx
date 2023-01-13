@@ -73,7 +73,7 @@ export const NavLinks = styled(Link)`
   color: ${props => props.theme.colors.text};
   text-decoration: none;
   user-select: none;
-  transition: 0.3s;
+  transition: 0.3s color;
   cursor: pointer;
 
   &:hover {
@@ -106,6 +106,7 @@ export const MobileMenu = styled.ul<MobileMenuProps>`
   background: ${props => props.theme.colors.background};
   list-style: none;
   transition: 0.5s transform;
+  z-index: 1;
 
   @media screen and (max-width: 568px) {
     gap: 10px;
@@ -122,7 +123,7 @@ export const NavBtns = styled.nav`
   display: flex;
   align-items: center;
   gap: 10px;
-  
+
   @media screen and (max-width: 768px) {
     display: none;
   }

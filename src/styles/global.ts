@@ -13,5 +13,21 @@ body {
   color: ${props => props.theme.colors.text};
   font-size: 1rem;
   font-family: Poppins, sans-serif;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar{
+    width: 0.2em;
+    background-color: #F5F5F5;
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb{
+    background-color: #000000;
+  }
+}
+
+h2 {
+  padding: 20px 0;
+  font-size: 2rem;
 }
 `;

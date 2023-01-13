@@ -1,8 +1,13 @@
 {
   "translation": {
-    "About": "About",
+    "Home": "Home",
     "Portfolio": "Portfolio",
     "Experience": "Experience",
-    "Contact": "Contact"
+    "Contact": "Contact",
+    "HeroHeading": "I'm a Frontend Developer",
+    "HeroParagraph": "Hi! I am JV and I'm constantly learning and improving to deliver outstanding web experiences. Currently I love to work on web applications using technologies like React, Typescript, Styled Components, Tailwind, and more.",
+    "PortfolioDescription": "Check out some of projects here",
+    "Demo": "Demo",
+    "Code": "Code"
   }
 }
