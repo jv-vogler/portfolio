@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
 import Portfolio from './components/Portfolio';
+import Contact from './components/Contact';
 
 const App: React.FC = () => {
   const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light);
@@ -24,6 +25,7 @@ const App: React.FC = () => {
       <Hero />
       <Experience />
       <Portfolio />
+      <Contact />
     </ThemeProvider>
   );
 };

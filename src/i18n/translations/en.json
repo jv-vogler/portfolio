@@ -6,7 +6,8 @@
     "Contact": "Contact",
     "HeroHeading": "I'm a Frontend Developer",
     "HeroParagraph": "Hi! I am JV and I'm constantly learning and improving to deliver outstanding web experiences. Currently I love to work on web applications using technologies like React, Typescript, Styled Components, Tailwind, and more.",
-    "PortfolioDescription": "Check out some of projects here",
+    "ExperienceDescription": "I have experience with the following technologies:",
+    "PortfolioDescription": "Check out some of my projects here",
     "Demo": "Demo",
     "Code": "Code"
   }

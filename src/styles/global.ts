@@ -27,7 +27,6 @@ body {
 }
 
 h2 {
-  padding: 20px 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 `;

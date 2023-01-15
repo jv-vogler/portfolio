@@ -1,25 +1,19 @@
-import {
-  BtnsWrapper,
-  Button,
-  Description,
-  Grid,
-  GridItem,
-  Heading,
-  Main,
-  Thumbnail,
-} from './styles';
+import { useTranslation } from 'react-i18next';
+import { BtnsWrapper, Button, Grid, GridItem, Main, Thumbnail } from './styles';
 
-const Portfolio = () => {
+const Portfolio: React.FC = () => {
+  const [t] = useTranslation();
+
   return (
     <Main id="Portfolio">
-      <Heading>Portfolio</Heading>
-      <Description>Check out some of my work here</Description>
+      <h2>{t('Portfolio')}</h2>
+      <p>{t('PortfolioDescription')}</p>
       <Grid>
         <GridItem>
           <Thumbnail />
           <BtnsWrapper>
-            <Button>Demo</Button>
-            <Button>Code</Button>
+            <Button>{t('Demo')}</Button>
+            <Button>{t('Code')}</Button>
           </BtnsWrapper>
         </GridItem>
       </Grid>
