@@ -66,6 +66,7 @@ export const Button = styled(Link)`
   &:hover {
     background-color: ${props => props.theme.colors.textSecondary};
     color: ${props => props.theme.colors.accent};
+    transform: scale(1.1);
   }
   
   @media screen and (max-width: 768px) {

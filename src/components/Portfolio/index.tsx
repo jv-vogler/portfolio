@@ -1,22 +1,41 @@
 import { useTranslation } from 'react-i18next';
-import { BtnsWrapper, Button, Grid, GridItem, Main, Thumbnail } from './styles';
+import {
+  InfoWrapper,
+  Button,
+  Grid,
+  GridItem,
+  HeadingContainer,
+  Main,
+  Thumbnail,
+  Wrapper,
+  ImageWrapper,
+} from './styles';
+
+import PORTFOLIOS from '../../constants/PORTFOLIOS';
 
 const Portfolio: React.FC = () => {
   const [t] = useTranslation();
 
   return (
     <Main id="Portfolio">
-      <h2>{t('Portfolio')}</h2>
-      <p>{t('PortfolioDescription')}</p>
-      <Grid>
-        <GridItem>
-          <Thumbnail />
-          <BtnsWrapper>
-            <Button>{t('Demo')}</Button>
-            <Button>{t('Code')}</Button>
-          </BtnsWrapper>
-        </GridItem>
-      </Grid>
+      <Wrapper>
+        <HeadingContainer>
+          <h2>{t('Portfolio')}</h2>
+          <p>{t('PortfolioDescription')}</p>
+        </HeadingContainer>
+        <Grid>
+          {PORTFOLIOS.map(({ id, title, description, livePage, repository, techs, thumbnail }) => (
+            <GridItem key={id}>
+              <InfoWrapper>
+                {title}
+              </InfoWrapper>
+              <ImageWrapper>
+                <Thumbnail src={thumbnail} />
+              </ImageWrapper>
+            </GridItem>
+          ))}
+        </Grid>
+      </Wrapper>
     </Main>
   );
 };

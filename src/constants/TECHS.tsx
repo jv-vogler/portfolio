@@ -12,7 +12,6 @@ import {
 } from 'react-icons/si';
 
 const SIZE = 65;
-
 const TECHS = [
   {
     id: 1,
@@ -58,21 +57,21 @@ const TECHS = [
   },
   {
     id: 8,
+    icon: <SiGit color="#e84d31" size={SIZE} />,
+    title: 'Git',
+    color: '#e84d31',
+  },
+  {
+    id: 9,
     icon: <SiAdobephotoshop color="#2fa3f7" size={SIZE} />,
     title: 'Adobe Photoshop',
     color: '#2fa3f7',
   },
   {
-    id: 9,
+    id: 10,
     icon: <SiAdobeillustrator color="#f77800" size={SIZE} />,
     title: 'Adobe Illustrator',
     color: '#f77800',
-  },
-  {
-    id: 10,
-    icon: <SiGit color="#e84d31" size={SIZE} />,
-    title: 'Git',
-    color: '#e84d31',
   },
 ];
 

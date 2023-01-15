@@ -9,6 +9,9 @@
     "ExperienceDescription": "I have experience with the following technologies:",
     "PortfolioDescription": "Check out some of my projects here",
     "Demo": "Demo",
-    "Code": "Code"
+    "Code": "Code",
+    "ContactDescription": "Use the form below to get in touch with me!",
+    "EnterMessage": "Enter your message",
+    "FormCTA": "Submit"
   }
 }
