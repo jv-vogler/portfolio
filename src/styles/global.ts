@@ -20,6 +20,8 @@ body {
   font-size: 1rem;
   font-family: Poppins, sans-serif;
   -ms-overflow-style: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &::-webkit-scrollbar {
     width: 0.2em;

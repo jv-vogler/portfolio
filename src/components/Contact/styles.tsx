@@ -1,3 +1,4 @@
+import { FormikErrors } from 'formik';
 import styled from 'styled-components';
 
 export const Section = styled.section`
@@ -38,6 +39,7 @@ export const FormContainer = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  gap: 2.5rem;
   min-width: 30%;
   margin-top: 5rem;
   margin-left: auto;
@@ -50,16 +52,43 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.label`
-  display: flex;
-  place-content: center;
   font-weight: 700;
+  font-size: 0.9rem;
 `;
 
-export const InputName = styled.input`
+export const FormItem = styled.div`
+  position: relative;
+`;
+
+export const FeedbackContainer = styled.div`
+  position: absolute;
+`;
+
+export const Message = styled.div`
+  display: 'flex';
+  place-items: 'center';
+  gap: 10;
+  color: 'crimson';
+`;
+
+type Props = {
+  error: string | undefined;
+};
+
+export const Input = styled.input<Props>`
   width: 100%;
   padding: 0.5rem;
   background: transparent;
-  border: 2px solid ${props => props.theme.colors.text};
+  border: 2px solid
+    ${props => {
+      if (props.error) {
+        return 'crimson';
+      } else if (props.value !== '') {
+        return 'green';
+      } else {
+        return props.theme.colors.text;
+      }
+    }};
   outline: none;
   border-radius: 0.5rem;
   color: ${props => props.theme.colors.text};
@@ -68,36 +97,7 @@ export const InputName = styled.input`
   transition: 0.3s;
 
   &:focus {
-    border: 2px solid ${props => props.theme.colors.accent};
-  }
-
-  &::placeholder {
-    font-weight: 400;
-  }
-
-  &:valid {
-    border: 2px solid green;
-  }
-
-  &:invalid {
-    /* border: 2px solid red; */
-  }
-`;
-
-export const InputEmail = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  background: transparent;
-  border: 2px solid ${props => props.theme.colors.text};
-  outline: none;
-  border-radius: 0.5rem;
-  color: ${props => props.theme.colors.text};
-  font-family: inherit;
-  font-weight: 600;
-  transition: 0.5s;
-
-  &:focus {
-    border: 2px solid ${props => props.theme.colors.accent};
+    background-color: lightgray;
   }
 
   &::placeholder {
@@ -105,25 +105,34 @@ export const InputEmail = styled.input`
   }
 `;
 
-export const Textarea = styled.textarea`
+export const Textarea = styled.textarea<Props>`
   width: 100%;
   padding: 0.5rem;
   background: transparent;
-  border: 2px solid ${props => props.theme.colors.text};
+  border: 2px solid
+    ${props => {
+      if (props.error) {
+        return 'crimson';
+      } else if (props.value !== '') {
+        return 'green';
+      } else {
+        return props.theme.colors.text;
+      }
+    }};
   border-radius: 0.5rem;
   outline: none;
   color: ${props => props.theme.colors.text};
   font-family: inherit;
   font-weight: 600;
   resize: none;
-  transition: 0.5s;
+  transition: 0.3s;
+
+  &:focus {
+    background-color: lightgray;
+  }
 
   &::placeholder {
     font-weight: 400;
-  }
-
-  &:focus {
-    border: 2px solid ${props => props.theme.colors.accent};
   }
 `;
 

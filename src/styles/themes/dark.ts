@@ -7,5 +7,6 @@ export default {
     text: '#e5e5e5',
     textSecondary: '#666666',
     divider: '#ffffff',
+    focus: '#999',
   },
 };

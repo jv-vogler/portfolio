@@ -11,7 +11,14 @@
     "Demo": "Demo",
     "Code": "Code",
     "ContactDescription": "Use the form below to get in touch with me!",
+    "Name": "Name",
+    "Email": "Email",
+    "Message": "Message",
     "EnterMessage": "Enter your message",
+    "ErrorRequired": "Required Field",
+    "ErrorMinName": "Needs at least 2 characters",
+    "ErrorMinMessage": "Needs at least 20 characters",
+    "ErrorEmailFormat": "Needs to be a valid email",
     "FormCTA": "Submit"
   }
 }

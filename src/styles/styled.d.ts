@@ -10,6 +10,7 @@ declare module 'styled-components' {
       text: string;
       textSecondary: string;
       divider: string;
+      focus: string;
     };
   }
 }

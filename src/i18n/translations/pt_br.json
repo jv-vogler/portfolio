@@ -11,7 +11,14 @@
     "Demo": "Demo",
     "Code": "Código",
     "ContactDescription": "Use o formulário abaixo para entrar em contato comigo!",
+    "Name": "Nome",
+    "Email": "Email",
+    "Message": "Mensagem",
     "EnterMessage": "Digite sua mensagem",
+    "ErrorRequired": "Campo obrigatório",
+    "ErrorMinName": "Precisa de pelo menos 2 caracteres",
+    "ErrorMinMessage": "Precisa de pelo menos 20 caracteres",
+    "ErrorEmailFormat": "Precisa ser um email válido",
     "FormCTA": "Enviar"
   }
 }
