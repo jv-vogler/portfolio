@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import {
-  InfoWrapper,
-  Button,
+  Title,
   Grid,
   GridItem,
   HeadingContainer,
@@ -9,9 +8,16 @@ import {
   Thumbnail,
   Wrapper,
   ImageWrapper,
+  ProjectData,
+  BtnContainer,
+  Description,
+  TechContainer,
+  TechLabel,
 } from './styles';
+import { AnchorButton } from '../Buttons/styles';
 
 import PORTFOLIOS from '../../constants/PORTFOLIOS';
+import i18n from '../../i18n';
 
 const Portfolio: React.FC = () => {
   const [t] = useTranslation();
@@ -24,16 +30,43 @@ const Portfolio: React.FC = () => {
           <p>{t('PortfolioDescription')}</p>
         </HeadingContainer>
         <Grid>
-          {PORTFOLIOS.map(({ id, title, description, livePage, repository, techs, thumbnail }) => (
-            <GridItem key={id}>
-              <InfoWrapper>
-                {title}
-              </InfoWrapper>
-              <ImageWrapper>
-                <Thumbnail src={thumbnail} />
-              </ImageWrapper>
-            </GridItem>
-          ))}
+          {PORTFOLIOS.map(
+            ({
+              id,
+              title,
+              description,
+              description_pt,
+              livePage,
+              repository,
+              techs,
+              thumbnail,
+            }) => (
+              <GridItem key={id}>
+                <Title>{title}</Title>
+                <ImageWrapper>
+                  <Thumbnail src={thumbnail} />
+                </ImageWrapper>
+                <ProjectData>
+                  <TechContainer>
+                    {techs.map(t => (
+                      <TechLabel key={t}>{t}</TechLabel>
+                    ))}
+                  </TechContainer>
+                  <Description>{i18n.language === 'en' ? description : description_pt}</Description>
+                  <BtnContainer>
+                    {livePage && (
+                      <AnchorButton href={livePage} target="_blank">
+                        {t('Demo')}
+                      </AnchorButton>
+                    )}
+                    <AnchorButton href={repository} target="_blank">
+                      {t('Code')}
+                    </AnchorButton>
+                  </BtnContainer>
+                </ProjectData>
+              </GridItem>
+            )
+          )}
         </Grid>
       </Wrapper>
     </Main>

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import HeroImage from '../HeroImage';
-import { Button, Heading, Paragraph, Section, TextContainer } from './styles';
+import { Heading, Paragraph, Section, TextContainer } from './styles';
+import { LinkButton } from '../Buttons/styles';
 
 const Hero: React.FC = () => {
   const [t] = useTranslation();
@@ -11,9 +12,9 @@ const Hero: React.FC = () => {
       <TextContainer>
         <Heading>{t('HeroHeading')}</Heading>
         <Paragraph>{t('HeroParagraph')}</Paragraph>
-        <Button to="Portfolio" smooth={true} offset={-80} duration={500}>
+        <LinkButton to="Portfolio" smooth={true} offset={-80} duration={500}>
           {t('Portfolio')}
-        </Button>
+        </LinkButton>
       </TextContainer>
     </Section>
   );

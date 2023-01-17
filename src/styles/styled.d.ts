@@ -11,6 +11,8 @@ declare module 'styled-components' {
       textSecondary: string;
       divider: string;
       focus: string;
+      button: string;
+      buttonText: string;
     };
   }
 }

@@ -45,32 +45,3 @@ export const Paragraph = styled.p`
     font-size: 0.9rem;
   }
 `;
-
-export const Button = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 150px;
-  height: 50px;
-  background-color: ${props => props.theme.colors.accent};
-  color: ${props => props.theme.colors.background};
-  font-family: inherit;
-  font-weight: bold;
-  font-size: 1.5rem;
-  outline: none;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: ${props => props.theme.colors.textSecondary};
-    color: ${props => props.theme.colors.accent};
-    transform: scale(1.1);
-  }
-  
-  @media screen and (max-width: 768px) {
-    align-self: center;
-    min-width: 150px;
-  }
-`;

@@ -40,8 +40,8 @@ export const Slider = styled.input`
     -webkit-appearance: none;
     height: 40px;
     width: 40px;
-    background: url(${SliderIcon}), rgba(255, 255, 255, 0.3);
-    border: 3px solid #ffffff;
+    background: url(${SliderIcon}), rgba(0, 0, 0, 0.3);
+    border: 3px solid ${props => props.theme.colors.accent};
     border-radius: 50%;
     background-size: contain;
     cursor: pointer;

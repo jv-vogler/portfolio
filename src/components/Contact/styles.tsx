@@ -1,4 +1,3 @@
-import { FormikErrors } from 'formik';
 import styled from 'styled-components';
 
 export const Section = styled.section`
@@ -31,8 +30,6 @@ export const HeadingContainer = styled.div`
 
 export const FormContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
 `;
 
@@ -73,6 +70,7 @@ export const Message = styled.div`
 
 type Props = {
   error: string | undefined;
+  touched: boolean | undefined;
 };
 
 export const Input = styled.input<Props>`
@@ -97,7 +95,7 @@ export const Input = styled.input<Props>`
   transition: 0.3s;
 
   &:focus {
-    background-color: lightgray;
+    box-shadow: 0px 0px 5px 2px ${props => props.theme.colors.text};
   }
 
   &::placeholder {
@@ -105,7 +103,7 @@ export const Input = styled.input<Props>`
   }
 `;
 
-export const Textarea = styled.textarea<Props>`
+export const TextArea = styled.textarea<Props>`
   width: 100%;
   padding: 0.5rem;
   background: transparent;
@@ -128,43 +126,10 @@ export const Textarea = styled.textarea<Props>`
   transition: 0.3s;
 
   &:focus {
-    background-color: lightgray;
+    box-shadow: 0px 0px 5px 2px ${props => props.theme.colors.text};
   }
 
   &::placeholder {
     font-weight: 400;
-  }
-`;
-
-export const SubmitBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  width: 150px;
-  margin: 2rem 0;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0.75rem 1.5rem;
-  background-color: ${props => props.theme.colors.accent};
-  color: ${props => props.theme.colors.background};
-  font-family: inherit;
-  font-weight: bold;
-  font-size: 1.5rem;
-  outline: none;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: ${props => props.theme.colors.textSecondary};
-    color: ${props => props.theme.colors.accent};
-    transform: scale(1.1);
-  }
-
-  @media screen and (max-width: 768px) {
-    align-self: center;
-    min-width: 150px;
   }
 `;
