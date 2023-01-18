@@ -30,6 +30,7 @@ export const HeadingContainer = styled.div`
 
 export const FormContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
 `;
 
@@ -136,7 +137,7 @@ export const TextArea = styled.textarea<Props>`
 export const SocialMediaIcons = styled.div`
   display: flex;
   place-content: center;
-  gap: 3rem;
+  gap: 1.5rem;
   width: 100%;
   margin-bottom: 20px;
 `;
@@ -147,21 +148,17 @@ export const Link = styled.a`
   place-items: center;
   gap: 0.5rem;
   color: ${props => props.theme.colors.button};
-  font-weight: bold;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 0.8rem;
   text-decoration: none;
-  transform: translateY(-10px);
-  transform-origin: bottom;
   outline: none;
   transition: 0.3s;
 
   &:hover {
     color: ${props => props.theme.colors.accent};
-    transform: scale(1.2);
   }
   
   &:focus {
     color: ${props => props.theme.colors.accent};
-    transform: scale(1.2);
   }
 `;

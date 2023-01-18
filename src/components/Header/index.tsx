@@ -39,15 +39,6 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
   }
 
   useEffect(() => {
-    const storedValue = localStorage.getItem('language')
-    if (storedValue) {
-      i18n.changeLanguage(storedValue)
-    } else {
-      i18n.changeLanguage('en')
-    }
-  }, [])
-
-  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {

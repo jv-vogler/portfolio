@@ -12,6 +12,7 @@ i18n.use(initReactI18next).init({
     en: enJson,
     pt_br: pt_brJson,
   },
+  lng: localStorage.getItem('language') || 'en',
 });
 
 export default i18n;

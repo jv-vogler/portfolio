@@ -1,5 +1,10 @@
+import { RefObject } from 'react';
 import { Link } from 'react-scroll';
 import styled from 'styled-components';
+
+type Props = {
+  ref: RefObject<HTMLInputElement> | null
+}
 
 export const Button = styled.button`
   display: flex;
@@ -16,7 +21,7 @@ export const Button = styled.button`
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: 0.3s ;
+  transition: 0.3s;
 
   &:hover {
     transform: scale(1.1);
@@ -24,7 +29,7 @@ export const Button = styled.button`
 
   &:focus {
     box-shadow: 0px 0px 10px 3px ${props => props.theme.colors.text};
-    transform: scale(1.1)
+    transform: scale(1.1);
   }
 
   @media screen and (max-width: 768px) {
@@ -57,7 +62,7 @@ export const AnchorButton = styled.a`
 
   &:focus {
     box-shadow: 0px 0px 15px 5px ${props => props.theme.colors.accent};
-    transform: scale(1.1)
+    transform: scale(1.1);
   }
 `;
 
@@ -84,7 +89,7 @@ export const LinkButton = styled(Link)`
 
   &:focus {
     box-shadow: 0px 0px 5px 2px ${props => props.theme.colors.accent};
-    transform: scale(1.1)
+    transform: scale(1.1);
   }
 
   @media screen and (max-width: 768px) {

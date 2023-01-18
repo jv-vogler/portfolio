@@ -21,9 +21,11 @@ import {
 } from './styles';
 import { Button } from '../Buttons/styles';
 import SOCIALS from '../../constants/SOCIALS';
+import { RefObject, useRef } from 'react';
 
 const Contact: React.FC = () => {
   const [t] = useTranslation();
+  const submitRef = useRef<HTMLButtonElement>(null);
 
   const schema = yup.object().shape({
     name: yup
@@ -62,7 +64,17 @@ const Contact: React.FC = () => {
           <h2>{t('Contact')}</h2>
           <p>{t('ContactDescription')}</p>
         </HeadingContainer>
+
         <FormContainer>
+          <SocialMediaIcons>
+            {SOCIALS.map(({ id, title, icon, link }) => (
+              <Link href={link} target="_blank" key={id}>
+                {icon}
+                {title}
+              </Link>
+            ))}
+          </SocialMediaIcons>
+
           <Form autoComplete="off" spellCheck={false} onSubmit={handleSubmit}>
             <FormItem>
               <Label htmlFor="name">{t('Name')}</Label>
@@ -75,6 +87,9 @@ const Contact: React.FC = () => {
                 placeholder="John Doe"
                 onChange={handleChange}
                 onBlur={handleBlur}
+                onFocus={() => {
+                  submitRef.current?.scrollIntoView({ behavior: 'smooth' });
+                }}
               />
               <FeedbackContainer>
                 {errors.name ? (
@@ -102,6 +117,9 @@ const Contact: React.FC = () => {
                 placeholder="johndoe@gmail.com"
                 onChange={handleChange}
                 onBlur={handleBlur}
+                onFocus={() => {
+                  submitRef.current?.scrollIntoView({ behavior: 'smooth' });
+                }}
               />
               <FeedbackContainer>
                 {errors.email ? (
@@ -128,6 +146,9 @@ const Contact: React.FC = () => {
                 placeholder={t('EnterMessage') || 'Enter your message'}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                onFocus={() => {
+                  submitRef.current?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 rows={10}
               ></TextArea>
               <FeedbackContainer>
@@ -145,16 +166,7 @@ const Contact: React.FC = () => {
               </FeedbackContainer>
             </FormItem>
 
-            <Button>{t('FormCTA')}</Button>
-
-            <SocialMediaIcons>
-              {SOCIALS.map(({ id, title, icon, link }) => (
-                <Link href={link} target="_blank" key={id}>
-                  {icon}
-                  {title}
-                </Link>
-              ))}
-            </SocialMediaIcons>
+            <Button ref={submitRef}>{t('FormCTA')}</Button>
           </Form>
         </FormContainer>
       </Wrapper>

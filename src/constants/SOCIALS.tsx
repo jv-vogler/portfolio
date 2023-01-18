@@ -1,7 +1,7 @@
 import { FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 
-const SIZE = 40;
+const SIZE = 35;
 const SOCIALS = [
   {
     id: 1,
@@ -11,21 +11,21 @@ const SOCIALS = [
   },
   {
     id: 2,
-    title: 'Github',
-    icon: <FaGithub size={SIZE} />,
-    link: 'https://github.com/jv-vogler',
-  },
-  {
-    id: 3,
     title: 'Email',
     icon: <HiOutlineMail size={SIZE} />,
     link: 'mailto:jvsvogler@gmail.com',
   },
   {
-    id: 4,
+    id: 3,
     title: 'Instagram',
     icon: <FaInstagram size={SIZE} />,
     link: 'https://www.instagram.com/jv_vogler/',
+  },
+  {
+    id: 4,
+    title: 'Github',
+    icon: <FaGithub size={SIZE} />,
+    link: 'https://github.com/jv-vogler',
   },
 ];
 
