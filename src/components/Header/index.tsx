@@ -35,7 +35,17 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
 
   function toggleLanguage() {
     i18n.changeLanguage(i18n.language === 'pt_br' ? 'en' : 'pt_br');
+    localStorage.setItem('language', i18n.language)
   }
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem('language')
+    if (storedValue) {
+      i18n.changeLanguage(storedValue)
+    } else {
+      i18n.changeLanguage('en')
+    }
+  }, [])
 
   useEffect(() => {
     if (isOpen) {

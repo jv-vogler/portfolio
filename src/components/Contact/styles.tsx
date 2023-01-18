@@ -38,7 +38,6 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 2.5rem;
   min-width: 30%;
-  margin-top: 5rem;
   margin-left: auto;
   margin-right: auto;
 
@@ -131,5 +130,38 @@ export const TextArea = styled.textarea<Props>`
 
   &::placeholder {
     font-weight: 400;
+  }
+`;
+
+export const SocialMediaIcons = styled.div`
+  display: flex;
+  place-content: center;
+  gap: 3rem;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+export const Link = styled.a`
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  gap: 0.5rem;
+  color: ${props => props.theme.colors.button};
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transform: translateY(-10px);
+  transform-origin: bottom;
+  outline: none;
+  transition: 0.3s;
+
+  &:hover {
+    color: ${props => props.theme.colors.accent};
+    transform: scale(1.2);
+  }
+  
+  &:focus {
+    color: ${props => props.theme.colors.accent};
+    transform: scale(1.2);
   }
 `;

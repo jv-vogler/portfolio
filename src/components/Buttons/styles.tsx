@@ -37,7 +37,7 @@ export const AnchorButton = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
+  width: 90px;
   height: 50px;
   background-color: #e6e6e6;
   color: #333;

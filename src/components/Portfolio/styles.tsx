@@ -125,5 +125,6 @@ export const Description = styled.p`
 
 export const BtnContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 40px;
 `;

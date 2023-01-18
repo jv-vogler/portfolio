@@ -1,7 +1,9 @@
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import axios from 'axios';
+
 import { useTranslation } from 'react-i18next';
+
 import { FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 import {
   Form,
@@ -14,8 +16,11 @@ import {
   Input,
   FormItem,
   FeedbackContainer,
+  SocialMediaIcons,
+  Link,
 } from './styles';
 import { Button } from '../Buttons/styles';
+import SOCIALS from '../../constants/SOCIALS';
 
 const Contact: React.FC = () => {
   const [t] = useTranslation();
@@ -141,6 +146,15 @@ const Contact: React.FC = () => {
             </FormItem>
 
             <Button>{t('FormCTA')}</Button>
+
+            <SocialMediaIcons>
+              {SOCIALS.map(({ id, title, icon, link }) => (
+                <Link href={link} target="_blank" key={id}>
+                  {icon}
+                  {title}
+                </Link>
+              ))}
+            </SocialMediaIcons>
           </Form>
         </FormContainer>
       </Wrapper>
