@@ -47,6 +47,7 @@ const Portfolio: React.FC = () => {
                   <Thumbnail src={thumbnail} />
                 </ImageWrapper>
                 <ProjectData>
+                  {title}
                   <TechContainer>
                     {techs.map(t => (
                       <TechLabel key={t}>{t}</TechLabel>

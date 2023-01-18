@@ -101,6 +101,10 @@ export const ProjectData = styled.div`
   &:focus-within {
     opacity: 1;
   }
+
+  @media screen and (max-width: 768px) {
+    opacity: 1;
+  }
 `;
 
 export const TechContainer = styled.div`
