@@ -25,15 +25,6 @@ import {
   MobileBtns,
 } from './styles';
 
-function handleKeypress(to: string) {
-  scroller.scrollTo(to, {
-    smooth: true,
-    offset: -80,
-    duration: 500,
-    // spy: true,
-  });
-}
-
 interface Props {
   toggleTheme(): void;
 }
@@ -45,7 +36,7 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
 
   function toggleLanguage() {
     i18n.changeLanguage(i18n.language === 'pt_br' ? 'en' : 'pt_br');
-    document.documentElement.lang = document.documentElement.lang === 'en' ? 'pt-BR' : 'en';
+    document.documentElement.lang = i18n.language === 'en' ? 'pt-BR' : 'en';
     localStorage.setItem('language', i18n.language);
   }
 
