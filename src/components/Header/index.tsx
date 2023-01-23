@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
+import { scroller } from 'react-scroll';
 import Switch from 'react-switch';
 import { Spin as Hamburger } from 'hamburger-react';
 
@@ -24,6 +25,15 @@ import {
   MobileBtns,
 } from './styles';
 
+function handleKeypress(to: string) {
+  scroller.scrollTo(to, {
+    smooth: true,
+    offset: -80,
+    duration: 500,
+    // spy: true,
+  });
+}
+
 interface Props {
   toggleTheme(): void;
 }
@@ -35,7 +45,8 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
 
   function toggleLanguage() {
     i18n.changeLanguage(i18n.language === 'pt_br' ? 'en' : 'pt_br');
-    localStorage.setItem('language', i18n.language)
+    document.documentElement.lang = document.documentElement.lang === 'en' ? 'pt-BR' : 'en';
+    localStorage.setItem('language', i18n.language);
   }
 
   useEffect(() => {
@@ -58,15 +69,31 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
             duration={500}
             onClick={() => setIsOpen(false)}
           >
-            <img src={Logo} alt="logo" width="90px" />
+            <img src={Logo} alt="Logo" width="90px" />
           </NavLogo>
           <MobileIcon>
-            <Hamburger toggled={isOpen} toggle={() => setIsOpen(!isOpen)} />
+            <Hamburger
+              label={t('Hamburger') || 'Navigation menu'}
+              toggled={isOpen}
+              toggle={() => setIsOpen(!isOpen)}
+            />
           </MobileIcon>
           <NavMenu>
             {LINKS.map(link => (
               <NavItem key={link.id}>
-                <NavLinks to={link.name} spy={true} smooth={true} offset={-80} duration={500}>
+                <NavLinks
+                  to={link.name}
+                  spy={true}
+                  smooth={true}
+                  offset={-80}
+                  duration={500}
+                  tabIndex={0}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') {
+                      scroller.scrollTo(link.name, { offset: -80 });
+                    }
+                  }}
+                >
                   {t(link.name)}
                 </NavLinks>
               </NavItem>
@@ -86,6 +113,8 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
               onColor="#555"
               width={60}
               height={30}
+              aria-label={t('ToggleTheme') || 'Toggle theme'}
+              tabIndex={0}
             />
             <Switch
               onChange={toggleLanguage}
@@ -98,6 +127,8 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
               onColor="#555"
               width={60}
               height={30}
+              aria-label={t('ToggleLanguage') || 'Toggle language'}
+              tabIndex={0}
             />
           </NavBtns>
         </Nav>
@@ -131,6 +162,8 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
             onColor="#555"
             width={60}
             height={30}
+            aria-label={t('ToggleTheme') || 'Toggle theme'}
+            tabIndex={-1}
           />
           <Switch
             onChange={toggleLanguage}
@@ -143,6 +176,8 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
             onColor="#555"
             width={60}
             height={30}
+            aria-label={t('ToggleLanguage') || 'Toggle language'}
+            tabIndex={-1}
           />
         </MobileBtns>
       </MobileMenu>

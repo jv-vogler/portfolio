@@ -19,6 +19,13 @@
     "ErrorMinName": "Needs at least 2 characters",
     "ErrorMinMessage": "Needs at least 20 characters",
     "ErrorEmailFormat": "Needs to be a valid email",
-    "FormCTA": "Submit"
+    "FormCTA": "Submit",
+
+    "Hamburger": "Navigation menu",
+    "AuthorPhoto1": "Author's photo",
+    "AuthorPhoto2": "Author's silhouette with code in the background",
+    "Thumbnail": "Project's screenshot",
+    "ToggleTheme": "Toggle theme",
+    "ToggleLanguage": "Toggle language"
   }
 }

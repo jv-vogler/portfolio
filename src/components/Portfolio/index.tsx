@@ -44,7 +44,7 @@ const Portfolio: React.FC = () => {
               <GridItem key={id}>
                 <Title>{title}</Title>
                 <ImageWrapper>
-                  <Thumbnail src={thumbnail} />
+                  <Thumbnail src={thumbnail} alt={t('Thumbnail') || "Project's screenshot"} />
                 </ImageWrapper>
                 <ProjectData>
                   {title}

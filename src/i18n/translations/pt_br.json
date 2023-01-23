@@ -19,6 +19,13 @@
     "ErrorMinName": "Precisa de pelo menos 2 caracteres",
     "ErrorMinMessage": "Precisa de pelo menos 20 caracteres",
     "ErrorEmailFormat": "Precisa ser um email válido",
-    "FormCTA": "Enviar"
+    "FormCTA": "Enviar",
+
+    "Hamburger": "Menu de navegação",
+    "AuthorPhoto1": "Foto do autor",
+    "AuthorPhoto2": "Silhueta do autor com código no fundo",
+    "Thumbnail": "Captura de tela do projeto",
+    "ToggleTheme": "Alternar tema",
+    "ToggleLanguage": "Alternar idioma"
   }
 }

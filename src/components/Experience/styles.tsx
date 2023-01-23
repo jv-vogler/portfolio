@@ -54,6 +54,7 @@ export const GridItem = styled.div`
   justify-content: center;
   text-align: center;
   padding: 1rem 0;
+  gap: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px ${props => props.color}, 0 2px 4px -2px ${props => props.color};
   transition: 0.5s;

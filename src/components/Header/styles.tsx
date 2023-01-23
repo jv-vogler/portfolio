@@ -113,13 +113,13 @@ export const MobileMenu = styled.ul<MobileMenuProps>`
   }
 `;
 
-export const MobileBtns = styled.nav`
+export const MobileBtns = styled.li`
   display: flex;
   flex-direction: column;
   gap: 3vh;
 `;
 
-export const NavBtns = styled.nav`
+export const NavBtns = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
