@@ -48,6 +48,10 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    document.documentElement.lang = i18n.language === 'en' ? 'en' : 'pt-BR';
+  });
+
   return (
     <>
       <Navbar>
