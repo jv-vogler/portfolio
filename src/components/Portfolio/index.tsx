@@ -13,6 +13,8 @@ import {
   Description,
   TechContainer,
   TechLabel,
+  RibbonContainer,
+  RibbonSpan,
 } from './styles';
 import { AnchorButton } from '../Buttons/styles';
 
@@ -42,7 +44,14 @@ const Portfolio: React.FC = () => {
               thumbnail,
             }) => (
               <GridItem key={id}>
-                <Title>{title}</Title>
+                <Title>
+                  {title}
+                  {title === 'Treasure Hunters' && (
+                    <RibbonContainer>
+                      <RibbonSpan>Passion Project</RibbonSpan>
+                    </RibbonContainer>
+                  )}
+                </Title>
                 <ImageWrapper>
                   <Thumbnail src={thumbnail} alt={t('Thumbnail') || "Project's screenshot"} />
                 </ImageWrapper>

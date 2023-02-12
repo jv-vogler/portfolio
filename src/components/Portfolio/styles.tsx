@@ -63,6 +63,7 @@ export const Title = styled.div`
   display: flex;
   justify-content: center;
   place-items: center;
+  position: relative;
   width: 100%;
   height: 75px;
   border-top-left-radius: 0.5rem;
@@ -72,6 +73,55 @@ export const Title = styled.div`
 
   color: ${props => props.theme.colors.background};
   background-color: ${props => props.theme.colors.button};
+`;
+
+export const RibbonContainer = styled.div`
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+
+  &::before,
+  ::after {
+    content: '';
+    position: absolute;
+    display: block;
+    border: 5px solid #b30000;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    z-index: -1;
+  }
+
+  &::before {
+    top: 0;
+    right: 0;
+  }
+
+  &::after {
+    bottom: 0;
+    left: 0;
+  }
+`;
+
+export const RibbonSpan = styled.span`
+  display: block;
+  position: absolute;
+  right: -25px;
+  top: 30px;
+  width: 225px;
+  padding: 15px 0;
+  background-color: #ff5555;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  text-align: center;
+  transform: rotate(-45deg);
+  z-index: 200;
 `;
 
 export const Thumbnail = styled.img`
