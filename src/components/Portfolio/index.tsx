@@ -53,7 +53,10 @@ const Portfolio: React.FC = () => {
                   )}
                 </Title>
                 <ImageWrapper>
-                  <Thumbnail src={thumbnail} alt={t('Thumbnail') || "Project's screenshot"} />
+                  <picture>
+                    <source srcSet={thumbnail.webp} type='image/webp' />
+                    <Thumbnail src={thumbnail.jpg} alt={t('Thumbnail') || "Project's screenshot"} />
+                  </picture>
                 </ImageWrapper>
                 <ProjectData>
                   {title}

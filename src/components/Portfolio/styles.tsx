@@ -88,7 +88,7 @@ export const RibbonContainer = styled.div`
     content: '';
     position: absolute;
     display: block;
-    border: 5px solid #b30000;
+    border: 5px solid #880000;
     border-top-color: transparent;
     border-left-color: transparent;
     z-index: -1;
@@ -112,10 +112,10 @@ export const RibbonSpan = styled.span`
   top: 30px;
   width: 225px;
   padding: 15px 0;
-  background-color: #ff5555;
+  background-color: #AB0000;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: bold;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
