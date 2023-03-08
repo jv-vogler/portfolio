@@ -27,6 +27,8 @@ export const Nav = styled.nav`
 export const NavLogo = styled(Link)`
   user-select: none;
   cursor: pointer;
+  width: 90px;
+  height: 90px;
 `;
 
 export const MobileIcon = styled.div`

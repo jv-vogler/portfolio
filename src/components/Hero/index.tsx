@@ -19,6 +19,7 @@ const Hero: React.FC = () => {
           offset={-80}
           duration={500}
           tabIndex={0}
+          href='#Portfolio'
           onKeyDown={e => {
             if (e.key === 'Enter') {
               scroller.scrollTo('Portfolio', { offset: -80 });

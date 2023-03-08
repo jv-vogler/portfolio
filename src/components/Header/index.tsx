@@ -63,6 +63,7 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
             offset={-80}
             duration={500}
             onClick={() => setIsOpen(false)}
+            href="/"
           >
             <img src={Logo} alt="Logo" width="90px" />
           </NavLogo>
@@ -83,6 +84,7 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
                   offset={-80}
                   duration={500}
                   tabIndex={0}
+                  href={`#${link.name}`}
                   onKeyDown={e => {
                     if (e.key === 'Enter') {
                       scroller.scrollTo(link.name, { offset: -80 });
@@ -138,6 +140,7 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
               offset={-80}
               duration={500}
               onClick={() => setIsOpen(false)}
+              href={`#${link.name}`}
             >
               {t(link.name)}
             </NavLinks>
