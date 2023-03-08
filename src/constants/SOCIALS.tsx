@@ -1,8 +1,16 @@
+import { ReactElement } from 'react';
 import { FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 
+type Social = {
+  id: number;
+  title: string;
+  icon: ReactElement;
+  link: string;
+};
+
 const SIZE = 35;
-const SOCIALS = [
+const SOCIALS: Social[] = [
   {
     id: 1,
     title: 'LinkedIn',

@@ -5,12 +5,22 @@ import TodoApp from '../assets/thumb-todoapp.jpg';
 import MemoryCats from '../assets/thumb-memorycats.jpg';
 import Portfolio from '../assets/thumb-portfolio.jpg';
 
-const PORTFOLIOS = [
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  description_pt: string;
+  thumbnail: string;
+  techs: string[];
+  livePage: string;
+  repository: string;
+};
+
+const PORTFOLIOS: Project[] = [
   {
     id: 1,
     title: 'Another Reddit Clone',
-    description:
-      `A fully functional Reddit clone. You can log in/sign up, create and join communities, create posts, upvote/downvote posts, and more! Try it using "demo@demo.com" and "demo" as login and password.`,
+    description: `A fully functional Reddit clone. You can log in/sign up, create and join communities, create posts, upvote/downvote posts, and more! Try it using "demo@demo.com" and "demo" as login and password.`,
     description_pt:
       'Um clone do Reddit completamente funcional. Você pode logar/se cadastrar, criar e entrar em comunidades, criar posts, votar nos posts, e mais! Teste usando "demo@demo.com" e "demo" como login e senha.',
     thumbnail: WIP,

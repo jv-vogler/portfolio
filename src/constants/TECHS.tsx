@@ -1,3 +1,4 @@
+import { IconType } from 'react-icons/lib';
 import {
   SiHtml5,
   SiCss3,
@@ -15,8 +16,15 @@ import {
   SiFirebase,
 } from 'react-icons/si';
 
+type Tech = {
+  id: number;
+  icon: JSX.Element;
+  title: string;
+  color: string;
+};
+
 const SIZE = 65;
-const TECHS = [
+const TECHS: Tech[] = [
   {
     id: 1,
     icon: <SiHtml5 color="#f05c2a" size={SIZE} aria-hidden={true} />,
