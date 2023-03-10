@@ -121,7 +121,7 @@ export const RibbonSpan = styled.span`
   text-transform: uppercase;
   text-align: center;
   transform: rotate(-45deg);
-  z-index: 200;
+  z-index: 9;
 `;
 
 export const Thumbnail = styled.img`
