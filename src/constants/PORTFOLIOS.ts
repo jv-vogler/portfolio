@@ -12,6 +12,8 @@ import Portfolio from '../assets/thumb-portfolio.jpg';
 import PortfolioWebp from '../assets/thumb-portfolio.webp';
 import Reddit from '../assets/thumb-reddit.jpg';
 import RedditWebp from '../assets/thumb-reddit.webp';
+import VoltorbFlip from '../assets/thumb-voltorbflip.jpg';
+import VoltorbFlipWebp from '../assets/thumb-voltorbflip.webp';
 
 type Thumbnail = {
   jpg: string;
@@ -31,7 +33,20 @@ type Project = {
 
 const PORTFOLIOS: Project[] = [
   {
-    id: 1,
+    id: 7,
+    title: 'Voltorb Flip',
+    description:
+      'Voltorb Flip is a minigame of the Goldenrod and Celadon Game Corners in the Korean and Western releases of Pokémon HeartGold and SoulSilver.',
+    description_pt:
+      'Voltorb Flip é um minigame dos Game Corners de Goldenrod e Celadon nas versões Coreanas e Ocidentais dos jogos Pokémon HeartGold e SoulSilver.',
+    thumbnail: { jpg: VoltorbFlip, webp: VoltorbFlipWebp },
+    techs: ['React', 'Next.js', 'TypeScript', 'Tailwindcss'],
+    livePage: 'https://voltorbflip.vercel.app/',
+    repository: 'https://github.com/jv-vogler/voltorb-flip',
+  },
+
+  {
+    id: 6,
     title: 'Another Reddit Clone',
     description: `A functional Reddit clone. You can log in/sign up, create and join communities, create posts, upvote/downvote posts, and more!`,
     description_pt:
@@ -42,7 +57,7 @@ const PORTFOLIOS: Project[] = [
     repository: 'https://github.com/jv-vogler/another-reddit-clone',
   },
   {
-    id: 2,
+    id: 5,
     title: 'Treasure Hunters',
     description:
       'Treasure Hunters is a 2D platformer game where you control the feared Captain Clown Nose in a quest to recover his ship that was taken in a mutiny. Many dangers and treasures hide and await under the tree shadows of Palm Tree Island.',
@@ -54,7 +69,7 @@ const PORTFOLIOS: Project[] = [
     repository: 'https://github.com/jv-vogler/Treasure-Hunters',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Portfolio',
     description: 'Source code for this website.',
     description_pt: 'Código fonte desse website.',
@@ -64,7 +79,7 @@ const PORTFOLIOS: Project[] = [
     repository: 'https://github.com/jv-vogler/portfolio',
   },
   {
-    id: 4,
+    id: 3,
     title: 'Weather App',
     description: 'Weather forecast for cities around the world.',
     description_pt: 'Previsão do tempo de cidades ao redor do mundo.',
@@ -74,7 +89,7 @@ const PORTFOLIOS: Project[] = [
     repository: 'https://github.com/jv-vogler/weather-app',
   },
   {
-    id: 5,
+    id: 2,
     title: 'To-do List',
     description:
       'The good old "Todo List" of React beginners. Creates tasks that can be marked as complete and deleted.',
@@ -86,7 +101,7 @@ const PORTFOLIOS: Project[] = [
     repository: 'https://github.com/jv-vogler/todo-list',
   },
   {
-    id: 6,
+    id: 1,
     title: 'Memory Cats',
     description:
       "A simple yet challenging memory game, because not only you have to identify the pairs but also remember the name of each cat you've found.",
