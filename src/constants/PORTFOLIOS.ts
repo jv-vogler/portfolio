@@ -1,45 +1,46 @@
-import WIP from '../assets/thumb-wip.jpg';
-import WIPWebp from '../assets/thumb-wip.webp';
-import TreasureHunters from '../assets/thumb-treasurehunters.jpg';
-import TreasureHuntersWebp from '../assets/thumb-treasurehunters.webp';
-import WeatherApp from '../assets/thumb-weatherapp.jpg';
-import WeatherAppWebp from '../assets/thumb-weatherapp.webp';
-import TodoApp from '../assets/thumb-todoapp.jpg';
-import TodoAppWebp from '../assets/thumb-todoapp.webp';
-import MemoryCats from '../assets/thumb-memorycats.jpg';
-import MemoryCatsWebp from '../assets/thumb-memorycats.webp';
-import Portfolio from '../assets/thumb-portfolio.jpg';
-import PortfolioWebp from '../assets/thumb-portfolio.webp';
-import Reddit from '../assets/thumb-reddit.jpg';
-import RedditWebp from '../assets/thumb-reddit.webp';
+import WIP from '../assets/thumb-wip.jpg'
+import WIPWebp from '../assets/thumb-wip.webp'
+import TreasureHunters from '../assets/thumb-treasurehunters.jpg'
+import TreasureHuntersWebp from '../assets/thumb-treasurehunters.webp'
+import WeatherApp from '../assets/thumb-weatherapp.jpg'
+import WeatherAppWebp from '../assets/thumb-weatherapp.webp'
+import TodoApp from '../assets/thumb-todoapp.jpg'
+import TodoAppWebp from '../assets/thumb-todoapp.webp'
+import MemoryCats from '../assets/thumb-memorycats.jpg'
+import MemoryCatsWebp from '../assets/thumb-memorycats.webp'
+import Portfolio from '../assets/thumb-portfolio.jpg'
+import PortfolioWebp from '../assets/thumb-portfolio.webp'
+import Reddit from '../assets/thumb-reddit.jpg'
+import RedditWebp from '../assets/thumb-reddit.webp'
+import FetchHire from '../assets/thumb-fetchhire.jpg'
+import FetchHireWebp from '../assets/thumb-fetchhire.webp'
 
 type Thumbnail = {
-  jpg: string;
-  webp: string;
-};
+  jpg: string
+  webp: string
+}
 
 type Project = {
-  id: number;
-  title: string;
-  description: string;
-  description_pt: string;
-  thumbnail: Thumbnail;
-  techs: string[];
-  livePage: string;
-  repository: string;
-};
+  id: number
+  title: string
+  description: string
+  description_pt: string
+  thumbnail: Thumbnail
+  techs: string[]
+  livePage: string
+  repository: string
+}
 
 const PORTFOLIOS: Project[] = [
   {
     id: 1,
-    title: 'Another Reddit Clone',
-    description: `A functional Reddit clone. You can log in/sign up, create and join communities, create posts, upvote/downvote posts, and more!`,
-    description_pt:
-      'Um clone do Reddit funcional. Você pode logar/se cadastrar, criar e entrar em comunidades, criar posts, votar nos posts, e mais!',
-    thumbnail: { jpg: Reddit, webp: RedditWebp },
-    techs: ['React', 'Next.js', 'TypeScript', 'Chakra UI', 'Firebase', 'Recoil'],
-    livePage: 'https://another-reddit-clone-jv-vogler.vercel.app/',
-    repository: 'https://github.com/jv-vogler/another-reddit-clone',
+    title: 'Fetch Hire',
+    description: `A tool to get helpful insight and data about Github users.`,
+    description_pt: 'Uma ferramenta para obter informações úteis sobre usuários do Github.',
+    thumbnail: { jpg: FetchHire, webp: FetchHireWebp },
+    techs: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+    livePage: 'https://fetch-hire.vercel.app/',
+    repository: 'https://github.com/jv-vogler/fetch-hire',
   },
   {
     id: 2,
@@ -55,6 +56,17 @@ const PORTFOLIOS: Project[] = [
   },
   {
     id: 3,
+    title: 'Another Reddit Clone',
+    description: `A functional Reddit clone. You can log in/sign up, create and join communities, create posts, upvote/downvote posts, and more!`,
+    description_pt:
+      'Um clone do Reddit funcional. Você pode logar/se cadastrar, criar e entrar em comunidades, criar posts, votar nos posts, e mais!',
+    thumbnail: { jpg: Reddit, webp: RedditWebp },
+    techs: ['React', 'Next.js', 'TypeScript', 'Chakra UI', 'Firebase', 'Recoil'],
+    livePage: 'https://another-reddit-clone-jv-vogler.vercel.app/',
+    repository: 'https://github.com/jv-vogler/another-reddit-clone',
+  },
+  {
+    id: 4,
     title: 'Portfolio',
     description: 'Source code for this website.',
     description_pt: 'Código fonte desse website.',
@@ -64,7 +76,7 @@ const PORTFOLIOS: Project[] = [
     repository: 'https://github.com/jv-vogler/portfolio',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Weather App',
     description: 'Weather forecast for cities around the world.',
     description_pt: 'Previsão do tempo de cidades ao redor do mundo.',
@@ -74,7 +86,7 @@ const PORTFOLIOS: Project[] = [
     repository: 'https://github.com/jv-vogler/weather-app',
   },
   {
-    id: 5,
+    id: 6,
     title: 'To-do List',
     description:
       'The good old "Todo List" of React beginners. Creates tasks that can be marked as complete and deleted.',
@@ -86,7 +98,7 @@ const PORTFOLIOS: Project[] = [
     repository: 'https://github.com/jv-vogler/todo-list',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Memory Cats',
     description:
       "A simple yet challenging memory game, because not only you have to identify the pairs but also remember the name of each cat you've found.",
@@ -97,6 +109,6 @@ const PORTFOLIOS: Project[] = [
     livePage: 'https://jv-vogler.itch.io/memory-cats',
     repository: 'https://github.com/jv-vogler/memory-cats',
   },
-];
+]
 
-export default PORTFOLIOS;
+export default PORTFOLIOS
