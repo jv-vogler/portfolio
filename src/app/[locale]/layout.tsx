@@ -2,6 +2,7 @@ import { routing } from '@/i18n/routing'
 import { Footer } from '@/ui/components/Footer'
 import { Toaster } from '@/ui/components/ui/sonner'
 import { Header } from '@/ui/header/components/Header'
+import { GoogleAnalytics } from '@/ui/lib/GoogleAnalytics'
 import { PersonJsonLd, WebSiteJsonLd } from '@/ui/lib/jsonLd'
 import { ThemeProvider } from '@/ui/theme/ThemeProvider'
 import { Analytics } from '@vercel/analytics/react'
@@ -116,6 +117,7 @@ export default async function LocaleLayout({
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
+        <GoogleAnalytics />
       </body>
     </html>
   )
