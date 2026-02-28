@@ -1,9 +1,9 @@
 'use client'
 
-import { useLocale, useTranslations } from 'next-intl'
-import { usePathname, useRouter } from '@/i18n/routing'
 import type { Locale } from '@/i18n/config'
 import { locales } from '@/i18n/config'
+import { usePathname, useRouter } from '@/i18n/routing'
+import { useLocale, useTranslations } from 'next-intl'
 
 const localeLabels: Record<Locale, string> = {
   en: 'EN',
