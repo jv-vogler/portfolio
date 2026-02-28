@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 
 export function Footer() {
   const t = useTranslations('footer')
+  const tA11y = useTranslations('a11y')
   const year = new Date().getFullYear()
 
   return (
@@ -16,7 +17,11 @@ export function Footer() {
               href={item.url}
               target={item.url.startsWith('mailto:') ? undefined : '_blank'}
               rel={item.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-              aria-label={item.label}
+              aria-label={
+                item.url.startsWith('mailto:')
+                  ? item.label
+                  : `${item.label} (${tA11y('opensInNewTab')})`
+              }
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               <SocialIcon slug={item.iconSlug} size={20} />

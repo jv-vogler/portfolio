@@ -41,15 +41,32 @@ const mdxComponents: MDXComponentMap = {
       {children}
     </li>
   ),
-  a: ({ href, children, ...props }) => (
-    <Link
-      href={href ?? '#'}
-      className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
-      {...props}
-    >
-      {children}
-    </Link>
-  ),
+  a: ({ href, children, ...props }) => {
+    const isExternal = href?.startsWith('http')
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+          {...props}
+        >
+          {children}
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      )
+    }
+    return (
+      <Link
+        href={href ?? '#'}
+        className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+        {...props}
+      >
+        {children}
+      </Link>
+    )
+  },
   blockquote: ({ children, ...props }) => (
     <blockquote
       className="mt-4 mb-4 border-l-4 border-primary pl-4 italic text-muted-foreground"
@@ -69,16 +86,21 @@ const mdxComponents: MDXComponentMap = {
     </pre>
   ),
   hr: (props) => <hr className="my-8 border-border" {...props} />,
-  img: ({ src, alt, ...props }) => (
-    <Image
-      src={src ?? ''}
-      alt={alt ?? ''}
-      width={800}
-      height={450}
-      className="my-4 rounded-lg"
-      {...props}
-    />
-  ),
+  img: ({ src, alt, ...props }) => {
+    if (process.env.NODE_ENV === 'development' && !alt) {
+      console.warn(`[MDX] Image missing alt text: ${src}`)
+    }
+    return (
+      <Image
+        src={src ?? ''}
+        alt={alt || 'Blog post image'}
+        width={800}
+        height={450}
+        className="my-4 rounded-lg"
+        {...props}
+      />
+    )
+  },
   strong: ({ children, ...props }) => (
     <strong className="font-semibold" {...props}>
       {children}

@@ -10,9 +10,15 @@ export function PortfolioSection() {
   const t = useTranslations('portfolio')
 
   return (
-    <MotionSection id="portfolio" className="mx-auto max-w-6xl px-4 py-20">
+    <MotionSection
+      id="portfolio"
+      aria-labelledby="portfolio-heading"
+      className="mx-auto max-w-6xl px-4 py-20"
+    >
       <div className="mb-12 text-center">
-        <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">{t('heading')}</h2>
+        <h2 id="portfolio-heading" className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
+          {t('heading')}
+        </h2>
         <p className="text-muted-foreground">{t('description')}</p>
       </div>
 

@@ -16,6 +16,7 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const t = useTranslations('portfolio')
+  const tA11y = useTranslations('a11y')
 
   return (
     <motion.div variants={scaleOnHover} initial="rest" whileHover="hover" className="h-full">
@@ -62,6 +63,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-3.5 w-3.5" />
                 {t('demo')}
+                <span className="sr-only"> ({tA11y('opensInNewTab')})</span>
               </a>
             </Button>
           )}
@@ -70,6 +72,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <a href={project.codeUrl} target="_blank" rel="noopener noreferrer">
                 <Github className="h-3.5 w-3.5" />
                 {t('code')}
+                <span className="sr-only"> ({tA11y('opensInNewTab')})</span>
               </a>
             </Button>
           )}

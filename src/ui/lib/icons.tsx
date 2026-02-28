@@ -55,13 +55,12 @@ export function TechIcon({ slug, size = 24, className }: TechIconProps) {
   if (icon) {
     return (
       <svg
-        role="img"
         viewBox="0 0 24 24"
         width={size}
         height={size}
         fill="currentColor"
         className={className}
-        aria-label={icon.title}
+        aria-hidden="true"
       >
         <path d={icon.path} />
       </svg>
@@ -70,7 +69,7 @@ export function TechIcon({ slug, size = 24, className }: TechIconProps) {
 
   const FallbackIcon = lucideFallbackMap[slug]
   if (FallbackIcon) {
-    return <FallbackIcon size={size} className={className} />
+    return <FallbackIcon size={size} className={className} aria-hidden="true" />
   }
 
   return null
@@ -94,5 +93,5 @@ export function SocialIcon({ slug, size = 20, className }: SocialIconProps) {
 
   if (!Icon) return null
 
-  return <Icon size={size} className={className} />
+  return <Icon size={size} className={className} aria-hidden="true" />
 }

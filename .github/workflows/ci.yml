@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    name: Lint, Format, Typecheck & Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint (Oxlint)
+        run: pnpm lint
+
+      - name: Format check (Oxfmt)
+        run: pnpm format:check
+
+      - name: Typecheck (tsc)
+        run: pnpm typecheck
+
+      - name: Typecheck (tsgo)
+        run: pnpm typecheck:go
+        continue-on-error: true
+
+      - name: Build
+        run: pnpm build
+
+      - name: Verify architecture dependency rule
+        run: |
+          echo "Checking core/ and lib/ don't import from app/ or ui/..."
+          if grep -rn "from '@/ui/\|from '@/app/" src/core/ src/lib/ 2>/dev/null; then
+            echo "ERROR: Inner layers import from outer layers!"
+            exit 1
+          fi
+          echo "Checking core/ has no framework imports..."
+          if grep -rn "from 'react\|from 'next" src/core/ 2>/dev/null; then
+            echo "ERROR: core/ contains framework imports!"
+            exit 1
+          fi
+          echo "All dependency rules pass."

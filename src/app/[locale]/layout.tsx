@@ -109,8 +109,20 @@ export default async function LocaleLayout({
         />
         <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+            >
+              {messages.a11y &&
+              typeof messages.a11y === 'object' &&
+              'skipToContent' in messages.a11y
+                ? (messages.a11y as Record<string, string>).skipToContent
+                : 'Skip to content'}
+            </a>
             <Header />
-            <main className="min-h-screen">{children}</main>
+            <main id="main-content" className="min-h-screen">
+              {children}
+            </main>
             <Footer />
             <Toaster />
           </NextIntlClientProvider>

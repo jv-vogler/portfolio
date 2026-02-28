@@ -56,7 +56,7 @@ export function BlogList({ posts }: BlogListProps) {
                       </Badge>
                     ))}
                   </div>
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                     {t('readMore')}
                     <ArrowRight className="size-4" />
                   </span>

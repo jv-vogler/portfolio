@@ -89,6 +89,12 @@
     "authorPhoto2": "Silhueta do autor com código no fundo",
     "thumbnail": "Captura de tela do projeto",
     "toggleTheme": "Alternar tema",
-    "toggleLanguage": "Alternar idioma"
+    "toggleLanguage": "Alternar idioma",
+    "skipToContent": "Pular para o conteúdo",
+    "desktopNav": "Navegação principal",
+    "mobileNav": "Navegação mobile",
+    "opensInNewTab": "abre em uma nova aba",
+    "closeMenu": "Fechar menu",
+    "homeLink": "JV Vogler — Início"
   }
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, type Variants } from 'framer-motion'
+import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import type { ComponentProps, ReactNode } from 'react'
 
 export const fadeInUp: Variants = {
@@ -43,11 +43,13 @@ type MotionSectionProps = {
 } & Omit<ComponentProps<typeof motion.section>, 'variants' | 'initial' | 'whileInView' | 'viewport'>
 
 export function MotionSection({ children, className, ...props }: MotionSectionProps) {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <motion.section
-      variants={fadeInUp}
-      initial="hidden"
-      whileInView="visible"
+      variants={prefersReducedMotion ? undefined : fadeInUp}
+      initial={prefersReducedMotion ? undefined : 'hidden'}
+      whileInView={prefersReducedMotion ? undefined : 'visible'}
       viewport={{ once: true, amount: 0.2 }}
       className={className}
       {...props}

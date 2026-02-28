@@ -74,7 +74,7 @@ export default async function BlogPostPage({
     const { post, content } = await getPost(slug, locale)
 
     return (
-      <section className="container mx-auto max-w-3xl px-4 py-20">
+      <section aria-labelledby="post-heading" className="container mx-auto max-w-3xl px-4 py-20">
         <BlogPostingJsonLd post={post} locale={locale} />
         <Link
           href="/blog"
@@ -89,7 +89,9 @@ export default async function BlogPostPage({
             <Calendar className="size-4" />
             <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
           </div>
-          <h1 className="mb-4 text-4xl font-bold tracking-tight">{post.title}</h1>
+          <h1 id="post-heading" className="mb-4 text-4xl font-bold tracking-tight">
+            {post.title}
+          </h1>
           <p className="mb-6 text-lg text-muted-foreground">{post.description}</p>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (

@@ -1,23 +1,23 @@
-'use client'
+"use client";
 
-import { Button } from '@/ui/components/ui/button'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Moon, Sun } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import { useTheme } from 'next-themes'
+import { Button } from "@/ui/components/ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
 
 export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme()
-  const t = useTranslations('a11y')
+  const { resolvedTheme, setTheme } = useTheme();
+  const t = useTranslations("a11y");
 
-  const isDark = resolvedTheme === 'dark'
+  const isDark = resolvedTheme === "dark";
 
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      aria-label={t('toggleTheme')}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label={t("toggleTheme")}
       className="relative"
     >
       <AnimatePresence mode="wait" initial={false}>
@@ -44,5 +44,5 @@ export function ThemeToggle() {
         )}
       </AnimatePresence>
     </Button>
-  )
+  );
 }

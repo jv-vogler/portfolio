@@ -18,12 +18,12 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="text-lg font-bold text-foreground">
+        <Link href="/" className="text-lg font-bold text-foreground" aria-label={tA11y('homeLink')}>
           JV Vogler
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav aria-label={tA11y('desktopNav')} className="hidden items-center gap-6 md:flex">
           {Navigation.links.map((link) => {
             const isRoute = link.href.startsWith('/')
 
@@ -64,7 +64,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-64">
               <SheetTitle className="sr-only">{tA11y('navigationMenu')}</SheetTitle>
-              <nav className="mt-8 flex flex-col gap-4">
+              <nav aria-label={tA11y('mobileNav')} className="mt-8 flex flex-col gap-4">
                 {Navigation.links.map((link) => {
                   const isRoute = link.href.startsWith('/')
 

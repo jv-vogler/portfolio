@@ -12,12 +12,13 @@ export function Hero() {
   return (
     <section
       id="home"
+      aria-labelledby="hero-heading"
       className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden px-4"
     >
       {/* Background gradient decoration */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 h-[300px] w-[300px] rounded-full bg-primary/5 blur-2xl" />
+        <div className="absolute top-1/4 left-1/2 h-125 w-125 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 h-75 w-75 rounded-full bg-primary/5 blur-2xl" />
       </div>
 
       <motion.div
@@ -34,6 +35,7 @@ export function Hero() {
         </motion.p>
 
         <motion.h1
+          id="hero-heading"
           variants={fadeInUp}
           className="mb-6 text-4xl leading-tight font-bold text-foreground sm:text-5xl md:text-6xl"
         >

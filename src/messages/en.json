@@ -89,6 +89,12 @@
     "authorPhoto2": "Author's silhouette with code in the background",
     "thumbnail": "Project's screenshot",
     "toggleTheme": "Toggle theme",
-    "toggleLanguage": "Toggle language"
+    "toggleLanguage": "Toggle language",
+    "skipToContent": "Skip to content",
+    "desktopNav": "Main navigation",
+    "mobileNav": "Mobile navigation",
+    "opensInNewTab": "opens in a new tab",
+    "closeMenu": "Close menu",
+    "homeLink": "JV Vogler — Home"
   }
 }

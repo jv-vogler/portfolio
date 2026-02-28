@@ -28,7 +28,7 @@ export function ContactForm() {
   }, [submitResult, t])
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5">
+    <form onSubmit={onSubmit} className="space-y-5" aria-label={t('heading')}>
       {/* Name */}
       <div className="space-y-1.5">
         <label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -38,10 +38,15 @@ export function ContactForm() {
           id="name"
           {...register('name')}
           aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? 'name-error' : undefined}
           placeholder={t('name')}
           disabled={isSubmitting}
         />
-        {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
+        {errors.name && (
+          <p id="name-error" role="alert" className="text-sm text-destructive">
+            {errors.name.message}
+          </p>
+        )}
       </div>
 
       {/* Email */}
@@ -54,10 +59,15 @@ export function ContactForm() {
           type="email"
           {...register('email')}
           aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? 'email-error' : undefined}
           placeholder={t('email')}
           disabled={isSubmitting}
         />
-        {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+        {errors.email && (
+          <p id="email-error" role="alert" className="text-sm text-destructive">
+            {errors.email.message}
+          </p>
+        )}
       </div>
 
       {/* Message */}
@@ -69,11 +79,16 @@ export function ContactForm() {
           id="message"
           {...register('message')}
           aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? 'message-error' : undefined}
           placeholder={t('messagePlaceholder')}
           disabled={isSubmitting}
           className="min-h-32"
         />
-        {errors.message && <p className="text-sm text-destructive">{errors.message.message}</p>}
+        {errors.message && (
+          <p id="message-error" role="alert" className="text-sm text-destructive">
+            {errors.message.message}
+          </p>
+        )}
       </div>
 
       {/* Submit */}

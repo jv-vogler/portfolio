@@ -10,9 +10,15 @@ export function Experience() {
   const t = useTranslations('experience')
 
   return (
-    <MotionSection id="experience" className="mx-auto max-w-6xl px-4 py-20">
+    <MotionSection
+      id="experience"
+      aria-labelledby="experience-heading"
+      className="mx-auto max-w-6xl px-4 py-20"
+    >
       <div className="mb-12 text-center">
-        <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">{t('heading')}</h2>
+        <h2 id="experience-heading" className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
+          {t('heading')}
+        </h2>
         <p className="text-muted-foreground">{t('description')}</p>
       </div>
 

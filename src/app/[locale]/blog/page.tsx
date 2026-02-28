@@ -38,9 +38,11 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const posts = await getAllPosts(locale)
 
   return (
-    <section className="container mx-auto max-w-4xl px-4 py-20">
+    <section aria-labelledby="blog-heading" className="container mx-auto max-w-4xl px-4 py-20">
       <MotionSection className="mb-12 text-center">
-        <h1 className="mb-4 text-4xl font-bold">{t('heading')}</h1>
+        <h1 id="blog-heading" className="mb-4 text-4xl font-bold">
+          {t('heading')}
+        </h1>
         <p className="text-lg text-muted-foreground">{t('description')}</p>
       </MotionSection>
       <BlogList posts={posts} />
