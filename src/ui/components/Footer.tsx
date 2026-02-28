@@ -1,0 +1,35 @@
+import { Social } from '@/core/social'
+import { SocialIcon } from '@/ui/lib/icons'
+import { useTranslations } from 'next-intl'
+
+export function Footer() {
+  const t = useTranslations('footer')
+  const year = new Date().getFullYear()
+
+  return (
+    <footer className="border-t border-border/40 bg-background">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-8 sm:flex-row sm:justify-between">
+        <div className="flex items-center gap-4">
+          {Social.items.map((item) => (
+            <a
+              key={item.id}
+              href={item.url}
+              target={item.url.startsWith('mailto:') ? undefined : '_blank'}
+              rel={item.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+              aria-label={item.label}
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <SocialIcon slug={item.iconSlug} size={20} />
+            </a>
+          ))}
+        </div>
+        <div className="flex flex-col items-center gap-1 text-sm text-muted-foreground sm:items-end">
+          <p>
+            &copy; {year} JV Vogler. {t('rights')}
+          </p>
+          <p>{t('builtWith')}</p>
+        </div>
+      </div>
+    </footer>
+  )
+}
