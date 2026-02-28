@@ -37,13 +37,13 @@ export function ContactSection() {
               const isMailto = item.url.startsWith('mailto:')
               return (
                 <a
-                  key={item.id}
+                  key={item.slug}
                   href={item.url}
                   target={isMailto ? undefined : '_blank'}
                   rel={isMailto ? undefined : 'noopener noreferrer'}
                   className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  <SocialIcon slug={item.iconSlug} size={20} />
+                  <SocialIcon slug={item.slug} size={20} />
                   <span>{item.label}</span>
                   {!isMailto && <span className="sr-only"> ({tA11y('opensInNewTab')})</span>}
                 </a>

@@ -30,7 +30,7 @@ export function PortfolioSection() {
         className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {Portfolio.items.map((project) => (
-          <motion.div key={project.id} variants={fadeInUp}>
+          <motion.div key={project.slug} variants={fadeInUp}>
             <ProjectCard project={project} />
           </motion.div>
         ))}

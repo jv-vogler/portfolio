@@ -1,99 +1,79 @@
 export namespace Portfolio {
-  export type Type = {
-    id: number;
-    slug: string;
-    title: string;
-    descriptionKey: string;
-    thumbnail: string;
-    techs: string[];
-    demoUrl: string;
-    codeUrl: string;
-    isPassionProject?: boolean;
-  };
+  export type Project = {
+    slug: string
+    thumbnail: string
+    techs: string[]
+    demoUrl?: string
+    codeUrl?: string
+    featured?: boolean
+    caseStudy?: boolean
+  }
 
-  export const items: Type[] = [
+  export const items: Project[] = [
     {
-      id: 8,
-      slug: "fetchhire",
-      title: "Fetch Hire",
-      descriptionKey: "portfolio.fetchhire.description",
-      thumbnail: "thumb-fetchhire.jpg",
-      techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-      demoUrl: "https://fetch-hire.vercel.app/",
-      codeUrl: "https://github.com/jv-vogler/fetch-hire",
+      slug: 'ai-integration-platform',
+      thumbnail: 'thumb-ai-platform.png',
+      techs: ['React', 'Next.js', 'TypeScript', 'Node.js', 'AWS', 'OpenAI'],
+      featured: true,
+      caseStudy: true,
     },
     {
-      id: 7,
-      slug: "treasure-hunters",
-      title: "Treasure Hunters",
-      descriptionKey: "portfolio.treasure-hunters.description",
-      thumbnail: "thumb-treasurehunters.jpg",
-      techs: ["Godot", "GDScript"],
-      demoUrl: "https://github.com/jv-vogler/Treasure-Hunters",
-      codeUrl: "https://github.com/jv-vogler/Treasure-Hunters",
-      isPassionProject: true,
+      slug: 'fetchhire',
+      thumbnail: 'thumb-fetchhire.png',
+      techs: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+      demoUrl: 'https://fetch-hire.vercel.app/',
+      codeUrl: 'https://github.com/jv-vogler/fetch-hire',
     },
     {
-      id: 6,
-      slug: "voltorb-flip",
-      title: "Voltorb Flip",
-      descriptionKey: "portfolio.voltorb-flip.description",
-      thumbnail: "thumb-voltorbflip.jpg",
-      techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-      demoUrl: "https://voltorbflip.vercel.app/",
-      codeUrl: "https://github.com/jv-vogler/voltorb-flip",
-      isPassionProject: true,
+      slug: 'treasure-hunters',
+      thumbnail: 'thumb-treasurehunters.png',
+      techs: ['Godot', 'GDScript'],
+      demoUrl: 'https://github.com/jv-vogler/Treasure-Hunters',
+      codeUrl: 'https://github.com/jv-vogler/Treasure-Hunters',
+      featured: true,
     },
     {
-      id: 5,
-      slug: "another-reddit-clone",
-      title: "Another Reddit Clone",
-      descriptionKey: "portfolio.another-reddit-clone.description",
-      thumbnail: "thumb-reddit.jpg",
-      techs: ["React", "Next.js", "TypeScript", "Chakra UI", "Firebase", "Recoil"],
-      demoUrl: "https://another-reddit-clone-jv-vogler.vercel.app/",
-      codeUrl: "https://github.com/jv-vogler/another-reddit-clone",
+      slug: 'voltorb-flip',
+      thumbnail: 'thumb-voltorbflip.png',
+      techs: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+      demoUrl: 'https://voltorbflip.vercel.app/',
+      codeUrl: 'https://github.com/jv-vogler/voltorb-flip',
+      featured: true,
     },
     {
-      id: 4,
-      slug: "portfolio",
-      title: "Portfolio",
-      descriptionKey: "portfolio.portfolio.description",
-      thumbnail: "thumb-portfolio.jpg",
-      techs: ["React", "TypeScript", "Styled Components", "Vite"],
-      demoUrl: "",
-      codeUrl: "https://github.com/jv-vogler/portfolio",
+      slug: 'another-reddit-clone',
+      thumbnail: 'thumb-reddit.png',
+      techs: ['React', 'Next.js', 'TypeScript', 'Chakra UI', 'Firebase', 'Recoil'],
+      demoUrl: 'https://another-reddit-clone-jv-vogler.vercel.app/',
+      codeUrl: 'https://github.com/jv-vogler/another-reddit-clone',
     },
     {
-      id: 3,
-      slug: "weather-app",
-      title: "Weather App",
-      descriptionKey: "portfolio.weather-app.description",
-      thumbnail: "thumb-weatherapp.jpg",
-      techs: ["HTML", "CSS", "JavaScript", "Webpack"],
-      demoUrl: "https://jv-vogler.github.io/weather-app/",
-      codeUrl: "https://github.com/jv-vogler/weather-app",
+      slug: 'portfolio-v1',
+      thumbnail: 'thumb-portfolio.png',
+      techs: ['React', 'TypeScript', 'Styled Components', 'Vite'],
+      codeUrl: 'https://github.com/jv-vogler/portfolio',
     },
     {
-      id: 2,
-      slug: "todo-list",
-      title: "To-do List",
-      descriptionKey: "portfolio.todo-list.description",
-      thumbnail: "thumb-todoapp.jpg",
-      techs: ["React", "TypeScript", "Styled Components", "Vite"],
-      demoUrl: "https://jv-vogler.github.io/todo-list/",
-      codeUrl: "https://github.com/jv-vogler/todo-list",
+      slug: 'weather-app',
+      thumbnail: 'thumb-weatherapp.png',
+      techs: ['HTML', 'CSS', 'JavaScript', 'Webpack'],
+      demoUrl: 'https://jv-vogler.github.io/weather-app/',
+      codeUrl: 'https://github.com/jv-vogler/weather-app',
     },
     {
-      id: 1,
-      slug: "memory-cats",
-      title: "Memory Cats",
-      descriptionKey: "portfolio.memory-cats.description",
-      thumbnail: "thumb-memorycats.jpg",
-      techs: ["Godot", "GDScript"],
-      demoUrl: "https://jv-vogler.itch.io/memory-cats",
-      codeUrl: "https://github.com/jv-vogler/memory-cats",
-      isPassionProject: true,
+      slug: 'todo-list',
+      thumbnail: 'thumb-todoapp.png',
+      techs: ['React', 'TypeScript', 'Styled Components', 'Vite'],
+      demoUrl: 'https://jv-vogler.github.io/todo-list/',
+      codeUrl: 'https://github.com/jv-vogler/todo-list',
     },
-  ];
+    {
+      slug: 'memory-cats',
+      thumbnail: 'thumb-memorycats.png',
+      techs: ['Godot', 'GDScript'],
+      demoUrl: 'https://jv-vogler.itch.io/memory-cats',
+      codeUrl: 'https://github.com/jv-vogler/memory-cats',
+      featured: true,
+    },
+  ]
 }

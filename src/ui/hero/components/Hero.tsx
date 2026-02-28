@@ -17,8 +17,8 @@ export function Hero() {
     >
       {/* Background gradient decoration */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/2 h-125 w-125 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 h-75 w-75 rounded-full bg-primary/5 blur-2xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_-20%,var(--color-primary)/0.08,transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_70%_80%,var(--color-primary)/0.04,transparent)]" />
       </div>
 
       <motion.div

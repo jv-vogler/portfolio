@@ -13,7 +13,7 @@ export function Footer() {
         <div className="flex items-center gap-4">
           {Social.items.map((item) => (
             <a
-              key={item.id}
+              key={item.slug}
               href={item.url}
               target={item.url.startsWith('mailto:') ? undefined : '_blank'}
               rel={item.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
@@ -24,7 +24,7 @@ export function Footer() {
               }
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
-              <SocialIcon slug={item.iconSlug} size={20} />
+              <SocialIcon slug={item.slug} size={20} />
             </a>
           ))}
         </div>
@@ -32,7 +32,6 @@ export function Footer() {
           <p>
             &copy; {year} JV Vogler. {t('rights')}
           </p>
-          <p>{t('builtWith')}</p>
         </div>
       </div>
     </footer>

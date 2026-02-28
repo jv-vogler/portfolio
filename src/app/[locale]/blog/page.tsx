@@ -4,6 +4,8 @@ import { MotionSection } from '@/ui/lib/motion'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
+export const revalidate = 3600
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://jvvogler.com'
 
 export async function generateMetadata({

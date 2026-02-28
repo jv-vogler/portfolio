@@ -1,16 +1,22 @@
-import { Github, Image, Instagram, Linkedin, Mail, PenTool, type LucideProps } from 'lucide-react'
+import {
+  BrainCircuit,
+  Cloud,
+  Code2,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  type LucideProps,
+} from 'lucide-react'
 import type { ComponentType } from 'react'
 import {
-  siChakraui,
-  siCss,
-  siFirebase,
+  siDocker,
   siGit,
-  siHtml5,
-  siJavascript,
   siNextdotjs,
   siNodedotjs,
+  siPostgresql,
   siReact,
-  siStyledcomponents,
+  siRubyonrails,
   siTailwindcss,
   siTypescript,
 } from 'simple-icons'
@@ -24,23 +30,21 @@ type SimpleIcon = {
 }
 
 const techIconMap: Record<string, SimpleIcon> = {
-  html5: siHtml5,
-  css3: siCss,
-  javascript: siJavascript,
   typescript: siTypescript,
   react: siReact,
   nextdotjs: siNextdotjs,
-  nodedotjs: siNodedotjs,
-  chakraui: siChakraui,
-  styledcomponents: siStyledcomponents,
   tailwindcss: siTailwindcss,
-  firebase: siFirebase,
+  nodedotjs: siNodedotjs,
+  rubyonrails: siRubyonrails,
+  postgresql: siPostgresql,
   git: siGit,
+  docker: siDocker,
 }
 
 const lucideFallbackMap: Record<string, ComponentType<LucideProps>> = {
-  adobephotoshop: Image,
-  adobeillustrator: PenTool,
+  'html-css': Code2,
+  aws: Cloud,
+  ai: BrainCircuit,
 }
 
 type TechIconProps = {

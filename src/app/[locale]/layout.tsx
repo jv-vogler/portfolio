@@ -1,3 +1,4 @@
+import { locales } from '@/i18n/config'
 import { routing } from '@/i18n/routing'
 import { Footer } from '@/ui/components/Footer'
 import { Toaster } from '@/ui/components/ui/sonner'
@@ -12,6 +13,10 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { Poppins } from 'next/font/google'
 import { notFound } from 'next/navigation'
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
+}
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -111,7 +116,7 @@ export default async function LocaleLayout({
           <NextIntlClientProvider messages={messages}>
             <a
               href="#main-content"
-              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
             >
               {messages.a11y &&
               typeof messages.a11y === 'object' &&
