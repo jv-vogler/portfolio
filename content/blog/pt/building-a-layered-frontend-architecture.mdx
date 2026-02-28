@@ -1,0 +1,72 @@
+---
+title: "Construindo uma Arquitetura Frontend em Camadas com Next.js"
+description: "Como estruturei meu portfólio usando um padrão de arquitetura em camadas — separando lógica de domínio, utilitários compartilhados, infraestrutura e componentes de UI."
+date: "2026-02-28"
+tags: ["arquitetura", "nextjs", "typescript", "padrões"]
+published: true
+---
+
+## O Problema com Estruturas Planas
+
+A maioria dos projetos frontend começa com uma estrutura plana: components, hooks, utils e talvez uma pasta services. Isso funciona bem para apps pequenos, mas conforme o projeto cresce, fica mais difícil raciocinar sobre o **fluxo de dependências** e a **separação de responsabilidades**.
+
+Quando seu arquivo de utilitários importa da pasta de componentes, e seu componente importa da camada de API, você criou um grafo de dependências emaranhado que é difícil de manter ou testar.
+
+### A Arquitetura em Camadas
+
+Adotei uma **arquitetura frontend em camadas** com quatro camadas distintas, cada uma com regras de dependência estritas:
+
+```
+core/ → Tipos e lógica de domínio puros (zero imports de framework)
+lib/  → Utilitários genéricos (sem conhecimento de domínio)
+app/  → Server Actions, acesso a dados, I/O
+ui/   → Componentes React, hooks, páginas
+```
+
+### A Regra de Ouro
+
+**Camadas internas nunca importam de camadas externas.** `core/` não sabe nada sobre React. `lib/` não sabe nada sobre seu domínio. Isso torna as camadas internas trivialmente testáveis e portáveis.
+
+### Camada Core
+
+A camada `core/` contém TypeScript puro e schemas Zod — sem React, sem Next.js, nenhum código de framework:
+
+```typescript
+// core/contact.ts
+export namespace Contact {
+  export const formSchema = z.object({
+    name: z.string().min(2),
+    email: z.string().email(),
+    message: z.string().min(20),
+  })
+
+  export type FormValues = z.infer<typeof formSchema>
+}
+```
+
+Este schema é usado tanto pela UI (React Hook Form + Zod resolver) quanto pela server action (validação antes de enviar email). Uma única fonte da verdade, zero duplicação.
+
+### Camada Lib
+
+A camada `lib/` fornece utilitários genéricos, agnósticos de domínio:
+
+```typescript
+// lib/date.ts
+export function formatDate(dateString: string, locale: string): string {
+  return new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(dateString))
+}
+```
+
+### Benefícios
+
+1. **Testabilidade** — As camadas core e lib podem ser testadas unitariamente sem nenhuma configuração de framework.
+2. **Portabilidade** — Se você trocar do Next.js para Remix ou Astro, sua camada core vem junto sem alterações.
+3. **Clareza** — Quando você vê um import de `@/core/contact`, sabe que é lógica de domínio pura. Quando vê `@/app/actions/contact`, sabe que toca o servidor.
+
+### Conclusão
+
+Uma arquitetura em camadas adiciona uma pequena estrutura adicional no início, mas gera dividendos em manutenibilidade. Para um site de portfólio, pode parecer exagero — mas também é o sandbox perfeito para praticar padrões que você usará em aplicações maiores.
