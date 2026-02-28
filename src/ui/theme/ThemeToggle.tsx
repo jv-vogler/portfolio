@@ -3,8 +3,8 @@
 import { Button } from '@/ui/components/ui/button'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
-import { useTheme } from 'next-themes'
 import { useTranslations } from 'next-intl'
+import { useTheme } from 'next-themes'
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()

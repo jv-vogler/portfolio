@@ -2,9 +2,9 @@
 
 import { Navigation } from '@/core/navigation'
 import { Link } from '@/i18n/routing'
-import { LocaleSwitcher } from '@/ui/header/components/LocaleSwitcher'
 import { Button } from '@/ui/components/ui/button'
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/ui/components/ui/sheet'
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/ui/components/ui/sheet'
+import { LocaleSwitcher } from '@/ui/header/components/LocaleSwitcher'
 import { ThemeToggle } from '@/ui/theme/ThemeToggle'
 import { Menu } from 'lucide-react'
 import { useTranslations } from 'next-intl'

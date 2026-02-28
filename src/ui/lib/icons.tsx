@@ -1,3 +1,5 @@
+import { Github, Image, Instagram, Linkedin, Mail, PenTool, type LucideProps } from 'lucide-react'
+import type { ComponentType } from 'react'
 import {
   siChakraui,
   siCss,
@@ -12,16 +14,6 @@ import {
   siTailwindcss,
   siTypescript,
 } from 'simple-icons'
-import {
-  Github,
-  Image,
-  Instagram,
-  Linkedin,
-  Mail,
-  PenTool,
-  type LucideProps,
-} from 'lucide-react'
-import type { ComponentType } from 'react'
 
 type SimpleIcon = {
   title: string
