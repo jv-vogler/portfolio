@@ -1,6 +1,94 @@
 {
-  "home": {
+  "metadata": {
     "title": "JV Vogler — Frontend Developer",
     "description": "Portfolio of JV Vogler, a frontend developer specializing in modern web technologies."
+  },
+  "nav": {
+    "home": "Home",
+    "experience": "Experience",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "heading": "I'm a Frontend Developer",
+    "paragraph": "Hi! I am JV and I'm constantly learning and improving to deliver outstanding web experiences. Currently I love to work on web applications using technologies such as React, Typescript, Styled Components, Tailwind, and more.",
+    "cta": "Portfolio"
+  },
+  "experience": {
+    "heading": "Experience",
+    "description": "I have experience with the following technologies:"
+  },
+  "portfolio": {
+    "heading": "Portfolio",
+    "description": "Check out some of my projects here",
+    "demo": "Demo",
+    "code": "Code",
+    "passionProject": "Passion Project",
+    "fetchhire": {
+      "description": "A tool to get helpful insight and data about Github users."
+    },
+    "treasure-hunters": {
+      "description": "Treasure Hunters is a 2D platformer game where you control the feared Captain Clown Nose in a quest to recover his ship that was taken in a mutiny. Many dangers and treasures hide and await under the tree shadows of Palm Tree Island."
+    },
+    "voltorb-flip": {
+      "description": "Voltorb Flip is a minigame of the Goldenrod and Celadon Game Corners in the Korean and Western releases of Pokémon HeartGold and SoulSilver."
+    },
+    "another-reddit-clone": {
+      "description": "A functional Reddit clone. You can log in/sign up, create and join communities, create posts, upvote/downvote posts, and more!"
+    },
+    "portfolio": {
+      "description": "Source code for this website."
+    },
+    "weather-app": {
+      "description": "Weather forecast for cities around the world."
+    },
+    "todo-list": {
+      "description": "The good old \"Todo List\" of React beginners. Creates tasks that can be marked as complete and deleted."
+    },
+    "memory-cats": {
+      "description": "A simple yet challenging memory game, because not only you have to identify the pairs but also remember the name of each cat you've found."
+    }
+  },
+  "contact": {
+    "heading": "Contact",
+    "description": "Use the form below to get in touch with me!",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "messagePlaceholder": "Enter your message",
+    "submit": "Submit",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again.",
+    "validation": {
+      "required": "Required field",
+      "nameMin": "Needs at least 2 characters",
+      "messageMin": "Needs at least 20 characters",
+      "emailFormat": "Needs to be a valid email"
+    }
+  },
+  "blog": {
+    "heading": "Blog",
+    "description": "Thoughts, tutorials, and insights on web development.",
+    "noPosts": "No posts yet. Check back soon!",
+    "readMore": "Read more",
+    "backToList": "Back to all posts"
+  },
+  "footer": {
+    "builtWith": "Built with Next.js",
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist.",
+    "backHome": "Go back home"
+  },
+  "a11y": {
+    "navigationMenu": "Navigation menu",
+    "authorPhoto1": "Author's photo",
+    "authorPhoto2": "Author's silhouette with code in the background",
+    "thumbnail": "Project's screenshot",
+    "toggleTheme": "Toggle theme",
+    "toggleLanguage": "Toggle language"
   }
 }

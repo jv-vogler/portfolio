@@ -1,6 +1,94 @@
 {
-  "home": {
+  "metadata": {
     "title": "JV Vogler — Desenvolvedor Frontend",
     "description": "Portfólio de JV Vogler, um desenvolvedor frontend especializado em tecnologias web modernas."
+  },
+  "nav": {
+    "home": "Início",
+    "experience": "Experiência",
+    "portfolio": "Portfólio",
+    "blog": "Blog",
+    "contact": "Contato"
+  },
+  "hero": {
+    "heading": "Sou um Desenvolvedor Frontend",
+    "paragraph": "Olá! Sou o JV e estou constantemente aprendendo e melhorando para entregar experiências web excepcionais. Atualmente eu amo trabalhar em aplicações web usando tecnologias como React, Typescript, Styled Components, Tailwind, e mais.",
+    "cta": "Portfólio"
+  },
+  "experience": {
+    "heading": "Experiência",
+    "description": "Eu tenho experiência com as seguintes tecnologias:"
+  },
+  "portfolio": {
+    "heading": "Portfólio",
+    "description": "Confira alguns dos meus projetos aqui",
+    "demo": "Demo",
+    "code": "Código",
+    "passionProject": "Projeto Pessoal",
+    "fetchhire": {
+      "description": "Uma ferramenta para obter informações úteis sobre usuários do Github."
+    },
+    "treasure-hunters": {
+      "description": "Treasure Hunters é um jogo de plataforma 2D onde você assume o controle do temido Capitão Nariz de Palhaço em busca de recuperar seu navio tomado em um motim. Diversos perigos e tesouros se escondem e o aguardam sob as sombras das árvores da Ilha das Palmeiras."
+    },
+    "voltorb-flip": {
+      "description": "Voltorb Flip é um minigame dos Game Corners de Goldenrod e Celadon nas versões Coreanas e Ocidentais dos jogos Pokémon HeartGold e SoulSilver."
+    },
+    "another-reddit-clone": {
+      "description": "Um clone do Reddit funcional. Você pode logar/se cadastrar, criar e entrar em comunidades, criar posts, votar nos posts, e mais!"
+    },
+    "portfolio": {
+      "description": "Código fonte desse website."
+    },
+    "weather-app": {
+      "description": "Previsão do tempo de cidades ao redor do mundo."
+    },
+    "todo-list": {
+      "description": "A boa e velha \"Todo List\" dos iniciantes em React. Cria tarefas que podem ser marcadas como completas e deletadas."
+    },
+    "memory-cats": {
+      "description": "Um jogo da memória simples, porém desafiador, pois além de identificar os pares iguais você também precisa se lembrar do nome de cada gato que encontrou."
+    }
+  },
+  "contact": {
+    "heading": "Contato",
+    "description": "Use o formulário abaixo para entrar em contato comigo!",
+    "name": "Nome",
+    "email": "Email",
+    "message": "Mensagem",
+    "messagePlaceholder": "Digite sua mensagem",
+    "submit": "Enviar",
+    "success": "Mensagem enviada com sucesso!",
+    "error": "Falha ao enviar mensagem. Por favor, tente novamente.",
+    "validation": {
+      "required": "Campo obrigatório",
+      "nameMin": "Precisa de pelo menos 2 caracteres",
+      "messageMin": "Precisa de pelo menos 20 caracteres",
+      "emailFormat": "Precisa ser um email válido"
+    }
+  },
+  "blog": {
+    "heading": "Blog",
+    "description": "Pensamentos, tutoriais e insights sobre desenvolvimento web.",
+    "noPosts": "Nenhum post ainda. Volte em breve!",
+    "readMore": "Leia mais",
+    "backToList": "Voltar para todos os posts"
+  },
+  "footer": {
+    "builtWith": "Feito com Next.js",
+    "rights": "Todos os direitos reservados."
+  },
+  "notFound": {
+    "title": "Página Não Encontrada",
+    "description": "A página que você está procurando não existe.",
+    "backHome": "Voltar para o início"
+  },
+  "a11y": {
+    "navigationMenu": "Menu de navegação",
+    "authorPhoto1": "Foto do autor",
+    "authorPhoto2": "Silhueta do autor com código no fundo",
+    "thumbnail": "Captura de tela do projeto",
+    "toggleTheme": "Alternar tema",
+    "toggleLanguage": "Alternar idioma"
   }
 }

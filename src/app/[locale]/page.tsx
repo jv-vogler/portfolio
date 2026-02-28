@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 export default function HomePage() {
-  const t = useTranslations("home");
+  const t = useTranslations("metadata");
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-8">
