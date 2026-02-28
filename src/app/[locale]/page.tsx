@@ -1,12 +1,31 @@
-import { useTranslations } from 'next-intl'
+import { ContactSection } from '@/ui/contact/components/ContactSection'
+import { Experience } from '@/ui/experience/components/Experience'
+import { Hero } from '@/ui/hero/components/Hero'
+import { PortfolioSection } from '@/ui/portfolio/components/Portfolio'
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'metadata' })
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  }
+}
 
 export default function HomePage() {
-  const t = useTranslations('metadata')
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-8">
-      <h1 className="text-4xl font-bold text-foreground">{t('title')}</h1>
-      <p className="text-lg text-muted-foreground">{t('description')}</p>
-    </main>
+    <>
+      <Hero />
+      <Experience />
+      <PortfolioSection />
+      <ContactSection />
+    </>
   )
 }

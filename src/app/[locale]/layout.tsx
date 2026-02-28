@@ -1,5 +1,6 @@
 import { routing } from '@/i18n/routing'
 import { Footer } from '@/ui/components/Footer'
+import { Toaster } from '@/ui/components/ui/sonner'
 import { Header } from '@/ui/header/components/Header'
 import { ThemeProvider } from '@/ui/theme/ThemeProvider'
 import { Analytics } from '@vercel/analytics/react'
@@ -39,6 +40,7 @@ export default async function LocaleLayout({
             <Header />
             <main className="min-h-screen">{children}</main>
             <Footer />
+            <Toaster />
           </NextIntlClientProvider>
         </ThemeProvider>
         <Analytics />
