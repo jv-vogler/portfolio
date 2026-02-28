@@ -4,12 +4,15 @@ import { Link } from '@/i18n/routing'
 import { formatDate } from '@/lib/date'
 import { BlogPost } from '@/ui/blog/components/BlogPost'
 import { Badge } from '@/ui/components/ui/badge'
+import { BlogPostingJsonLd } from '@/ui/lib/jsonLd'
 import { ArrowLeft, Calendar } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 
 export const revalidate = 3600
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://jvvogler.com'
 
 export async function generateStaticParams() {
   const params: { locale: string; slug: string }[] = []
@@ -42,6 +45,14 @@ export async function generateMetadata({
         type: 'article',
         publishedTime: post.date,
         tags: post.tags,
+        url: `${BASE_URL}/${locale}/blog/${slug}`,
+      },
+      alternates: {
+        canonical: `${BASE_URL}/${locale}/blog/${slug}`,
+        languages: {
+          en: `${BASE_URL}/en/blog/${slug}`,
+          pt: `${BASE_URL}/pt/blog/${slug}`,
+        },
       },
     }
   } catch {
@@ -64,6 +75,7 @@ export default async function BlogPostPage({
 
     return (
       <section className="container mx-auto max-w-3xl px-4 py-20">
+        <BlogPostingJsonLd post={post} locale={locale} />
         <Link
           href="/blog"
           className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"

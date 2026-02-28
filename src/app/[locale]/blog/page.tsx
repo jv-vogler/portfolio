@@ -4,6 +4,8 @@ import { MotionSection } from '@/ui/lib/motion'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://jvvogler.com'
+
 export async function generateMetadata({
   params,
 }: {
@@ -15,6 +17,18 @@ export async function generateMetadata({
   return {
     title: t('heading'),
     description: t('description'),
+    openGraph: {
+      title: `${t('heading')} | JV Vogler`,
+      description: t('description'),
+      url: `${BASE_URL}/${locale}/blog`,
+    },
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/blog`,
+      languages: {
+        en: `${BASE_URL}/en/blog`,
+        pt: `${BASE_URL}/pt/blog`,
+      },
+    },
   }
 }
 
