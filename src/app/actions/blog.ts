@@ -1,41 +1,49 @@
-import { Blog } from "@/core/blog";
-import { getPostBySlug, getPostSlugs } from "@/lib/mdx";
-
-function mapFrontmatterToPost(
-  slug: string,
-  locale: string,
-  frontmatter: Record<string, unknown>,
-): Blog.Post {
-  return {
-    slug,
-    locale,
-    title: (frontmatter.title as string) ?? "",
-    description: (frontmatter.description as string) ?? "",
-    date: (frontmatter.date as string) ?? "",
-    tags: (frontmatter.tags as string[]) ?? [],
-    published: (frontmatter.published as boolean) ?? false,
-  };
-}
+import { Blog, type PayloadPost } from "@/core/blog";
+import config from "@payload-config";
+import { getPayload } from "payload";
 
 export async function getAllPosts(locale: string): Promise<Blog.Post[]> {
-  const slugs = getPostSlugs(locale);
+  const payload = await getPayload({ config });
 
-  const posts = await Promise.all(
-    slugs.map(async (slug) => {
-      const { frontmatter } = await getPostBySlug(slug, locale);
-      return mapFrontmatterToPost(slug, locale, frontmatter);
-    }),
-  );
+  const { docs } = await payload.find({
+    collection: "posts",
+    locale: locale as "en" | "pt",
+    where: {
+      _status: { equals: "published" },
+    },
+    sort: "-publishedDate",
+    limit: 100,
+    overrideAccess: true,
+  });
 
-  return Blog.sortByDate(Blog.filterPublished(posts));
+  return (docs as PayloadPost[]).map((doc) => Blog.fromPayload(doc, locale));
 }
 
 export async function getPost(
   slug: string,
   locale: string,
-): Promise<{ post: Blog.Post; content: string }> {
-  const { frontmatter, content } = await getPostBySlug(slug, locale);
-  const post = mapFrontmatterToPost(slug, locale, frontmatter);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): Promise<{ post: Blog.Post; content: any }> {
+  const payload = await getPayload({ config });
 
-  return { post, content };
+  const { docs } = await payload.find({
+    collection: "posts",
+    locale: locale as "en" | "pt",
+    where: {
+      slug: { equals: slug },
+    },
+    limit: 1,
+    overrideAccess: true,
+  });
+
+  if (!docs.length) {
+    throw new Error(`Post not found: ${slug}`);
+  }
+
+  const doc = docs[0] as PayloadPost;
+
+  return {
+    post: Blog.fromPayload(doc, locale),
+    content: doc.content,
+  };
 }

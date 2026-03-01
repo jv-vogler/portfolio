@@ -5,6 +5,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 import { Media } from "./collections/Media";
+import { Posts } from "./collections/Posts";
 import { Users } from "./collections/Users";
 
 const filename = fileURLToPath(import.meta.url);
@@ -22,7 +23,7 @@ export default buildConfig({
   editor: lexicalEditor(),
 
   // Collections
-  collections: [Users, Media],
+  collections: [Users, Media, Posts],
 
   // Secret for encrypting cookies and JWT tokens
   secret: process.env.PAYLOAD_SECRET || "",
