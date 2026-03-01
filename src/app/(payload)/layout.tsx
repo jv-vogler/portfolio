@@ -2,7 +2,7 @@
 import type { Metadata } from 'next'
 
 import config from '@payload-config'
-import { RootLayout } from '@payloadcms/next/layouts'
+import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 
 import './custom.scss'
 import { importMap } from './importMap.js'
@@ -16,8 +16,17 @@ export const metadata: Metadata = {
   description: 'Content Management System',
 }
 
+const serverFunction = async function (args: unknown) {
+  'use server'
+  return handleServerFunctions({
+    ...JSON.parse(args as string),
+    config,
+    importMap,
+  })
+}
+
 const Layout = ({ children }: Args) => (
-  <RootLayout config={config} importMap={importMap}>
+  <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
     {children}
   </RootLayout>
 )

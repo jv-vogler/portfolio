@@ -27,6 +27,10 @@ pnpm-debug.log*
 # Vercel
 .vercel
 
+# PayloadCMS (auto-generated)
+src/app/(payload)/importMap.js
+src/payload-types.ts
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts

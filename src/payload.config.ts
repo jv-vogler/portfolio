@@ -1,4 +1,4 @@
-import { postgresAdapter } from '@payloadcms/db-postgres'
+import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -9,10 +9,10 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  // Database adapter (PostgreSQL)
-  db: postgresAdapter({
+  // Database adapter (Vercel Postgres / Neon)
+  db: vercelPostgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URL,
+      connectionString: process.env.POSTGRES_URL || '',
     },
   }),
 
@@ -23,7 +23,7 @@ export default buildConfig({
   collections: [],
 
   // Secret for encrypting cookies and JWT tokens
-  secret: process.env.PAYLOAD_SECRET,
+  secret: process.env.PAYLOAD_SECRET || '',
 
   // TypeScript type generation
   typescript: {
@@ -34,6 +34,7 @@ export default buildConfig({
   admin: {
     importMap: {
       baseDir: path.resolve(dirname),
+      importMapFile: path.resolve(dirname, 'app/(payload)/importMap.js'),
     },
   },
 
