@@ -2,7 +2,9 @@
 import type { Metadata } from "next";
 
 import config from "@payload-config";
+import "@payloadcms/next/css";
 import { handleServerFunctions, RootLayout } from "@payloadcms/next/layouts";
+import type { ServerFunctionClient } from "payload";
 
 import "./custom.scss";
 import { importMap } from "./importMap.js";
@@ -16,10 +18,10 @@ export const metadata: Metadata = {
   description: "Content Management System",
 };
 
-const serverFunction = async function (args: unknown) {
+const serverFunction: ServerFunctionClient = async function (args) {
   "use server";
   return handleServerFunctions({
-    ...JSON.parse(args as string),
+    ...args,
     config,
     importMap,
   });

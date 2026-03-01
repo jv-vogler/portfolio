@@ -4,6 +4,8 @@ import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
+import { Media } from "./collections/Media";
+import { Users } from "./collections/Users";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -19,8 +21,8 @@ export default buildConfig({
   // Rich text editor (Lexical)
   editor: lexicalEditor(),
 
-  // Collections (will add Users, Media, Posts, Projects, Skills in later phases)
-  collections: [],
+  // Collections
+  collections: [Users, Media],
 
   // Secret for encrypting cookies and JWT tokens
   secret: process.env.PAYLOAD_SECRET || "",
@@ -32,6 +34,7 @@ export default buildConfig({
 
   // Admin panel configuration
   admin: {
+    user: "users",
     importMap: {
       baseDir: path.resolve(dirname),
       importMapFile: path.resolve(dirname, "app/(payload)/importMap.js"),
