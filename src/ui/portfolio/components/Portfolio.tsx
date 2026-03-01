@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { Portfolio } from '@/core/portfolio'
-import { fadeInUp, MotionSection, staggerContainer } from '@/ui/lib/motion'
-import { ProjectCard } from '@/ui/portfolio/components/ProjectCard'
-import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
+import { Portfolio } from "@/core/portfolio";
+import { fadeInUp, MotionSection, staggerContainer } from "@/ui/lib/motion";
+import { ProjectCard } from "@/ui/portfolio/components/ProjectCard";
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export function PortfolioSection() {
-  const t = useTranslations('portfolio')
+  const t = useTranslations("portfolio");
 
   return (
     <MotionSection
@@ -17,9 +17,9 @@ export function PortfolioSection() {
     >
       <div className="mb-12 text-center">
         <h2 id="portfolio-heading" className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
-          {t('heading')}
+          {t("heading")}
         </h2>
-        <p className="text-muted-foreground">{t('description')}</p>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       <motion.div
@@ -36,5 +36,5 @@ export function PortfolioSection() {
         ))}
       </motion.div>
     </MotionSection>
-  )
+  );
 }

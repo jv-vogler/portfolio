@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import type { Portfolio } from '@/core/portfolio'
-import { Link } from '@/i18n/routing'
-import { Badge } from '@/ui/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/ui/components/ui/card'
-import { scaleOnHover } from '@/ui/lib/motion'
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import Image from 'next/image'
+import type { Portfolio } from "@/core/portfolio";
+import { Link } from "@/i18n/routing";
+import { Badge } from "@/ui/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/components/ui/card";
+import { scaleOnHover } from "@/ui/lib/motion";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 type ProjectCardProps = {
-  project: Portfolio.Project
-}
+  project: Portfolio.Project;
+};
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const t = useTranslations('portfolio')
+  const t = useTranslations("portfolio");
 
   return (
     <motion.div variants={scaleOnHover} initial="rest" whileHover="hover" className="h-full">
@@ -25,7 +25,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.featured && (
             <div className="absolute top-3 right-3 z-10">
               <Badge variant="default" className="bg-primary text-primary-foreground shadow-md">
-                {t('featured')}
+                {t("featured")}
               </Badge>
             </div>
           )}
@@ -59,12 +59,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </div>
 
             <div className="flex items-center gap-1 text-sm font-medium text-primary">
-              {t('viewProject')}
+              {t("viewProject")}
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
             </div>
           </CardContent>
         </Card>
       </Link>
     </motion.div>
-  )
+  );
 }

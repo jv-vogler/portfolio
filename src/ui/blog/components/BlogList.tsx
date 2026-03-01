@@ -1,29 +1,29 @@
-'use client'
+"use client";
 
-import type { Blog } from '@/core/blog'
-import { Link } from '@/i18n/routing'
-import { formatDate } from '@/lib/date'
-import { Badge } from '@/ui/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/components/ui/card'
-import { fadeInUp, staggerContainer } from '@/ui/lib/motion'
-import { motion } from 'framer-motion'
-import { ArrowRight, Calendar } from 'lucide-react'
-import { useLocale, useTranslations } from 'next-intl'
+import type { Blog } from "@/core/blog";
+import { Link } from "@/i18n/routing";
+import { formatDate } from "@/lib/date";
+import { Badge } from "@/ui/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/components/ui/card";
+import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
+import { motion } from "framer-motion";
+import { ArrowRight, Calendar } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
 type BlogListProps = {
-  posts: Blog.Post[]
-}
+  posts: Blog.Post[];
+};
 
 export function BlogList({ posts }: BlogListProps) {
-  const t = useTranslations('blog')
-  const locale = useLocale()
+  const t = useTranslations("blog");
+  const locale = useLocale();
 
   if (posts.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
-        <p className="text-muted-foreground text-lg">{t('noPosts')}</p>
+        <p className="text-muted-foreground text-lg">{t("noPosts")}</p>
       </div>
-    )
+    );
   }
 
   return (
@@ -57,7 +57,7 @@ export function BlogList({ posts }: BlogListProps) {
                     ))}
                   </div>
                   <span className="inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
-                    {t('readMore')}
+                    {t("readMore")}
                     <ArrowRight className="size-4" />
                   </span>
                 </div>
@@ -67,5 +67,5 @@ export function BlogList({ posts }: BlogListProps) {
         </motion.div>
       ))}
     </motion.div>
-  )
+  );
 }

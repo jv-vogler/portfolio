@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { Skills } from '@/core/skills'
-import { TechIcon } from '@/ui/lib/icons'
-import { fadeInUp, MotionSection, staggerContainer } from '@/ui/lib/motion'
-import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
+import { Skills } from "@/core/skills";
+import { TechIcon } from "@/ui/lib/icons";
+import { fadeInUp, MotionSection, staggerContainer } from "@/ui/lib/motion";
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export function Experience() {
-  const t = useTranslations('experience')
+  const t = useTranslations("experience");
 
   return (
     <MotionSection
@@ -17,9 +17,9 @@ export function Experience() {
     >
       <div className="mb-12 text-center">
         <h2 id="experience-heading" className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
-          {t('heading')}
+          {t("heading")}
         </h2>
-        <p className="text-muted-foreground">{t('description')}</p>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       <div className="space-y-12">
@@ -52,5 +52,5 @@ export function Experience() {
         ))}
       </div>
     </MotionSection>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-import { MDXRemote } from 'next-mdx-remote/rsc'
-import Image from 'next/image'
-import Link from 'next/link'
-import type { ComponentProps } from 'react'
+import { MDXRemote } from "next-mdx-remote/rsc";
+import Image from "next/image";
+import Link from "next/link";
+import type { ComponentProps } from "react";
 
-type MDXComponentMap = ComponentProps<typeof MDXRemote>['components']
+type MDXComponentMap = ComponentProps<typeof MDXRemote>["components"];
 
 const mdxComponents: MDXComponentMap = {
   h1: ({ children, ...props }) => (
@@ -42,7 +42,7 @@ const mdxComponents: MDXComponentMap = {
     </li>
   ),
   a: ({ href, children, ...props }) => {
-    const isExternal = href?.startsWith('http')
+    const isExternal = href?.startsWith("http");
     if (isExternal) {
       return (
         <a
@@ -55,17 +55,17 @@ const mdxComponents: MDXComponentMap = {
           {children}
           <span className="sr-only"> (opens in a new tab)</span>
         </a>
-      )
+      );
     }
     return (
       <Link
-        href={href ?? '#'}
+        href={href ?? "#"}
         className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
         {...props}
       >
         {children}
       </Link>
-    )
+    );
   },
   blockquote: ({ children, ...props }) => (
     <blockquote
@@ -87,35 +87,35 @@ const mdxComponents: MDXComponentMap = {
   ),
   hr: (props) => <hr className="my-8 border-border" {...props} />,
   img: ({ src, alt, ...props }) => {
-    if (process.env.NODE_ENV === 'development' && !alt) {
-      console.warn(`[MDX] Image missing alt text: ${src}`)
+    if (process.env.NODE_ENV === "development" && !alt) {
+      console.warn(`[MDX] Image missing alt text: ${src}`);
     }
     return (
       <Image
-        src={src ?? ''}
-        alt={alt || 'Blog post image'}
+        src={src ?? ""}
+        alt={alt || "Blog post image"}
         width={800}
         height={450}
         className="my-4 rounded-lg"
         {...props}
       />
-    )
+    );
   },
   strong: ({ children, ...props }) => (
     <strong className="font-semibold" {...props}>
       {children}
     </strong>
   ),
-}
+};
 
 type BlogPostProps = {
-  content: string
-}
+  content: string;
+};
 
 export function BlogPost({ content }: BlogPostProps) {
   return (
     <article className="prose prose-neutral dark:prose-invert mx-auto max-w-3xl">
       <MDXRemote source={content} components={mdxComponents} />
     </article>
-  )
+  );
 }

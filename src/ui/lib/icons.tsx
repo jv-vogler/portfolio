@@ -7,8 +7,8 @@ import {
   Linkedin,
   Mail,
   type LucideProps,
-} from 'lucide-react'
-import type { ComponentType } from 'react'
+} from "lucide-react";
+import type { ComponentType } from "react";
 import {
   siDocker,
   siGit,
@@ -19,15 +19,15 @@ import {
   siRubyonrails,
   siTailwindcss,
   siTypescript,
-} from 'simple-icons'
+} from "simple-icons";
 
 type SimpleIcon = {
-  title: string
-  slug: string
-  svg: string
-  path: string
-  hex: string
-}
+  title: string;
+  slug: string;
+  svg: string;
+  path: string;
+  hex: string;
+};
 
 const techIconMap: Record<string, SimpleIcon> = {
   typescript: siTypescript,
@@ -39,22 +39,22 @@ const techIconMap: Record<string, SimpleIcon> = {
   postgresql: siPostgresql,
   git: siGit,
   docker: siDocker,
-}
+};
 
 const lucideFallbackMap: Record<string, ComponentType<LucideProps>> = {
-  'html-css': Code2,
+  "html-css": Code2,
   aws: Cloud,
   ai: BrainCircuit,
-}
+};
 
 type TechIconProps = {
-  slug: string
-  size?: number
-  className?: string
-}
+  slug: string;
+  size?: number;
+  className?: string;
+};
 
 export function TechIcon({ slug, size = 24, className }: TechIconProps) {
-  const icon = techIconMap[slug]
+  const icon = techIconMap[slug];
 
   if (icon) {
     return (
@@ -68,15 +68,15 @@ export function TechIcon({ slug, size = 24, className }: TechIconProps) {
       >
         <path d={icon.path} />
       </svg>
-    )
+    );
   }
 
-  const FallbackIcon = lucideFallbackMap[slug]
+  const FallbackIcon = lucideFallbackMap[slug];
   if (FallbackIcon) {
-    return <FallbackIcon size={size} className={className} aria-hidden="true" />
+    return <FallbackIcon size={size} className={className} aria-hidden="true" />;
   }
 
-  return null
+  return null;
 }
 
 const socialIconMap: Record<string, ComponentType<LucideProps>> = {
@@ -84,18 +84,18 @@ const socialIconMap: Record<string, ComponentType<LucideProps>> = {
   mail: Mail,
   instagram: Instagram,
   github: Github,
-}
+};
 
 type SocialIconProps = {
-  slug: string
-  size?: number
-  className?: string
-}
+  slug: string;
+  size?: number;
+  className?: string;
+};
 
 export function SocialIcon({ slug, size = 20, className }: SocialIconProps) {
-  const Icon = socialIconMap[slug]
+  const Icon = socialIconMap[slug];
 
-  if (!Icon) return null
+  if (!Icon) return null;
 
-  return <Icon size={size} className={className} aria-hidden="true" />
+  return <Icon size={size} className={className} aria-hidden="true" />;
 }

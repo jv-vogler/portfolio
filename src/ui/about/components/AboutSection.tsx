@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { About } from '@/core/about'
-import { fadeInUp, staggerContainer } from '@/ui/lib/motion'
-import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
-import Image from 'next/image'
+import { About } from "@/core/about";
+import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export function AboutSection() {
-  const t = useTranslations()
+  const t = useTranslations();
 
   return (
     <section
@@ -26,7 +26,7 @@ export function AboutSection() {
           <div className="relative mb-6 h-64 w-64 overflow-hidden rounded-2xl bg-muted shadow-lg">
             <Image
               src="/images/hero/profile.jpg"
-              alt={t('a11y.authorPhoto1')}
+              alt={t("a11y.authorPhoto1")}
               fill
               className="object-cover"
               sizes="256px"
@@ -34,7 +34,7 @@ export function AboutSection() {
             />
           </div>
           <h1 className="text-2xl font-bold">JV Vogler</h1>
-          <p className="text-sm text-muted-foreground">{t('metadata.description')}</p>
+          <p className="text-sm text-muted-foreground">{t("metadata.description")}</p>
         </motion.aside>
 
         {/* Right column — Q&A */}
@@ -45,7 +45,7 @@ export function AboutSection() {
           className="flex-1"
         >
           <motion.h2 id="about-heading" variants={fadeInUp} className="mb-10 text-3xl font-bold">
-            {t('about.heading')}
+            {t("about.heading")}
           </motion.h2>
 
           <div className="space-y-8">
@@ -63,5 +63,5 @@ export function AboutSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

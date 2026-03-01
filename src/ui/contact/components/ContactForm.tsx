@@ -1,45 +1,45 @@
-'use client'
+"use client";
 
-import { Button } from '@/ui/components/ui/button'
-import { Input } from '@/ui/components/ui/input'
-import { Textarea } from '@/ui/components/ui/textarea'
-import { useContactForm } from '@/ui/contact/hooks/useContactForm'
-import { Loader2, Send } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
-import { toast } from 'sonner'
+import { Button } from "@/ui/components/ui/button";
+import { Input } from "@/ui/components/ui/input";
+import { Textarea } from "@/ui/components/ui/textarea";
+import { useContactForm } from "@/ui/contact/hooks/useContactForm";
+import { Loader2, Send } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export function ContactForm() {
-  const t = useTranslations('contact')
-  const { form, onSubmit, isSubmitting, submitResult } = useContactForm()
+  const t = useTranslations("contact");
+  const { form, onSubmit, isSubmitting, submitResult } = useContactForm();
   const {
     register,
     formState: { errors },
-  } = form
+  } = form;
 
   useEffect(() => {
-    if (!submitResult) return
+    if (!submitResult) return;
 
     if (submitResult.success) {
-      toast.success(t('success'))
+      toast.success(t("success"));
     } else {
-      toast.error(submitResult.error ?? t('error'))
+      toast.error(submitResult.error ?? t("error"));
     }
-  }, [submitResult, t])
+  }, [submitResult, t]);
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5" aria-label={t('heading')}>
+    <form onSubmit={onSubmit} className="space-y-5" aria-label={t("heading")}>
       {/* Name */}
       <div className="space-y-1.5">
         <label htmlFor="name" className="text-sm font-medium text-foreground">
-          {t('name')}
+          {t("name")}
         </label>
         <Input
           id="name"
-          {...register('name')}
+          {...register("name")}
           aria-invalid={!!errors.name}
-          aria-describedby={errors.name ? 'name-error' : undefined}
-          placeholder={t('name')}
+          aria-describedby={errors.name ? "name-error" : undefined}
+          placeholder={t("name")}
           disabled={isSubmitting}
         />
         {errors.name && (
@@ -52,15 +52,15 @@ export function ContactForm() {
       {/* Email */}
       <div className="space-y-1.5">
         <label htmlFor="email" className="text-sm font-medium text-foreground">
-          {t('email')}
+          {t("email")}
         </label>
         <Input
           id="email"
           type="email"
-          {...register('email')}
+          {...register("email")}
           aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? 'email-error' : undefined}
-          placeholder={t('email')}
+          aria-describedby={errors.email ? "email-error" : undefined}
+          placeholder={t("email")}
           disabled={isSubmitting}
         />
         {errors.email && (
@@ -73,14 +73,14 @@ export function ContactForm() {
       {/* Message */}
       <div className="space-y-1.5">
         <label htmlFor="message" className="text-sm font-medium text-foreground">
-          {t('message')}
+          {t("message")}
         </label>
         <Textarea
           id="message"
-          {...register('message')}
+          {...register("message")}
           aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? 'message-error' : undefined}
-          placeholder={t('messagePlaceholder')}
+          aria-describedby={errors.message ? "message-error" : undefined}
+          placeholder={t("messagePlaceholder")}
           disabled={isSubmitting}
           className="min-h-32"
         />
@@ -94,8 +94,8 @@ export function ContactForm() {
       {/* Submit */}
       <Button type="submit" disabled={isSubmitting} className="w-full gap-2">
         {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-        {t('submit')}
+        {t("submit")}
       </Button>
     </form>
-  )
+  );
 }

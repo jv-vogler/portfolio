@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { Button } from '@/ui/components/ui/button'
-import { fadeInUp, staggerContainer } from '@/ui/lib/motion'
-import { motion } from 'framer-motion'
-import { ArrowDown } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { Button } from "@/ui/components/ui/button";
+import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
+import { motion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function Hero() {
-  const t = useTranslations('hero')
+  const t = useTranslations("hero");
 
   return (
     <section
@@ -39,25 +39,25 @@ export function Hero() {
           variants={fadeInUp}
           className="mb-6 text-4xl leading-tight font-bold text-foreground sm:text-5xl md:text-6xl"
         >
-          {t('heading')}
+          {t("heading")}
         </motion.h1>
 
         <motion.p
           variants={fadeInUp}
           className="mb-10 max-w-2xl text-lg text-muted-foreground md:text-xl"
         >
-          {t('paragraph')}
+          {t("paragraph")}
         </motion.p>
 
         <motion.div variants={fadeInUp}>
           <Button asChild size="lg" className="gap-2">
             <a href="#portfolio">
-              {t('cta')}
+              {t("cta")}
               <ArrowDown className="h-4 w-4" />
             </a>
           </Button>
         </motion.div>
       </motion.div>
     </section>
-  )
+  );
 }

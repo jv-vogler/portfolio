@@ -1,16 +1,16 @@
 export namespace About {
   export type QA = {
-    slug: string
-  }
+    slug: string;
+  };
 
   export const items: QA[] = [
-    { slug: 'whoAreYou' },
-    { slug: 'whatDoYouDo' },
-    { slug: 'howDidYouStart' },
-    { slug: 'whatTechDoYouUse' },
-    { slug: 'whatAreYouLearning' },
-    { slug: 'outsideCoding' },
-    { slug: 'favoriteSetup' },
-    { slug: 'goal' },
-  ]
+    { slug: "whoAreYou" },
+    { slug: "whatDoYouDo" },
+    { slug: "howDidYouStart" },
+    { slug: "whatTechDoYouUse" },
+    { slug: "whatAreYouLearning" },
+    { slug: "outsideCoding" },
+    { slug: "favoriteSetup" },
+    { slug: "goal" },
+  ];
 }

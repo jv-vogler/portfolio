@@ -1,25 +1,25 @@
-import { AboutSection } from '@/ui/about/components/AboutSection'
-import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { AboutSection } from "@/ui/about/components/AboutSection";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const revalidate = 3600
+export const revalidate = 3600;
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://jv-portfolio.vercel.app'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jv-portfolio.vercel.app";
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'about' })
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "about" });
 
   return {
-    title: t('heading'),
-    description: t('metaDescription'),
+    title: t("heading"),
+    description: t("metaDescription"),
     openGraph: {
-      title: `${t('heading')} | JV Vogler`,
-      description: t('metaDescription'),
+      title: `${t("heading")} | JV Vogler`,
+      description: t("metaDescription"),
       url: `${BASE_URL}/${locale}/about`,
     },
     alternates: {
@@ -29,9 +29,9 @@ export async function generateMetadata({
         pt: `${BASE_URL}/pt/about`,
       },
     },
-  }
+  };
 }
 
 export default function AboutPage() {
-  return <AboutSection />
+  return <AboutSection />;
 }
