@@ -9,8 +9,10 @@
     "lint": "oxlint src/",
     "format": "oxfmt --write src/",
     "format:check": "oxfmt --check src/",
+    "format:write": "oxfmt --write src/",
     "typecheck": "tsc --noEmit",
-    "typecheck:go": "tsgo --noEmit"
+    "typecheck:go": "tsgo --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -49,6 +51,8 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@typescript/native-preview": "7.0.0-dev.20260227.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.1",
     "oxfmt": "^0.35.0",
     "oxlint": "^1.50.0",
     "shadcn": "^3.8.5",
