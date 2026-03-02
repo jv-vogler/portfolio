@@ -15,6 +15,9 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  // Server URL for admin panel API requests
+  serverURL: process.env.NEXT_PUBLIC_BASE_URL || "",
+
   // Database adapter (Vercel Postgres / Neon)
   db: vercelPostgresAdapter({
     pool: {

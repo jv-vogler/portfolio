@@ -8,6 +8,6 @@ export namespace Navigation {
     { label: "home", href: "/" },
     { label: "about", href: "/about" },
     { label: "blog", href: "/blog" },
-    { label: "contact", href: "#contact" },
+    { label: "contact", href: "/#contact" },
   ];
 }
