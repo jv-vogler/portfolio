@@ -9,6 +9,7 @@ export async function getAllProjects(locale: string): Promise<Portfolio.Project[
     collection: "projects",
     locale: locale as "en" | "pt",
     sort: "sortOrder",
+    depth: 1,
     limit: 100,
     overrideAccess: true,
   });
@@ -25,6 +26,7 @@ export async function getProject(slug: string, locale: string): Promise<Portfoli
     where: {
       slug: { equals: slug },
     },
+    depth: 1,
     limit: 1,
     overrideAccess: true,
   });

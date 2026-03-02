@@ -48,14 +48,9 @@ export const Projects: CollectionConfig = {
     },
     {
       name: "techs",
-      type: "array",
-      fields: [
-        {
-          name: "tech",
-          type: "text",
-          required: true,
-        },
-      ],
+      type: "relationship",
+      relationTo: "skills",
+      hasMany: true,
     },
     {
       name: "demoUrl",

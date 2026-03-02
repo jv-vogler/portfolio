@@ -5,6 +5,7 @@ export type PayloadSkill = {
   name: string;
   category: "frontend" | "backend" | "tools";
   sortOrder?: number | null;
+  showInExperience?: boolean | null;
 };
 
 export namespace Skills {

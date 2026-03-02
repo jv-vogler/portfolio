@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 interface ProjectSeedData {
   slug: string;
   thumbnail: string; // filename in public/images/portfolio/
-  techs: string[];
+  techs: string[]; // human-readable tech names
   demoUrl?: string;
   codeUrl?: string;
   featured?: boolean;
@@ -38,6 +38,45 @@ interface ProjectSeedData {
       learnings: string;
     };
   };
+}
+
+// Category hints for new skills that aren't in the core 12
+const TECH_CATEGORY_HINTS: Record<string, "frontend" | "backend" | "tools"> = {
+  react: "frontend",
+  "next.js": "frontend",
+  typescript: "frontend",
+  "tailwind css": "frontend",
+  "html & css": "frontend",
+  html: "frontend",
+  css: "frontend",
+  javascript: "frontend",
+  "chakra ui": "frontend",
+  "styled components": "frontend",
+  vite: "tools",
+  webpack: "tools",
+  "node.js": "backend",
+  "ruby on rails": "backend",
+  postgresql: "backend",
+  firebase: "backend",
+  git: "tools",
+  aws: "tools",
+  "ai / agentic": "tools",
+  docker: "tools",
+  openai: "tools",
+  recoil: "frontend",
+  godot: "tools",
+  gdscript: "tools",
+};
+
+function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 const projects: ProjectSeedData[] = [
@@ -265,12 +304,88 @@ async function uploadThumbnail(
   return media.id;
 }
 
+/**
+ * Build a name→id map for all skills, creating missing ones as needed.
+ * New skills (not in the core 12) get showInExperience: false so they
+ * don't appear in the Experience section.
+ */
+async function buildSkillsMap(
+  payload: Payload,
+  techNames: string[],
+): Promise<Map<string, string | number>> {
+  // Fetch all existing skills (locale-agnostic — slugs/ids are shared)
+  const { docs } = await payload.find({
+    collection: "skills",
+    limit: 500,
+    overrideAccess: true,
+  });
+
+  // Build name→id map (keyed by lowercased EN name)
+  const nameToId = new Map<string, string | number>();
+  for (const skill of docs) {
+    nameToId.set((skill.name as string).toLowerCase(), skill.id);
+  }
+
+  // Ensure every tech name has a corresponding skill entry
+  for (const techName of techNames) {
+    const key = techName.toLowerCase();
+    if (!nameToId.has(key)) {
+      const category = TECH_CATEGORY_HINTS[key] ?? "tools";
+      const slug = slugify(techName);
+
+      // Check by slug too (e.g. "HTML & CSS" slug = "html-css")
+      const bySlug = docs.find((s) => s.slug === slug);
+      if (bySlug) {
+        nameToId.set(key, bySlug.id);
+        continue;
+      }
+
+      console.log(`    + Creating missing skill: "${techName}" (${category})`);
+      const created = await payload.create({
+        collection: "skills",
+        locale: "en",
+        data: {
+          slug,
+          name: techName,
+          category,
+          showInExperience: false,
+        },
+        context: { disableRevalidate: true },
+        overrideAccess: true,
+      });
+      // PT name defaults to EN name for project-specific techs
+      await payload.update({
+        collection: "skills",
+        id: created.id,
+        locale: "pt",
+        data: { name: techName },
+        context: { disableRevalidate: true },
+        overrideAccess: true,
+      });
+      nameToId.set(key, created.id);
+    }
+  }
+
+  return nameToId;
+}
+
 // ---------------------------------------------------------------------------
 // Main seed function
 // ---------------------------------------------------------------------------
 
 export async function seedPortfolio(payload: Payload): Promise<void> {
-  // Check if projects already exist to avoid duplicates
+  // Collect all unique tech names across all projects
+  const allTechNames = [...new Set(projects.flatMap((p) => p.techs))];
+  const skillsMap = await buildSkillsMap(payload, allTechNames);
+
+  /** Resolve tech names to skill IDs */
+  function resolveSkillIds(techNames: string[]): (string | number)[] {
+    return techNames
+      .map((name) => skillsMap.get(name.toLowerCase()))
+      .filter((id): id is string | number => id !== undefined);
+  }
+
+  // Check if projects already exist
   const existing = await payload.find({
     collection: "projects",
     limit: 1,
@@ -278,10 +393,36 @@ export async function seedPortfolio(payload: Payload): Promise<void> {
   });
 
   if (existing.totalDocs > 0) {
-    console.log("  ⚠️  Projects already exist — skipping portfolio seed.");
+    // ── Migration pass: update techs on existing projects ──────────────────
+    console.log("  🔄 Projects already exist — migrating techs to skill relationships...");
+
+    const { docs: existingProjects } = await payload.find({
+      collection: "projects",
+      limit: 100,
+      overrideAccess: true,
+    });
+
+    for (const project of existingProjects) {
+      const seedData = projects.find((p) => p.slug === project.slug);
+      if (!seedData) continue;
+
+      await payload.update({
+        collection: "projects",
+        id: project.id,
+        data: {
+          techs: resolveSkillIds(seedData.techs),
+        },
+        overrideAccess: true,
+        context: { disableRevalidate: true },
+      });
+      console.log(`    ✔ Updated techs for: ${project.slug}`);
+    }
+
+    console.log("  ✅ Techs migration complete.");
     return;
   }
 
+  // ── Full seed: create all projects ─────────────────────────────────────
   for (const project of projects) {
     console.log(`  → Seeding "${project.en.title}"...`);
 
@@ -302,7 +443,7 @@ export async function seedPortfolio(payload: Payload): Promise<void> {
       title: project.en.title,
       description: project.en.description,
       thumbnail: thumbnailId ?? undefined,
-      techs: project.techs.map((tech) => ({ tech })),
+      techs: resolveSkillIds(project.techs),
       demoUrl: project.demoUrl ?? undefined,
       codeUrl: project.codeUrl ?? undefined,
       featured: project.featured ?? false,

@@ -8,6 +8,9 @@ export async function getAllSkills(locale: string): Promise<Skills.Skill[]> {
   const { docs } = await payload.find({
     collection: "skills",
     locale: locale as "en" | "pt",
+    where: {
+      showInExperience: { equals: true },
+    },
     sort: "sortOrder",
     limit: 200,
     overrideAccess: true,
@@ -27,6 +30,7 @@ export async function getSkillsByCategory(
     locale: locale as "en" | "pt",
     where: {
       category: { equals: category },
+      showInExperience: { equals: true },
     },
     sort: "sortOrder",
     limit: 200,

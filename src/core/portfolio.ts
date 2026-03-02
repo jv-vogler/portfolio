@@ -1,3 +1,9 @@
+// Populated skill relationship shape (depth >= 1)
+export type PayloadSkillRef =
+  | string
+  | number
+  | { id: string | number; slug: string; name: string; category: string };
+
 // Loose type for Payload Project document (until payload-types.ts is regenerated)
 export type PayloadProject = {
   id: string | number;
@@ -5,7 +11,7 @@ export type PayloadProject = {
   title: string;
   description: string;
   thumbnail?: { url?: string | null; alt?: string } | null;
-  techs?: Array<{ tech: string }>;
+  techs?: Array<PayloadSkillRef> | null;
   demoUrl?: string | null;
   codeUrl?: string | null;
   featured?: boolean | null;
@@ -51,7 +57,10 @@ export namespace Portfolio {
               alt: doc.thumbnail.alt,
             }
           : null,
-      techs: (doc.techs ?? []).map((t) => t.tech),
+      techs: (doc.techs ?? []).map((t) => {
+        if (t !== null && typeof t === "object" && "name" in t) return t.name;
+        return String(t);
+      }),
       demoUrl: doc.demoUrl ?? undefined,
       codeUrl: doc.codeUrl ?? undefined,
       featured: doc.featured ?? false,

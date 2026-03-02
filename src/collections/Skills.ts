@@ -45,6 +45,15 @@ export const Skills: CollectionConfig = {
         description: "Lower numbers appear first within their category.",
       },
     },
+    {
+      name: "showInExperience",
+      type: "checkbox",
+      defaultValue: true,
+      admin: {
+        position: "sidebar",
+        description: "Show this skill in the Experience section on the home page.",
+      },
+    },
   ],
   hooks: {
     beforeChange: [
