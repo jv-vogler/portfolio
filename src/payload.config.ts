@@ -64,18 +64,16 @@ export default buildConfig({
     fallback: true,
   },
 
-  // Storage: Vercel Blob in production, local disk in development
-  plugins: process.env.BLOB_READ_WRITE_TOKEN
-    ? [
-        vercelBlobStorage({
-          enabled: true,
-          collections: {
-            media: true,
-          },
-          token: process.env.BLOB_READ_WRITE_TOKEN,
-        }),
-      ]
-    : [],
+  // Storage: Vercel Blob (requires BLOB_READ_WRITE_TOKEN in environment)
+  plugins: [
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || "",
+    }),
+  ],
 
   // Sharp for image processing
   sharp,
