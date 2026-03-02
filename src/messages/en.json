@@ -21,20 +21,6 @@
       "frontend": "Frontend",
       "backend": "Backend",
       "tools": "Tools & Platform"
-    },
-    "skill": {
-      "typescript": "TypeScript",
-      "react": "React",
-      "nextdotjs": "Next.js",
-      "tailwindcss": "Tailwind CSS",
-      "html-css": "HTML & CSS",
-      "nodedotjs": "Node.js",
-      "rubyonrails": "Ruby on Rails",
-      "postgresql": "PostgreSQL",
-      "git": "Git",
-      "aws": "AWS",
-      "ai": "AI / Agentic",
-      "docker": "Docker"
     }
   },
   "portfolio": {
@@ -53,48 +39,6 @@
       "approach": "The Approach",
       "outcome": "The Outcome",
       "learnings": "Key Learnings"
-    },
-    "ai-integration-platform": {
-      "title": "AI Integration Platform",
-      "description": "A full-stack platform that orchestrates multiple AI providers behind a unified API, enabling teams to build and deploy AI-powered workflows at scale.",
-      "caseStudy": {
-        "problem": "The company needed to integrate multiple AI providers into existing products without vendor lock-in, while keeping latency low and costs predictable. Each team was building ad-hoc integrations, leading to duplicated effort and inconsistent quality.",
-        "approach": "I designed a layered Node.js/TypeScript service on AWS that abstracts provider-specific APIs behind a unified interface. The architecture includes request routing, response caching, rate limiting, and cost tracking. The React/Next.js dashboard lets teams monitor usage, configure workflows, and A/B test different models.",
-        "outcome": "Reduced integration time for new AI features from weeks to days. Centralized cost tracking saved ~30% on API spend. The platform now serves thousands of daily requests across multiple products.",
-        "learnings": "Building provider-agnostic abstractions requires careful API design — too thin and you lose useful features, too thick and you re-implement each SDK. Streaming responses and graceful fallback between providers were the hardest problems to solve well."
-      }
-    },
-    "fetchhire": {
-      "title": "FetchHire",
-      "description": "A tool to get helpful insight and data about Github users."
-    },
-    "treasure-hunters": {
-      "title": "Treasure Hunters",
-      "description": "Treasure Hunters is a 2D platformer game where you control the feared Captain Clown Nose in a quest to recover his ship that was taken in a mutiny. Many dangers and treasures hide and await under the tree shadows of Palm Tree Island."
-    },
-    "voltorb-flip": {
-      "title": "Voltorb Flip",
-      "description": "Voltorb Flip is a minigame of the Goldenrod and Celadon Game Corners in the Korean and Western releases of Pokémon HeartGold and SoulSilver."
-    },
-    "another-reddit-clone": {
-      "title": "Another Reddit Clone",
-      "description": "A functional Reddit clone. You can log in/sign up, create and join communities, create posts, upvote/downvote posts, and more!"
-    },
-    "portfolio-v1": {
-      "title": "Portfolio v1",
-      "description": "Source code for the first version of my portfolio website."
-    },
-    "weather-app": {
-      "title": "Weather App",
-      "description": "Weather forecast for cities around the world."
-    },
-    "todo-list": {
-      "title": "Todo List",
-      "description": "The good old \"Todo List\" of React beginners. Creates tasks that can be marked as complete and deleted."
-    },
-    "memory-cats": {
-      "title": "Memory Cats",
-      "description": "A simple yet challenging memory game, because not only you have to identify the pairs but also remember the name of each cat you've found."
     }
   },
   "contact": {

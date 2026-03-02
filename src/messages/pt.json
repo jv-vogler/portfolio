@@ -21,20 +21,6 @@
       "frontend": "Frontend",
       "backend": "Backend",
       "tools": "Ferramentas & Plataforma"
-    },
-    "skill": {
-      "typescript": "TypeScript",
-      "react": "React",
-      "nextdotjs": "Next.js",
-      "tailwindcss": "Tailwind CSS",
-      "html-css": "HTML & CSS",
-      "nodedotjs": "Node.js",
-      "rubyonrails": "Ruby on Rails",
-      "postgresql": "PostgreSQL",
-      "git": "Git",
-      "aws": "AWS",
-      "ai": "IA / Agentes",
-      "docker": "Docker"
     }
   },
   "portfolio": {
@@ -53,48 +39,6 @@
       "approach": "A Abordagem",
       "outcome": "O Resultado",
       "learnings": "Aprendizados"
-    },
-    "ai-integration-platform": {
-      "title": "Plataforma de Integração AI",
-      "description": "Uma plataforma full-stack que orquestra múltiplos provedores de IA por trás de uma API unificada, permitindo que equipes construam e implantem workflows com IA em escala.",
-      "caseStudy": {
-        "problem": "A empresa precisava integrar múltiplos provedores de IA nos produtos existentes sem dependência de fornecedor, mantendo latência baixa e custos previsíveis. Cada equipe criava integrações ad-hoc, gerando esforço duplicado e qualidade inconsistente.",
-        "approach": "Projetei um serviço em camadas com Node.js/TypeScript na AWS que abstrai as APIs específicas de cada provedor por trás de uma interface unificada. A arquitetura inclui roteamento de requisições, cache de respostas, rate limiting e rastreamento de custos. O dashboard React/Next.js permite que as equipes monitorem uso, configurem workflows e façam testes A/B com diferentes modelos.",
-        "outcome": "Reduziu o tempo de integração de novas funcionalidades de IA de semanas para dias. O rastreamento centralizado de custos economizou ~30% em gastos com API. A plataforma agora atende milhares de requisições diárias em múltiplos produtos.",
-        "learnings": "Construir abstrações agnósticas de provedor exige um design de API cuidadoso — fina demais e você perde recursos úteis, grossa demais e você reimplementa cada SDK. Streaming de respostas e fallback gracioso entre provedores foram os problemas mais difíceis de resolver bem."
-      }
-    },
-    "fetchhire": {
-      "title": "FetchHire",
-      "description": "Uma ferramenta para obter informações úteis sobre usuários do Github."
-    },
-    "treasure-hunters": {
-      "title": "Treasure Hunters",
-      "description": "Treasure Hunters é um jogo de plataforma 2D onde você assume o controle do temido Capitão Nariz de Palhaço em busca de recuperar seu navio tomado em um motim. Diversos perigos e tesouros se escondem e o aguardam sob as sombras das árvores da Ilha das Palmeiras."
-    },
-    "voltorb-flip": {
-      "title": "Voltorb Flip",
-      "description": "Voltorb Flip é um minigame dos Game Corners de Goldenrod e Celadon nas versões Coreanas e Ocidentais dos jogos Pokémon HeartGold e SoulSilver."
-    },
-    "another-reddit-clone": {
-      "title": "Clone do Reddit",
-      "description": "Um clone do Reddit funcional. Você pode logar/se cadastrar, criar e entrar em comunidades, criar posts, votar nos posts, e mais!"
-    },
-    "portfolio-v1": {
-      "title": "Portfólio v1",
-      "description": "Código fonte da primeira versão do meu site portfólio."
-    },
-    "weather-app": {
-      "title": "App de Clima",
-      "description": "Previsão do tempo de cidades ao redor do mundo."
-    },
-    "todo-list": {
-      "title": "Lista de Tarefas",
-      "description": "A boa e velha \"Todo List\" dos iniciantes em React. Cria tarefas que podem ser marcadas como completas e deletadas."
-    },
-    "memory-cats": {
-      "title": "Memory Cats",
-      "description": "Um jogo da memória simples, porém desafiador, pois além de identificar os pares iguais você também precisa se lembrar do nome de cada gato que encontrou."
     }
   },
   "contact": {

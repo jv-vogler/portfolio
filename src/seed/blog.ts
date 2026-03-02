@@ -1,11 +1,31 @@
 import fs from "fs";
-import matter from "gray-matter";
 import path from "path";
 import type { Payload } from "payload";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// ---------------------------------------------------------------------------
+// Minimal front-matter parser (gray-matter removed; this is dead-code since
+// content/blog/ was deleted after initial migration — kept for reference)
+// ---------------------------------------------------------------------------
+function parseFrontMatter(raw: string): { data: Record<string, unknown>; content: string } {
+  const match = /^---\n([\s\S]*?)\n---\n?([\s\S]*)/.exec(raw);
+  if (!match) return { data: {}, content: raw };
+  const data: Record<string, unknown> = {};
+  for (const line of match[1].split("\n")) {
+    const colonIdx = line.indexOf(":");
+    if (colonIdx === -1) continue;
+    const key = line.slice(0, colonIdx).trim();
+    const val = line
+      .slice(colonIdx + 1)
+      .trim()
+      .replace(/^["']|["']$/g, "");
+    if (key) data[key] = val;
+  }
+  return { data, content: match[2] };
+}
 
 // ---------------------------------------------------------------------------
 // Lexical node builder helpers
@@ -297,13 +317,13 @@ export async function seedBlog(payload: Payload) {
 
     // ── Read EN ────────────────────────────────────────────────────────────
     const enRaw = fs.readFileSync(path.join(enDir, file), "utf-8");
-    const { data: enFm, content: enBody } = matter(enRaw);
+    const { data: enFm, content: enBody } = parseFrontMatter(enRaw);
 
     // ── Read PT (fallback to EN if missing) ────────────────────────────────
     const ptPath = path.join(contentDir, "pt", file);
     const hasPt = fs.existsSync(ptPath);
     const { data: ptFm, content: ptBody } = hasPt
-      ? matter(fs.readFileSync(ptPath, "utf-8"))
+      ? parseFrontMatter(fs.readFileSync(ptPath, "utf-8"))
       : { data: enFm, content: enBody };
 
     console.log(`  📝 Seeding: ${slug}`);
