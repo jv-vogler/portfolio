@@ -4,3 +4,6 @@ onlyBuiltDependencies:
   - bufferutil
   - esbuild
   - utf-8-validate
+
+patchedDependencies:
+  payload@3.78.0: patches/payload@3.78.0.patch

@@ -1,11 +1,12 @@
+import type { SerializedEditorState } from "lexical";
+
 // Loose type for Payload Post document (until payload-types.ts is generated)
 export type PayloadPost = {
   id: string | number;
   slug: string;
   title: string;
   description: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  content: any;
+  content: SerializedEditorState;
   tags?: Array<{ tag: string }>;
   publishedDate: string;
   _status?: string;

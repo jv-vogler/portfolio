@@ -1,5 +1,6 @@
 import { Blog, type PayloadPost } from "@/core/blog";
 import config from "@payload-config";
+import type { SerializedEditorState } from "lexical";
 import { getPayload } from "payload";
 
 export async function getAllPosts(locale: string): Promise<Blog.Post[]> {
@@ -22,8 +23,7 @@ export async function getAllPosts(locale: string): Promise<Blog.Post[]> {
 export async function getPost(
   slug: string,
   locale: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): Promise<{ post: Blog.Post; content: any }> {
+): Promise<{ post: Blog.Post; content: SerializedEditorState }> {
   const payload = await getPayload({ config });
 
   const { docs } = await payload.find({

@@ -1,14 +1,14 @@
-import { RichText } from "@payloadcms/richtext-lexical/react";
+import type { SerializedEditorState } from "lexical";
+import { RichTextRenderer } from "./RichTextRenderer";
 
 type BlogPostProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  content: any;
+  content: SerializedEditorState;
 };
 
 export function BlogPost({ content }: BlogPostProps) {
   return (
     <article className="prose prose-neutral dark:prose-invert mx-auto max-w-3xl">
-      <RichText data={content} />
+      <RichTextRenderer data={content} />
     </article>
   );
 }
