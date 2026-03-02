@@ -31,24 +31,26 @@ export function ProjectCard({ project }: ProjectCardProps) {
           )}
 
           {/* Thumbnail */}
-          <div className="relative aspect-video w-full overflow-hidden">
-            <Image
-              src={`/images/portfolio/${project.thumbnail}`}
-              alt={t(`${project.slug}.title`)}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            />
+          <div className="relative aspect-video w-full overflow-hidden bg-muted">
+            {project.thumbnail ? (
+              <Image
+                src={project.thumbnail.url}
+                alt={project.thumbnail.alt ?? project.title}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            ) : (
+              <div className="h-full w-full" />
+            )}
           </div>
 
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">{t(`${project.slug}.title`)}</CardTitle>
+            <CardTitle className="text-lg">{project.title}</CardTitle>
           </CardHeader>
 
           <CardContent className="flex-1 space-y-4">
-            <p className="line-clamp-3 text-sm text-muted-foreground">
-              {t(`${project.slug}.description`)}
-            </p>
+            <p className="line-clamp-3 text-sm text-muted-foreground">{project.description}</p>
 
             <div className="flex flex-wrap gap-1.5">
               {project.techs.map((tech) => (

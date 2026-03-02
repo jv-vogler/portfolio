@@ -1,4 +1,4 @@
-import { Portfolio } from "@/core/portfolio";
+import { getAllProjects, getProject } from "@/app/actions/portfolio";
 import { locales } from "@/i18n/config";
 import { Link } from "@/i18n/routing";
 import { Badge } from "@/ui/components/ui/badge";
@@ -12,10 +12,10 @@ export const revalidate = 3600;
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jv-portfolio.vercel.app";
 
-export function generateStaticParams() {
-  return Portfolio.items.flatMap((project) =>
-    locales.map((locale) => ({ locale, slug: project.slug })),
-  );
+export async function generateStaticParams() {
+  // Fetch slugs from Payload using the default locale; slugs are locale-agnostic
+  const projects = await getAllProjects("en");
+  return projects.flatMap((project) => locales.map((locale) => ({ locale, slug: project.slug })));
 }
 
 export async function generateMetadata({
@@ -24,23 +24,19 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const project = Portfolio.items.find((p) => p.slug === slug);
+  const project = await getProject(slug, locale);
 
   if (!project) return { title: "Not Found" };
 
-  const t = await getTranslations({ locale, namespace: "portfolio" });
-  const title = t(`${slug}.title`);
-  const description = t(`${slug}.description`);
-
   return {
-    title,
-    description,
+    title: project.title,
+    description: project.description,
     openGraph: {
-      title,
-      description,
+      title: project.title,
+      description: project.description,
       type: "article",
       url: `${BASE_URL}/${locale}/portfolio/${slug}`,
-      images: [{ url: `/images/portfolio/${project.thumbnail}` }],
+      images: project.thumbnail ? [{ url: project.thumbnail.url }] : [],
     },
     alternates: {
       canonical: `${BASE_URL}/${locale}/portfolio/${slug}`,
@@ -58,7 +54,7 @@ export default async function PortfolioDetailPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const project = Portfolio.items.find((p) => p.slug === slug);
+  const project = await getProject(slug, locale);
 
   if (!project) notFound();
 
@@ -78,26 +74,30 @@ export default async function PortfolioDetailPage({
       {/* Header */}
       <div className="mb-8">
         <div className="mb-4 flex flex-wrap items-center gap-3">
-          <h1 className="text-3xl font-bold sm:text-4xl">{t(`${slug}.title`)}</h1>
+          <h1 className="text-3xl font-bold sm:text-4xl">{project.title}</h1>
           {project.featured && (
             <Badge variant="default" className="bg-primary text-primary-foreground">
               {t("featured")}
             </Badge>
           )}
         </div>
-        <p className="text-lg leading-relaxed text-muted-foreground">{t(`${slug}.description`)}</p>
+        <p className="text-lg leading-relaxed text-muted-foreground">{project.description}</p>
       </div>
 
       {/* Screenshot */}
       <div className="relative mb-8 aspect-video w-full overflow-hidden rounded-xl border bg-muted shadow-sm">
-        <Image
-          src={`/images/portfolio/${project.thumbnail}`}
-          alt={t(`${slug}.title`)}
-          fill
-          className="object-cover"
-          sizes="(max-width: 896px) 100vw, 896px"
-          priority
-        />
+        {project.thumbnail ? (
+          <Image
+            src={project.thumbnail.url}
+            alt={project.thumbnail.alt ?? project.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 896px) 100vw, 896px"
+            priority
+          />
+        ) : (
+          <div className="h-full w-full" />
+        )}
       </div>
 
       {/* Tech stack */}
@@ -145,33 +145,35 @@ export default async function PortfolioDetailPage({
         <div className="space-y-10 border-t pt-10">
           <h2 className="text-2xl font-bold">{t("caseStudy.heading")}</h2>
 
-          <div>
-            <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.problem")}</h3>
-            <p className="leading-relaxed text-muted-foreground">
-              {t(`${slug}.caseStudy.problem`)}
-            </p>
-          </div>
+          {project.caseStudy.problem && (
+            <div>
+              <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.problem")}</h3>
+              <p className="leading-relaxed text-muted-foreground">{project.caseStudy.problem}</p>
+            </div>
+          )}
 
-          <div>
-            <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.approach")}</h3>
-            <p className="leading-relaxed text-muted-foreground">
-              {t(`${slug}.caseStudy.approach`)}
-            </p>
-          </div>
+          {project.caseStudy.approach && (
+            <div>
+              <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.approach")}</h3>
+              <p className="leading-relaxed text-muted-foreground">{project.caseStudy.approach}</p>
+            </div>
+          )}
 
-          <div>
-            <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.outcome")}</h3>
-            <p className="leading-relaxed text-muted-foreground">
-              {t(`${slug}.caseStudy.outcome`)}
-            </p>
-          </div>
+          {project.caseStudy.outcome && (
+            <div>
+              <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.outcome")}</h3>
+              <p className="leading-relaxed text-muted-foreground">{project.caseStudy.outcome}</p>
+            </div>
+          )}
 
-          <div>
-            <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.learnings")}</h3>
-            <p className="leading-relaxed text-muted-foreground">
-              {t(`${slug}.caseStudy.learnings`)}
-            </p>
-          </div>
+          {project.caseStudy.learnings && (
+            <div>
+              <h3 className="mb-2 text-lg font-semibold text-primary">
+                {t("caseStudy.learnings")}
+              </h3>
+              <p className="leading-relaxed text-muted-foreground">{project.caseStudy.learnings}</p>
+            </div>
+          )}
         </div>
       )}
     </section>

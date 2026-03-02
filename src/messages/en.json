@@ -41,6 +41,7 @@
     "heading": "Portfolio",
     "description": "Check out some of my projects here",
     "viewProject": "View Project",
+    "noProjects": "No projects yet. Check back soon!",
     "featured": "Featured",
     "backToPortfolio": "Back to portfolio",
     "techStack": "Tech Stack",
