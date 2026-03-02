@@ -14,6 +14,8 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { Poppins } from "next/font/google";
 import { notFound } from "next/navigation";
 
+import "../globals.css";
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
