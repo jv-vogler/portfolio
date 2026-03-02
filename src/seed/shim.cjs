@@ -12,13 +12,13 @@
  */
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const mod = require('@next/env')
+const mod = require("@next/env");
 
 if (!mod.default) {
-  mod.default = {}
+  mod.default = {};
 }
 if (!mod.default.loadEnvConfig) {
   mod.default.loadEnvConfig = function () {
-    return { combinedEnv: process.env, loadedEnvFiles: [] }
-  }
+    return { combinedEnv: process.env, loadedEnvFiles: [] };
+  };
 }
