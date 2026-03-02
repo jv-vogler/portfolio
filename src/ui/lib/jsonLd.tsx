@@ -1,6 +1,6 @@
 import type { Blog } from "@/core/blog";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jv-portfolio.vercel.app";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jvogler.vercel.app";
 
 type PersonJsonLdProps = {
   name: string;

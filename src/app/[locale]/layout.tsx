@@ -25,7 +25,7 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jv-portfolio.vercel.app";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jvogler.vercel.app";
 
 export async function generateMetadata({
   params,
