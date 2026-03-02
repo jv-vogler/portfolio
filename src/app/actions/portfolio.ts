@@ -1,9 +1,9 @@
 import { Portfolio, type PayloadProject } from "@/core/portfolio";
-import config from "@payload-config";
-import { getPayload } from "payload";
+import { getPayloadSafe } from "@/lib/payload";
 
 export async function getAllProjects(locale: string): Promise<Portfolio.Project[]> {
-  const payload = await getPayload({ config });
+  const payload = await getPayloadSafe();
+  if (!payload) return [];
 
   const { docs } = await payload.find({
     collection: "projects",
@@ -18,7 +18,8 @@ export async function getAllProjects(locale: string): Promise<Portfolio.Project[
 }
 
 export async function getProject(slug: string, locale: string): Promise<Portfolio.Project | null> {
-  const payload = await getPayload({ config });
+  const payload = await getPayloadSafe();
+  if (!payload) return null;
 
   const { docs } = await payload.find({
     collection: "projects",

@@ -1,9 +1,9 @@
 import { Skills, type PayloadSkill } from "@/core/skills";
-import config from "@payload-config";
-import { getPayload } from "payload";
+import { getPayloadSafe } from "@/lib/payload";
 
 export async function getAllSkills(locale: string): Promise<Skills.Skill[]> {
-  const payload = await getPayload({ config });
+  const payload = await getPayloadSafe();
+  if (!payload) return [];
 
   const { docs } = await payload.find({
     collection: "skills",
@@ -23,7 +23,8 @@ export async function getSkillsByCategory(
   category: Skills.Category,
   locale: string,
 ): Promise<Skills.Skill[]> {
-  const payload = await getPayload({ config });
+  const payload = await getPayloadSafe();
+  if (!payload) return [];
 
   const { docs } = await payload.find({
     collection: "skills",

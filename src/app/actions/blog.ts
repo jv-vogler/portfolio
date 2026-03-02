@@ -1,10 +1,10 @@
 import { Blog, type PayloadPost } from "@/core/blog";
-import config from "@payload-config";
+import { getPayloadSafe } from "@/lib/payload";
 import type { SerializedEditorState } from "lexical";
-import { getPayload } from "payload";
 
 export async function getAllPosts(locale: string): Promise<Blog.Post[]> {
-  const payload = await getPayload({ config });
+  const payload = await getPayloadSafe();
+  if (!payload) return [];
 
   const { docs } = await payload.find({
     collection: "posts",
@@ -24,7 +24,8 @@ export async function getPost(
   slug: string,
   locale: string,
 ): Promise<{ post: Blog.Post; content: SerializedEditorState }> {
-  const payload = await getPayload({ config });
+  const payload = await getPayloadSafe();
+  if (!payload) throw new Error("Payload unavailable — cannot fetch post");
 
   const { docs } = await payload.find({
     collection: "posts",
