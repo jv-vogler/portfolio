@@ -13,6 +13,7 @@ import { getPayload } from "payload";
 
 import { seedBlog } from "./blog";
 import { seedPortfolio } from "./portfolio";
+import { seedSkills } from "./skills";
 
 async function main() {
   console.log("🌱 Starting seed...\n");
@@ -27,7 +28,9 @@ async function main() {
   console.log("\n🗂️  Seeding portfolio projects...");
   await seedPortfolio(payload);
 
-  // ── Future phases will add skills seed here ───────────────────────────────
+  // ── Phase 7: Skills ──────────────────────────────────────────────────────
+  console.log("\n🛠️  Seeding skills...");
+  await seedSkills(payload);
 
   console.log("\n✅ Seed complete!");
   process.exit(0);

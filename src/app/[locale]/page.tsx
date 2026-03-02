@@ -1,5 +1,5 @@
 import { ContactSection } from "@/ui/contact/components/ContactSection";
-import { Experience } from "@/ui/experience/components/Experience";
+import { ExperienceSection } from "@/ui/experience/components/ExperienceSection";
 import { Hero } from "@/ui/hero/components/Hero";
 import { PortfolioSection } from "@/ui/portfolio/components/Portfolio";
 import type { Metadata } from "next";
@@ -39,7 +39,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Experience />
+      <ExperienceSection />
       <PortfolioSection />
       <ContactSection />
     </>

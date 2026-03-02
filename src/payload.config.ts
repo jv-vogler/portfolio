@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import { Media } from "./collections/Media";
 import { Posts } from "./collections/Posts";
 import { Projects } from "./collections/Projects";
+import { Skills } from "./collections/Skills";
 import { Users } from "./collections/Users";
 
 const filename = fileURLToPath(import.meta.url);
@@ -24,7 +25,7 @@ export default buildConfig({
   editor: lexicalEditor(),
 
   // Collections
-  collections: [Users, Media, Posts, Projects],
+  collections: [Users, Media, Posts, Projects, Skills],
 
   // Secret for encrypting cookies and JWT tokens
   secret: process.env.PAYLOAD_SECRET || "",
