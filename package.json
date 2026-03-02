@@ -14,8 +14,7 @@
     "format": "oxfmt --write src/",
     "format:check": "oxfmt --check src/",
     "format:write": "oxfmt --write src/",
-    "typecheck": "tsc --noEmit",
-    "typecheck:go": "tsgo --noEmit",
+    "typecheck": "tsgo --noEmit",
     "prepare": "husky",
     "seed": "tsx --require ./src/seed/shim.cjs --env-file .env.local src/seed/index.ts"
   },
