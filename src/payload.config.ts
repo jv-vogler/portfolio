@@ -28,6 +28,9 @@ export default buildConfig({
   // Collections
   collections: [Users, Media, Posts, Projects, Skills],
 
+  // CORS (admin/API browser requests)
+  cors: [process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"].filter(Boolean),
+
   // Secret for encrypting cookies and JWT tokens
   secret: process.env.PAYLOAD_SECRET || "",
 
@@ -62,19 +65,17 @@ export default buildConfig({
   },
 
   // Storage: Vercel Blob in production, local disk in development
-  plugins: [
-    ...(process.env.BLOB_READ_WRITE_TOKEN
-      ? [
-          vercelBlobStorage({
-            enabled: true,
-            collections: {
-              media: true,
-            },
-            token: process.env.BLOB_READ_WRITE_TOKEN,
-          }),
-        ]
-      : []),
-  ],
+  plugins: process.env.BLOB_READ_WRITE_TOKEN
+    ? [
+        vercelBlobStorage({
+          enabled: true,
+          collections: {
+            media: true,
+          },
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        }),
+      ]
+    : [],
 
   // Sharp for image processing
   sharp,
