@@ -63,7 +63,19 @@
     "description": "Pensamentos, tutoriais e insights sobre desenvolvimento web.",
     "noPosts": "Nenhum post ainda. Volte em breve!",
     "readMore": "Leia mais",
-    "backToList": "Voltar para todos os posts"
+    "backToList": "Voltar para todos os posts",
+    "filterByTag": "Filtrar por tag",
+    "allTags": "Todas",
+    "featured": "Destaque",
+    "readingTime": "{minutes} min de leitura",
+    "updated": "Atualizado em {date}",
+    "relatedPosts": "Posts Relacionados",
+    "sharePost": "Compartilhar",
+    "copyLink": "Copiar link",
+    "linkCopied": "Link copiado!",
+    "tableOfContents": "Índice",
+    "backToTop": "Voltar ao topo",
+    "rss": "Feed RSS"
   },
   "footer": {
     "rights": "Todos os direitos reservados."

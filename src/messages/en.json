@@ -63,7 +63,19 @@
     "description": "Thoughts, tutorials, and insights on web development.",
     "noPosts": "No posts yet. Check back soon!",
     "readMore": "Read more",
-    "backToList": "Back to all posts"
+    "backToList": "Back to all posts",
+    "filterByTag": "Filter by tag",
+    "allTags": "All",
+    "featured": "Featured",
+    "readingTime": "{minutes} min read",
+    "updated": "Updated {date}",
+    "relatedPosts": "Related Posts",
+    "sharePost": "Share post",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied!",
+    "tableOfContents": "Table of Contents",
+    "backToTop": "Back to top",
+    "rss": "RSS Feed"
   },
   "footer": {
     "rights": "All rights reserved."
