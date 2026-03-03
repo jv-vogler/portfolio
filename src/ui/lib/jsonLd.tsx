@@ -53,10 +53,19 @@ export function WebSiteJsonLd({ name, url = BASE_URL, description }: WebSiteJson
 type BlogPostingJsonLdProps = {
   post: Blog.Post;
   locale: string;
+  dateModified?: string;
+  image?: string;
+  wordCount?: number;
 };
 
-export function BlogPostingJsonLd({ post, locale }: BlogPostingJsonLdProps) {
-  const jsonLd = {
+export function BlogPostingJsonLd({
+  post,
+  locale,
+  dateModified,
+  image,
+  wordCount,
+}: BlogPostingJsonLdProps) {
+  const jsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
@@ -71,6 +80,10 @@ export function BlogPostingJsonLd({ post, locale }: BlogPostingJsonLdProps) {
     url: `${BASE_URL}/${locale}/blog/${post.slug}`,
     keywords: post.tags.join(", "),
   };
+
+  if (dateModified) jsonLd.dateModified = dateModified;
+  if (image) jsonLd.image = image;
+  if (wordCount !== undefined) jsonLd.wordCount = wordCount;
 
   return (
     <script
