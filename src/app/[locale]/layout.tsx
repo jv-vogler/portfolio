@@ -88,6 +88,9 @@ export async function generateMetadata({
         pt: `${BASE_URL}/pt`,
       },
     },
+    icons: {
+      icon: "/favicon.ico",
+    },
   };
 }
 

@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   },
   description:
     "Portfolio of JV Vogler, a frontend developer specializing in modern web technologies.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
