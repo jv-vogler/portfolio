@@ -2,7 +2,7 @@
 
 import { Badge } from "@/ui/components/ui/badge";
 import { fadeIn } from "@/ui/lib/motion";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -16,6 +16,7 @@ export function TagFilter({ tags }: TagFilterProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const prefersReducedMotion = useReducedMotion();
 
   const activeTags = searchParams.getAll("tag");
 
@@ -53,9 +54,9 @@ export function TagFilter({ tags }: TagFilterProps) {
 
   return (
     <motion.div
-      variants={fadeIn}
-      initial="hidden"
-      animate="visible"
+      variants={prefersReducedMotion ? undefined : fadeIn}
+      initial={prefersReducedMotion ? undefined : "hidden"}
+      animate={prefersReducedMotion ? undefined : "visible"}
       className="mb-8 flex flex-wrap gap-2"
       role="group"
       aria-label={t("filterByTag")}

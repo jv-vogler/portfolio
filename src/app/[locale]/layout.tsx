@@ -89,6 +89,9 @@ export async function generateMetadata({
         en: `${BASE_URL}/en`,
         pt: `${BASE_URL}/pt`,
       },
+      types: {
+        "application/rss+xml": "/feed.xml",
+      },
     },
     icons: {
       icon: "/favicon.ico",

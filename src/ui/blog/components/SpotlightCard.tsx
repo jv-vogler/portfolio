@@ -6,7 +6,7 @@ import { formatDate } from "@/lib/date";
 import { Badge } from "@/ui/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/components/ui/card";
 import { scaleOnHover } from "@/ui/lib/motion";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, Star } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -18,9 +18,15 @@ type SpotlightCardProps = {
 export function SpotlightCard({ post }: SpotlightCardProps) {
   const t = useTranslations("blog");
   const locale = useLocale();
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.div variants={scaleOnHover} initial="rest" whileHover="hover" className="mb-10">
+    <motion.div
+      variants={prefersReducedMotion ? undefined : scaleOnHover}
+      initial={prefersReducedMotion ? undefined : "rest"}
+      whileHover={prefersReducedMotion ? undefined : "hover"}
+      className="mb-10"
+    >
       <Link href={`/blog/${post.slug}`} className="group block">
         <Card className="overflow-hidden border-primary/30 bg-primary/5 transition-colors hover:border-primary/60">
           {post.coverImage && (
@@ -29,7 +35,7 @@ export function SpotlightCard({ post }: SpotlightCardProps) {
                 src={post.coverImage.heroUrl ?? post.coverImage.url}
                 alt={post.coverImage.alt}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 896px"
                 priority
               />

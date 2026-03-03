@@ -11,6 +11,7 @@ type ShareButtonsProps = {
 
 export function ShareButtons({ url, title }: ShareButtonsProps) {
   const t = useTranslations("blog");
+  const tA11y = useTranslations("a11y");
   const [copied, setCopied] = useState(false);
 
   const encodedUrl = encodeURIComponent(url);
@@ -65,7 +66,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
             href={`https://x.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Share on X / Twitter"
+            aria-label={`Share on X / Twitter — ${tA11y("opensInNewTab")}`}
             className={buttonClass}
           >
             <Twitter className="size-4" />X
@@ -74,7 +75,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Share on LinkedIn"
+            aria-label={`Share on LinkedIn — ${tA11y("opensInNewTab")}`}
             className={buttonClass}
           >
             <Linkedin className="size-4" />

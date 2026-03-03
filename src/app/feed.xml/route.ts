@@ -19,21 +19,22 @@ function escapeXml(str: string): string {
 export async function GET(): Promise<NextResponse> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://jvvogler.dev";
 
-  const [enPosts, ptPosts] = await Promise.all([getAllPosts("en"), getAllPosts("pt")]);
+  try {
+    const [enPosts, ptPosts] = await Promise.all([getAllPosts("en"), getAllPosts("pt")]);
 
-  // Merge both locales, deduplicate by slug+locale, sort newest first.
-  const allPosts = [
-    ...enPosts.map((p) => ({ ...p, locale: "en" })),
-    ...ptPosts.map((p) => ({ ...p, locale: "pt" })),
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    // Merge both locales, deduplicate by slug+locale, sort newest first.
+    const allPosts = [
+      ...enPosts.map((p) => ({ ...p, locale: "en" })),
+      ...ptPosts.map((p) => ({ ...p, locale: "pt" })),
+    ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  const items = allPosts
-    .map((post) => {
-      const link = `${baseUrl}/${post.locale}/blog/${post.slug}`;
-      const categories = post.tags
-        .map((tag) => `    <category>${escapeXml(tag)}</category>`)
-        .join("\n");
-      return `  <item>
+    const items = allPosts
+      .map((post) => {
+        const link = `${baseUrl}/${post.locale}/blog/${post.slug}`;
+        const categories = post.tags
+          .map((tag) => `    <category>${escapeXml(tag)}</category>`)
+          .join("\n");
+        return `  <item>
     <title>${escapeXml(post.title)}</title>
     <description>${escapeXml(post.description)}</description>
     <pubDate>${toRfc822(post.date)}</pubDate>
@@ -41,10 +42,10 @@ export async function GET(): Promise<NextResponse> {
     <guid isPermaLink="true">${link}</guid>
 ${categories}
   </item>`;
-    })
-    .join("\n");
+      })
+      .join("\n");
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JV Vogler Blog</title>
@@ -57,10 +58,14 @@ ${items}
   </channel>
 </rss>`;
 
-  return new NextResponse(xml, {
-    headers: {
-      "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": `public, s-maxage=${revalidate}, stale-while-revalidate`,
-    },
-  });
+    return new NextResponse(xml, {
+      headers: {
+        "Content-Type": "application/xml; charset=utf-8",
+        "Cache-Control": `public, s-maxage=${revalidate}, stale-while-revalidate`,
+      },
+    });
+  } catch (error) {
+    console.error("RSS feed generation failed:", error);
+    return new NextResponse("Failed to generate RSS feed.", { status: 500 });
+  }
 }

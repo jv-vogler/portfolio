@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Link2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ type AnchorHeadingProps = {
 
 export function AnchorHeading({ id, level, children, className }: AnchorHeadingProps) {
   const [copied, setCopied] = useState(false);
+  const t = useTranslations("blog");
   const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
 
   const handleCopy = async () => {
@@ -48,7 +50,7 @@ export function AnchorHeading({ id, level, children, className }: AnchorHeadingP
       <button
         type="button"
         onClick={handleCopy}
-        aria-label={copied ? "Link copied!" : `Copy link to this section`}
+        aria-label={copied ? t("linkCopied") : t("copyLink")}
         className={cn(
           "ml-2 inline-flex translate-y-[-1px] items-center opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100",
           "rounded text-muted-foreground hover:text-primary",

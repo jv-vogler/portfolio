@@ -6,8 +6,10 @@ last_updated: 2026-03-03
 phase_1_completed: 2026-03-03
 phase_6_completed: 2026-03-03
 phase_7_completed: 2026-03-03
+phase_8_completed: 2026-03-03
+phase_9_completed: 2026-03-03
 owner: JV Vogler
-status: "In progress"
+status: "Completed"
 tags:
   - feature
   - refactor
@@ -17,7 +19,7 @@ tags:
 
 # Introduction
 
-![Status: In Progress](https://img.shields.io/badge/status-In%20Progress-yellow)
+![Status: Completed](https://img.shields.io/badge/status-Completed-brightgreen)
 
 A comprehensive refactor of the blog subsystem (`/blog` list page and `/blog/[slug]` post page) to transform it from a minimal MVP into a polished, feature-rich developer blog. The refactor adds discovery features (tag filtering, command palette, related posts), content enrichment (reading time, TOC, cover images), UX polish (progress bar, back-to-top, animated transitions, share buttons), and distribution (RSS feed). All features are URL-synced where applicable, respect the existing i18n setup (en/pt), and follow the established patterns (Payload collections, `Blog` namespace in `src/core/blog.ts`, shadcn/ui components, `next-intl`, framer-motion).
 
@@ -154,14 +156,14 @@ A comprehensive refactor of the blog subsystem (`/blog` list page and `/blog/[sl
 
 - GOAL-009: Final validation, error handling, accessibility, and polish.
 
-| Task     | Description                                                                                                                                                                                                                                                                                                                 | Completed | Date |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---- |
-| TASK-041 | **Accessibility audit** — Ensure all new interactive elements (tag filter, command palette, share buttons, back-to-top, copy buttons) have proper `aria-label` attributes, keyboard navigation, and focus management. TOC links must have `aria-current` for the active heading. Command palette must trap focus when open. |           |      |
-| TASK-042 | **Responsive design QA** — Verify all new components render correctly on mobile (375px), tablet (768px), and desktop (1280px). TOC must collapse on mobile. Cover images must be responsive. Tag filter must be horizontally scrollable on narrow screens. ShareButtons must use Web Share API on mobile.                   |           |      |
-| TASK-043 | **Reduced motion compliance** — Verify all animations are disabled or simplified when `prefers-reduced-motion: reduce` is set. Reading progress bar must not animate (use instant width change). Page transitions must be disabled. Back-to-top must appear/disappear without animation.                                    |           |      |
-| TASK-044 | **Error boundaries** — Add error handling for: Clipboard API failures (code copy, share, anchor copy), missing cover images (graceful fallback to no image), RSS generation failures (return 500 with error message).                                                                                                       |           |      |
-| TASK-045 | **TypeScript strict compliance** — Run `pnpm typecheck` and ensure zero type errors across all new and modified files.                                                                                                                                                                                                      |           |      |
-| TASK-046 | **Lint & format** — Run `pnpm lint` and `pnpm format:check` to ensure all new code passes oxlint and oxfmt checks.                                                                                                                                                                                                          |           |      |
+| Task     | Description                                                                                                                                                                                                                                                                                                                 | Completed | Date       |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-041 | **Accessibility audit** — Ensure all new interactive elements (tag filter, command palette, share buttons, back-to-top, copy buttons) have proper `aria-label` attributes, keyboard navigation, and focus management. TOC links must have `aria-current` for the active heading. Command palette must trap focus when open. | ✅        | 2026-03-03 |
+| TASK-042 | **Responsive design QA** — Verify all new components render correctly on mobile (375px), tablet (768px), and desktop (1280px). TOC must collapse on mobile. Cover images must be responsive. Tag filter must be horizontally scrollable on narrow screens. ShareButtons must use Web Share API on mobile.                   | ✅        | 2026-03-03 |
+| TASK-043 | **Reduced motion compliance** — Verify all animations are disabled or simplified when `prefers-reduced-motion: reduce` is set. Reading progress bar must not animate (use instant width change). Page transitions must be disabled. Back-to-top must appear/disappear without animation.                                    | ✅        | 2026-03-03 |
+| TASK-044 | **Error boundaries** — Add error handling for: Clipboard API failures (code copy, share, anchor copy), missing cover images (graceful fallback to no image), RSS generation failures (return 500 with error message).                                                                                                       | ✅        | 2026-03-03 |
+| TASK-045 | **TypeScript strict compliance** — Run `pnpm typecheck` and ensure zero type errors across all new and modified files.                                                                                                                                                                                                      | ✅        | 2026-03-03 |
+| TASK-046 | **Lint & format** — Run `pnpm lint` and `pnpm format:check` to ensure all new code passes oxlint and oxfmt checks.                                                                                                                                                                                                          | ✅        | 2026-03-03 |
 
 ## 3. Alternatives
 
