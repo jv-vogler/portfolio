@@ -23,7 +23,10 @@ function slugifyHeading(text: string): string {
 
 /** Recursively extract text from a Lexical node tree. */
 function extractNodeText(node: { type?: string; text?: string; children?: unknown[] }): string {
-  if (node.type === "text" && typeof node.text === "string") return node.text;
+  // Both "text" and "code-highlight" nodes carry their content in `.text`
+  if (typeof node.text === "string") return node.text;
+  // Linebreak nodes → newline character
+  if (node.type === "linebreak") return "\n";
   if (Array.isArray(node.children)) {
     return (node.children as Array<{ type?: string; text?: string; children?: unknown[] }>)
       .map(extractNodeText)
@@ -49,12 +52,34 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
     );
   },
 
+  /**
+   * Suppress paragraph nodes whose sole content is a fenced-code opening marker
+   * (e.g. "```ts", "```typescript"). These are artifacts from seeded content
+   * where the opening fence line was accidentally stored as a separate paragraph.
+   */
+  paragraph: ({ node, nodesToJSX }) => {
+    const text = extractNodeText(
+      node as { type?: string; text?: string; children?: unknown[] },
+    ).trim();
+    if (/^`{3}/.test(text)) return null;
+    const children = nodesToJSX({ nodes: node.children });
+    return children?.length ? (
+      <p>{children}</p>
+    ) : (
+      <p>
+        <br />
+      </p>
+    );
+  },
+
   /** Override native Lexical code-block nodes to add a copy button. */
   code: ({ node }) => {
-    // Extract the raw code text from the Lexical code-highlight/linebreak children
-    // instead of passing rendered JSX — CodeBlockCopy needs the plain string for
-    // shiki syntax highlighting and clipboard copy.
-    const rawCode = extractNodeText(node as { type?: string; text?: string; children?: unknown[] });
+    // Extract the raw code text from the Lexical code-highlight/linebreak children.
+    // Strip any trailing closing-fence line (```) that was accidentally stored
+    // inside the code block content during seeding.
+    const rawCode = extractNodeText(node as { type?: string; text?: string; children?: unknown[] })
+      .replace(/\n`{3,}\s*$/, "")
+      .trimEnd();
     const language = (node as unknown as { language?: string }).language;
     return <CodeBlockCopy code={rawCode} language={language} />;
   },

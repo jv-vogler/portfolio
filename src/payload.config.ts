@@ -10,6 +10,7 @@ import { Posts } from "./collections/Posts";
 import { Projects } from "./collections/Projects";
 import { Skills } from "./collections/Skills";
 import { Users } from "./collections/Users";
+import { LexicalCodeFeature } from "./features/lexicalCode/feature.server";
 import { AboutGlobal } from "./globals/About";
 
 const filename = fileURLToPath(import.meta.url);
@@ -23,8 +24,11 @@ export default buildConfig({
     },
   }),
 
-  // Rich text editor (Lexical)
-  editor: lexicalEditor(),
+  // Rich text editor (Lexical) — include LexicalCodeFeature to register the
+  // CodeNode / CodeHighlightNode types used by seeded posts with code blocks.
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [...defaultFeatures, LexicalCodeFeature()],
+  }),
 
   // Collections
   collections: [Users, Media, Posts, Projects, Skills],

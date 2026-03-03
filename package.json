@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@lexical/code": "0.35.0",
     "@neondatabase/serverless": "^1.0.2",
     "@payloadcms/db-vercel-postgres": "^3.78.0",
     "@payloadcms/next": "^3.78.0",
