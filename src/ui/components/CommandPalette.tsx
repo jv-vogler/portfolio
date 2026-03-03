@@ -13,6 +13,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/ui/components/ui/command";
+import { formatForDisplay } from "@tanstack/react-hotkeys";
 import {
   BookOpen,
   ExternalLink,
@@ -27,7 +28,6 @@ import {
   User,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
 import { useCallback } from "react";
 
 type Post = Pick<Blog.Post, "slug" | "title" | "tags">;
@@ -36,6 +36,8 @@ type CommandPaletteProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   posts: Post[];
+  onToggleTheme: () => void;
+  onToggleLocale: () => void;
 };
 
 const NAV_ICONS: Record<string, React.ReactNode> = {
@@ -52,12 +54,17 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   github: <Github className="mr-2 h-4 w-4" />,
 };
 
-export function CommandPalette({ open, onOpenChange, posts }: CommandPaletteProps) {
+export function CommandPalette({
+  open,
+  onOpenChange,
+  posts,
+  onToggleTheme,
+  onToggleLocale,
+}: CommandPaletteProps) {
   const t = useTranslations("commandPalette");
   const tNav = useTranslations("nav");
   const router = useRouter();
   const locale = useLocale();
-  const { setTheme, theme } = useTheme();
 
   const handleSelect = useCallback(
     (action: () => void) => {
@@ -140,21 +147,19 @@ export function CommandPalette({ open, onOpenChange, posts }: CommandPaletteProp
         {/* Actions group */}
         <CommandSeparator />
         <CommandGroup heading={t("actions")}>
-          <CommandItem
-            value={t("toggleTheme")}
-            onSelect={() => handleSelect(() => setTheme(theme === "dark" ? "light" : "dark"))}
-          >
+          <CommandItem value={t("toggleTheme")} onSelect={() => handleSelect(onToggleTheme)}>
             <Moon className="mr-2 h-4 w-4" />
             {t("toggleTheme")}
+            <kbd className="ml-auto font-mono text-xs text-muted-foreground">
+              {formatForDisplay("Mod+Shift+M")}
+            </kbd>
           </CommandItem>
-          <CommandItem
-            value={t("toggleLanguage")}
-            onSelect={() =>
-              handleSelect(() => router.push("/", { locale: locale === "en" ? "pt" : "en" }))
-            }
-          >
+          <CommandItem value={t("toggleLanguage")} onSelect={() => handleSelect(onToggleLocale)}>
             <Languages className="mr-2 h-4 w-4" />
             {t("toggleLanguage")} ({locale === "en" ? "PT" : "EN"})
+            <kbd className="ml-auto font-mono text-xs text-muted-foreground">
+              {formatForDisplay("Mod+Shift+L")}
+            </kbd>
           </CommandItem>
         </CommandGroup>
       </CommandList>
