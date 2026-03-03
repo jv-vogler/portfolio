@@ -2,18 +2,21 @@
 
 import { Navigation } from "@/core/navigation";
 import { Link } from "@/i18n/routing";
+import { useCommandPalette } from "@/ui/components/CommandPaletteProvider";
 import { Button } from "@/ui/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/ui/components/ui/sheet";
 import { LocaleSwitcher } from "@/ui/header/components/LocaleSwitcher";
 import { ThemeToggle } from "@/ui/theme/ThemeToggle";
-import { Menu } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export function Header() {
   const t = useTranslations("nav");
   const tA11y = useTranslations("a11y");
+  const tCmd = useTranslations("commandPalette");
   const [open, setOpen] = useState(false);
+  const { toggle: togglePalette } = useCommandPalette();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
@@ -52,6 +55,28 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={togglePalette}
+            aria-label={tCmd("placeholder")}
+            className="hidden h-8 gap-1.5 px-3 text-sm text-muted-foreground sm:flex"
+          >
+            <Search className="h-3.5 w-3.5" />
+            <span className="hidden lg:inline">{tCmd("placeholder")}</span>
+            <kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+              <span className="text-xs">⌘</span>K
+            </kbd>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={togglePalette}
+            aria-label={tCmd("placeholder")}
+            className="h-8 w-8 sm:hidden"
+          >
+            <Search className="h-4 w-4" />
+          </Button>
           <LocaleSwitcher />
           <ThemeToggle />
 

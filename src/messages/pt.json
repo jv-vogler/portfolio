@@ -102,5 +102,15 @@
   "about": {
     "heading": "Sobre Mim",
     "metaDescription": "Saiba mais sobre JV Vogler — um desenvolvedor frontend apaixonado por criar ótimas experiências web."
+  },
+  "commandPalette": {
+    "placeholder": "Buscar…",
+    "navigation": "Navegação",
+    "posts": "Posts do Blog",
+    "social": "Social",
+    "actions": "Ações",
+    "noResults": "Nenhum resultado encontrado.",
+    "toggleTheme": "Alternar tema",
+    "toggleLanguage": "Alternar idioma"
   }
 }
