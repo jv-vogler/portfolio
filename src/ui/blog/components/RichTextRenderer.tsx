@@ -50,10 +50,13 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
   },
 
   /** Override native Lexical code-block nodes to add a copy button. */
-  code: ({ node, nodesToJSX }) => {
-    const children = nodesToJSX({ nodes: node.children });
+  code: ({ node }) => {
+    // Extract the raw code text from the Lexical code-highlight/linebreak children
+    // instead of passing rendered JSX — CodeBlockCopy needs the plain string for
+    // shiki syntax highlighting and clipboard copy.
+    const rawCode = extractNodeText(node as { type?: string; text?: string; children?: unknown[] });
     const language = (node as unknown as { language?: string }).language;
-    return <CodeBlockCopy language={language}>{children}</CodeBlockCopy>;
+    return <CodeBlockCopy code={rawCode} language={language} />;
   },
 });
 

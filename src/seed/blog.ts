@@ -112,7 +112,9 @@ function listItemNode(value: number, children: object[]) {
 }
 
 function codeNode(language: string, code: string) {
-  // Code block: children are text nodes interleaved with linebreak nodes
+  // Code block: children are text nodes interleaved with linebreak nodes.
+  // highlightType is required by Lexical's CodeHighlightNode — omitting it
+  // causes "Minified Lexical error #17" in the Payload admin editor.
   const lines = code.split("\n");
   const children: object[] = [];
   lines.forEach((line, i) => {
@@ -123,6 +125,7 @@ function codeNode(language: string, code: string) {
       detail: 0,
       mode: "normal",
       style: "",
+      highlightType: null,
       version: 1,
     });
     if (i < lines.length - 1) {
