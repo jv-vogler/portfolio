@@ -45,6 +45,15 @@ export const Posts: CollectionConfig = {
       localized: true,
     },
     {
+      name: "coverImage",
+      type: "upload",
+      relationTo: "media",
+      required: false,
+      admin: {
+        description: "Optional hero image for the post.",
+      },
+    },
+    {
       name: "content",
       type: "richText",
       required: true,
@@ -71,6 +80,14 @@ export const Posts: CollectionConfig = {
           pickerAppearance: "dayOnly",
           displayFormat: "yyyy-MM-dd",
         },
+      },
+    },
+    {
+      name: "featured",
+      type: "checkbox",
+      defaultValue: false,
+      admin: {
+        position: "sidebar",
       },
     },
   ],
