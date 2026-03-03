@@ -120,7 +120,7 @@ export function CodeBlockCopy({ code, language }: CodeBlockCopyProps) {
           // Shiki emits a <pre> with inline background/colour styles.
           // [&>pre] overrides margin/padding/border-radius so it fills the container.
           <div
-            className="overflow-x-auto [&>pre]:!m-0 [&>pre]:!rounded-none [&>pre]:!border-0 [&>pre]:p-4 [&>pre]:text-sm"
+            className="overflow-x-auto [&>pre]:m-0! [&>pre]:rounded-none! [&>pre]:border-0! [&>pre]:p-4 [&>pre]:text-sm"
             // biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output is safe (generated server/client from our own code strings)
             dangerouslySetInnerHTML={{ __html: highlightedHtml }}
           />

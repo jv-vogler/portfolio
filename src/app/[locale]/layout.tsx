@@ -13,7 +13,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
-import { Poppins } from "next/font/google";
+import { Fira_Code, Poppins } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import "../globals.css";
@@ -26,6 +26,12 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-poppins",
+  display: "swap",
+});
+
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  variable: "--font-fira-code",
   display: "swap",
 });
 
@@ -118,7 +124,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${poppins.variable} font-sans antialiased`}>
+      <body className={`${poppins.variable} ${firaCode.variable} font-sans antialiased`}>
         <PersonJsonLd
           name="JV Vogler"
           jobTitle="Frontend Developer"

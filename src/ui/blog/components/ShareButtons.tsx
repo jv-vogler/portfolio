@@ -2,7 +2,7 @@
 
 import { Check, Link2, Linkedin, Share2, Twitter } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type ShareButtonsProps = {
   url: string;
@@ -13,6 +13,13 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
   const t = useTranslations("blog");
   const tA11y = useTranslations("a11y");
   const [copied, setCopied] = useState(false);
+  // Start as false so server and initial client render agree (no navigator on server).
+  // Set to true after mount only if the Web Share API is actually available.
+  const [hasNativeShare, setHasNativeShare] = useState(false);
+
+  useEffect(() => {
+    setHasNativeShare(typeof navigator !== "undefined" && "share" in navigator);
+  }, []);
 
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
@@ -53,8 +60,8 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-2" aria-label={t("sharePost")}>
-      {/* Mobile: Web Share API */}
-      {typeof navigator !== "undefined" && "share" in navigator ? (
+      {/* Mobile: Web Share API — only rendered after mount to avoid hydration mismatch */}
+      {hasNativeShare ? (
         <button type="button" onClick={handleNativeShare} className={buttonClass}>
           <Share2 className="size-4" />
           {t("sharePost")}

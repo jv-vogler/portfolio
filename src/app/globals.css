@@ -122,12 +122,25 @@
   --radius-4xl: calc(var(--radius) + 16px);
 
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono:
+    var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  pre,
+  code {
+    /* Reference --font-fira-code directly: --font-mono lives inside @theme inline
+       which Tailwind v4 inlines into utilities rather than emitting a real CSS
+       custom property, so var(--font-mono) resolves to nothing at runtime. */
+    font-family:
+      var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-variant-ligatures: common-ligatures;
+    font-feature-settings:
+      "liga" 1,
+      "calt" 1;
   }
   html {
     scroll-behavior: smooth;
