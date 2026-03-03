@@ -1,6 +1,8 @@
+import { getAbout } from "@/lib/payload";
 import { AboutSection } from "@/ui/about/components/AboutSection";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import type { TypedLocale } from "payload";
 
 export const revalidate = 3600;
 
@@ -32,6 +34,8 @@ export async function generateMetadata({
   };
 }
 
-export default function AboutPage() {
-  return <AboutSection />;
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const items = await getAbout(locale as TypedLocale);
+  return <AboutSection items={items} />;
 }

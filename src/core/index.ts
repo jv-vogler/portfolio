@@ -1,4 +1,3 @@
-export { About } from "./about";
 export { Blog } from "./blog";
 export { Contact } from "./contact";
 export { Navigation } from "./navigation";

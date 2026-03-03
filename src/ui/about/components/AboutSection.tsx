@@ -1,12 +1,16 @@
 "use client";
 
-import { About } from "@/core/about";
+import type { AboutItem } from "@/lib/payload";
 import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-export function AboutSection() {
+interface AboutSectionProps {
+  items: AboutItem[];
+}
+
+export function AboutSection({ items }: AboutSectionProps) {
   const t = useTranslations();
 
   return (
@@ -49,14 +53,10 @@ export function AboutSection() {
           </motion.h2>
 
           <div className="space-y-8">
-            {About.items.map((item) => (
-              <motion.div key={item.slug} variants={fadeInUp}>
-                <h3 className="mb-2 text-lg font-medium italic text-primary">
-                  {t(`about.${item.slug}.question`)}
-                </h3>
-                <p className="leading-relaxed text-muted-foreground">
-                  {t(`about.${item.slug}.answer`)}
-                </p>
+            {items.map((item, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <h3 className="mb-2 text-lg font-medium italic text-primary">{item.question}</h3>
+                <p className="leading-relaxed text-muted-foreground">{item.answer}</p>
               </motion.div>
             ))}
           </div>

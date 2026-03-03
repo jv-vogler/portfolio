@@ -1,4 +1,5 @@
 import config from "@payload-config";
+import type { TypedLocale } from "payload";
 import { getPayload, type Payload } from "payload";
 
 /**
@@ -24,4 +25,18 @@ export async function getPayloadSafe(): Promise<Payload | null> {
     // Re-throw unexpected errors
     throw error;
   }
+}
+
+export type AboutItem = { question: string; answer: string };
+
+/**
+ * Fetch the About global Q&A items for a given locale.
+ * Returns an empty array if Payload is unavailable (e.g. during CI builds).
+ */
+export async function getAbout(locale: TypedLocale): Promise<AboutItem[]> {
+  const payload = await getPayloadSafe();
+  if (!payload) return [];
+
+  const global = await payload.findGlobal({ slug: "about", locale, depth: 0 });
+  return (global.items ?? []) as AboutItem[];
 }

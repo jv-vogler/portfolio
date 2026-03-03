@@ -89,38 +89,6 @@
   },
   "about": {
     "heading": "About Me",
-    "metaDescription": "Learn more about JV Vogler — a frontend developer passionate about building great web experiences.",
-    "whoAreYou": {
-      "question": "Who are you?",
-      "answer": "I'm JV — a frontend developer based in Brazil. I'm passionate about building polished, user-friendly web applications and I'm always looking for the next thing to learn."
-    },
-    "whatDoYouDo": {
-      "question": "What do you do?",
-      "answer": "I build web applications for a living. I specialize in React, TypeScript, and the modern frontend ecosystem. I also love tinkering with side projects, game dev experiments, and writing about what I learn."
-    },
-    "howDidYouStart": {
-      "question": "How did you get into programming?",
-      "answer": "I'm self-taught. I started by following free online courses and building small projects. Eventually things clicked, and I fell in love with the craft of turning ideas into interactive experiences."
-    },
-    "whatTechDoYouUse": {
-      "question": "What technologies do you use most?",
-      "answer": "React, Next.js, TypeScript, and Tailwind CSS are my daily drivers. I also enjoy working with Node.js, Framer Motion, and dabbling in Godot for game development."
-    },
-    "whatAreYouLearning": {
-      "question": "What are you currently learning?",
-      "answer": "I'm diving deeper into server components and the modern React ecosystem, exploring Rust for performance-critical tooling, and generally trying to level up my system design skills."
-    },
-    "outsideCoding": {
-      "question": "What do you do outside of coding?",
-      "answer": "I enjoy playing video games (PC, console, mobile — anything really), reading, listening to music, and spending time daydreaming about future projects. I'm also a big fan of coffee."
-    },
-    "favoriteSetup": {
-      "question": "What's your dev setup?",
-      "answer": "Linux (Arch btw), VS Code with a whole bunch of extensions, fish shell, and a mechanical keyboard. Dark mode everything, obviously."
-    },
-    "goal": {
-      "question": "What's your goal?",
-      "answer": "To keep growing as a developer, build things that people actually enjoy using, and share what I learn along the way through my blog and open-source contributions."
-    }
+    "metaDescription": "Learn more about JV Vogler — a frontend developer passionate about building great web experiences."
   }
 }

@@ -89,38 +89,6 @@
   },
   "about": {
     "heading": "Sobre Mim",
-    "metaDescription": "Saiba mais sobre JV Vogler — um desenvolvedor frontend apaixonado por criar ótimas experiências web.",
-    "whoAreYou": {
-      "question": "Quem é você?",
-      "answer": "Sou o JV — um desenvolvedor frontend morando no Brasil. Sou apaixonado por construir aplicações web bem feitas e intuitivas, e estou sempre procurando a próxima coisa para aprender."
-    },
-    "whatDoYouDo": {
-      "question": "O que você faz?",
-      "answer": "Eu construo aplicações web profissionalmente. Me especializo em React, TypeScript e o ecossistema frontend moderno. Também adoro mexer em projetos paralelos, experimentos com game dev e escrever sobre o que aprendo."
-    },
-    "howDidYouStart": {
-      "question": "Como você começou a programar?",
-      "answer": "Sou autodidata. Comecei seguindo cursos online gratuitos e construindo pequenos projetos. Eventualmente as coisas fizeram sentido e me apaixonei pela arte de transformar ideias em experiências interativas."
-    },
-    "whatTechDoYouUse": {
-      "question": "Quais tecnologias você mais usa?",
-      "answer": "React, Next.js, TypeScript e Tailwind CSS são minhas ferramentas do dia a dia. Também gosto de trabalhar com Node.js, Framer Motion, e experimentar com Godot para desenvolvimento de jogos."
-    },
-    "whatAreYouLearning": {
-      "question": "O que você está aprendendo atualmente?",
-      "answer": "Estou me aprofundando em server components e o ecossistema moderno do React, explorando Rust para ferramentas de alta performance, e geralmente tentando evoluir minhas habilidades de design de sistemas."
-    },
-    "outsideCoding": {
-      "question": "O que você faz fora da programação?",
-      "answer": "Gosto de jogar videogames (PC, console, mobile — qualquer coisa), ler, ouvir música e passar tempo sonhando com projetos futuros. Também sou um grande fã de café."
-    },
-    "favoriteSetup": {
-      "question": "Qual é seu setup de dev?",
-      "answer": "Linux (Arch btw), VS Code com um monte de extensões, fish shell e um teclado mecânico. Modo escuro em tudo, obviamente."
-    },
-    "goal": {
-      "question": "Qual é seu objetivo?",
-      "answer": "Continuar crescendo como desenvolvedor, construir coisas que as pessoas realmente gostem de usar e compartilhar o que aprendo pelo meu blog e contribuições open-source."
-    }
+    "metaDescription": "Saiba mais sobre JV Vogler — um desenvolvedor frontend apaixonado por criar ótimas experiências web."
   }
 }

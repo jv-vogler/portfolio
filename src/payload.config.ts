@@ -10,6 +10,7 @@ import { Posts } from "./collections/Posts";
 import { Projects } from "./collections/Projects";
 import { Skills } from "./collections/Skills";
 import { Users } from "./collections/Users";
+import { AboutGlobal } from "./globals/About";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -27,6 +28,9 @@ export default buildConfig({
 
   // Collections
   collections: [Users, Media, Posts, Projects, Skills],
+
+  // Globals
+  globals: [AboutGlobal],
 
   // CORS (admin/API browser requests)
   cors: [process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"].filter(Boolean),
