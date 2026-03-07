@@ -145,7 +145,86 @@
   html {
     scroll-behavior: smooth;
   }
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* View Transition animations */
+::view-transition-group(*) {
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Subtle crossfade for non-matched content; named elements morph over 400ms */
+::view-transition-old(root) {
+  animation: vt-fade-out 200ms ease both;
+}
+::view-transition-new(root) {
+  animation: vt-fade-in 200ms ease both;
+}
+@keyframes vt-fade-out {
+  to { opacity: 0; }
+}
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+}
+
+/* Keep the header and footer completely static during transitions */
+::view-transition-group(header),
+::view-transition-group(footer) {
+  animation: none;
+}
+
+/* Hide the hero during transitions so it never flashes */
+::view-transition-old(hero),
+::view-transition-new(hero) {
+  animation: none;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*) {
+    animation-duration: 0ms;
+  }
+}
+
+/* Dot-grid texture system */
+.dot-grid {
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: oklch(0.5 0 0 / 0.04);
+}
+
+.dot-grid-dense {
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: oklch(0.5 0 0 / 0.06);
+}
+
+.dark .dot-grid {
+  color: oklch(0.8 0 0 / 0.04);
+}
+
+.dark .dot-grid-dense {
+  color: oklch(0.8 0 0 / 0.06);
+}
+
+/* Blinking cursor for terminal effects */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
 }

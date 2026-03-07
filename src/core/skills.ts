@@ -20,7 +20,7 @@ export namespace Skills {
   export const categories: Category[] = ["frontend", "backend", "tools"];
 
   export function byCategory(skills: Skill[], category: Category): Skill[] {
-    return skills.filter((s) => s.category === category);
+    return skills.filter((skill) => skill.category === category);
   }
 
   export function fromPayload(doc: PayloadSkill): Skill {

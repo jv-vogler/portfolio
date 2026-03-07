@@ -11,6 +11,7 @@ import {
 import type { ComponentType } from "react";
 import {
   siDocker,
+  siFirebase,
   siGit,
   siNextdotjs,
   siNodedotjs,
@@ -39,6 +40,7 @@ const techIconMap: Record<string, SimpleIcon> = {
   postgresql: siPostgresql,
   git: siGit,
   docker: siDocker,
+  firebase: siFirebase,
 };
 
 const lucideFallbackMap: Record<string, ComponentType<LucideProps>> = {

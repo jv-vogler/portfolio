@@ -52,10 +52,10 @@ export async function getRelatedPosts(
   limit = 3,
 ): Promise<Blog.Post[]> {
   const all = await getAllPosts(locale);
-  const others = all.filter((p) => p.slug !== slug);
+  const others = all.filter((post) => post.slug !== slug);
 
   const scored = others.map((post) => {
-    const shared = post.tags.filter((t) => tags.includes(t)).length;
+    const shared = post.tags.filter((tag) => tags.includes(tag)).length;
     return { post, shared };
   });
 
@@ -64,7 +64,7 @@ export async function getRelatedPosts(
     return new Date(b.post.date).getTime() - new Date(a.post.date).getTime();
   });
 
-  return scored.slice(0, limit).map((s) => s.post);
+  return scored.slice(0, limit).map((scoredPost) => scoredPost.post);
 }
 
 export async function getPost(

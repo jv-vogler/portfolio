@@ -32,9 +32,47 @@ export const slideInFromRight: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
+export const parallaxFadeIn: Variants = {
+  hidden: { opacity: 0, scale: 1.05 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
+export const slideInFromLeftWide: Variants = {
+  hidden: { opacity: 0, x: -80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+export const slideInFromRightWide: Variants = {
+  hidden: { opacity: 0, x: 80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 export const scaleOnHover: Variants = {
   rest: { scale: 1 },
   hover: { scale: 1.05, transition: { duration: 0.2, ease: "easeInOut" } },
+};
+
+export const letterCascade: Variants = {
+  hidden: { opacity: 0, y: 60, rotateX: -40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      delay: i * 0.05,
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+export const drawLine: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  visible: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 1.2, ease: "easeInOut" },
+  },
 };
 
 type MotionSectionProps = {

@@ -83,6 +83,50 @@ export const Projects: CollectionConfig = {
       },
     },
     {
+      name: "showcaseEnabled",
+      type: "checkbox",
+      defaultValue: false,
+      admin: {
+        position: "sidebar",
+        description: "Include this project in the home page showcase.",
+      },
+    },
+    {
+      name: "showcaseOrder",
+      type: "number",
+      admin: {
+        position: "sidebar",
+        description: "Lower numbers appear first in the showcase.",
+      },
+    },
+    {
+      name: "accentColor",
+      type: "text",
+      admin: {
+        position: "sidebar",
+        description: "oklch color string, e.g. oklch(0.70 0.02 250)",
+      },
+    },
+    {
+      name: "isProfessional",
+      type: "checkbox",
+      defaultValue: false,
+      admin: {
+        position: "sidebar",
+        description: "Professional projects use a full-width layout in the showcase.",
+      },
+    },
+    {
+      name: "narrative",
+      type: "textarea",
+      localized: true,
+    },
+    {
+      name: "chapterLabel",
+      type: "text",
+      localized: true,
+    },
+    {
       name: "caseStudy",
       type: "group",
       fields: [
@@ -92,24 +136,12 @@ export const Projects: CollectionConfig = {
           defaultValue: false,
         },
         {
-          name: "problem",
-          type: "textarea",
+          name: "content",
+          type: "richText",
           localized: true,
-        },
-        {
-          name: "approach",
-          type: "textarea",
-          localized: true,
-        },
-        {
-          name: "outcome",
-          type: "textarea",
-          localized: true,
-        },
-        {
-          name: "learnings",
-          type: "textarea",
-          localized: true,
+          admin: {
+            condition: (_, siblingData) => Boolean(siblingData?.enabled),
+          },
         },
       ],
     },
@@ -143,7 +175,9 @@ export const Projects: CollectionConfig = {
       },
     ],
     afterDelete: [
-      async ({ doc }) => {
+      async ({ doc, context }) => {
+        if (context?.disableRevalidate) return;
+
         const slug = doc.slug as string | undefined;
         const locales = ["en", "pt"];
 

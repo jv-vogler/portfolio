@@ -194,7 +194,7 @@ export namespace Blog {
       title: doc.title,
       description: doc.description,
       date: doc.publishedDate,
-      tags: (doc.tags ?? []).map((t) => t.tag),
+      tags: (doc.tags ?? []).map((tag) => tag.tag),
       published: doc._status === "published",
       locale,
       readingTime: computeReadingTime(doc.content),

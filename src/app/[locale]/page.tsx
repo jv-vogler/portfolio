@@ -1,7 +1,8 @@
+import { AboutCard } from "@/ui/about/components/AboutCard";
 import { ContactSection } from "@/ui/contact/components/ContactSection";
-import { ExperienceSection } from "@/ui/experience/components/ExperienceSection";
 import { Hero } from "@/ui/hero/components/Hero";
-import { PortfolioSection } from "@/ui/portfolio/components/Portfolio";
+import { PortfolioReelSection } from "@/ui/portfolio/components/Portfolio";
+import { SkillsSection } from "@/ui/skills/components/SkillsSection";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
@@ -39,8 +40,25 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ExperienceSection />
-      <PortfolioSection />
+
+      {/* Connective tissue — geometric line */}
+      <div className="relative" aria-hidden="true">
+        <div className="h-px w-full bg-primary/10" />
+        <div className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-primary/20 bg-background" />
+      </div>
+
+      <PortfolioReelSection />
+
+      <SkillsSection />
+
+      {/* Connective tissue */}
+      <div className="relative" aria-hidden="true">
+        <div className="h-px w-full bg-primary/10" />
+        <div className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-primary/20 bg-background" />
+      </div>
+
+      <AboutCard />
+
       <ContactSection />
     </>
   );

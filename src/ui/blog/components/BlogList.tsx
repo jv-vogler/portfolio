@@ -36,8 +36,8 @@ export function BlogList({ posts }: BlogListProps) {
     );
   }
 
-  const featuredPost = posts.find((p) => p.featured);
-  const regularPosts = posts.filter((p) => !p.featured || p !== featuredPost);
+  const featuredPost = posts.find((post) => post.featured);
+  const regularPosts = posts.filter((post) => !post.featured || post !== featuredPost);
 
   return (
     <div>
@@ -82,7 +82,7 @@ export function BlogList({ posts }: BlogListProps) {
                     </div>
 
                     {post.coverImage?.thumbnailUrl && (
-                      <div className="relative hidden h-20 w-28 flex-shrink-0 overflow-hidden rounded-md sm:block">
+                      <div className="relative hidden h-20 w-28 shrink-0 overflow-hidden rounded-md sm:block">
                         <Image
                           src={post.coverImage.thumbnailUrl}
                           alt={post.coverImage.alt}

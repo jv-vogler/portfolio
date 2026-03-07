@@ -292,7 +292,7 @@ function mdToLexical(markdown: string) {
 // Seed function
 // ---------------------------------------------------------------------------
 
-export async function seedBlog(payload: Payload) {
+export async function seedBlog(payload: Payload, { force = false }: { force?: boolean } = {}) {
   const contentDir = path.resolve(__dirname, "../../content/blog");
 
   if (!fs.existsSync(contentDir)) {
@@ -314,8 +314,18 @@ export async function seedBlog(payload: Payload) {
       overrideAccess: true,
     });
     if (existing.totalDocs > 0) {
-      console.log(`  ⏭️  Post already exists, skipping: ${slug}`);
-      continue;
+      if (force) {
+        console.log(`  🗑️  --force: deleting existing post: ${slug}`);
+        await payload.delete({
+          collection: "posts",
+          id: existing.docs[0].id,
+          overrideAccess: true,
+          context: { disableRevalidate: true },
+        });
+      } else {
+        console.log(`  ⏭️  Post already exists, skipping: ${slug}`);
+        continue;
+      }
     }
 
     // ── Read EN ────────────────────────────────────────────────────────────

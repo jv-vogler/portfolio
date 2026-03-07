@@ -1,62 +1,109 @@
 "use client";
 
-import { Button } from "@/ui/components/ui/button";
-import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
-import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { letterCascade } from "@/ui/lib/motion";
+import { useTypingAnimation } from "@/ui/lib/useTypingAnimation";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
+
+const NAME = "JV Vogler";
 
 export function Hero() {
   const t = useTranslations("hero");
+  const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const gridShift = useTransform(scrollYProgress, [0, 1], ["0px", "15px"]);
+  const letterSpread = useTransform(scrollYProgress, [0, 0.5], [0, 12]);
+
+  const comment = t("comment");
+  const tagline = t("tagline");
+
+  const { displayedText: commentText, isComplete: commentDone } = useTypingAnimation({
+    text: comment,
+    speed: 30,
+    startDelay: 300,
+    enabled: !prefersReducedMotion,
+  });
+
+  const { displayedText: taglineText, isComplete: taglineDone } = useTypingAnimation({
+    text: tagline,
+    speed: 25,
+    startDelay: 1800,
+    enabled: !prefersReducedMotion,
+  });
 
   return (
     <section
-      id="home"
-      aria-labelledby="hero-heading"
-      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden px-4"
+      ref={sectionRef}
+      className="dot-grid relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden bg-[oklch(0.18_0.01_180)]"
+      style={{
+        viewTransitionName: "hero",
+        backgroundColor: undefined,
+      }}
     >
-      {/* Background gradient decoration */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_-20%,var(--color-primary)/0.08,transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_70%_80%,var(--color-primary)/0.04,transparent)]" />
-      </div>
+      {/* Tinted charcoal background with teal hue */}
+      <div className="absolute inset-0 bg-[oklch(0.18_0.01_180)] dark:bg-[oklch(0.14_0.01_180)]" />
 
+      {/* Dot grid overlay */}
       <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="mx-auto flex max-w-4xl flex-col items-center text-center"
+        className="dot-grid pointer-events-none absolute inset-0"
+        style={prefersReducedMotion ? undefined : { backgroundPositionY: gridShift }}
+      />
+
+      {/* Content */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center px-6 text-center"
+        style={prefersReducedMotion ? undefined : { y: contentY }}
       >
-        <motion.p
-          variants={fadeInUp}
-          className="mb-4 text-sm font-medium tracking-widest text-primary uppercase"
-        >
-          JV Vogler
-        </motion.p>
+        {/* Comment line */}
+        <p className="mb-6 font-mono text-sm text-[oklch(0.65_0.24_155)] sm:text-base">
+          {prefersReducedMotion ? comment : commentText}
+          {!prefersReducedMotion && !commentDone && <span className="animate-blink">|</span>}
+        </p>
 
-        <motion.h1
-          id="hero-heading"
-          variants={fadeInUp}
-          className="mb-6 text-4xl leading-tight font-bold text-foreground sm:text-5xl md:text-6xl"
+        {/* Name — massive scale, letter cascade */}
+        <h1
+          className="mb-8 flex flex-wrap justify-center font-sans font-bold"
+          style={{
+            fontSize: "clamp(4rem, 12vw, 12rem)",
+            lineHeight: 1,
+            perspective: "600px",
+          }}
         >
-          {t("heading")}
-        </motion.h1>
+          {NAME.split("").map((char, i) => (
+            <motion.span
+              key={i}
+              custom={i}
+              variants={prefersReducedMotion ? undefined : letterCascade}
+              initial={prefersReducedMotion ? undefined : "hidden"}
+              animate={prefersReducedMotion ? undefined : "visible"}
+              className="inline-block text-[oklch(0.98_0_0)]"
+              style={prefersReducedMotion ? undefined : { marginInline: letterSpread }}
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          ))}
+        </h1>
 
-        <motion.p
-          variants={fadeInUp}
-          className="mb-10 max-w-2xl text-lg text-muted-foreground md:text-xl"
-        >
-          {t("paragraph")}
-        </motion.p>
-
-        <motion.div variants={fadeInUp}>
-          <Button asChild size="lg" className="gap-2">
-            <a href="#portfolio">
-              {t("cta")}
-              <ArrowDown className="h-4 w-4" />
-            </a>
-          </Button>
-        </motion.div>
+        {/* Tagline with typing effect */}
+        <p className="mb-8 h-8 font-mono text-sm text-[oklch(0.7_0_0)] sm:text-base md:text-lg">
+          {prefersReducedMotion ? tagline : taglineText}
+          {!prefersReducedMotion && commentDone && (
+            <motion.span
+              className={taglineDone ? "" : "animate-blink"}
+              animate={{ opacity: taglineDone ? 0 : 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              |
+            </motion.span>
+          )}
+        </p>
       </motion.div>
     </section>
   );

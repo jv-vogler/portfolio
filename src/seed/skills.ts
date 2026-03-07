@@ -92,7 +92,7 @@ const skills: SkillSeedData[] = [
   },
 ];
 
-export async function seedSkills(payload: Payload) {
+export async function seedSkills(payload: Payload, { force = false }: { force?: boolean } = {}) {
   for (const skill of skills) {
     // Check if skill already exists (idempotent)
     const existing = await payload.find({
@@ -103,8 +103,18 @@ export async function seedSkills(payload: Payload) {
     });
 
     if (existing.docs.length > 0) {
-      console.log(`  • Skipping "${skill.slug}" (already exists)`);
-      continue;
+      if (force) {
+        console.log(`  🗑️  --force: deleting existing skill: ${skill.slug}`);
+        await payload.delete({
+          collection: "skills",
+          id: existing.docs[0].id,
+          overrideAccess: true,
+          context: { disableRevalidate: true },
+        });
+      } else {
+        console.log(`  • Skipping "${skill.slug}" (already exists)`);
+        continue;
+      }
     }
 
     // Create with English locale first

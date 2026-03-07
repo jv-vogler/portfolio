@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "JV Vogler — Desenvolvedor Frontend",
-    "description": "Portfólio de JV Vogler, um desenvolvedor frontend especializado em tecnologias web modernas."
+    "title": "JV Vogler — Engenheiro de Software",
+    "description": "Portfólio de JV Vogler, um engenheiro de software especializado em tecnologias web modernas."
   },
   "nav": {
     "home": "Início",
@@ -10,9 +10,11 @@
     "contact": "Contato"
   },
   "hero": {
-    "heading": "Sou um Desenvolvedor Frontend",
+    "heading": "Sou um Engenheiro de Software",
     "paragraph": "Olá! Sou o JV e estou constantemente aprendendo e melhorando para entregar experiências web excepcionais. Atualmente eu amo trabalhar em aplicações web usando tecnologias como React, TypeScript, Next.js, Tailwind CSS, e mais.",
-    "cta": "Portfólio"
+    "cta": "Portfólio",
+    "comment": "// construindo coisas desde que me lembro",
+    "tagline": "Engenheiro de Software | Criador de Experiências Interativas"
   },
   "experience": {
     "heading": "Experiência",
@@ -25,7 +27,7 @@
   },
   "portfolio": {
     "heading": "Portfólio",
-    "description": "Confira alguns dos meus projetos aqui",
+    "description": "Uma jornada pelos projetos que me moldaram como desenvolvedor.",
     "viewProject": "Ver Projeto",
     "noProjects": "Nenhum projeto ainda. Volte em breve!",
     "featured": "Destaque",
@@ -33,19 +35,24 @@
     "techStack": "Tecnologias",
     "liveDemo": "Demo",
     "viewCode": "Ver Código",
+    "learnMore": "Saiba Mais",
     "caseStudy": {
-      "heading": "Estudo de Caso",
-      "problem": "O Problema",
-      "approach": "A Abordagem",
-      "outcome": "O Resultado",
-      "learnings": "Aprendizados"
+      "heading": "Estudo de Caso"
     }
+  },
+  "skills": {
+    "heading": "Como Eu Construo",
+    "description": "Tecnologias e ferramentas que uso para dar vida a ideias."
   },
   "contact": {
     "heading": "Contato",
     "description": "Use o formulário abaixo para entrar em contato comigo!",
+    "terminalCommand": "echo \"Vamos construir algo juntos\"",
+    "terminalOutput": "Pronto para colaborar? Me mande uma mensagem abaixo.",
     "name": "Nome",
+    "namePlaceholder": "João Silva",
     "email": "Email",
+    "emailPlaceholder": "joao@exemplo.com",
     "message": "Mensagem",
     "messagePlaceholder": "Digite sua mensagem",
     "submit": "Enviar",
@@ -101,7 +108,11 @@
   },
   "about": {
     "heading": "Sobre Mim",
-    "metaDescription": "Saiba mais sobre JV Vogler — um desenvolvedor frontend apaixonado por criar ótimas experiências web."
+    "metaDescription": "Saiba mais sobre JV Vogler — um engenheiro de software apaixonado por criar ótimas experiências web.",
+    "elevatorPitch": "Sou um engenheiro de software que ama transformar ideias em experiências web interativas e polidas. Das raízes em game dev à web moderna — eu construo coisas que ganham vida.",
+    "location": "Brasil",
+    "learnMore": "Saiba mais sobre mim",
+    "reachOut": "ou entre em contato"
   },
   "commandPalette": {
     "placeholder": "Buscar…",

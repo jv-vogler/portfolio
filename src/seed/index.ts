@@ -16,21 +16,23 @@ import { seedPortfolio } from "./portfolio";
 import { seedSkills } from "./skills";
 
 async function main() {
-  console.log("🌱 Starting seed...\n");
+  const force = process.argv.includes("--force");
+
+  console.log(`🌱 Starting seed${force ? " (--force: existing data will be deleted)" : ""}...\n`);
 
   const payload = await getPayload({ config });
 
   // ── Phase 4: Blog posts ──────────────────────────────────────────────────
   console.log("📚 Seeding blog posts...");
-  await seedBlog(payload);
+  await seedBlog(payload, { force });
 
   // ── Phase 6: Portfolio projects ──────────────────────────────────────────
   console.log("\n🗂️  Seeding portfolio projects...");
-  await seedPortfolio(payload);
+  await seedPortfolio(payload, { force });
 
   // ── Phase 7: Skills ──────────────────────────────────────────────────────
   console.log("\n🛠️  Seeding skills...");
-  await seedSkills(payload);
+  await seedSkills(payload, { force });
 
   console.log("\n✅ Seed complete!");
   process.exit(0);

@@ -38,7 +38,7 @@ export function CommandPaletteProvider({ children, posts }: CommandPaletteProvid
 
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
-  const toggle = useCallback(() => setIsOpen((v) => !v), []);
+  const toggle = useCallback(() => setIsOpen((isOpenValue) => !isOpenValue), []);
   const toggleTheme = useCallback(
     () => setTheme(theme === "dark" ? "light" : "dark"),
     [setTheme, theme],

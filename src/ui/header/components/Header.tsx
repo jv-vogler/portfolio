@@ -59,7 +59,10 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
+    <header
+      style={{ viewTransitionName: "header" }}
+      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md"
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="text-lg font-bold text-foreground" aria-label={tA11y("homeLink")}>
           JV Vogler

@@ -17,7 +17,12 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
 
   function switchLocale(locale: Locale) {
+    const scrollY = window.scrollY;
     router.replace(pathname, { locale });
+    // Restore scroll position after locale change
+    requestAnimationFrame(() => {
+      window.scrollTo(0, scrollY);
+    });
   }
 
   return (

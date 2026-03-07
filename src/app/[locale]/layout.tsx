@@ -15,6 +15,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { Fira_Code, Poppins } from "next/font/google";
 import { notFound } from "next/navigation";
+import { ViewTransition } from "react";
 
 import "../globals.css";
 
@@ -123,43 +124,45 @@ export default async function LocaleLayout({
   const minimalPosts = posts.map(({ slug, title, tags }) => ({ slug, title, tags }));
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className={`${poppins.variable} ${firaCode.variable} font-sans antialiased`}>
-        <PersonJsonLd
-          name="JV Vogler"
-          jobTitle="Frontend Developer"
-          sameAs={["https://github.com/jvvogler", "https://linkedin.com/in/jvvogler"]}
-        />
-        <WebSiteJsonLd
-          name="JV Vogler"
-          description="Portfolio of JV Vogler, a frontend developer specializing in modern web technologies."
-        />
-        <ThemeProvider>
-          <NextIntlClientProvider messages={messages}>
-            <CommandPaletteProvider posts={minimalPosts}>
-              <a
-                href="#main-content"
-                className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
-              >
-                {messages.a11y &&
-                typeof messages.a11y === "object" &&
-                "skipToContent" in messages.a11y
-                  ? (messages.a11y as Record<string, string>).skipToContent
-                  : "Skip to content"}
-              </a>
-              <Header />
-              <main id="main-content" className="min-h-screen">
-                {children}
-              </main>
-              <Footer />
-              <Toaster />
-            </CommandPaletteProvider>
-          </NextIntlClientProvider>
-        </ThemeProvider>
-        <Analytics />
-        <SpeedInsights />
-        <GoogleAnalytics />
-      </body>
-    </html>
+    <ViewTransition>
+      <html lang={locale} suppressHydrationWarning>
+        <body className={`${poppins.variable} ${firaCode.variable} font-sans antialiased`}>
+          <PersonJsonLd
+            name="JV Vogler"
+            jobTitle="Frontend Developer"
+            sameAs={["https://github.com/jvvogler", "https://linkedin.com/in/jvvogler"]}
+          />
+          <WebSiteJsonLd
+            name="JV Vogler"
+            description="Portfolio of JV Vogler, a frontend developer specializing in modern web technologies."
+          />
+          <ThemeProvider>
+            <NextIntlClientProvider messages={messages}>
+              <CommandPaletteProvider posts={minimalPosts}>
+                <a
+                  href="#main-content"
+                  className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+                >
+                  {messages.a11y &&
+                  typeof messages.a11y === "object" &&
+                  "skipToContent" in messages.a11y
+                    ? (messages.a11y as Record<string, string>).skipToContent
+                    : "Skip to content"}
+                </a>
+                <Header />
+                <main id="main-content" className="min-h-screen">
+                  {children}
+                </main>
+                <Footer />
+                <Toaster />
+              </CommandPaletteProvider>
+            </NextIntlClientProvider>
+          </ThemeProvider>
+          <Analytics />
+          <SpeedInsights />
+          <GoogleAnalytics />
+        </body>
+      </html>
+    </ViewTransition>
   );
 }

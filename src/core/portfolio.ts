@@ -1,3 +1,5 @@
+import type { SerializedEditorState } from "lexical";
+
 // Populated skill relationship shape (depth >= 1)
 export type PayloadSkillRef =
   | string
@@ -16,21 +18,21 @@ export type PayloadProject = {
   codeUrl?: string | null;
   featured?: boolean | null;
   sortOrder?: number | null;
+  showcaseEnabled?: boolean | null;
+  showcaseOrder?: number | null;
+  accentColor?: string | null;
+  isProfessional?: boolean | null;
+  narrative?: string | null;
+  chapterLabel?: string | null;
   caseStudy?: {
     enabled?: boolean | null;
-    problem?: string | null;
-    approach?: string | null;
-    outcome?: string | null;
-    learnings?: string | null;
+    content?: SerializedEditorState | null;
   } | null;
 };
 
 export namespace Portfolio {
   export type CaseStudy = {
-    problem?: string;
-    approach?: string;
-    outcome?: string;
-    learnings?: string;
+    content: SerializedEditorState;
   };
 
   export type Project = {
@@ -42,6 +44,12 @@ export namespace Portfolio {
     demoUrl?: string;
     codeUrl?: string;
     featured?: boolean;
+    showcaseEnabled?: boolean;
+    showcaseOrder?: number;
+    accentColor?: string;
+    isProfessional?: boolean;
+    narrative?: string;
+    chapterLabel?: string;
     caseStudy?: CaseStudy;
   };
 
@@ -57,21 +65,23 @@ export namespace Portfolio {
               alt: doc.thumbnail.alt,
             }
           : null,
-      techs: (doc.techs ?? []).map((t) => {
-        if (t !== null && typeof t === "object" && "name" in t) return t.name;
-        return String(t);
+      techs: (doc.techs ?? []).map((tech) => {
+        if (tech !== null && typeof tech === "object" && "name" in tech) return tech.name;
+        return String(tech);
       }),
       demoUrl: doc.demoUrl ?? undefined,
       codeUrl: doc.codeUrl ?? undefined,
       featured: doc.featured ?? false,
-      caseStudy: doc.caseStudy?.enabled
-        ? {
-            problem: doc.caseStudy.problem ?? undefined,
-            approach: doc.caseStudy.approach ?? undefined,
-            outcome: doc.caseStudy.outcome ?? undefined,
-            learnings: doc.caseStudy.learnings ?? undefined,
-          }
-        : undefined,
+      showcaseEnabled: doc.showcaseEnabled ?? false,
+      showcaseOrder: doc.showcaseOrder ?? undefined,
+      accentColor: doc.accentColor ?? undefined,
+      isProfessional: doc.isProfessional ?? false,
+      narrative: doc.narrative ?? undefined,
+      chapterLabel: doc.chapterLabel ?? undefined,
+      caseStudy:
+        doc.caseStudy?.enabled && doc.caseStudy.content
+          ? { content: doc.caseStudy.content }
+          : undefined,
     };
   }
 }

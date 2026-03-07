@@ -25,7 +25,6 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
 
     if (headingElements.length === 0) return;
 
-    // Track which headings are visible and which one is the "current" one
     const visibleMap = new Map<string, boolean>();
 
     observerRef.current = new IntersectionObserver(
@@ -34,8 +33,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
           visibleMap.set(entry.target.id, entry.isIntersecting);
         }
 
-        // Pick the first visible heading, or fall back to the last heading above viewport
-        const firstVisible = headings.find((h) => visibleMap.get(h.id));
+        const firstVisible = headings.find((heading) => visibleMap.get(heading.id));
         if (firstVisible) {
           setActiveId(firstVisible.id);
         }

@@ -92,7 +92,6 @@ export const Posts: CollectionConfig = {
     },
   ],
   hooks: {
-    // TASK-016: Auto-generate slug from English title on create
     beforeChange: [
       async ({ data, operation }) => {
         if (operation === "create" && !data.slug && data.title) {
@@ -105,7 +104,6 @@ export const Posts: CollectionConfig = {
         return data;
       },
     ],
-    // TASK-017: Revalidate ISR paths when a post changes
     afterChange: [
       async ({ doc, context }) => {
         if (context.disableRevalidate) return;
@@ -122,7 +120,9 @@ export const Posts: CollectionConfig = {
       },
     ],
     afterDelete: [
-      async ({ doc }) => {
+      async ({ doc, context }) => {
+        if (context?.disableRevalidate) return;
+
         const slug = doc.slug as string | undefined;
         const locales = ["en", "pt"];
 

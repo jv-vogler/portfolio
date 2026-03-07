@@ -39,7 +39,7 @@ export function ContactForm() {
           {...register("name")}
           aria-invalid={!!errors.name}
           aria-describedby={errors.name ? "name-error" : undefined}
-          placeholder={t("name")}
+          placeholder={t("namePlaceholder")}
           disabled={isSubmitting}
         />
         {errors.name && (
@@ -60,7 +60,7 @@ export function ContactForm() {
           {...register("email")}
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "email-error" : undefined}
-          placeholder={t("email")}
+          placeholder={t("emailPlaceholder")}
           disabled={isSubmitting}
         />
         {errors.email && (

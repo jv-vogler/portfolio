@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "JV Vogler — Frontend Developer",
-    "description": "Portfolio of JV Vogler, a frontend developer specializing in modern web technologies."
+    "title": "JV Vogler — Software Engineer",
+    "description": "Portfolio of JV Vogler, a software engineer specializing in modern web technologies."
   },
   "nav": {
     "home": "Home",
@@ -10,9 +10,11 @@
     "contact": "Contact"
   },
   "hero": {
-    "heading": "I'm a Frontend Developer",
+    "heading": "I'm a Software Engineer",
     "paragraph": "Hi! I am JV and I'm constantly learning and improving to deliver outstanding web experiences. Currently I love to work on web applications using technologies such as React, TypeScript, Next.js, Tailwind CSS, and more.",
-    "cta": "Portfolio"
+    "cta": "Portfolio",
+    "comment": "// building things since I can remember",
+    "tagline": "Software Engineer | Builder of Interactive Experiences"
   },
   "experience": {
     "heading": "Experience",
@@ -25,7 +27,7 @@
   },
   "portfolio": {
     "heading": "Portfolio",
-    "description": "Check out some of my projects here",
+    "description": "A journey through the projects that shaped me as a developer.",
     "viewProject": "View Project",
     "noProjects": "No projects yet. Check back soon!",
     "featured": "Featured",
@@ -33,19 +35,24 @@
     "techStack": "Tech Stack",
     "liveDemo": "Live Demo",
     "viewCode": "View Code",
+    "learnMore": "Learn More",
     "caseStudy": {
-      "heading": "Case Study",
-      "problem": "The Problem",
-      "approach": "The Approach",
-      "outcome": "The Outcome",
-      "learnings": "Key Learnings"
+      "heading": "Case Study"
     }
+  },
+  "skills": {
+    "heading": "How I Build",
+    "description": "Technologies and tools I use to bring ideas to life."
   },
   "contact": {
     "heading": "Contact",
     "description": "Use the form below to get in touch with me!",
+    "terminalCommand": "echo \"Let's build something together\"",
+    "terminalOutput": "Ready to collaborate? Drop me a message below.",
     "name": "Name",
+    "namePlaceholder": "John Doe",
     "email": "Email",
+    "emailPlaceholder": "john@example.com",
     "message": "Message",
     "messagePlaceholder": "Enter your message",
     "submit": "Submit",
@@ -101,7 +108,11 @@
   },
   "about": {
     "heading": "About Me",
-    "metaDescription": "Learn more about JV Vogler — a frontend developer passionate about building great web experiences."
+    "metaDescription": "Learn more about JV Vogler — a software engineer passionate about building great web experiences.",
+    "elevatorPitch": "I'm a software engineer who loves turning ideas into polished, interactive web experiences. From game dev roots to modern web — I build things that feel alive.",
+    "location": "Brazil",
+    "learnMore": "Learn more about me",
+    "reachOut": "or reach out"
   },
   "commandPalette": {
     "placeholder": "Search…",

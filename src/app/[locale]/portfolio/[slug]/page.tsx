@@ -1,8 +1,9 @@
 import { getAllProjects, getProject } from "@/app/actions/portfolio";
 import { locales } from "@/i18n/config";
-import { Link } from "@/i18n/routing";
+import { RichTextRenderer } from "@/ui/blog/components/RichTextRenderer";
 import { Badge } from "@/ui/components/ui/badge";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { PortfolioBackButton } from "@/ui/portfolio/components/PortfolioBackButton";
+import { ExternalLink, Github } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
@@ -13,7 +14,6 @@ export const revalidate = 3600;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jvogler.vercel.app";
 
 export async function generateStaticParams() {
-  // Fetch slugs from Payload using the default locale; slugs are locale-agnostic
   const projects = await getAllProjects("en");
   return projects.flatMap((project) => locales.map((locale) => ({ locale, slug: project.slug })));
 }
@@ -59,123 +59,199 @@ export default async function PortfolioDetailPage({
   if (!project) notFound();
 
   const t = await getTranslations({ locale, namespace: "portfolio" });
+  const accent = project.accentColor ?? "oklch(0.70 0.02 250)";
 
   return (
-    <section className="container mx-auto max-w-4xl px-4 py-20">
-      {/* Back link */}
-      <Link
-        href="/#portfolio"
-        className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        {t("backToPortfolio")}
-      </Link>
+    <section className="bg-[oklch(0.18_0.01_260)] py-20">
+      <div className="container mx-auto max-w-4xl px-4">
+        {/* Back button */}
+        <PortfolioBackButton />
 
-      {/* Header */}
-      <div className="mb-8">
-        <div className="mb-4 flex flex-wrap items-center gap-3">
-          <h1 className="text-3xl font-bold sm:text-4xl">{project.title}</h1>
-          {project.featured && (
-            <Badge variant="default" className="bg-primary text-primary-foreground">
-              {t("featured")}
-            </Badge>
+        {/* HUD chapter label + title */}
+        <div className="mb-8">
+          <div
+            className="mb-3 flex items-center gap-3"
+            style={{ viewTransitionName: `project-chapter-${slug}` }}
+          >
+            <span
+              className="shrink-0 font-mono text-xs uppercase tracking-[0.25em]"
+              style={{ color: accent }}
+            >
+              {project.chapterLabel ?? project.title}
+            </span>
+            <div
+              className="h-px flex-1"
+              style={{
+                background: `linear-gradient(90deg, ${accent}, transparent)`,
+                opacity: 0.4,
+              }}
+            />
+          </div>
+
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <h1
+              className="text-3xl font-bold text-[oklch(0.95_0_0)] sm:text-4xl"
+              style={{ viewTransitionName: `project-title-${slug}` }}
+            >
+              {project.title}
+            </h1>
+            {project.featured && (
+              <Badge
+                variant="default"
+                className="border-white/10 bg-white/5 text-xs text-[oklch(0.75_0_0)]"
+              >
+                {t("featured")}
+              </Badge>
+            )}
+          </div>
+          {project.narrative && (
+            <p
+              className="mb-2 text-lg leading-relaxed text-[oklch(0.65_0_0)]"
+              style={{ viewTransitionName: `project-narrative-${slug}` }}
+            >
+              {project.narrative}
+            </p>
           )}
         </div>
-        <p className="text-lg leading-relaxed text-muted-foreground">{project.description}</p>
-      </div>
 
-      {/* Screenshot */}
-      <div className="relative mb-8 aspect-video w-full overflow-hidden rounded-xl border bg-muted shadow-sm">
-        {project.thumbnail ? (
-          <Image
-            src={project.thumbnail.url}
-            alt={project.thumbnail.alt ?? project.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 896px) 100vw, 896px"
-            priority
+        {/* Screenshot with HUD styling */}
+        <div
+          className="relative mb-8 aspect-video w-full overflow-hidden rounded-xl"
+          style={{
+            border: `1px solid color-mix(in oklch, ${accent} 25%, transparent)`,
+          }}
+        >
+          {/* Top accent bar */}
+          <div
+            className="absolute top-0 left-0 z-10 h-0.5 w-full"
+            style={{
+              background: `linear-gradient(90deg, transparent 5%, ${accent} 50%, transparent 95%)`,
+            }}
           />
-        ) : (
-          <div className="h-full w-full" />
+
+          {/* HUD corner brackets */}
+          <div className="pointer-events-none absolute inset-0 z-20">
+            <div
+              className="absolute top-0 left-0 h-5 w-5 border-t-2 border-l-2"
+              style={{ borderColor: accent, opacity: 0.5 }}
+            />
+            <div
+              className="absolute top-0 right-0 h-5 w-5 border-t-2 border-r-2"
+              style={{ borderColor: accent, opacity: 0.5 }}
+            />
+            <div
+              className="absolute bottom-0 left-0 h-5 w-5 border-b-2 border-l-2"
+              style={{ borderColor: accent, opacity: 0.5 }}
+            />
+            <div
+              className="absolute bottom-0 right-0 h-5 w-5 border-b-2 border-r-2"
+              style={{ borderColor: accent, opacity: 0.5 }}
+            />
+          </div>
+
+          {project.thumbnail ? (
+            <Image
+              src={project.thumbnail.url}
+              alt={project.thumbnail.alt ?? project.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 896px) 100vw, 896px"
+              priority
+              style={{ viewTransitionName: `project-image-${slug}` }}
+            />
+          ) : (
+            <div className="h-full w-full bg-[oklch(0.15_0.01_260)]" />
+          )}
+
+          {/* Tinted gradient overlay */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(to top, color-mix(in oklch, ${accent} 25%, oklch(0.1 0 0)) 0%, transparent 50%)`,
+            }}
+          />
+
+          {/* Scanlines */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)",
+            }}
+          />
+        </div>
+
+        <p className="text-lg leading-relaxed text-[oklch(0.65_0_0)] mb-6">{project.description}</p>
+
+        {/* Tech stack */}
+        <div className="mb-8">
+          <h2 className="mb-3 text-xl font-semibold text-[oklch(0.85_0_0)]">{t("techStack")}</h2>
+          <div className="flex flex-wrap gap-2">
+            {project.techs.map((tech) => (
+              <Badge
+                key={tech}
+                variant="secondary"
+                className="border-white/10 bg-white/5 text-sm text-[oklch(0.75_0_0)]"
+                style={{
+                  viewTransitionName: `project-tech-${slug}-${tech.toLowerCase().replace(/[\s.+#]/g, "-")}`,
+                }}
+              >
+                {tech}
+              </Badge>
+            ))}
+          </div>
+        </div>
+
+        {/* External links */}
+        {(project.demoUrl || project.codeUrl) && (
+          <div className="mb-12 flex flex-wrap gap-4">
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium text-[oklch(0.95_0_0)] transition-colors"
+                style={{
+                  background: `color-mix(in oklch, ${accent} 30%, oklch(0.18 0.01 260))`,
+                  border: `1px solid color-mix(in oklch, ${accent} 40%, transparent)`,
+                }}
+              >
+                <ExternalLink className="h-4 w-4" />
+                {t("liveDemo")}
+              </a>
+            )}
+            {project.codeUrl && (
+              <a
+                href={project.codeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium text-[oklch(0.75_0_0)] transition-colors"
+                style={{
+                  border: `1px solid color-mix(in oklch, ${accent} 25%, transparent)`,
+                }}
+              >
+                <Github className="h-4 w-4" />
+                {t("viewCode")}
+              </a>
+            )}
+          </div>
+        )}
+
+        {/* Case study — rich text */}
+        {project.caseStudy && (
+          <div
+            className="space-y-10 pt-10"
+            style={{
+              borderTop: `1px solid color-mix(in oklch, ${accent} 20%, transparent)`,
+            }}
+          >
+            <h2 className="text-2xl font-bold text-[oklch(0.95_0_0)]">{t("caseStudy.heading")}</h2>
+            <div className="prose prose-invert max-w-none prose-headings:text-[oklch(0.85_0_0)] prose-p:text-[oklch(0.65_0_0)] prose-a:text-[oklch(0.75_0.1_250)] prose-strong:text-[oklch(0.80_0_0)]">
+              <RichTextRenderer data={project.caseStudy.content} />
+            </div>
+          </div>
         )}
       </div>
-
-      {/* Tech stack */}
-      <div className="mb-8">
-        <h2 className="mb-3 text-xl font-semibold">{t("techStack")}</h2>
-        <div className="flex flex-wrap gap-2">
-          {project.techs.map((tech) => (
-            <Badge key={tech} variant="secondary" className="text-sm">
-              {tech}
-            </Badge>
-          ))}
-        </div>
-      </div>
-
-      {/* External links */}
-      {(project.demoUrl || project.codeUrl) && (
-        <div className="mb-12 flex flex-wrap gap-4">
-          {project.demoUrl && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              <ExternalLink className="h-4 w-4" />
-              {t("liveDemo")}
-            </a>
-          )}
-          {project.codeUrl && (
-            <a
-              href={project.codeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-accent"
-            >
-              <Github className="h-4 w-4" />
-              {t("viewCode")}
-            </a>
-          )}
-        </div>
-      )}
-
-      {/* Case study sections */}
-      {project.caseStudy && (
-        <div className="space-y-10 border-t pt-10">
-          <h2 className="text-2xl font-bold">{t("caseStudy.heading")}</h2>
-
-          {project.caseStudy.problem && (
-            <div>
-              <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.problem")}</h3>
-              <p className="leading-relaxed text-muted-foreground">{project.caseStudy.problem}</p>
-            </div>
-          )}
-
-          {project.caseStudy.approach && (
-            <div>
-              <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.approach")}</h3>
-              <p className="leading-relaxed text-muted-foreground">{project.caseStudy.approach}</p>
-            </div>
-          )}
-
-          {project.caseStudy.outcome && (
-            <div>
-              <h3 className="mb-2 text-lg font-semibold text-primary">{t("caseStudy.outcome")}</h3>
-              <p className="leading-relaxed text-muted-foreground">{project.caseStudy.outcome}</p>
-            </div>
-          )}
-
-          {project.caseStudy.learnings && (
-            <div>
-              <h3 className="mb-2 text-lg font-semibold text-primary">
-                {t("caseStudy.learnings")}
-              </h3>
-              <p className="leading-relaxed text-muted-foreground">{project.caseStudy.learnings}</p>
-            </div>
-          )}
-        </div>
-      )}
     </section>
   );
 }

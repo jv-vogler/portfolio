@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ---------------------------------------------------------------------------
-// Portfolio item definitions (migrated from src/core/portfolio.ts)
+// Portfolio item definitions
 // ---------------------------------------------------------------------------
 
 interface ProjectSeedData {
@@ -18,25 +18,21 @@ interface ProjectSeedData {
   codeUrl?: string;
   featured?: boolean;
   sortOrder: number;
+  showcaseEnabled: boolean;
+  showcaseOrder: number;
+  accentColor: string;
+  isProfessional: boolean;
   en: {
     title: string;
     description: string;
-    caseStudy?: {
-      problem: string;
-      approach: string;
-      outcome: string;
-      learnings: string;
-    };
+    narrative?: string;
+    chapterLabel?: string;
   };
   pt: {
     title: string;
     description: string;
-    caseStudy?: {
-      problem: string;
-      approach: string;
-      outcome: string;
-      learnings: string;
-    };
+    narrative?: string;
+    chapterLabel?: string;
   };
 }
 
@@ -81,75 +77,32 @@ function slugify(text: string): string {
 
 const projects: ProjectSeedData[] = [
   {
-    slug: "ai-integration-platform",
-    thumbnail: "thumb-ai-platform.png",
-    techs: ["React", "Next.js", "TypeScript", "Node.js", "AWS", "OpenAI"],
-    featured: true,
-    sortOrder: 1,
-    en: {
-      title: "AI Integration Platform",
-      description:
-        "A full-stack platform that orchestrates multiple AI providers behind a unified API, enabling teams to build and deploy AI-powered workflows at scale.",
-      caseStudy: {
-        problem:
-          "The company needed to integrate multiple AI providers into existing products without vendor lock-in, while keeping latency low and costs predictable. Each team was building ad-hoc integrations, leading to duplicated effort and inconsistent quality.",
-        approach:
-          "I designed a layered Node.js/TypeScript service on AWS that abstracts provider-specific APIs behind a unified interface. The architecture includes request routing, response caching, rate limiting, and cost tracking. The React/Next.js dashboard lets teams monitor usage, configure workflows, and A/B test different models.",
-        outcome:
-          "Reduced integration time for new AI features from weeks to days. Centralized cost tracking saved ~30% on API spend. The platform now serves thousands of daily requests across multiple products.",
-        learnings:
-          "Building provider-agnostic abstractions requires careful API design — too thin and you lose useful features, too thick and you re-implement each SDK. Streaming responses and graceful fallback between providers were the hardest problems to solve well.",
-      },
-    },
-    pt: {
-      title: "Plataforma de Integração AI",
-      description:
-        "Uma plataforma full-stack que orquestra múltiplos provedores de IA por trás de uma API unificada, permitindo que equipes construam e implantem workflows com IA em escala.",
-      caseStudy: {
-        problem:
-          "A empresa precisava integrar múltiplos provedores de IA nos produtos existentes sem dependência de fornecedor, mantendo latência baixa e custos previsíveis. Cada equipe criava integrações ad-hoc, gerando esforço duplicado e qualidade inconsistente.",
-        approach:
-          "Projetei um serviço em camadas com Node.js/TypeScript na AWS que abstrai as APIs específicas de cada provedor por trás de uma interface unificada. A arquitetura inclui roteamento de requisições, cache de respostas, rate limiting e rastreamento de custos. O dashboard React/Next.js permite que as equipes monitorem uso, configurem workflows e façam testes A/B com diferentes modelos.",
-        outcome:
-          "Reduziu o tempo de integração de novas funcionalidades de IA de semanas para dias. O rastreamento centralizado de custos economizou ~30% em gastos com API. A plataforma agora atende milhares de requisições diárias em múltiplos produtos.",
-        learnings:
-          "Construir abstrações agnósticas de provedor exige um design de API cuidadoso — fina demais e você perde recursos úteis, grossa demais e você reimplementa cada SDK. Streaming de respostas e fallback gracioso entre provedores foram os problemas mais difíceis de resolver bem.",
-      },
-    },
-  },
-  {
-    slug: "fetchhire",
-    thumbnail: "thumb-fetchhire.png",
-    techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    demoUrl: "https://fetch-hire.vercel.app/",
-    codeUrl: "https://github.com/jv-vogler/fetch-hire",
-    sortOrder: 2,
-    en: {
-      title: "FetchHire",
-      description: "A tool to get helpful insight and data about Github users.",
-    },
-    pt: {
-      title: "FetchHire",
-      description: "Uma ferramenta para obter informações úteis sobre usuários do Github.",
-    },
-  },
-  {
     slug: "treasure-hunters",
     thumbnail: "thumb-treasurehunters.png",
     techs: ["Godot", "GDScript"],
     demoUrl: "https://github.com/jv-vogler/Treasure-Hunters",
     codeUrl: "https://github.com/jv-vogler/Treasure-Hunters",
     featured: true,
-    sortOrder: 3,
+    sortOrder: 1,
+    showcaseEnabled: true,
+    showcaseOrder: 1,
+    accentColor: "oklch(0.70 0.02 250)", // common
+    isProfessional: false,
     en: {
       title: "Treasure Hunters",
       description:
         "Treasure Hunters is a 2D platformer game where you control the feared Captain Clown Nose in a quest to recover his ship that was taken in a mutiny. Many dangers and treasures hide and await under the tree shadows of Palm Tree Island.",
+      narrative:
+        "My first real project — a 2D platformer built in Godot. Captain Clown Nose's quest for treasure taught me game loops, state machines, and the joy of shipping something playable. This is where the love for building things started.",
+      chapterLabel: "Where it all began",
     },
     pt: {
       title: "Treasure Hunters",
       description:
         "Treasure Hunters é um jogo de plataforma 2D onde você assume o controle do temido Capitão Nariz de Palhaço em busca de recuperar seu navio tomado em um motim. Diversos perigos e tesouros se escondem e o aguardam sob as sombras das árvores da Ilha das Palmeiras.",
+      narrative:
+        "Meu primeiro projeto de verdade — um platformer 2D feito em Godot. A busca do Capitão Nariz de Palhaço por tesouros me ensinou game loops, máquinas de estado e a alegria de entregar algo jogável. Foi aqui que o amor por construir coisas começou.",
+      chapterLabel: "Onde tudo começou",
     },
   },
   {
@@ -159,102 +112,106 @@ const projects: ProjectSeedData[] = [
     demoUrl: "https://voltorbflip.vercel.app/",
     codeUrl: "https://github.com/jv-vogler/voltorb-flip",
     featured: true,
-    sortOrder: 4,
+    sortOrder: 2,
+    showcaseEnabled: true,
+    showcaseOrder: 2,
+    accentColor: "oklch(0.70 0.02 250)", // common
+    isProfessional: false,
     en: {
       title: "Voltorb Flip",
       description:
         "Voltorb Flip is a minigame of the Goldenrod and Celadon Game Corners in the Korean and Western releases of Pokémon HeartGold and SoulSilver.",
+      narrative:
+        "A faithful recreation of the Pokémon HG/SS minigame. Building this sharpened my logic skills and proved that web tech could deliver polished, interactive experiences — bridging my game dev roots with the web.",
+      chapterLabel: "Where it all began",
     },
     pt: {
       title: "Voltorb Flip",
       description:
         "Voltorb Flip é um minigame dos Game Corners de Goldenrod e Celadon nas versões Coreanas e Ocidentais dos jogos Pokémon HeartGold e SoulSilver.",
+      narrative:
+        "Uma recriação fiel do minigame de Pokémon HG/SS. Construir isso afiou minha lógica e provou que tecnologias web conseguem entregar experiências interativas polidas — unindo minhas raízes em game dev com a web.",
+      chapterLabel: "Onde tudo começou",
     },
   },
   {
-    slug: "another-reddit-clone",
-    thumbnail: "thumb-reddit.png",
-    techs: ["React", "Next.js", "TypeScript", "Chakra UI", "Firebase", "Recoil"],
-    demoUrl: "https://another-reddit-clone-jv-vogler.vercel.app/",
-    codeUrl: "https://github.com/jv-vogler/another-reddit-clone",
+    slug: "fetchhire",
+    thumbnail: "thumb-fetchhire.png",
+    techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    demoUrl: "https://fetch-hire.vercel.app/",
+    codeUrl: "https://github.com/jv-vogler/fetch-hire",
+    sortOrder: 3,
+    showcaseEnabled: true,
+    showcaseOrder: 3,
+    accentColor: "oklch(0.68 0.18 150)", // uncommon
+    isProfessional: false,
+    en: {
+      title: "FetchHire",
+      description: "A tool to get helpful insight and data about Github users.",
+      narrative:
+        'When I decided to transition into web development, I built FetchHire — a tool that helps tech recruiters get quick insights on GitHub users. It was my way of saying "hire me" while proving I could build useful things. AI-powered enhancements are on the roadmap.',
+      chapterLabel: "The career pivot",
+    },
+    pt: {
+      title: "FetchHire",
+      description: "Uma ferramenta para obter informações úteis sobre usuários do Github.",
+      narrative:
+        'Quando decidi migrar para desenvolvimento web, criei o FetchHire — uma ferramenta que ajuda recrutadores tech a obter insights rápidos sobre usuários do GitHub. Foi meu jeito de dizer "me contrate" enquanto provava que sabia construir coisas úteis. Melhorias com IA estão no roadmap.',
+      chapterLabel: "A virada de carreira",
+    },
+  },
+  {
+    slug: "jv-portfolio",
+    thumbnail: "thumb-portfolio-v2.png",
+    techs: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js", "Payload CMS"],
+    codeUrl: "https://github.com/jv-vogler/jv-portfolio",
+    sortOrder: 4,
+    showcaseEnabled: true,
+    showcaseOrder: 5,
+    accentColor: "oklch(0.58 0.24 300)", // epic
+    isProfessional: false,
+    en: {
+      title: "This Portfolio",
+      description:
+        "The site you're looking at right now. A modern, accessible portfolio built with Next.js, Payload CMS, and Tailwind CSS — featuring i18n, dark mode, a blog with syntax highlighting, and scroll-driven animations.",
+      narrative:
+        "The site you're browsing right now. Built with Next.js, Payload CMS, and Tailwind — featuring i18n, dark mode, a blog, and the scroll-driven storytelling you're experiencing. A living project that evolves with me.",
+      chapterLabel: "Full circle",
+    },
+    pt: {
+      title: "Este Portfólio",
+      description:
+        "O site que você está vendo agora. Um portfólio moderno e acessível construído com Next.js, Payload CMS e Tailwind CSS — com i18n, modo escuro, blog com syntax highlighting e animações baseadas em scroll.",
+      narrative:
+        "O site que você está navegando agora. Construído com Next.js, Payload CMS e Tailwind — com i18n, modo escuro, blog e o storytelling com scroll que você está experimentando. Um projeto vivo que evolui comigo.",
+      chapterLabel: "Ciclo completo",
+    },
+  },
+  {
+    slug: "joblogger",
+    thumbnail: "thumb-joblogger.png",
+    techs: ["Expo", "React Native", "TypeScript"],
+    codeUrl: "",
     sortOrder: 5,
+    showcaseEnabled: true,
+    showcaseOrder: 4,
+    accentColor: "oklch(0.62 0.20 255)", // rare
+    isProfessional: false,
     en: {
-      title: "Another Reddit Clone",
+      title: "JobLogger",
       description:
-        "A functional Reddit clone. You can log in/sign up, create and join communities, create posts, upvote/downvote posts, and more!",
+        "A lightweight job application tracker that helps you organize your job search. Log applications, track statuses, and keep notes — all in one place.",
+      narrative:
+        "A job application tracker with AI-powered features. JobLogger represents my current focus — combining practical tooling with intelligent automation to solve real problems.",
+      chapterLabel: "Embracing AI",
     },
     pt: {
-      title: "Clone do Reddit",
+      title: "JobLogger",
       description:
-        "Um clone do Reddit funcional. Você pode logar/se cadastrar, criar e entrar em comunidades, criar posts, votar nos posts, e mais!",
-    },
-  },
-  {
-    slug: "portfolio-v1",
-    thumbnail: "thumb-portfolio.png",
-    techs: ["React", "TypeScript", "Styled Components", "Vite"],
-    codeUrl: "https://github.com/jv-vogler/portfolio",
-    sortOrder: 6,
-    en: {
-      title: "Portfolio v1",
-      description: "Source code for the first version of my portfolio website.",
-    },
-    pt: {
-      title: "Portfólio v1",
-      description: "Código fonte da primeira versão do meu site portfólio.",
-    },
-  },
-  {
-    slug: "weather-app",
-    thumbnail: "thumb-weatherapp.png",
-    techs: ["HTML", "CSS", "JavaScript", "Webpack"],
-    demoUrl: "https://jv-vogler.github.io/weather-app/",
-    codeUrl: "https://github.com/jv-vogler/weather-app",
-    sortOrder: 7,
-    en: {
-      title: "Weather App",
-      description: "Weather forecast for cities around the world.",
-    },
-    pt: {
-      title: "App de Clima",
-      description: "Previsão do tempo de cidades ao redor do mundo.",
-    },
-  },
-  {
-    slug: "todo-list",
-    thumbnail: "thumb-todoapp.png",
-    techs: ["React", "TypeScript", "Styled Components", "Vite"],
-    demoUrl: "https://jv-vogler.github.io/todo-list/",
-    codeUrl: "https://github.com/jv-vogler/todo-list",
-    sortOrder: 8,
-    en: {
-      title: "Todo List",
-      description:
-        'The good old "Todo List" of React beginners. Creates tasks that can be marked as complete and deleted.',
-    },
-    pt: {
-      title: "Lista de Tarefas",
-      description:
-        'A boa e velha "Todo List" dos iniciantes em React. Cria tarefas que podem ser marcadas como completas e deletadas.',
-    },
-  },
-  {
-    slug: "memory-cats",
-    thumbnail: "thumb-memorycats.png",
-    techs: ["Godot", "GDScript"],
-    demoUrl: "https://jv-vogler.itch.io/memory-cats",
-    codeUrl: "https://github.com/jv-vogler/memory-cats",
-    featured: true,
-    sortOrder: 9,
-    en: {
-      title: "Memory Cats",
-      description:
-        "A simple yet challenging memory game, because not only you have to identify the pairs but also remember the name of each cat you've found.",
-    },
-    pt: {
-      title: "Memory Cats",
-      description:
-        "Um jogo da memória simples, porém desafiador, pois além de identificar os pares iguais você também precisa se lembrar do nome de cada gato que encontrou.",
+        "Um rastreador leve de candidaturas de emprego que ajuda a organizar sua busca. Registre candidaturas, acompanhe status e mantenha anotações — tudo em um só lugar.",
+      narrative:
+        "Um rastreador de candidaturas com funcionalidades de IA. O JobLogger representa meu foco atual — combinando ferramentas práticas com automação inteligente para resolver problemas reais.",
+      chapterLabel: "Abraçando a IA",
     },
   },
 ];
@@ -373,7 +330,10 @@ async function buildSkillsMap(
 // Main seed function
 // ---------------------------------------------------------------------------
 
-export async function seedPortfolio(payload: Payload): Promise<void> {
+export async function seedPortfolio(
+  payload: Payload,
+  { force = false }: { force?: boolean } = {},
+): Promise<void> {
   // Collect all unique tech names across all projects
   const allTechNames = [...new Set(projects.flatMap((p) => p.techs))];
   const skillsMap = await buildSkillsMap(payload, allTechNames);
@@ -388,38 +348,72 @@ export async function seedPortfolio(payload: Payload): Promise<void> {
   // Check if projects already exist
   const existing = await payload.find({
     collection: "projects",
-    limit: 1,
+    limit: 100,
     overrideAccess: true,
   });
 
   if (existing.totalDocs > 0) {
-    // ── Migration pass: update techs on existing projects ──────────────────
-    console.log("  🔄 Projects already exist — migrating techs to skill relationships...");
+    if (force) {
+      console.log(
+        `  🗑️  --force: deleting ${existing.totalDocs} existing project(s) and their thumbnails...`,
+      );
+      for (const project of existing.docs) {
+        // Delete thumbnail from media collection if present
+        const thumbnailId =
+          project.thumbnail && typeof project.thumbnail === "object"
+            ? (project.thumbnail as { id: string | number }).id
+            : typeof project.thumbnail === "string" || typeof project.thumbnail === "number"
+              ? project.thumbnail
+              : undefined;
+        if (thumbnailId !== undefined) {
+          try {
+            await payload.delete({
+              collection: "media",
+              id: thumbnailId,
+              overrideAccess: true,
+              context: { disableRevalidate: true },
+            });
+          } catch {
+            // ignore — media may have already been removed
+          }
+        }
+        await payload.delete({
+          collection: "projects",
+          id: project.id,
+          overrideAccess: true,
+          context: { disableRevalidate: true },
+        });
+      }
+      console.log("  ✔ Deleted existing projects.");
+    } else {
+      // ── Migration pass: update techs on existing projects ──────────────────
+      console.log("  🔄 Projects already exist — migrating techs to skill relationships...");
 
-    const { docs: existingProjects } = await payload.find({
-      collection: "projects",
-      limit: 100,
-      overrideAccess: true,
-    });
-
-    for (const project of existingProjects) {
-      const seedData = projects.find((p) => p.slug === project.slug);
-      if (!seedData) continue;
-
-      await payload.update({
+      const { docs: existingProjects } = await payload.find({
         collection: "projects",
-        id: project.id,
-        data: {
-          techs: resolveSkillIds(seedData.techs),
-        },
+        limit: 100,
         overrideAccess: true,
-        context: { disableRevalidate: true },
       });
-      console.log(`    ✔ Updated techs for: ${project.slug}`);
-    }
 
-    console.log("  ✅ Techs migration complete.");
-    return;
+      for (const project of existingProjects) {
+        const seedData = projects.find((p) => p.slug === project.slug);
+        if (!seedData) continue;
+
+        await payload.update({
+          collection: "projects",
+          id: project.id,
+          data: {
+            techs: resolveSkillIds(seedData.techs),
+          },
+          overrideAccess: true,
+          context: { disableRevalidate: true },
+        });
+        console.log(`    ✔ Updated techs for: ${project.slug}`);
+      }
+
+      console.log("  ✅ Techs migration complete.");
+      return;
+    } // end else (no --force)
   }
 
   // ── Full seed: create all projects ─────────────────────────────────────
@@ -436,8 +430,6 @@ export async function seedPortfolio(payload: Payload): Promise<void> {
     }
 
     // 2. Build project data
-    const hasCaseStudy = Boolean(project.en.caseStudy);
-
     const projectData = {
       slug: project.slug,
       title: project.en.title,
@@ -448,12 +440,14 @@ export async function seedPortfolio(payload: Payload): Promise<void> {
       codeUrl: project.codeUrl ?? undefined,
       featured: project.featured ?? false,
       sortOrder: project.sortOrder,
+      showcaseEnabled: project.showcaseEnabled,
+      showcaseOrder: project.showcaseOrder,
+      accentColor: project.accentColor,
+      isProfessional: project.isProfessional,
+      narrative: project.en.narrative ?? "",
+      chapterLabel: project.en.chapterLabel ?? "",
       caseStudy: {
-        enabled: hasCaseStudy,
-        problem: project.en.caseStudy?.problem ?? "",
-        approach: project.en.caseStudy?.approach ?? "",
-        outcome: project.en.caseStudy?.outcome ?? "",
-        learnings: project.en.caseStudy?.learnings ?? "",
+        enabled: false,
       },
     };
 
@@ -474,13 +468,8 @@ export async function seedPortfolio(payload: Payload): Promise<void> {
       data: {
         title: project.pt.title,
         description: project.pt.description,
-        caseStudy: {
-          enabled: hasCaseStudy,
-          problem: project.pt.caseStudy?.problem ?? "",
-          approach: project.pt.caseStudy?.approach ?? "",
-          outcome: project.pt.caseStudy?.outcome ?? "",
-          learnings: project.pt.caseStudy?.learnings ?? "",
-        },
+        narrative: project.pt.narrative ?? "",
+        chapterLabel: project.pt.chapterLabel ?? "",
       },
       overrideAccess: true,
       context: { disableRevalidate: true },

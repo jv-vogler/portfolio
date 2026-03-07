@@ -8,7 +8,10 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border/40 bg-background">
+    <footer
+      className="border-t border-border/40 bg-background"
+      style={{ viewTransitionName: "footer" }}
+    >
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-8 sm:flex-row sm:justify-between">
         <div className="flex items-center gap-4">
           {Social.items.map((item) => (
