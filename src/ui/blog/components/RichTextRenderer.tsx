@@ -81,7 +81,9 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
       .replace(/\n`{3,}\s*$/, "")
       .trimEnd();
     const language = (node as unknown as { language?: string }).language;
-    return <CodeBlockCopy code={rawCode} language={language} />;
+    // Use pre-highlighted HTML from server-side enrichment if available
+    const highlightedHtml = (node as unknown as { highlightedHtml?: string }).highlightedHtml;
+    return <CodeBlockCopy code={rawCode} language={language} highlightedHtml={highlightedHtml} />;
   },
 });
 

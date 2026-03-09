@@ -2,6 +2,7 @@ import { getAllPosts, getPost, getRelatedPosts } from "@/app/actions/blog";
 import { locales } from "@/i18n/config";
 import { Link } from "@/i18n/routing";
 import { formatDate } from "@/lib/date";
+import { enrichCodeBlocks } from "@/ui/blog/lib/highlightCode";
 import { BackToTop } from "@/ui/blog/components/BackToTop";
 import { BlogPost } from "@/ui/blog/components/BlogPost";
 import { CoverImage } from "@/ui/blog/components/CoverImage";
@@ -98,8 +99,11 @@ export default async function BlogPostPage({
   const t = await getTranslations({ locale, namespace: "blog" });
 
   try {
-    const { post, content, headings } = await getPost(slug, locale);
-    const relatedPosts = await getRelatedPosts(slug, post.tags, locale, 3);
+    const { post, content: rawContent, headings } = await getPost(slug, locale);
+    const [content, relatedPosts] = await Promise.all([
+      enrichCodeBlocks(rawContent),
+      getRelatedPosts(slug, post.tags, locale, 3),
+    ]);
 
     const showUpdated = isUpdatedAfterPublish(post.date, post.updatedAt);
     const postUrl = `${BASE_URL}/${locale}/blog/${slug}`;

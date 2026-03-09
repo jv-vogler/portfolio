@@ -1,6 +1,7 @@
 import { getAllProjects, getProject } from "@/app/actions/portfolio";
 import { locales } from "@/i18n/config";
 import { RichTextRenderer } from "@/ui/blog/components/RichTextRenderer";
+import { enrichCodeBlocks } from "@/ui/blog/lib/highlightCode";
 import { Badge } from "@/ui/components/ui/badge";
 import { PortfolioBackButton } from "@/ui/portfolio/components/PortfolioBackButton";
 import { ExternalLink, Github } from "lucide-react";
@@ -266,7 +267,7 @@ export default async function PortfolioDetailPage({
           >
             <h2 className="text-2xl font-bold text-[oklch(0.95_0_0)]">{t("caseStudy.heading")}</h2>
             <div className="prose prose-invert max-w-none prose-headings:text-[oklch(0.85_0_0)] prose-p:text-[oklch(0.65_0_0)] prose-a:text-[oklch(0.75_0.1_250)] prose-strong:text-[oklch(0.80_0_0)]">
-              <RichTextRenderer data={project.caseStudy.content} />
+              <RichTextRenderer data={await enrichCodeBlocks(project.caseStudy.content)} />
             </div>
           </div>
         )}

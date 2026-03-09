@@ -142,7 +142,7 @@ function ProjectCard({
   config: CardAnimConfig;
   isProfessional: boolean;
 }) {
-  const { push } = useViewTransitionRouter();
+  const { push, prefetch } = useViewTransitionRouter();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.15 });
   const href = `/portfolio/${project.slug}`;
@@ -193,7 +193,10 @@ function ProjectCard({
           background: "oklch(0.18 0.01 260)",
           border: `1px solid color-mix(in oklch, ${accentColor} 25%, transparent)`,
         }}
-        onMouseEnter={() => setHovered(true)}
+        onMouseEnter={() => {
+          setHovered(true);
+          prefetch(href);
+        }}
         onMouseLeave={() => setHovered(false)}
       >
         {/* HUD corner brackets */}

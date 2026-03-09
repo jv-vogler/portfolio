@@ -2,11 +2,16 @@
 
 import type { Blog } from "@/core/blog";
 import { usePathname, useRouter } from "@/i18n/routing";
-import { CommandPalette } from "@/ui/components/CommandPalette";
 import { useHotkey } from "@tanstack/react-hotkeys";
+import dynamic from "next/dynamic";
 import { useLocale } from "next-intl";
 import { useTheme } from "next-themes";
 import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
+
+const CommandPalette = dynamic(
+  () => import("@/ui/components/CommandPalette").then((m) => m.CommandPalette),
+  { ssr: false },
+);
 
 type Post = Pick<Blog.Post, "slug" | "title" | "tags">;
 

@@ -1,7 +1,10 @@
 import { Portfolio, type PayloadProject } from "@/core/portfolio";
 import { getPayloadSafe } from "@/lib/payload";
+import { cache } from "react";
 
-export async function getAllProjects(locale: string): Promise<Portfolio.Project[]> {
+export const getAllProjects = cache(async function getAllProjects(
+  locale: string,
+): Promise<Portfolio.Project[]> {
   const payload = await getPayloadSafe();
   if (!payload) return [];
 
@@ -15,9 +18,11 @@ export async function getAllProjects(locale: string): Promise<Portfolio.Project[
   });
 
   return (docs as PayloadProject[]).map(Portfolio.fromPayload);
-}
+});
 
-export async function getShowcaseProjects(locale: string): Promise<Portfolio.Project[]> {
+export const getShowcaseProjects = cache(async function getShowcaseProjects(
+  locale: string,
+): Promise<Portfolio.Project[]> {
   const payload = await getPayloadSafe();
   if (!payload) return [];
 
@@ -34,9 +39,12 @@ export async function getShowcaseProjects(locale: string): Promise<Portfolio.Pro
   });
 
   return (docs as PayloadProject[]).map(Portfolio.fromPayload);
-}
+});
 
-export async function getProject(slug: string, locale: string): Promise<Portfolio.Project | null> {
+export const getProject = cache(async function getProject(
+  slug: string,
+  locale: string,
+): Promise<Portfolio.Project | null> {
   const payload = await getPayloadSafe();
   if (!payload) return null;
 
@@ -54,4 +62,4 @@ export async function getProject(slug: string, locale: string): Promise<Portfoli
   if (!docs.length) return null;
 
   return Portfolio.fromPayload(docs[0] as PayloadProject);
-}
+});

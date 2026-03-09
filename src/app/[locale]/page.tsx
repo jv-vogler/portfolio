@@ -1,10 +1,14 @@
-import { AboutCard } from "@/ui/about/components/AboutCard";
-import { ContactSection } from "@/ui/contact/components/ContactSection";
 import { Hero } from "@/ui/hero/components/Hero";
 import { PortfolioReelSection } from "@/ui/portfolio/components/Portfolio";
 import { SkillsSection } from "@/ui/skills/components/SkillsSection";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import dynamic from "next/dynamic";
+
+const AboutCard = dynamic(() => import("@/ui/about/components/AboutCard").then((m) => m.AboutCard));
+const ContactSection = dynamic(() =>
+  import("@/ui/contact/components/ContactSection").then((m) => m.ContactSection),
+);
 
 export const revalidate = 3600;
 

@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/app/actions/blog";
+import { getCachedMinimalPosts } from "@/app/actions/blog";
 import { locales } from "@/i18n/config";
 import { routing } from "@/i18n/routing";
 import { CommandPaletteProvider } from "@/ui/components/CommandPaletteProvider";
@@ -120,8 +120,7 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages();
-  const posts = await getAllPosts(locale);
-  const minimalPosts = posts.map(({ slug, title, tags }) => ({ slug, title, tags }));
+  const minimalPosts = await getCachedMinimalPosts(locale);
 
   return (
     <ViewTransition>

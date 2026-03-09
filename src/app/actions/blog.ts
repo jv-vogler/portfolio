@@ -1,9 +1,14 @@
 import { Blog, type PayloadPost } from "@/core/blog";
 import { getPayloadSafe } from "@/lib/payload";
 import type { SerializedEditorState } from "lexical";
+import { unstable_cache } from "next/cache";
 import type { Where } from "payload";
+import { cache } from "react";
 
-export async function getAllPosts(locale: string, tag?: string): Promise<Blog.Post[]> {
+export const getAllPosts = cache(async function getAllPosts(
+  locale: string,
+  tag?: string,
+): Promise<Blog.Post[]> {
   const payload = await getPayloadSafe();
   if (!payload) return [];
 
@@ -26,10 +31,10 @@ export async function getAllPosts(locale: string, tag?: string): Promise<Blog.Po
   });
 
   return (docs as PayloadPost[]).map((doc) => Blog.fromPayload(doc, locale));
-}
+});
 
 /** Return a deduplicated, alphabetically sorted list of all tags in use. */
-export async function getAllTags(locale: string): Promise<string[]> {
+export const getAllTags = cache(async function getAllTags(locale: string): Promise<string[]> {
   const posts = await getAllPosts(locale);
   const tagSet = new Set<string>();
   for (const post of posts) {
@@ -38,14 +43,14 @@ export async function getAllTags(locale: string): Promise<string[]> {
     }
   }
   return Array.from(tagSet).sort((a, b) => a.localeCompare(b));
-}
+});
 
 /**
  * Return up to `limit` posts related to the given slug, ranked by shared-tag
  * overlap then by date descending. Falls back to most-recent posts when no
  * tags overlap.
  */
-export async function getRelatedPosts(
+export const getRelatedPosts = cache(async function getRelatedPosts(
   slug: string,
   tags: string[],
   locale: string,
@@ -65,9 +70,9 @@ export async function getRelatedPosts(
   });
 
   return scored.slice(0, limit).map((scoredPost) => scoredPost.post);
-}
+});
 
-export async function getPost(
+export const getPost = cache(async function getPost(
   slug: string,
   locale: string,
 ): Promise<{
@@ -100,4 +105,14 @@ export async function getPost(
     content: doc.content,
     headings: Blog.extractHeadings(doc.content),
   };
-}
+});
+
+/** Cached minimal post data for CommandPalette — persists across requests for 1 hour. */
+export const getCachedMinimalPosts = unstable_cache(
+  async (locale: string) => {
+    const posts = await getAllPosts(locale);
+    return posts.map(({ slug, title, tags }) => ({ slug, title, tags }));
+  },
+  ["command-palette-posts"],
+  { revalidate: 3600 },
+);
