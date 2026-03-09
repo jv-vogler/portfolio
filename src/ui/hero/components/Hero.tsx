@@ -1,5 +1,7 @@
 "use client";
 
+import type { Blog } from "@/core/blog";
+import { HeroLatestPost } from "@/ui/hero/components/HeroLatestPost";
 import { letterCascade } from "@/ui/lib/motion";
 import { useTypingAnimation } from "@/ui/lib/useTypingAnimation";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
@@ -8,7 +10,16 @@ import { useRef } from "react";
 
 const NAME = "JV Vogler";
 
-export function Hero() {
+type HeroPost = Pick<
+  Blog.Post,
+  "slug" | "title" | "description" | "date" | "readingTime" | "tags" | "coverImage"
+>;
+
+type HeroProps = {
+  latestPost?: HeroPost | null;
+};
+
+export function Hero({ latestPost }: HeroProps) {
   const t = useTranslations("hero");
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -71,7 +82,7 @@ export function Hero() {
         <h1
           className="mb-8 flex flex-wrap justify-center font-sans font-bold"
           style={{
-            fontSize: "clamp(4rem, 12vw, 12rem)",
+            fontSize: "clamp(3rem, 12vw, 12rem)",
             lineHeight: 1,
             perspective: "600px",
           }}
@@ -104,6 +115,9 @@ export function Hero() {
             </motion.span>
           )}
         </p>
+
+        {/* Featured/latest blog post */}
+        {latestPost && <HeroLatestPost post={latestPost} />}
       </motion.div>
     </section>
   );

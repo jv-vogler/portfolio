@@ -1,4 +1,5 @@
 import { getCachedMinimalPosts } from "@/app/actions/blog";
+import { getCachedMinimalProjects } from "@/app/actions/portfolio";
 import { locales } from "@/i18n/config";
 import { routing } from "@/i18n/routing";
 import { CommandPaletteProvider } from "@/ui/components/CommandPaletteProvider";
@@ -120,7 +121,10 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages();
-  const minimalPosts = await getCachedMinimalPosts(locale);
+  const [minimalPosts, minimalProjects] = await Promise.all([
+    getCachedMinimalPosts(locale),
+    getCachedMinimalProjects(locale),
+  ]);
 
   return (
     <ViewTransition>
@@ -137,7 +141,7 @@ export default async function LocaleLayout({
           />
           <ThemeProvider>
             <NextIntlClientProvider messages={messages}>
-              <CommandPaletteProvider posts={minimalPosts}>
+              <CommandPaletteProvider posts={minimalPosts} projects={minimalProjects}>
                 <a
                   href="#main-content"
                   className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"

@@ -1,5 +1,6 @@
 import { Portfolio, type PayloadProject } from "@/core/portfolio";
 import { getPayloadSafe } from "@/lib/payload";
+import { unstable_cache } from "next/cache";
 import { cache } from "react";
 
 export const getAllProjects = cache(async function getAllProjects(
@@ -40,6 +41,16 @@ export const getShowcaseProjects = cache(async function getShowcaseProjects(
 
   return (docs as PayloadProject[]).map(Portfolio.fromPayload);
 });
+
+/** Cached minimal project data for CommandPalette — persists across requests for 1 hour. */
+export const getCachedMinimalProjects = unstable_cache(
+  async (locale: string) => {
+    const projects = await getAllProjects(locale);
+    return projects.map(({ slug, title, techs }) => ({ slug, title, techs }));
+  },
+  ["command-palette-projects"],
+  { revalidate: 3600 },
+);
 
 export const getProject = cache(async function getProject(
   slug: string,

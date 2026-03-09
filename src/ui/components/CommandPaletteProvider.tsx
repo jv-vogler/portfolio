@@ -1,6 +1,7 @@
 "use client";
 
 import type { Blog } from "@/core/blog";
+import type { Portfolio } from "@/core/portfolio";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import dynamic from "next/dynamic";
@@ -14,6 +15,7 @@ const CommandPalette = dynamic(
 );
 
 type Post = Pick<Blog.Post, "slug" | "title" | "tags">;
+type Project = Pick<Portfolio.Project, "slug" | "title" | "techs">;
 
 type CommandPaletteContextValue = {
   open: () => void;
@@ -32,9 +34,10 @@ export function useCommandPalette() {
 type CommandPaletteProviderProps = {
   children: ReactNode;
   posts: Post[];
+  projects: Project[];
 };
 
-export function CommandPaletteProvider({ children, posts }: CommandPaletteProviderProps) {
+export function CommandPaletteProvider({ children, posts, projects }: CommandPaletteProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { setTheme, theme } = useTheme();
   const locale = useLocale();
@@ -64,6 +67,7 @@ export function CommandPaletteProvider({ children, posts }: CommandPaletteProvid
         open={isOpen}
         onOpenChange={setIsOpen}
         posts={posts}
+        projects={projects}
         onToggleTheme={toggleTheme}
         onToggleLocale={toggleLocale}
       />

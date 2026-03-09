@@ -122,6 +122,7 @@
     "actions": "Actions",
     "noResults": "No results found.",
     "toggleTheme": "Toggle theme",
-    "toggleLanguage": "Switch language"
+    "toggleLanguage": "Switch language",
+    "projects": "Projects"
   }
 }

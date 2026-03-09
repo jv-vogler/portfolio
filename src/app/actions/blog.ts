@@ -116,3 +116,20 @@ export const getCachedMinimalPosts = unstable_cache(
   ["command-palette-posts"],
   { revalidate: 3600 },
 );
+
+/** Return the featured post (or most recent) for the hero section. */
+export const getHeroPost = cache(async function getHeroPost(locale: string) {
+  const posts = await getAllPosts(locale);
+  const featured = posts.find((p) => p.featured);
+  const post = featured ?? posts[0] ?? null;
+  if (!post) return null;
+  return {
+    slug: post.slug,
+    title: post.title,
+    description: post.description,
+    date: post.date,
+    readingTime: post.readingTime,
+    tags: post.tags,
+    coverImage: post.coverImage,
+  };
+});

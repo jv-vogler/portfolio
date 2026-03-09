@@ -1,3 +1,4 @@
+import { getHeroPost } from "@/app/actions/blog";
 import { Hero } from "@/ui/hero/components/Hero";
 import { PortfolioReelSection } from "@/ui/portfolio/components/Portfolio";
 import { SkillsSection } from "@/ui/skills/components/SkillsSection";
@@ -40,10 +41,13 @@ export async function generateMetadata({
   };
 }
 
-export default function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const latestPost = await getHeroPost(locale);
+
   return (
     <>
-      <Hero />
+      <Hero latestPost={latestPost} />
 
       {/* Connective tissue — geometric line */}
       <div className="relative" aria-hidden="true">

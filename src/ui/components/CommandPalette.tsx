@@ -1,6 +1,7 @@
 "use client";
 
 import type { Blog } from "@/core/blog";
+import type { Portfolio } from "@/core/portfolio";
 import { Navigation } from "@/core/navigation";
 import { Social } from "@/core/social";
 import { useRouter } from "@/i18n/routing";
@@ -16,6 +17,7 @@ import {
 import { formatForDisplay } from "@tanstack/react-hotkeys";
 import {
   BookOpen,
+  Briefcase,
   ExternalLink,
   Github,
   Globe,
@@ -28,14 +30,16 @@ import {
   User,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 type Post = Pick<Blog.Post, "slug" | "title" | "tags">;
+type Project = Pick<Portfolio.Project, "slug" | "title" | "techs">;
 
 type CommandPaletteProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   posts: Post[];
+  projects: Project[];
   onToggleTheme: () => void;
   onToggleLocale: () => void;
 };
@@ -58,6 +62,7 @@ export function CommandPalette({
   open,
   onOpenChange,
   posts,
+  projects,
   onToggleTheme,
   onToggleLocale,
 }: CommandPaletteProps) {
@@ -65,6 +70,9 @@ export function CommandPalette({
   const tNav = useTranslations("nav");
   const router = useRouter();
   const locale = useLocale();
+  const [query, setQuery] = useState("");
+
+  const visiblePosts = query ? posts : posts.slice(0, 5);
 
   const handleSelect = useCallback(
     (action: () => void) => {
@@ -89,44 +97,51 @@ export function CommandPalette({
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <CommandInput placeholder={t("placeholder")} />
+      <CommandInput placeholder={t("placeholder")} onValueChange={setQuery} />
       <CommandList>
         <CommandEmpty>{t("noResults")}</CommandEmpty>
 
+        {/* Actions group */}
+        <CommandGroup heading={t("actions")}>
+          <CommandItem
+            value={t("toggleTheme")}
+            onSelect={() => handleSelect(onToggleTheme)}
+            keywords={[t("actions"), "actions", "ações"]}
+          >
+            <Moon className="mr-2 h-4 w-4" />
+            {t("toggleTheme")}
+            <kbd className="ml-auto font-mono text-xs text-muted-foreground">
+              {formatForDisplay("Mod+Shift+M")}
+            </kbd>
+          </CommandItem>
+          <CommandItem
+            value={t("toggleLanguage")}
+            onSelect={() => handleSelect(onToggleLocale)}
+            keywords={[t("actions"), "actions", "ações"]}
+          >
+            <Languages className="mr-2 h-4 w-4" />
+            {t("toggleLanguage")} ({locale === "en" ? "PT" : "EN"})
+            <kbd className="ml-auto font-mono text-xs text-muted-foreground">
+              {formatForDisplay("Mod+Shift+L")}
+            </kbd>
+          </CommandItem>
+        </CommandGroup>
+
         {/* Navigation group */}
+        <CommandSeparator />
         <CommandGroup heading={t("navigation")}>
           {Navigation.links.map((link) => (
             <CommandItem
               key={link.label}
               value={tNav(link.label)}
               onSelect={() => handleSelect(() => navigateTo(link.href))}
-              keywords={[link.href]}
+              keywords={[link.href, t("navigation"), "navigation", "navegação", "nav"]}
             >
               {NAV_ICONS[link.label] ?? <Globe className="mr-2 h-4 w-4" />}
               {tNav(link.label)}
             </CommandItem>
           ))}
         </CommandGroup>
-
-        {/* Blog posts group */}
-        {posts.length > 0 && (
-          <>
-            <CommandSeparator />
-            <CommandGroup heading={t("posts")}>
-              {posts.map((post) => (
-                <CommandItem
-                  key={post.slug}
-                  value={post.title}
-                  onSelect={() => handleSelect(() => navigateTo(`/blog/${post.slug}`))}
-                  keywords={post.tags}
-                >
-                  <BookOpen className="mr-2 h-4 w-4" />
-                  {post.title}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </>
-        )}
 
         {/* Social links group */}
         <CommandSeparator />
@@ -136,6 +151,7 @@ export function CommandPalette({
               key={item.slug}
               value={item.label}
               onSelect={() => handleSelect(() => navigateTo(item.url))}
+              keywords={[t("social"), "social"]}
             >
               {SOCIAL_ICONS[item.slug] ?? <Link2 className="mr-2 h-4 w-4" />}
               {item.label}
@@ -144,24 +160,45 @@ export function CommandPalette({
           ))}
         </CommandGroup>
 
-        {/* Actions group */}
-        <CommandSeparator />
-        <CommandGroup heading={t("actions")}>
-          <CommandItem value={t("toggleTheme")} onSelect={() => handleSelect(onToggleTheme)}>
-            <Moon className="mr-2 h-4 w-4" />
-            {t("toggleTheme")}
-            <kbd className="ml-auto font-mono text-xs text-muted-foreground">
-              {formatForDisplay("Mod+Shift+M")}
-            </kbd>
-          </CommandItem>
-          <CommandItem value={t("toggleLanguage")} onSelect={() => handleSelect(onToggleLocale)}>
-            <Languages className="mr-2 h-4 w-4" />
-            {t("toggleLanguage")} ({locale === "en" ? "PT" : "EN"})
-            <kbd className="ml-auto font-mono text-xs text-muted-foreground">
-              {formatForDisplay("Mod+Shift+L")}
-            </kbd>
-          </CommandItem>
-        </CommandGroup>
+        {/* Projects group */}
+        {projects.length > 0 && (
+          <>
+            <CommandSeparator />
+            <CommandGroup heading={t("projects")}>
+              {projects.map((project) => (
+                <CommandItem
+                  key={project.slug}
+                  value={project.title}
+                  onSelect={() => handleSelect(() => navigateTo(`/portfolio/${project.slug}`))}
+                  keywords={[...project.techs, t("projects"), "projects", "projetos"]}
+                >
+                  <Briefcase className="mr-2 h-4 w-4" />
+                  {project.title}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </>
+        )}
+
+        {/* Blog posts group */}
+        {posts.length > 0 && (
+          <>
+            <CommandSeparator />
+            <CommandGroup heading={t("posts")}>
+              {visiblePosts.map((post) => (
+                <CommandItem
+                  key={post.slug}
+                  value={post.title}
+                  onSelect={() => handleSelect(() => navigateTo(`/blog/${post.slug}`))}
+                  keywords={[...post.tags, t("posts"), "blog", "posts", "blog posts"]}
+                >
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  {post.title}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </>
+        )}
       </CommandList>
     </CommandDialog>
   );
