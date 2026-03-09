@@ -20,9 +20,19 @@ export function useViewTransitionRouter() {
         "startViewTransition" in document &&
         typeof document.startViewTransition === "function"
       ) {
-        document.startViewTransition(() => {
-          router.push(href);
-        });
+        try {
+          (document.startViewTransition as any)({
+            update: () => {
+              router.push(href);
+            },
+            types: ["forward"],
+          });
+        } catch {
+          // Fallback for browsers that only support callback form
+          document.startViewTransition(() => {
+            router.push(href);
+          });
+        }
       } else {
         router.push(href);
       }

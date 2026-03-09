@@ -19,7 +19,15 @@ export function PortfolioBackButton() {
     };
 
     if ("startViewTransition" in document && typeof document.startViewTransition === "function") {
-      document.startViewTransition(navigate);
+      try {
+        (document.startViewTransition as any)({
+          update: navigate,
+          types: ["backward"],
+        });
+      } catch {
+        // Fallback for browsers that only support callback form
+        document.startViewTransition(navigate);
+      }
     } else {
       navigate();
     }

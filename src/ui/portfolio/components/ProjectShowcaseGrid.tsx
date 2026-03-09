@@ -233,7 +233,13 @@ function ProjectCard({
               push(href);
             }}
           >
-            <div className="relative aspect-video overflow-hidden">
+            <div
+              className="relative aspect-video overflow-hidden"
+              style={{
+                viewTransitionName: `project-image-${project.slug}`,
+                viewTransitionClass: "project-image",
+              }}
+            >
               <Image
                 src={project.thumbnail.url}
                 alt={project.thumbnail.alt ?? project.title}
@@ -244,7 +250,6 @@ function ProjectCard({
                     ? "(max-width: 768px) 100vw, 100vw"
                     : "(max-width: 768px) 100vw, 50vw"
                 }
-                style={{ viewTransitionName: `project-image-${project.slug}` }}
               />
               {/* Tinted overlay */}
               <div
@@ -271,7 +276,10 @@ function ProjectCard({
           {/* HUD chapter label */}
           <div
             className="mb-3 flex items-center gap-3"
-            style={{ viewTransitionName: `project-chapter-${project.slug}` }}
+            style={{
+              viewTransitionName: `project-chapter-${project.slug}`,
+              viewTransitionClass: "morph-text",
+            }}
           >
             <span
               className="shrink-0 font-mono text-xs uppercase tracking-[0.25em]"
@@ -290,7 +298,10 @@ function ProjectCard({
 
           <h3
             className="mb-3 text-2xl font-bold text-[oklch(0.95_0_0)]"
-            style={{ viewTransitionName: `project-title-${project.slug}` }}
+            style={{
+              viewTransitionName: `project-title-${project.slug}`,
+              viewTransitionClass: "morph-text",
+            }}
           >
             <a
               href={href}
@@ -309,7 +320,10 @@ function ProjectCard({
 
           <p
             className="mb-4 text-sm leading-relaxed text-[oklch(0.65_0_0)]"
-            style={{ viewTransitionName: `project-narrative-${project.slug}` }}
+            style={{
+              viewTransitionName: `project-narrative-${project.slug}`,
+              viewTransitionClass: "morph-text",
+            }}
           >
             {narrative}
           </p>

@@ -168,15 +168,18 @@
   animation: vt-fade-in 200ms ease both;
 }
 @keyframes vt-fade-out {
-  to { opacity: 0; }
+  to {
+    opacity: 0;
+  }
 }
 @keyframes vt-fade-in {
-  from { opacity: 0; }
+  from {
+    opacity: 0;
+  }
 }
 
-/* Keep the header and footer completely static during transitions */
-::view-transition-group(header),
-::view-transition-group(footer) {
+/* Keep the header completely static during transitions */
+::view-transition-group(header) {
   animation: none;
 }
 
@@ -185,6 +188,84 @@
 ::view-transition-new(hero) {
   animation: none;
   opacity: 0;
+}
+
+/* Prevent ghost text overlap — instantly swap instead of crossfade */
+::view-transition-old(*.morph-text) {
+  animation: none;
+  opacity: 0;
+}
+::view-transition-new(*.morph-text) {
+  animation: none;
+}
+
+/* Preserve border-radius on image morph */
+::view-transition-group(*.project-image) {
+  border-radius: 0.75rem;
+  overflow: clip;
+}
+
+/* Forward: new content rises up */
+:active-view-transition-type(forward) ::view-transition-new(root) {
+  animation: vt-slide-up 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+:active-view-transition-type(forward) ::view-transition-old(root) {
+  animation: vt-fade-out 200ms ease both;
+}
+
+/* Backward: old content falls away */
+:active-view-transition-type(backward) ::view-transition-old(root) {
+  animation: vt-slide-down 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+:active-view-transition-type(backward) ::view-transition-new(root) {
+  animation: vt-fade-in 200ms ease both;
+}
+
+@keyframes vt-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+@keyframes vt-slide-down {
+  to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+/* Staggered entrance for detail-only content */
+@keyframes vt-stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+@keyframes vt-stagger-out {
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+::view-transition-new(detail-description) {
+  animation: vt-stagger-in 400ms cubic-bezier(0.22, 1, 0.36, 1) 50ms both;
+}
+::view-transition-new(detail-tech) {
+  animation: vt-stagger-in 400ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
+}
+::view-transition-new(detail-links) {
+  animation: vt-stagger-in 400ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+}
+::view-transition-new(detail-casestudy) {
+  animation: vt-stagger-in 400ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+}
+
+::view-transition-old(detail-description),
+::view-transition-old(detail-tech),
+::view-transition-old(detail-links),
+::view-transition-old(detail-casestudy) {
+  animation: vt-stagger-out 250ms ease both;
 }
 
 @media (prefers-reduced-motion: reduce) {
