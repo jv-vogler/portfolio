@@ -1,10 +1,12 @@
 import { getHeroPost } from "@/app/actions/blog";
+import { getAbout } from "@/lib/payload";
 import { Hero } from "@/ui/hero/components/Hero";
 import { PortfolioReelSection } from "@/ui/portfolio/components/Portfolio";
 import { SkillsSection } from "@/ui/skills/components/SkillsSection";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import dynamic from "next/dynamic";
+import type { TypedLocale } from "payload";
 
 const AboutCard = dynamic(() => import("@/ui/about/components/AboutCard").then((m) => m.AboutCard));
 const ContactSection = dynamic(() =>
@@ -43,7 +45,10 @@ export async function generateMetadata({
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const latestPost = await getHeroPost(locale);
+  const [latestPost, about] = await Promise.all([
+    getHeroPost(locale),
+    getAbout(locale as TypedLocale),
+  ]);
 
   return (
     <>
@@ -65,7 +70,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-primary/20 bg-background" />
       </div>
 
-      <AboutCard />
+      <AboutCard profileImage={about.profileImage} elevatorPitch={about.elevatorPitch} />
 
       <ContactSection />
     </>

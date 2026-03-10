@@ -1,5 +1,6 @@
 "use client";
 
+import type { ProfileImage } from "@/lib/payload";
 import { Social } from "@/core/social";
 import { SocialIcon } from "@/ui/lib/icons";
 import { parallaxFadeIn, staggerContainer, fadeInUp } from "@/ui/lib/motion";
@@ -9,10 +10,21 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
-export function AboutCard() {
+type AboutCardProps = {
+  profileImage?: ProfileImage;
+  elevatorPitch?: string | null;
+};
+
+const FALLBACK_IMAGE = "/images/hero/profile.jpg";
+
+export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
   const t = useTranslations("about");
   const tA11y = useTranslations("a11y");
   const prefersReducedMotion = useReducedMotion();
+
+  const imageSrc = profileImage?.url ?? FALLBACK_IMAGE;
+  const imageAlt = profileImage?.alt ?? tA11y("authorPhoto1");
+  const pitch = elevatorPitch ?? t("elevatorPitch");
 
   return (
     <section className="relative py-16 sm:py-24">
@@ -46,8 +58,8 @@ export function AboutCard() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <Image
-              src="/images/hero/profile.jpg"
-              alt={tA11y("authorPhoto1")}
+              src={imageSrc}
+              alt={imageAlt}
               width={120}
               height={120}
               className="size-[120px] object-cover"
@@ -65,9 +77,7 @@ export function AboutCard() {
         </div>
 
         {/* Elevator pitch */}
-        <p className="mb-8 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {t("elevatorPitch")}
-        </p>
+        <p className="mb-8 text-base leading-relaxed text-muted-foreground sm:text-lg">{pitch}</p>
 
         {/* Bottom strip: social icons + learn more */}
         <motion.div

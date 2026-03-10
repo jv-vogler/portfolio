@@ -4,7 +4,7 @@ import type { Blog } from "@/core/blog";
 import { Link } from "@/i18n/routing";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Clock } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
 type HeroPost = Pick<
@@ -18,6 +18,7 @@ type HeroLatestPostProps = {
 
 export function HeroLatestPost({ post }: HeroLatestPostProps) {
   const t = useTranslations("blog");
+  const locale = useLocale();
   const prefersReducedMotion = useReducedMotion();
   const thumbnailUrl = post.coverImage?.cardUrl ?? post.coverImage?.url;
 
@@ -51,7 +52,13 @@ export function HeroLatestPost({ post }: HeroLatestPostProps) {
             <Clock className="h-3 w-3" />
             <span>{t("readingTime", { minutes: post.readingTime })}</span>
             <span className="text-[oklch(0.65_0.24_155)]">·</span>
-            <span>{new Date(post.date).toLocaleDateString()}</span>
+            <span>
+              {new Date(post.date).toLocaleDateString(locale, {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </span>
           </div>
         </div>
 

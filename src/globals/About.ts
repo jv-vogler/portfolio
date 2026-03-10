@@ -5,7 +5,7 @@ export const AboutGlobal: GlobalConfig = {
   slug: "about",
   label: "About",
   admin: {
-    description: "Q&A items displayed on the About page.",
+    description: "Profile info and Q&A items for the About page and About card.",
   },
   access: {
     read: () => true,
@@ -15,11 +15,30 @@ export const AboutGlobal: GlobalConfig = {
     afterChange: [
       ({ context }) => {
         if (context.disableRevalidate) return;
+        revalidatePath("/[locale]", "page");
         revalidatePath("/[locale]/about", "page");
       },
     ],
   },
   fields: [
+    {
+      name: "profileImage",
+      label: "Profile Image",
+      type: "upload",
+      relationTo: "media",
+      admin: {
+        description: "Profile photo used on the About page and About card.",
+      },
+    },
+    {
+      name: "elevatorPitch",
+      label: "Elevator Pitch",
+      type: "textarea",
+      localized: true,
+      admin: {
+        description: "Short bio shown on the home page About card.",
+      },
+    },
     {
       name: "items",
       label: "Q&A Items",

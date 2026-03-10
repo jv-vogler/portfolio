@@ -1,6 +1,6 @@
 "use client";
 
-import type { AboutItem } from "@/lib/payload";
+import type { AboutItem, ProfileImage } from "@/lib/payload";
 import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -8,10 +8,15 @@ import Image from "next/image";
 
 interface AboutSectionProps {
   items: AboutItem[];
+  profileImage: ProfileImage;
 }
 
-export function AboutSection({ items }: AboutSectionProps) {
+const FALLBACK_IMAGE = "/images/hero/profile.jpg";
+
+export function AboutSection({ items, profileImage }: AboutSectionProps) {
   const t = useTranslations();
+  const imageSrc = profileImage?.url ?? FALLBACK_IMAGE;
+  const imageAlt = profileImage?.alt ?? t("a11y.authorPhoto1");
 
   return (
     <section
@@ -29,8 +34,8 @@ export function AboutSection({ items }: AboutSectionProps) {
         >
           <div className="relative mb-6 h-64 w-64 overflow-hidden rounded-2xl bg-muted shadow-lg">
             <Image
-              src="/images/hero/profile.jpg"
-              alt={t("a11y.authorPhoto1")}
+              src={imageSrc}
+              alt={imageAlt}
               fill
               className="object-cover"
               sizes="256px"

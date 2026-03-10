@@ -30,14 +30,34 @@ export async function getPayloadSafe(): Promise<Payload | null> {
 
 export type AboutItem = { question: string; answer: string };
 
-/**
- * Fetch the About global Q&A items for a given locale.
- * Returns an empty array if Payload is unavailable (e.g. during CI builds).
- */
-export const getAbout = cache(async function getAbout(locale: TypedLocale): Promise<AboutItem[]> {
-  const payload = await getPayloadSafe();
-  if (!payload) return [];
+export type ProfileImage = { url: string; alt?: string } | null;
 
-  const global = await payload.findGlobal({ slug: "about", locale, depth: 0 });
-  return (global.items ?? []) as AboutItem[];
+export type AboutData = {
+  profileImage: ProfileImage;
+  elevatorPitch: string | null;
+  items: AboutItem[];
+};
+
+/**
+ * Fetch the About global for a given locale.
+ * Returns profile image, elevator pitch, and Q&A items.
+ * Falls back gracefully if Payload is unavailable (e.g. during CI builds).
+ */
+export const getAbout = cache(async function getAbout(locale: TypedLocale): Promise<AboutData> {
+  const payload = await getPayloadSafe();
+  if (!payload) return { profileImage: null, elevatorPitch: null, items: [] };
+
+  const global = await payload.findGlobal({ slug: "about", locale, depth: 1 });
+
+  const rawImage = global.profileImage;
+  let profileImage: ProfileImage = null;
+  if (rawImage && typeof rawImage === "object" && "url" in rawImage && rawImage.url) {
+    profileImage = { url: rawImage.url as string, alt: (rawImage as { alt?: string }).alt };
+  }
+
+  return {
+    profileImage,
+    elevatorPitch: (global.elevatorPitch as string) ?? null,
+    items: (global.items ?? []) as AboutItem[],
+  };
 });
