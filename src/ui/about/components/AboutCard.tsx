@@ -63,6 +63,7 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
               width={120}
               height={120}
               className="size-30 object-cover"
+              loading="eager"
             />
           </motion.div>
 

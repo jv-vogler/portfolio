@@ -40,6 +40,7 @@ export function AboutSection({ items, profileImage }: AboutSectionProps) {
               className="object-cover"
               sizes="256px"
               priority
+              loading="eager"
             />
           </div>
           <p className="text-sm text-muted-foreground">{t("metadata.description")}</p>
