@@ -31,24 +31,37 @@ export function useTypingAnimation({
     setIsComplete(false);
     setIsStarted(false);
 
+    let rafId: number;
+
     const startTimeout = setTimeout(() => {
       setIsStarted(true);
-      let index = 0;
+      let startTime: number | null = null;
+      let lastIndex = 0;
 
-      const interval = setInterval(() => {
-        index++;
-        setDisplayedText(text.slice(0, index));
+      const step = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const nextIndex = Math.min(Math.floor(elapsed / speed), text.length);
 
-        if (index >= text.length) {
-          clearInterval(interval);
+        if (nextIndex !== lastIndex) {
+          lastIndex = nextIndex;
+          setDisplayedText(text.slice(0, nextIndex));
+        }
+
+        if (nextIndex < text.length) {
+          rafId = requestAnimationFrame(step);
+        } else {
           setIsComplete(true);
         }
-      }, speed);
+      };
 
-      return () => clearInterval(interval);
+      rafId = requestAnimationFrame(step);
     }, startDelay);
 
-    return () => clearTimeout(startTimeout);
+    return () => {
+      clearTimeout(startTimeout);
+      cancelAnimationFrame(rafId);
+    };
   }, [text, speed, startDelay, enabled]);
 
   return { displayedText, isComplete, isStarted };

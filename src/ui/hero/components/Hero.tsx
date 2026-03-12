@@ -30,7 +30,7 @@ export function Hero({ latestPost }: HeroProps) {
 
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
   const gridShift = useTransform(scrollYProgress, [0, 1], ["0px", "15px"]);
-  const letterSpread = useTransform(scrollYProgress, [0, 0.5], [0, 12]);
+  const letterGap = useTransform(scrollYProgress, [0, 0.5], ["0px", "24px"]);
 
   const comment = t("comment");
   const tagline = t("tagline");
@@ -79,12 +79,12 @@ export function Hero({ latestPost }: HeroProps) {
         </p>
 
         {/* Name — massive scale, letter cascade */}
-        <h1
+        <motion.h1
           className="mb-8 flex flex-wrap justify-center font-sans font-bold"
           style={{
             fontSize: "clamp(3rem, 12vw, 12rem)",
             lineHeight: 1,
-            perspective: "600px",
+            ...(prefersReducedMotion ? {} : { gap: letterGap }),
           }}
         >
           {NAME.split("").map((char, i) => (
@@ -95,12 +95,12 @@ export function Hero({ latestPost }: HeroProps) {
               initial={prefersReducedMotion ? undefined : "hidden"}
               animate={prefersReducedMotion ? undefined : "visible"}
               className="inline-block text-[oklch(0.98_0_0)]"
-              style={prefersReducedMotion ? undefined : { marginInline: letterSpread }}
+              style={{ willChange: "transform, opacity" }}
             >
               {char === " " ? "\u00A0" : char}
             </motion.span>
           ))}
-        </h1>
+        </motion.h1>
 
         {/* Tagline with typing effect */}
         <p className="mb-8 h-8 font-mono text-sm text-[oklch(0.7_0_0)] sm:text-base md:text-lg">

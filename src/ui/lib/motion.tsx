@@ -53,14 +53,13 @@ export const scaleOnHover: Variants = {
 };
 
 export const letterCascade: Variants = {
-  hidden: { opacity: 0, y: 60, rotateX: -40 },
+  hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    rotateX: 0,
     transition: {
       delay: i * 0.05,
-      duration: 0.6,
+      duration: 0.5,
       ease: [0.22, 1, 0.36, 1],
     },
   }),
