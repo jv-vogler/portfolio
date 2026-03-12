@@ -23,11 +23,20 @@ export const AboutGlobal: GlobalConfig = {
   fields: [
     {
       name: "profileImage",
-      label: "Profile Image",
+      label: "Card Profile Image",
       type: "upload",
       relationTo: "media",
       admin: {
-        description: "Profile photo used on the About page and About card.",
+        description: "Profile photo used on the home page About card.",
+      },
+    },
+    {
+      name: "aboutPageImage",
+      label: "About Page Image",
+      type: "upload",
+      relationTo: "media",
+      admin: {
+        description: "Photo displayed on the About page (can differ from the card image).",
       },
     },
     {

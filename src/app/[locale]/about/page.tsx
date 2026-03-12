@@ -36,6 +36,6 @@ export async function generateMetadata({
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const { profileImage, items } = await getAbout(locale as TypedLocale);
-  return <AboutSection items={items} profileImage={profileImage} />;
+  const { aboutPageImage, profileImage, items } = await getAbout(locale as TypedLocale);
+  return <AboutSection items={items} profileImage={aboutPageImage ?? profileImage} />;
 }

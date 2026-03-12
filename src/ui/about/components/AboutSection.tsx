@@ -42,7 +42,6 @@ export function AboutSection({ items, profileImage }: AboutSectionProps) {
               priority
             />
           </div>
-          <h1 className="text-2xl font-bold">JV Vogler</h1>
           <p className="text-sm text-muted-foreground">{t("metadata.description")}</p>
         </motion.aside>
 

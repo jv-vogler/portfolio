@@ -1,9 +1,9 @@
 "use client";
 
-import type { ProfileImage } from "@/lib/payload";
 import { Social } from "@/core/social";
+import type { ProfileImage } from "@/lib/payload";
 import { SocialIcon } from "@/ui/lib/icons";
-import { parallaxFadeIn, staggerContainer, fadeInUp } from "@/ui/lib/motion";
+import { fadeInUp, parallaxFadeIn, staggerContainer } from "@/ui/lib/motion";
 import { motion, useReducedMotion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -30,7 +30,7 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
     <section className="relative py-16 sm:py-24">
       {/* Card */}
       <motion.div
-        className="relative mx-auto max-w-[700px] overflow-hidden rounded-3xl border bg-card px-8 py-10 shadow-lg sm:px-12 sm:py-14"
+        className="relative mx-auto max-w-175 overflow-hidden rounded-3xl border bg-card px-8 py-10 shadow-lg sm:px-12 sm:py-14"
         variants={prefersReducedMotion ? undefined : parallaxFadeIn}
         initial={prefersReducedMotion ? undefined : "hidden"}
         whileInView={prefersReducedMotion ? undefined : "visible"}
@@ -62,7 +62,7 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
               alt={imageAlt}
               width={120}
               height={120}
-              className="size-[120px] object-cover"
+              className="size-30 object-cover"
             />
           </motion.div>
 

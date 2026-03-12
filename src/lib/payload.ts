@@ -34,6 +34,7 @@ export type ProfileImage = { url: string; alt?: string } | null;
 
 export type AboutData = {
   profileImage: ProfileImage;
+  aboutPageImage: ProfileImage;
   elevatorPitch: string | null;
   items: AboutItem[];
 };
@@ -45,7 +46,7 @@ export type AboutData = {
  */
 export const getAbout = cache(async function getAbout(locale: TypedLocale): Promise<AboutData> {
   const payload = await getPayloadSafe();
-  if (!payload) return { profileImage: null, elevatorPitch: null, items: [] };
+  if (!payload) return { profileImage: null, aboutPageImage: null, elevatorPitch: null, items: [] };
 
   const global = await payload.findGlobal({ slug: "about", locale, depth: 1 });
 
@@ -55,8 +56,25 @@ export const getAbout = cache(async function getAbout(locale: TypedLocale): Prom
     profileImage = { url: rawImage.url as string, alt: (rawImage as { alt?: string }).alt };
   }
 
+  const rawAboutImage = (global as Record<string, unknown>).aboutPageImage;
+  console.log("[getAbout] rawAboutImage:", JSON.stringify(rawAboutImage));
+  console.log("[getAbout] rawProfileImage:", JSON.stringify(rawImage));
+  let aboutPageImage: ProfileImage = null;
+  if (
+    rawAboutImage &&
+    typeof rawAboutImage === "object" &&
+    "url" in rawAboutImage &&
+    rawAboutImage.url
+  ) {
+    aboutPageImage = {
+      url: rawAboutImage.url as string,
+      alt: (rawAboutImage as { alt?: string }).alt,
+    };
+  }
+
   return {
     profileImage,
+    aboutPageImage,
     elevatorPitch: (global.elevatorPitch as string) ?? null,
     items: (global.items ?? []) as AboutItem[],
   };
