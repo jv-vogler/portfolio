@@ -28,27 +28,7 @@ export function LocaleSwitcher() {
   }, [pathname, otherLocale, nextRouter]);
 
   function switchLocale(locale: Locale) {
-    const scrollY = window.scrollY;
-
-    const doReplace = () => {
-      router.replace(pathname, { locale });
-      requestAnimationFrame(() => {
-        window.scrollTo(0, scrollY);
-      });
-    };
-
-    if ("startViewTransition" in document && typeof document.startViewTransition === "function") {
-      try {
-        (document.startViewTransition as any)({
-          update: doReplace,
-          types: ["locale-switch"],
-        });
-      } catch {
-        document.startViewTransition(doReplace);
-      }
-    } else {
-      doReplace();
-    }
+    router.replace(pathname, { locale });
   }
 
   return (

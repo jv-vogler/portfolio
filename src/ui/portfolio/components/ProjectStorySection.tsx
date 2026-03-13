@@ -104,7 +104,6 @@ function HeroLayout({ project, reducedMotion, chapter, narrative }: Props) {
               className="object-cover"
               sizes="100vw"
               priority
-              style={{ viewTransitionName: `project-image-${project.slug}` }}
             />
           </motion.div>
         )}
@@ -167,7 +166,6 @@ function LeftLayout({ project, reducedMotion, chapter, narrative }: Props) {
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
-              style={{ viewTransitionName: `project-image-${project.slug}` }}
             />
           )}
         </motion.div>
@@ -246,7 +244,6 @@ function RightCompactLayout({ project, reducedMotion, chapter, narrative }: Prop
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
-              style={{ viewTransitionName: `project-image-${project.slug}` }}
             />
           )}
         </motion.div>
@@ -283,7 +280,6 @@ function FullBleedLayout({ project, reducedMotion, chapter, narrative }: Props) 
               fill
               className="object-cover"
               sizes="100vw"
-              style={{ viewTransitionName: `project-image-${project.slug}` }}
             />
           </motion.div>
         )}

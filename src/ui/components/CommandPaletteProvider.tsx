@@ -4,9 +4,8 @@ import type { Blog } from "@/core/blog";
 import type { Portfolio } from "@/core/portfolio";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useHotkey } from "@tanstack/react-hotkeys";
-import dynamic from "next/dynamic";
 import { useLocale } from "next-intl";
-import { useTheme } from "next-themes";
+import dynamic from "next/dynamic";
 import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
 
 const CommandPalette = dynamic(() =>
@@ -38,7 +37,6 @@ type CommandPaletteProviderProps = {
 
 export function CommandPaletteProvider({ children, posts, projects }: CommandPaletteProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { setTheme, theme } = useTheme();
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -46,17 +44,12 @@ export function CommandPaletteProvider({ children, posts, projects }: CommandPal
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
   const toggle = useCallback(() => setIsOpen((isOpenValue) => !isOpenValue), []);
-  const toggleTheme = useCallback(
-    () => setTheme(theme === "dark" ? "light" : "dark"),
-    [setTheme, theme],
-  );
   const toggleLocale = useCallback(
     () => router.replace(pathname, { locale: locale === "en" ? "pt" : "en" }),
     [router, pathname, locale],
   );
 
   useHotkey("Mod+K", toggle);
-  useHotkey("Mod+Shift+M", toggleTheme);
   useHotkey("Mod+Shift+L", toggleLocale);
 
   return (
@@ -67,7 +60,6 @@ export function CommandPaletteProvider({ children, posts, projects }: CommandPal
         onOpenChange={setIsOpen}
         posts={posts}
         projects={projects}
-        onToggleTheme={toggleTheme}
         onToggleLocale={toggleLocale}
       />
     </CommandPaletteContext.Provider>

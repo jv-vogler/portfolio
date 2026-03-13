@@ -1,8 +1,8 @@
 "use client";
 
 import type { Blog } from "@/core/blog";
-import type { Portfolio } from "@/core/portfolio";
 import { Navigation } from "@/core/navigation";
+import type { Portfolio } from "@/core/portfolio";
 import { Social } from "@/core/social";
 import { useRouter } from "@/i18n/routing";
 import {
@@ -26,7 +26,6 @@ import {
   Link2,
   Linkedin,
   Mail,
-  Moon,
   User,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -40,7 +39,6 @@ type CommandPaletteProps = {
   onOpenChange: (open: boolean) => void;
   posts: Post[];
   projects: Project[];
-  onToggleTheme: () => void;
   onToggleLocale: () => void;
 };
 
@@ -63,7 +61,6 @@ export function CommandPalette({
   onOpenChange,
   posts,
   projects,
-  onToggleTheme,
   onToggleLocale,
 }: CommandPaletteProps) {
   const t = useTranslations("commandPalette");
@@ -103,17 +100,6 @@ export function CommandPalette({
 
         {/* Actions group */}
         <CommandGroup heading={t("actions")}>
-          <CommandItem
-            value={t("toggleTheme")}
-            onSelect={() => handleSelect(onToggleTheme)}
-            keywords={[t("actions"), "actions", "ações"]}
-          >
-            <Moon className="mr-2 h-4 w-4" />
-            {t("toggleTheme")}
-            <kbd className="ml-auto font-mono text-xs text-muted-foreground">
-              {formatForDisplay("Mod+Shift+M")}
-            </kbd>
-          </CommandItem>
           <CommandItem
             value={t("toggleLanguage")}
             onSelect={() => handleSelect(onToggleLocale)}

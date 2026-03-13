@@ -70,13 +70,7 @@ export default async function PortfolioDetailPage({
 
         {/* HUD chapter label + title */}
         <div className="mb-8">
-          <div
-            className="mb-3 flex items-center gap-3"
-            style={{
-              viewTransitionName: `project-chapter-${slug}`,
-              viewTransitionClass: "morph-text",
-            }}
-          >
+          <div className="mb-3 flex items-center gap-3">
             <span
               className="shrink-0 font-mono text-xs uppercase tracking-[0.25em]"
               style={{ color: accent }}
@@ -93,13 +87,7 @@ export default async function PortfolioDetailPage({
           </div>
 
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            <h1
-              className="text-3xl font-bold text-[oklch(0.95_0_0)] sm:text-4xl"
-              style={{
-                viewTransitionName: `project-title-${slug}`,
-                viewTransitionClass: "morph-text",
-              }}
-            >
+            <h1 className="text-3xl font-bold text-[oklch(0.95_0_0)] sm:text-4xl">
               {project.title}
             </h1>
             {project.featured && (
@@ -112,13 +100,7 @@ export default async function PortfolioDetailPage({
             )}
           </div>
           {project.narrative && (
-            <p
-              className="mb-2 text-lg leading-relaxed text-[oklch(0.65_0_0)]"
-              style={{
-                viewTransitionName: `project-narrative-${slug}`,
-                viewTransitionClass: "morph-text",
-              }}
-            >
+            <p className="mb-2 text-lg leading-relaxed text-[oklch(0.65_0_0)]">
               {project.narrative}
             </p>
           )}
@@ -129,8 +111,6 @@ export default async function PortfolioDetailPage({
           className="relative mb-8 aspect-video w-full overflow-hidden rounded-xl"
           style={{
             border: `1px solid color-mix(in oklch, ${accent} 25%, transparent)`,
-            viewTransitionName: `project-image-${slug}`,
-            viewTransitionClass: "project-image",
           }}
         >
           {/* Top accent bar */}
@@ -192,15 +172,10 @@ export default async function PortfolioDetailPage({
           />
         </div>
 
-        <p
-          className="text-lg leading-relaxed text-[oklch(0.65_0_0)] mb-6"
-          style={{ viewTransitionName: "detail-description" }}
-        >
-          {project.description}
-        </p>
+        <p className="text-lg leading-relaxed text-[oklch(0.65_0_0)] mb-6">{project.description}</p>
 
         {/* Tech stack */}
-        <div className="mb-8" style={{ viewTransitionName: "detail-tech" }}>
+        <div className="mb-8">
           <h2 className="mb-3 text-xl font-semibold text-[oklch(0.85_0_0)]">{t("techStack")}</h2>
           <div className="flex flex-wrap gap-2">
             {project.techs.map((tech) => (
@@ -208,9 +183,6 @@ export default async function PortfolioDetailPage({
                 key={tech}
                 variant="secondary"
                 className="border-white/10 bg-white/5 text-sm text-[oklch(0.75_0_0)]"
-                style={{
-                  viewTransitionName: `project-tech-${slug}-${tech.toLowerCase().replace(/[\s.+#]/g, "-")}`,
-                }}
               >
                 {tech}
               </Badge>
@@ -220,10 +192,7 @@ export default async function PortfolioDetailPage({
 
         {/* External links */}
         {(project.demoUrl || project.codeUrl) && (
-          <div
-            className="mb-12 flex flex-wrap gap-4"
-            style={{ viewTransitionName: "detail-links" }}
-          >
+          <div className="mb-12 flex flex-wrap gap-4">
             {project.demoUrl && (
               <a
                 href={project.demoUrl}
@@ -262,7 +231,6 @@ export default async function PortfolioDetailPage({
             className="space-y-10 pt-10"
             style={{
               borderTop: `1px solid color-mix(in oklch, ${accent} 20%, transparent)`,
-              viewTransitionName: "detail-casestudy",
             }}
           >
             <h2 className="text-2xl font-bold text-[oklch(0.95_0_0)]">{t("caseStudy.heading")}</h2>

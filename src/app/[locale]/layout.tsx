@@ -8,7 +8,6 @@ import { Toaster } from "@/ui/components/ui/sonner";
 import { Header } from "@/ui/header/components/Header";
 import { GoogleAnalytics } from "@/ui/lib/GoogleAnalytics";
 import { PersonJsonLd, WebSiteJsonLd } from "@/ui/lib/jsonLd";
-import { ThemeProvider } from "@/ui/theme/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
@@ -28,13 +27,13 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-poppins",
-  display: "swap",
+  display: "optional",
 });
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
   variable: "--font-fira-code",
-  display: "swap",
+  display: "optional",
 });
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jvogler.vercel.app";
@@ -128,7 +127,7 @@ export default async function LocaleLayout({
 
   return (
     <ViewTransition>
-      <html lang={locale} suppressHydrationWarning>
+      <html lang={locale} className="dark">
         <body className={`${poppins.variable} ${firaCode.variable} font-sans antialiased`}>
           <PersonJsonLd
             name="JV Vogler"
@@ -139,28 +138,26 @@ export default async function LocaleLayout({
             name="JV Vogler"
             description="Portfolio of JV Vogler, a frontend developer specializing in modern web technologies."
           />
-          <ThemeProvider>
-            <NextIntlClientProvider messages={messages}>
-              <CommandPaletteProvider posts={minimalPosts} projects={minimalProjects}>
-                <a
-                  href="#main-content"
-                  className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
-                >
-                  {messages.a11y &&
-                  typeof messages.a11y === "object" &&
-                  "skipToContent" in messages.a11y
-                    ? (messages.a11y as Record<string, string>).skipToContent
-                    : "Skip to content"}
-                </a>
-                <Header />
-                <main id="main-content" className="min-h-screen">
-                  {children}
-                </main>
-                <Footer />
-                <Toaster />
-              </CommandPaletteProvider>
-            </NextIntlClientProvider>
-          </ThemeProvider>
+          <NextIntlClientProvider messages={messages}>
+            <CommandPaletteProvider posts={minimalPosts} projects={minimalProjects}>
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+              >
+                {messages.a11y &&
+                typeof messages.a11y === "object" &&
+                "skipToContent" in messages.a11y
+                  ? (messages.a11y as Record<string, string>).skipToContent
+                  : "Skip to content"}
+              </a>
+              <Header />
+              <main id="main-content" className="min-h-screen">
+                {children}
+              </main>
+              <Footer />
+              <Toaster />
+            </CommandPaletteProvider>
+          </NextIntlClientProvider>
           <Analytics />
           <SpeedInsights />
           <GoogleAnalytics />

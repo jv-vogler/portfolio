@@ -221,7 +221,7 @@ function ProjectCard({
 
         {/* Top accent bar */}
         <div
-          className="h-[2px] w-full"
+          className="h-0.5 w-full"
           style={{
             background: `linear-gradient(90deg, transparent 5%, ${accentColor} 50%, transparent 95%)`,
           }}
@@ -236,13 +236,7 @@ function ProjectCard({
               push(href);
             }}
           >
-            <div
-              className="relative aspect-video overflow-hidden"
-              style={{
-                viewTransitionName: `project-image-${project.slug}`,
-                viewTransitionClass: "project-image",
-              }}
-            >
+            <div className="relative aspect-video overflow-hidden">
               <Image
                 src={project.thumbnail.url}
                 alt={project.thumbnail.alt ?? project.title}
@@ -277,13 +271,7 @@ function ProjectCard({
         {/* Content */}
         <div className="relative p-6">
           {/* HUD chapter label */}
-          <div
-            className="mb-3 flex items-center gap-3"
-            style={{
-              viewTransitionName: `project-chapter-${project.slug}`,
-              viewTransitionClass: "morph-text",
-            }}
-          >
+          <div className="mb-3 flex items-center gap-3">
             <span
               className="shrink-0 font-mono text-xs uppercase tracking-[0.25em]"
               style={{ color: accentColor }}
@@ -299,13 +287,7 @@ function ProjectCard({
             />
           </div>
 
-          <h3
-            className="mb-3 text-2xl font-bold text-[oklch(0.95_0_0)]"
-            style={{
-              viewTransitionName: `project-title-${project.slug}`,
-              viewTransitionClass: "morph-text",
-            }}
-          >
+          <h3 className="mb-3 text-2xl font-bold text-[oklch(0.95_0_0)]">
             <a
               href={href}
               onClick={(e) => {
@@ -321,15 +303,7 @@ function ProjectCard({
             </a>
           </h3>
 
-          <p
-            className="mb-4 text-sm leading-relaxed text-[oklch(0.65_0_0)]"
-            style={{
-              viewTransitionName: `project-narrative-${project.slug}`,
-              viewTransitionClass: "morph-text",
-            }}
-          >
-            {narrative}
-          </p>
+          <p className="mb-4 text-sm leading-relaxed text-[oklch(0.65_0_0)]">{narrative}</p>
 
           {/* Tech pills */}
           <div className="flex flex-wrap gap-1.5">
@@ -338,9 +312,6 @@ function ProjectCard({
                 key={tech}
                 variant="secondary"
                 className="border-white/10 bg-white/5 text-xs text-[oklch(0.75_0_0)]"
-                style={{
-                  viewTransitionName: `project-tech-${project.slug}-${tech.toLowerCase().replace(/[\s.+#]/g, "-")}`,
-                }}
               >
                 {tech}
               </Badge>
@@ -350,7 +321,7 @@ function ProjectCard({
 
         {/* Bottom accent bar */}
         <div
-          className="h-[2px] w-full"
+          className="h-0.5 w-full"
           style={{
             background: `linear-gradient(90deg, transparent 5%, ${accentColor} 50%, transparent 95%)`,
           }}

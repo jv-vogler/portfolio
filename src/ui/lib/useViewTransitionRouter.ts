@@ -27,23 +27,12 @@ export function useViewTransitionRouter() {
         "startViewTransition" in document &&
         typeof document.startViewTransition === "function"
       ) {
-        try {
-          const transition = (document.startViewTransition as any)({
-            update: () => {
-              router.push(href);
-            },
-            types: ["forward"],
-          });
-          transition.finished.finally(() => {
-            navigatingRef.current = false;
-          });
-        } catch {
-          // Fallback for browsers that only support callback form
-          document.startViewTransition(() => {
-            router.push(href);
-          });
+        const transition = document.startViewTransition(() => {
+          router.push(href);
+        });
+        transition.finished.finally(() => {
           navigatingRef.current = false;
-        }
+        });
       } else {
         router.push(href);
         navigatingRef.current = false;

@@ -8,7 +8,6 @@ import { Button } from "@/ui/components/ui/button";
 import { Separator } from "@/ui/components/ui/separator";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/ui/components/ui/sheet";
 import { LocaleSwitcher } from "@/ui/header/components/LocaleSwitcher";
-import { ThemeToggle } from "@/ui/theme/ThemeToggle";
 import { AnimatePresence, type Variants, motion } from "framer-motion";
 import {
   BookOpen,
@@ -61,7 +60,7 @@ export function Header() {
   return (
     <header
       style={{ viewTransitionName: "header" }}
-      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md"
+      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-colors duration-200"
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="text-lg font-bold text-foreground" aria-label={tA11y("homeLink")}>
@@ -121,7 +120,6 @@ export function Header() {
             <Search className="h-4 w-4" />
           </Button>
           <LocaleSwitcher />
-          <ThemeToggle />
 
           {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
@@ -223,13 +221,10 @@ export function Header() {
 
                 <Separator className="opacity-60" />
 
-                {/* Theme + locale */}
+                {/* Locale */}
                 <div className="flex items-center justify-between px-1">
-                  <p className="text-xs text-muted-foreground">Theme & language</p>
-                  <div className="flex items-center gap-1">
-                    <ThemeToggle />
-                    <LocaleSwitcher />
-                  </div>
+                  <p className="text-xs text-muted-foreground">Language</p>
+                  <LocaleSwitcher />
                 </div>
               </div>
             </SheetContent>

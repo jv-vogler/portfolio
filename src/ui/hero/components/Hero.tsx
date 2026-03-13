@@ -1,12 +1,6 @@
-"use client";
-
 import type { Blog } from "@/core/blog";
 import { HeroLatestPost } from "@/ui/hero/components/HeroLatestPost";
-import { letterCascade } from "@/ui/lib/motion";
-import { useTypingAnimation } from "@/ui/lib/useTypingAnimation";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useLayoutEffect, useRef, useState } from "react";
 
 const NAME = "JV Vogler";
 
@@ -21,130 +15,42 @@ type HeroProps = {
 
 export function Hero({ latestPost }: HeroProps) {
   const t = useTranslations("hero");
-  const prefersReducedMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [isReady, setIsReady] = useState(false);
-
-  // Wait for any active view transition to finish before starting animations.
-  // useLayoutEffect runs before paint, so on fresh loads (no VT) the cascade
-  // starts on the very first frame with no blank-hero flash.
-  useLayoutEffect(() => {
-    const vtAnimations = document.getAnimations().filter((a) => {
-      const effect = a.effect;
-      return (
-        effect instanceof KeyframeEffect &&
-        effect.pseudoElement != null &&
-        effect.pseudoElement.includes("view-transition")
-      );
-    });
-
-    if (vtAnimations.length > 0) {
-      let cancelled = false;
-      Promise.allSettled(vtAnimations.map((a) => a.finished)).then(() => {
-        if (!cancelled) setIsReady(true);
-      });
-      return () => {
-        cancelled = true;
-      };
-    }
-
-    setIsReady(true);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-  const gridShift = useTransform(scrollYProgress, [0, 1], ["0px", "15px"]);
-  const letterGap = useTransform(scrollYProgress, [0, 0.5], ["0px", "24px"]);
 
   const comment = t("comment");
   const tagline = t("tagline");
 
-  const { displayedText: commentText, isComplete: commentDone } = useTypingAnimation({
-    text: comment,
-    speed: 30,
-    startDelay: isReady ? 300 : 1e8,
-    enabled: !prefersReducedMotion,
-  });
-
-  const { displayedText: taglineText, isComplete: taglineDone } = useTypingAnimation({
-    text: tagline,
-    speed: 25,
-    startDelay: isReady ? 1800 : 1e8,
-    enabled: !prefersReducedMotion,
-  });
-
   return (
-    <section
-      ref={sectionRef}
-      className="dot-grid relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden bg-[oklch(0.18_0.01_180)]"
-      style={{ viewTransitionName: "hero" }}
-    >
+    <section className="dot-grid relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden bg-[oklch(0.18_0.01_180)]">
       {/* Tinted charcoal background with teal hue */}
-      <div className="absolute inset-0 bg-[oklch(0.18_0.01_180)] dark:bg-[oklch(0.14_0.01_180)]" />
+      <div className="absolute inset-0 bg-[oklch(0.14_0.01_180)]" />
 
       {/* Dot grid overlay */}
-      <motion.div
-        className="dot-grid pointer-events-none absolute inset-0"
-        style={prefersReducedMotion ? undefined : { backgroundPositionY: gridShift }}
-      />
+      <div className="dot-grid pointer-events-none absolute inset-0" />
 
       {/* Content */}
-      <motion.div
-        className="relative z-10 flex flex-col items-center px-6 text-center"
-        style={prefersReducedMotion ? undefined : { y: contentY }}
-      >
+      <div className="relative z-10 flex flex-col items-center px-6 text-center">
         {/* Comment line */}
-        <p className="mb-6 font-mono text-sm text-[oklch(0.65_0.24_155)] sm:text-base">
-          {prefersReducedMotion ? comment : commentText}
-          {!prefersReducedMotion && isReady && !commentDone && (
-            <span className="animate-blink">|</span>
-          )}
-        </p>
+        <p className="mb-6 font-mono text-sm text-[oklch(0.65_0.24_155)] sm:text-base">{comment}</p>
 
-        {/* Name — massive scale, letter cascade */}
-        <motion.h1
-          className="mb-8 flex flex-wrap justify-center font-sans font-bold"
+        {/* Name */}
+        <h1
+          className="mb-8 font-sans font-bold text-[oklch(0.98_0_0)]"
           style={{
             fontSize: "clamp(3rem, 12vw, 12rem)",
             lineHeight: 1,
-            ...(prefersReducedMotion ? {} : { gap: letterGap }),
           }}
         >
-          {NAME.split("").map((char, i) => (
-            <motion.span
-              key={i}
-              custom={i}
-              variants={prefersReducedMotion ? undefined : letterCascade}
-              initial={prefersReducedMotion ? undefined : "hidden"}
-              animate={prefersReducedMotion ? undefined : isReady ? "visible" : "hidden"}
-              className="inline-block text-[oklch(0.98_0_0)]"
-            >
-              {char === " " ? "\u00A0" : char}
-            </motion.span>
-          ))}
-        </motion.h1>
+          {NAME}
+        </h1>
 
-        {/* Tagline with typing effect */}
+        {/* Tagline */}
         <p className="mb-8 h-8 font-mono text-sm text-[oklch(0.7_0_0)] sm:text-base md:text-lg">
-          {prefersReducedMotion ? tagline : taglineText}
-          {!prefersReducedMotion && isReady && commentDone && (
-            <motion.span
-              className={taglineDone ? "" : "animate-blink"}
-              animate={{ opacity: taglineDone ? 0 : 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              |
-            </motion.span>
-          )}
+          {tagline}
         </p>
 
         {/* Featured/latest blog post */}
         {latestPost && <HeroLatestPost post={latestPost} />}
-      </motion.div>
+      </div>
     </section>
   );
 }
