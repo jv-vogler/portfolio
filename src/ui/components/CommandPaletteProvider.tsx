@@ -9,9 +9,8 @@ import { useLocale } from "next-intl";
 import { useTheme } from "next-themes";
 import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
 
-const CommandPalette = dynamic(
-  () => import("@/ui/components/CommandPalette").then((m) => m.CommandPalette),
-  { ssr: false },
+const CommandPalette = dynamic(() =>
+  import("@/ui/components/CommandPalette").then((m) => m.CommandPalette),
 );
 
 type Post = Pick<Blog.Post, "slug" | "title" | "tags">;
