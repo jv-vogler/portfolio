@@ -14,9 +14,10 @@ type HeroPost = Pick<
 
 type HeroLatestPostProps = {
   post: HeroPost;
+  delay?: number;
 };
 
-export function HeroLatestPost({ post }: HeroLatestPostProps) {
+export function HeroLatestPost({ post, delay = 1.5 }: HeroLatestPostProps) {
   const t = useTranslations("blog");
   const locale = useLocale();
   const prefersReducedMotion = useReducedMotion();
@@ -26,7 +27,7 @@ export function HeroLatestPost({ post }: HeroLatestPostProps) {
     <motion.div
       initial={prefersReducedMotion ? undefined : { opacity: 0, y: 12 }}
       animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 1.5 }}
+      transition={{ duration: 0.5, delay }}
     >
       <Link
         href={`/blog/${post.slug}` as "/blog/[slug]"}
