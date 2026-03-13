@@ -120,13 +120,13 @@
 }
 
 /* View Transition animations */
-::view-transition-group(*) {
+/* ::view-transition-group(*) {
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
+} */
 
 /* Subtle crossfade */
-::view-transition-old(root) {
+/* ::view-transition-old(root) {
   animation: vt-fade-out 200ms ease both;
 }
 ::view-transition-new(root) {
@@ -141,7 +141,7 @@
   from {
     opacity: 0;
   }
-}
+} */
 
 /* Keep the header completely static during transitions */
 ::view-transition-group(header) {

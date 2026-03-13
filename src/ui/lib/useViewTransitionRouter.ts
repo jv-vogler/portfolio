@@ -21,8 +21,10 @@ export function useViewTransitionRouter() {
       navigatingRef.current = true;
 
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const enableViewTransitions = process.env.NEXT_PUBLIC_ENABLE_VIEW_TRANSITIONS === "true";
 
       if (
+        enableViewTransitions &&
         !prefersReducedMotion &&
         "startViewTransition" in document &&
         typeof document.startViewTransition === "function"

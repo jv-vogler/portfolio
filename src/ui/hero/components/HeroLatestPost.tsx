@@ -26,7 +26,7 @@ export function HeroLatestPost({ post }: HeroLatestPostProps) {
     <motion.div
       initial={prefersReducedMotion ? undefined : { opacity: 0, y: 12 }}
       animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 3 }}
+      transition={{ duration: 0.5, delay: 1.5 }}
     >
       <Link
         href={`/blog/${post.slug}` as "/blog/[slug]"}

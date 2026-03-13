@@ -159,11 +159,10 @@ function ProjectCard({
 
   // --- Glow ---
   const glowRestOpacity = isProfessional ? "20%" : "15%";
-  const glowRest = `0 4px 24px color-mix(in oklch, ${accentColor} ${glowRestOpacity}, transparent)`;
+  const glowRest = `0 4px 16px color-mix(in oklch, ${accentColor} ${glowRestOpacity}, transparent)`;
   const glowHover = [
-    `0 0 30px color-mix(in oklch, ${accentColor} 40%, transparent)`,
-    `0 0 60px color-mix(in oklch, ${accentColor} 18%, transparent)`,
-    `inset 0 0 30px color-mix(in oklch, ${accentColor} 6%, transparent)`,
+    `0 0 20px color-mix(in oklch, ${accentColor} 35%, transparent)`,
+    `0 0 40px color-mix(in oklch, ${accentColor} 15%, transparent)`,
   ].join(", ");
 
   return (
@@ -181,7 +180,7 @@ function ProjectCard({
       }
       animate={isInView ? { opacity: 1, x: 0, y: 0, scale: 1 } : undefined}
       transition={{ duration: 0.7, delay: reducedMotion ? 0 : index * 0.13, ease: "easeOut" }}
-      style={{ zIndex: hovered ? 50 : 1, position: "relative" }}
+      style={{ zIndex: hovered ? 10 : 1, position: "relative" }}
     >
       <article
         className="group relative overflow-hidden rounded-xl"
