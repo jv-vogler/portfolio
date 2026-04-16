@@ -5,12 +5,8 @@ import type { Portfolio } from "@/core/portfolio";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { useLocale } from "next-intl";
-import dynamic from "next/dynamic";
+import { CommandPalette } from "@/ui/components/CommandPalette";
 import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
-
-const CommandPalette = dynamic(() =>
-  import("@/ui/components/CommandPalette").then((m) => m.CommandPalette),
-);
 
 type Post = Pick<Blog.Post, "slug" | "title" | "tags">;
 type Project = Pick<Portfolio.Project, "slug" | "title" | "techs">;
