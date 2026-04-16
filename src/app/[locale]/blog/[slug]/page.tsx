@@ -3,7 +3,9 @@ import { locales } from "@/i18n/config";
 import { Link } from "@/i18n/routing";
 import { formatDate } from "@/lib/date";
 import { enrichCodeBlocks } from "@/ui/blog/lib/highlightCode";
+import { formatTag } from "@/ui/blog/utils/formatTag";
 import { BackToTop } from "@/ui/blog/components/BackToTop";
+import { FocusedHide } from "@/ui/blog/components/FocusedHide";
 import { BlogPost } from "@/ui/blog/components/BlogPost";
 import { CoverImage } from "@/ui/blog/components/CoverImage";
 import { ReadingProgressBar } from "@/ui/blog/components/ReadingProgressBar";
@@ -122,47 +124,55 @@ export default async function BlogPostPage({
             wordCount={post.readingTime * 200}
           />
 
-          <Link
-            href="/blog"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="size-4" />
-            {t("backToList")}
-          </Link>
+          <FocusedHide>
+            <Link
+              href="/blog"
+              className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <ArrowLeft className="size-4" />
+              {t("backToList")}
+            </Link>
+          </FocusedHide>
 
           {/* Cover image hero */}
           <CoverImage coverImage={post.coverImage} title={post.title} priority />
 
           {/* Post header */}
           <header className="mb-10">
-            <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="size-4" />
-                <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
-              </span>
-              {post.readingTime > 0 && (
+            <FocusedHide>
+              <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5">
-                  <Clock className="size-4" />
-                  {t("readingTime", { minutes: post.readingTime })}
+                  <Calendar className="size-4" />
+                  <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
                 </span>
-              )}
-              {showUpdated && post.updatedAt && (
-                <Badge variant="outline" className="text-xs">
-                  {t("updated", { date: formatDate(post.updatedAt, locale) })}
-                </Badge>
-              )}
-            </div>
+                {post.readingTime > 0 && (
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="size-4" />
+                    {t("readingTime", { minutes: post.readingTime })}
+                  </span>
+                )}
+                {showUpdated && post.updatedAt && (
+                  <Badge variant="outline" className="text-xs">
+                    {t("updated", { date: formatDate(post.updatedAt, locale) })}
+                  </Badge>
+                )}
+              </div>
+            </FocusedHide>
             <h1 id="post-heading" className="mb-4 text-4xl font-bold tracking-tight">
               {post.title}
             </h1>
-            <p className="mb-6 text-lg text-muted-foreground">{post.description}</p>
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <Badge key={tag} variant="secondary">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
+            <FocusedHide>
+              <p className="mb-6 text-lg text-muted-foreground">{post.description}</p>
+            </FocusedHide>
+            <FocusedHide>
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary">
+                    {formatTag(tag)}
+                  </Badge>
+                ))}
+              </div>
+            </FocusedHide>
           </header>
 
           {/* Mobile TOC — shown before article on small screens */}

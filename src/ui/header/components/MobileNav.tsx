@@ -10,6 +10,7 @@ import { LocaleSwitcher } from "@/ui/header/components/LocaleSwitcher";
 import { AnimatePresence, type Variants, motion } from "framer-motion";
 import {
   BookOpen,
+  Briefcase,
   ExternalLink,
   Github,
   Globe,
@@ -26,6 +27,7 @@ import { useState } from "react";
 const NAV_ICONS: Record<string, React.ReactNode> = {
   home: <Home className="size-4" />,
   about: <User className="size-4" />,
+  portfolio: <Briefcase className="size-4" />,
   blog: <BookOpen className="size-4" />,
   contact: <Mail className="size-4" />,
 };
@@ -47,7 +49,7 @@ const itemVariants: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.25, ease: "easeOut" } },
 };
 
-export function MobileNav() {
+export function MobileNav({ isFocused = false }: { isFocused?: boolean }) {
   const t = useTranslations("nav");
   const tA11y = useTranslations("a11y");
   const [open, setOpen] = useState(false);
@@ -55,12 +57,12 @@ export function MobileNav() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild className="md:hidden">
+      <SheetTrigger asChild className={isFocused ? undefined : "md:hidden"}>
         <Button variant="ghost" size="icon" aria-label={tA11y("navigationMenu")}>
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="flex w-72 flex-col p-0">
+      <SheetContent side="right" className="flex w-72 flex-col overflow-x-hidden p-0">
         <SheetTitle className="sr-only">{tA11y("navigationMenu")}</SheetTitle>
 
         {/* Header / branding */}

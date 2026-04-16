@@ -1,5 +1,6 @@
 "use client";
 
+import { useFocusedReading } from "@/ui/blog/context/FocusedReadingContext";
 import { Check, Link2, Linkedin, Share2, Twitter } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ type ShareButtonsProps = {
 };
 
 export function ShareButtons({ url, title }: ShareButtonsProps) {
+  const { isFocused } = useFocusedReading();
   const t = useTranslations("blog");
   const tA11y = useTranslations("a11y");
   const [copied, setCopied] = useState(false);
@@ -20,6 +22,8 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
   useEffect(() => {
     setHasNativeShare(typeof navigator !== "undefined" && "share" in navigator);
   }, []);
+
+  if (isFocused) return null;
 
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);

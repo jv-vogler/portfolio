@@ -6,6 +6,7 @@
   "nav": {
     "home": "Início",
     "about": "Sobre",
+    "portfolio": "Portfólio",
     "blog": "Blog",
     "contact": "Contato"
   },
@@ -38,7 +39,10 @@
     "learnMore": "Saiba Mais",
     "caseStudy": {
       "heading": "Estudo de Caso"
-    }
+    },
+    "prevProject": "Anterior",
+    "nextProject": "Próximo",
+    "projectNavigation": "Navegação de projetos"
   },
   "skills": {
     "heading": "Como Eu Construo",
@@ -82,7 +86,9 @@
     "linkCopied": "Link copiado!",
     "tableOfContents": "Índice",
     "backToTop": "Voltar ao topo",
-    "rss": "Feed RSS"
+    "rss": "Feed RSS",
+    "focusedReading": "Leitura focada",
+    "exitFocusedReading": "Sair da leitura focada"
   },
   "footer": {
     "rights": "Todos os direitos reservados."
@@ -112,7 +118,9 @@
     "elevatorPitch": "Sou um engenheiro de software que ama transformar ideias em experiências web interativas e polidas. Das raízes em game dev à web moderna — eu construo coisas que ganham vida.",
     "location": "Brasil",
     "learnMore": "Saiba mais sobre mim",
-    "reachOut": "ou entre em contato"
+    "reachOut": "ou entre em contato",
+    "viewPortfolio": "Ver meu trabalho",
+    "readBlog": "Ler meu blog"
   },
   "commandPalette": {
     "placeholder": "Buscar…",
