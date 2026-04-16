@@ -69,7 +69,10 @@ export function Header() {
           >
             <Search className="h-3.5 w-3.5" />
             <span className="hidden lg:inline">{tCmd("placeholder")}</span>
-            <kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+            <kbd
+              aria-hidden="true"
+              className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex"
+            >
               <span className="text-xs">⌘</span>K
             </kbd>
           </Button>
