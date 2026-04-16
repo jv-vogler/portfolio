@@ -6,6 +6,7 @@ import { formatDate } from "@/lib/date";
 import { Badge } from "@/ui/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/components/ui/card";
 import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
+import { formatTag } from "@/ui/blog/utils/formatTag";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, RefreshCw } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -100,7 +101,7 @@ export function BlogList({ posts }: BlogListProps) {
                     <div className="flex flex-wrap gap-2">
                       {post.tags.map((tag) => (
                         <Badge key={tag} variant="secondary">
-                          {tag}
+                          {formatTag(tag)}
                         </Badge>
                       ))}
                     </div>

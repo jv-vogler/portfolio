@@ -1,6 +1,7 @@
 "use client";
 
 import { Badge } from "@/ui/components/ui/badge";
+import { formatTag } from "@/ui/blog/utils/formatTag";
 import { fadeIn } from "@/ui/lib/motion";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -87,7 +88,7 @@ export function TagFilter({ tags }: TagFilterProps) {
             variant={activeTags.includes(tag) ? "default" : "outline"}
             className="cursor-pointer transition-colors hover:bg-primary hover:text-primary-foreground"
           >
-            {tag}
+            {formatTag(tag)}
           </Badge>
         </button>
       ))}

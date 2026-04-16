@@ -3,6 +3,7 @@ import { locales } from "@/i18n/config";
 import { Link } from "@/i18n/routing";
 import { formatDate } from "@/lib/date";
 import { enrichCodeBlocks } from "@/ui/blog/lib/highlightCode";
+import { formatTag } from "@/ui/blog/utils/formatTag";
 import { BackToTop } from "@/ui/blog/components/BackToTop";
 import { BlogPost } from "@/ui/blog/components/BlogPost";
 import { CoverImage } from "@/ui/blog/components/CoverImage";
@@ -159,7 +160,7 @@ export default async function BlogPostPage({
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag) => (
                 <Badge key={tag} variant="secondary">
-                  {tag}
+                  {formatTag(tag)}
                 </Badge>
               ))}
             </div>
