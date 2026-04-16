@@ -39,7 +39,10 @@
     "learnMore": "Saiba Mais",
     "caseStudy": {
       "heading": "Estudo de Caso"
-    }
+    },
+    "prevProject": "Anterior",
+    "nextProject": "Próximo",
+    "projectNavigation": "Navegação de projetos"
   },
   "skills": {
     "heading": "Como Eu Construo",

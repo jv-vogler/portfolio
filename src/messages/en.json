@@ -39,7 +39,10 @@
     "learnMore": "Learn More",
     "caseStudy": {
       "heading": "Case Study"
-    }
+    },
+    "prevProject": "Previous",
+    "nextProject": "Next",
+    "projectNavigation": "Project navigation"
   },
   "skills": {
     "heading": "How I Build",

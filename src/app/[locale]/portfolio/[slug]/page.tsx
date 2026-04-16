@@ -4,6 +4,7 @@ import { RichTextRenderer } from "@/ui/blog/components/RichTextRenderer";
 import { enrichCodeBlocks } from "@/ui/blog/lib/highlightCode";
 import { Badge } from "@/ui/components/ui/badge";
 import { PortfolioBackButton } from "@/ui/portfolio/components/PortfolioBackButton";
+import { ProjectNavigation } from "@/ui/portfolio/components/ProjectNavigation";
 import { ExternalLink, Github } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -58,6 +59,11 @@ export default async function PortfolioDetailPage({
   const project = await getProject(slug, locale);
 
   if (!project) notFound();
+
+  const allProjects = await getAllProjects(locale);
+  const currentIndex = allProjects.findIndex((p) => p.slug === slug);
+  const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
+  const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
 
   const t = await getTranslations({ locale, namespace: "portfolio" });
   const accent = project.accentColor ?? "oklch(0.70 0.02 250)";
@@ -239,6 +245,10 @@ export default async function PortfolioDetailPage({
             </div>
           </div>
         )}
+        <ProjectNavigation
+          prevProject={prevProject ? { slug: prevProject.slug, title: prevProject.title } : null}
+          nextProject={nextProject ? { slug: nextProject.slug, title: nextProject.title } : null}
+        />
       </div>
     </section>
   );
