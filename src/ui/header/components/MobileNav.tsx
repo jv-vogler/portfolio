@@ -10,6 +10,7 @@ import { LocaleSwitcher } from "@/ui/header/components/LocaleSwitcher";
 import { AnimatePresence, type Variants, motion } from "framer-motion";
 import {
   BookOpen,
+  Briefcase,
   ExternalLink,
   Github,
   Globe,
@@ -26,6 +27,7 @@ import { useState } from "react";
 const NAV_ICONS: Record<string, React.ReactNode> = {
   home: <Home className="size-4" />,
   about: <User className="size-4" />,
+  portfolio: <Briefcase className="size-4" />,
   blog: <BookOpen className="size-4" />,
   contact: <Mail className="size-4" />,
 };

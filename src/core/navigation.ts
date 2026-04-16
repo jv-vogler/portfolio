@@ -7,6 +7,7 @@ export namespace Navigation {
   export const links: Link[] = [
     { label: "home", href: "/" },
     { label: "about", href: "/about" },
+    { label: "portfolio", href: "/portfolio" },
     { label: "blog", href: "/blog" },
     { label: "contact", href: "/#contact" },
   ];
