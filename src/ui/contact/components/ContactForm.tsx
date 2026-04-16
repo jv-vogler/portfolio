@@ -39,6 +39,7 @@ export function ContactForm() {
           {...register("name")}
           aria-invalid={!!errors.name}
           aria-describedby={errors.name ? "name-error" : undefined}
+          autoComplete="name"
           placeholder={t("namePlaceholder")}
           disabled={isSubmitting}
         />
@@ -60,6 +61,7 @@ export function ContactForm() {
           {...register("email")}
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "email-error" : undefined}
+          autoComplete="email"
           placeholder={t("emailPlaceholder")}
           disabled={isSubmitting}
         />
@@ -80,6 +82,7 @@ export function ContactForm() {
           {...register("message")}
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "message-error" : undefined}
+          autoComplete="off"
           placeholder={t("messagePlaceholder")}
           disabled={isSubmitting}
           className="min-h-32"
