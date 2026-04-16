@@ -86,7 +86,9 @@
     "linkCopied": "Link copied!",
     "tableOfContents": "Table of Contents",
     "backToTop": "Back to top",
-    "rss": "RSS Feed"
+    "rss": "RSS Feed",
+    "focusedReading": "Focused reading",
+    "exitFocusedReading": "Exit focused reading"
   },
   "footer": {
     "rights": "All rights reserved."

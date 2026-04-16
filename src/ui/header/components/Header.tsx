@@ -2,9 +2,11 @@
 
 import { Navigation } from "@/core/navigation";
 import { Link } from "@/i18n/routing";
+import { useFocusedReading } from "@/ui/blog/context/FocusedReadingContext";
 import { useCommandPalette } from "@/ui/components/CommandPaletteProvider";
 import { Button } from "@/ui/components/ui/button";
 import { LocaleSwitcher } from "@/ui/header/components/LocaleSwitcher";
+import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
@@ -19,6 +21,7 @@ export function Header() {
   const tA11y = useTranslations("a11y");
   const tCmd = useTranslations("commandPalette");
   const { toggle: togglePalette } = useCommandPalette();
+  const { isFocused } = useFocusedReading();
 
   return (
     <header
@@ -31,7 +34,10 @@ export function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav aria-label={tA11y("desktopNav")} className="hidden items-center gap-6 md:flex">
+        <nav
+          aria-label={tA11y("desktopNav")}
+          className={cn("hidden items-center gap-6 md:flex", isFocused && "!hidden")}
+        >
           {Navigation.links.map((link) => {
             const isRoute = link.href.startsWith("/");
 
@@ -85,10 +91,10 @@ export function Header() {
           >
             <Search className="h-4 w-4" />
           </Button>
-          <LocaleSwitcher />
+          {!isFocused && <LocaleSwitcher />}
 
           {/* Mobile menu */}
-          <MobileNav />
+          <MobileNav isFocused={isFocused} />
         </div>
       </div>
     </header>

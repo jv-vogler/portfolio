@@ -2,14 +2,18 @@
 
 import { Social } from "@/core/social";
 import { Link } from "@/i18n/routing";
+import { useFocusedReading } from "@/ui/blog/context/FocusedReadingContext";
 import { SocialIcon } from "@/ui/lib/icons";
 import { useTranslations } from "next-intl";
 
 export function Footer() {
+  const { isFocused } = useFocusedReading();
   const t = useTranslations("footer");
   const tA11y = useTranslations("a11y");
   const tNav = useTranslations("nav");
   const year = new Date().getFullYear();
+
+  if (isFocused) return null;
 
   return (
     <footer

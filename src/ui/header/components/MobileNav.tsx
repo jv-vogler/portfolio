@@ -49,7 +49,7 @@ const itemVariants: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.25, ease: "easeOut" } },
 };
 
-export function MobileNav() {
+export function MobileNav({ isFocused = false }: { isFocused?: boolean }) {
   const t = useTranslations("nav");
   const tA11y = useTranslations("a11y");
   const [open, setOpen] = useState(false);
@@ -57,7 +57,7 @@ export function MobileNav() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild className="md:hidden">
+      <SheetTrigger asChild className={isFocused ? undefined : "md:hidden"}>
         <Button variant="ghost" size="icon" aria-label={tA11y("navigationMenu")}>
           <Menu className="h-5 w-5" />
         </Button>

@@ -5,6 +5,7 @@ import { formatDate } from "@/lib/date";
 import { enrichCodeBlocks } from "@/ui/blog/lib/highlightCode";
 import { formatTag } from "@/ui/blog/utils/formatTag";
 import { BackToTop } from "@/ui/blog/components/BackToTop";
+import { FocusedReadingToggle } from "@/ui/blog/components/FocusedReadingToggle";
 import { BlogPost } from "@/ui/blog/components/BlogPost";
 import { CoverImage } from "@/ui/blog/components/CoverImage";
 import { ReadingProgressBar } from "@/ui/blog/components/ReadingProgressBar";
@@ -157,12 +158,15 @@ export default async function BlogPostPage({
               {post.title}
             </h1>
             <p className="mb-6 text-lg text-muted-foreground">{post.description}</p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {post.tags.map((tag) => (
                 <Badge key={tag} variant="secondary">
                   {formatTag(tag)}
                 </Badge>
               ))}
+              <div className="ml-auto">
+                <FocusedReadingToggle />
+              </div>
             </div>
           </header>
 

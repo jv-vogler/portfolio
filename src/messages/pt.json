@@ -86,7 +86,9 @@
     "linkCopied": "Link copiado!",
     "tableOfContents": "Índice",
     "backToTop": "Voltar ao topo",
-    "rss": "Feed RSS"
+    "rss": "Feed RSS",
+    "focusedReading": "Leitura focada",
+    "exitFocusedReading": "Sair da leitura focada"
   },
   "footer": {
     "rights": "Todos os direitos reservados."

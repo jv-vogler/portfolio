@@ -1,5 +1,6 @@
 "use client";
 
+import { useFocusedReading } from "@/ui/blog/context/FocusedReadingContext";
 import { Check, Link2, Linkedin, Share2, Twitter } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -10,8 +11,10 @@ type ShareButtonsProps = {
 };
 
 export function ShareButtons({ url, title }: ShareButtonsProps) {
+  const { isFocused } = useFocusedReading();
   const t = useTranslations("blog");
   const tA11y = useTranslations("a11y");
+  if (isFocused) return null;
   const [copied, setCopied] = useState(false);
   // Start as false so server and initial client render agree (no navigator on server).
   // Set to true after mount only if the Web Share API is actually available.
