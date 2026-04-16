@@ -36,7 +36,7 @@ export function Header() {
         {/* Desktop nav */}
         <nav
           aria-label={tA11y("desktopNav")}
-          className={cn("hidden items-center gap-6 md:flex", isFocused && "!hidden")}
+          className={cn("hidden items-center gap-6", !isFocused && "md:flex")}
         >
           {Navigation.links.map((link) => {
             const isRoute = link.href.startsWith("/");
