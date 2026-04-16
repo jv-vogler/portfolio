@@ -1,5 +1,6 @@
 import { getAllProjects, getProject } from "@/app/actions/portfolio";
 import { locales } from "@/i18n/config";
+import { BackToTop } from "@/ui/blog/components/BackToTop";
 import { RichTextRenderer } from "@/ui/blog/components/RichTextRenderer";
 import { enrichCodeBlocks } from "@/ui/blog/lib/highlightCode";
 import { Badge } from "@/ui/components/ui/badge";
@@ -249,6 +250,7 @@ export default async function PortfolioDetailPage({
           prevProject={prevProject ? { slug: prevProject.slug, title: prevProject.title } : null}
           nextProject={nextProject ? { slug: nextProject.slug, title: nextProject.title } : null}
         />
+        <BackToTop />
       </div>
     </section>
   );
