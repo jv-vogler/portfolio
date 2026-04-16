@@ -116,7 +116,9 @@
     "elevatorPitch": "Sou um engenheiro de software que ama transformar ideias em experiências web interativas e polidas. Das raízes em game dev à web moderna — eu construo coisas que ganham vida.",
     "location": "Brasil",
     "learnMore": "Saiba mais sobre mim",
-    "reachOut": "ou entre em contato"
+    "reachOut": "ou entre em contato",
+    "viewPortfolio": "Ver meu trabalho",
+    "readBlog": "Ler meu blog"
   },
   "commandPalette": {
     "placeholder": "Buscar…",

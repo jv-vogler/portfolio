@@ -2,9 +2,11 @@
 
 import type { AboutItem, ProfileImage } from "@/lib/payload";
 import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
+import { Button } from "@/ui/components/ui/button";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { Link } from "@/i18n/routing";
 
 interface AboutSectionProps {
   items: AboutItem[];
@@ -65,6 +67,18 @@ export function AboutSection({ items, profileImage }: AboutSectionProps) {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            variants={fadeInUp}
+            className="mt-10 flex flex-wrap gap-3 border-t border-border/40 pt-8"
+          >
+            <Link href="/portfolio">
+              <Button>{t("about.viewPortfolio")}</Button>
+            </Link>
+            <Link href="/blog">
+              <Button variant="outline">{t("about.readBlog")}</Button>
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>

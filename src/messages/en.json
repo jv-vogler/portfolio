@@ -116,7 +116,9 @@
     "elevatorPitch": "I'm a software engineer who loves turning ideas into polished, interactive web experiences. From game dev roots to modern web — I build things that feel alive.",
     "location": "Brazil",
     "learnMore": "Learn more about me",
-    "reachOut": "or reach out"
+    "reachOut": "or reach out",
+    "viewPortfolio": "View my work",
+    "readBlog": "Read my blog"
   },
   "commandPalette": {
     "placeholder": "Search…",
