@@ -62,7 +62,7 @@ export function MobileNav({ isFocused = false }: { isFocused?: boolean }) {
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="flex w-72 flex-col p-0">
+      <SheetContent side="right" className="flex w-72 flex-col overflow-x-hidden p-0">
         <SheetTitle className="sr-only">{tA11y("navigationMenu")}</SheetTitle>
 
         {/* Header / branding */}
