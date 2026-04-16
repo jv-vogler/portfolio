@@ -1,7 +1,9 @@
 "use client";
 
 import type { Blog } from "@/core/blog";
+import { Link } from "@/i18n/routing";
 import { HeroLatestPost } from "@/ui/hero/components/HeroLatestPost";
+import { Button } from "@/ui/components/ui/button";
 import { useTypingAnimation } from "@/ui/lib/useTypingAnimation";
 import { motion, useAnimate, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -152,6 +154,20 @@ export function Hero({ latestPost }: HeroProps) {
         <p className="mb-8 h-8 font-mono text-sm text-[oklch(0.7_0_0)] sm:text-base md:text-lg">
           {taglineDisplay}
         </p>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={nameSharp ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-10 mt-2"
+        >
+          <Link href="/#portfolio">
+            <Button size="lg" className="rounded-full px-8 font-semibold">
+              {t("cta")}
+            </Button>
+          </Link>
+        </motion.div>
 
         {/* Featured/latest blog post */}
         {latestPost && <HeroLatestPost post={latestPost} delay={latestPostDelay} />}
