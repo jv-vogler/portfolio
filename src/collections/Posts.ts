@@ -17,6 +17,11 @@ export const Posts: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "_status", "publishedDate", "updatedAt"],
+    preview: (doc, { locale }) => {
+      const base = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+      const secret = process.env.PAYLOAD_PREVIEW_SECRET ?? "";
+      return `${base}/api/draft?secret=${secret}&slug=${doc["slug"]}&locale=${locale ?? "en"}`;
+    },
   },
   versions: {
     drafts: true,
