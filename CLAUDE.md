@@ -89,4 +89,5 @@ pnpm dlx shadcn@latest add <component>   # outputs to src/ui/components/ui/
 | Payload collections, hooks, access control | `/payload`                                                                    |
 | Deploying to Vercel                        | `/deploy-to-vercel`                                                           |
 | Writing copy, blog posts, any prose        | `/elements-of-style:writing-clearly-and-concisely`                            |
+| Drafting a new blog post for the portfolio | `blog-post` skill — draft → writing-skills review → `pnpm publish:post`       |
 | Library/framework docs lookup              | `context7` MCP — use before guessing API surface                              |

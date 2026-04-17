@@ -16,7 +16,8 @@
     "format:write": "oxfmt --write src/",
     "typecheck": "tsgo --noEmit",
     "prepare": "husky",
-    "seed": "tsx --require ./src/seed/shim.cjs --env-file .env.local src/seed/index.ts"
+    "seed": "tsx --require ./src/seed/shim.cjs --env-file .env.local src/seed/index.ts",
+    "publish:post": "tsx --require ./src/seed/shim.cjs --env-file .env.local src/seed/publish.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
