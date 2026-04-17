@@ -91,6 +91,7 @@ export const getPost = cache(async function getPost(
     locale: locale as "en" | "pt",
     where: {
       slug: { equals: slug },
+      ...(!isDraft && { _status: { equals: "published" } }),
     },
     limit: 1,
     depth: 1,
