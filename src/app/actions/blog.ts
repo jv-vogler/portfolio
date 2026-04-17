@@ -1,6 +1,7 @@
 import { Blog, type PayloadPost } from "@/core/blog";
 import { getPayloadSafe } from "@/lib/payload";
 import type { SerializedEditorState } from "lexical";
+import { draftMode } from "next/headers";
 import { unstable_cache } from "next/cache";
 import type { Where } from "payload";
 import { cache } from "react";
@@ -83,6 +84,8 @@ export const getPost = cache(async function getPost(
   const payload = await getPayloadSafe();
   if (!payload) throw new Error("Payload unavailable — cannot fetch post");
 
+  const { isEnabled: isDraft } = await draftMode();
+
   const { docs } = await payload.find({
     collection: "posts",
     locale: locale as "en" | "pt",
@@ -92,6 +95,7 @@ export const getPost = cache(async function getPost(
     limit: 1,
     depth: 1,
     overrideAccess: true,
+    draft: isDraft,
   });
 
   if (!docs.length) {
