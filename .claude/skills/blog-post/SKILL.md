@@ -1,6 +1,6 @@
 ---
 name: blog-post
-description: Draft a blog post for the portfolio and publish it to Payload. Use when the user says any of "write a blog post", "draft a post", "new post about X", "/new-post", "blog post about X", or anything similar. Orchestrates topic refinement, outlining, drafting in `content/blog/<slug>/en.md`, applying `elements-of-style:writing-clearly-and-concisely`, and printing the publish command.
+description: Draft a blog post for the portfolio and publish it to Payload. Use when the user says any of "write a blog post", "draft a post", "new post about X", "/new-post", "blog post about X", or anything similar. Orchestrates topic refinement, outlining, drafting in `content/blog/<slug>/en.md`, applying `portfolio-voice` (voice layer) and `elements-of-style:writing-clearly-and-concisely` (Strunk rules), and printing the publish command.
 ---
 
 # Blog Post Authoring
@@ -20,7 +20,7 @@ You MUST step through these in order. Create a task per item via TaskCreate if t
 1. **Confirm scope and slug**
 2. **Brainstorm 2–3 angles** (skip if the user already has a clear thesis)
 3. **Outline** — write front matter + H2 headings only into `en.md`
-4. **Draft each section** — flesh out the body
+4. **Draft each section** — flesh out the body **using `portfolio-voice`** (mandatory — see §4)
 5. **Apply `elements-of-style:writing-clearly-and-concisely`** to the full prose (mandatory)
 6. **Offer cover image + PT translation** (optional)
 7. **Print the publish command** — do not run it for the user
@@ -66,7 +66,22 @@ coverAlt: "Describe the cover image in one short phrase"
 
 ## 4. Draft each section
 
-Write the body, one H2 section at a time. Favor concrete examples and code over abstraction. Code fences must include a language tag — our renderer uses Shiki highlighting and plain fences render as gray blocks:
+**Before writing the first sentence, invoke `portfolio-voice`.** It loads the cached voice profile and owns sentence-level voice decisions — openings, closings, punctuation habits, anti-patterns. Voice must be applied from the first sentence; drafting generically and "voice-ifying later" is explicitly out of policy (see the portfolio-voice skill for the reasoning).
+
+Skill invocation:
+
+```
+Skill: portfolio-voice
+```
+
+Use its **drafting behavior** (not polishing behavior) since this is a fresh post.
+
+`portfolio-voice` also owns:
+
+- Placeholder markers for media — use `[placeholder:screenshot of <specific thing>]`, `[placeholder:gif of …]`, `[placeholder:diagram of …]`, `[placeholder:code snippet of …]`. Never generic.
+- `[verify: <claim>]` markers for facts that need checking, collected under a `## Claims to verify` section at the end of the draft.
+
+With voice loaded, write the body one H2 section at a time. Favor concrete examples and code over abstraction. Code fences must include a language tag — our renderer uses Shiki highlighting and plain fences render as gray blocks:
 
 ````markdown
 ```ts
@@ -90,7 +105,7 @@ Supported Shiki languages (register new ones in `src/ui/blog/lib/highlightCode.t
 
 ## 5. Apply elements-of-style (mandatory)
 
-Before declaring the draft done, invoke the `elements-of-style:writing-clearly-and-concisely` skill via the Skill tool, and apply its rules to the full prose. This is non-negotiable — it's the quality bar for anything shipped on the portfolio.
+After the voice pass, invoke `elements-of-style:writing-clearly-and-concisely` and apply its rules to the full prose. Voice and Strunk are orthogonal — voice shapes what the sentences sound like, Strunk trims them. Run them in this order; reversing loses voice to over-editing.
 
 Skill invocation:
 
@@ -98,7 +113,7 @@ Skill invocation:
 Skill: elements-of-style:writing-clearly-and-concisely
 ```
 
-Pass the current markdown body in the args. Apply every suggested revision that preserves the author's voice. Show the user the before/after of any non-trivial changes and let them override.
+Pass the current markdown body in the args. Apply every suggested revision that preserves the voice profile's habits (em-dashes, fragments, parentheticals, strikethrough jokes are all intentional — Strunk may flag them; keep them). Show the user the before/after of any non-trivial changes and let them override.
 
 ## 6. Cover image + PT translation (optional)
 
@@ -132,7 +147,8 @@ Do not run the command yourself unless the user explicitly asks.
 - **Never `git add` or `git commit` anything under `content/`** — the directory is gitignored on purpose.
 - **Never edit `src/seed/publish.ts` or `src/collections/Posts.ts` from this skill.** Schema changes are a separate task. If a required field is missing or the script fails, stop and surface the error to the user.
 - **Never invent new markdown features.** If something doesn't render, write a note in the post and flag the gap rather than hacking around it.
-- **Never skip step 5** (writing skills). Even a one-paragraph note goes through the rule set.
+- **Never skip step 4's `portfolio-voice` invocation or step 5's Strunk pass.** Both are mandatory for anything shipped on the portfolio — one paragraph or a ten-page essay, the chain runs the same way.
+- **Never invent facts.** If you are unsure about a claim (a date, a number, a library behavior, a quote), mark it `[verify: <claim>]` inline and list it under `## Claims to verify` at the end. Handoff belongs to the author, not to confident-sounding guesswork.
 
 ## Verification after publish
 
