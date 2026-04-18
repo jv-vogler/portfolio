@@ -46,5 +46,3 @@ next-env.d.ts
 *.sln
 *.sw?
 
-# Blog authoring drafts (not committed; pushed via pnpm publish:post)
-/content/
