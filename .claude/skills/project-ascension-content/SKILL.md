@@ -1,6 +1,6 @@
 ---
 name: project-ascension-content
-description: Draft blog posts about Project Ascension — João's Godot 4 tactical hex roguelite deckbuilder. Use whenever the user says "draft a devlog", "weekly dev log", "this week's devlog", "write an ADR narrative for NNNN", "turn ADR NNNN into a post", "deep dive on [a system]", "write about how [a system] works", "postmortem for [a bug]", "series intro for project ascension", or mentions "Project Ascension" alongside any drafting verb ("write", "draft", "post about"). This is the knowledge layer — it reads the content package at docs/project-ascension/ plus the game repo, enforces invariants, drafts to content/blog/[slug]/en.md, then hands off to portfolio-voice for the final voice + Strunk pass. Sits on top of blog-post (paths, front matter, publish command) and portfolio-voice (voice + Strunk) — does not replace either.
+description: Draft blog posts about Project Ascension — João's Godot 4 tactical hex roguelite deckbuilder. Use whenever the user says "draft a devlog", "weekly dev log", "this week's devlog", "write an ADR narrative for NNNN", "turn ADR NNNN into a post", "deep dive on [a system]", "write about how [a system] works", "postmortem for [a bug]", "series intro for project ascension", or mentions "Project Ascension" alongside any drafting verb ("write", "draft", "post about"). This is the knowledge layer — it reads the content package at docs/project-ascension/ plus the game repo, enforces invariants, drafts to content/blog/[slug]/en.md, then hands off to portfolio-voice for the voice + Strunk pass and humanizer for the final AI-tell scrub. Sits on top of blog-post (paths, front matter, publish command), portfolio-voice (voice + Strunk), and humanizer (final pass) — does not replace any of them.
 ---
 
 # Project Ascension — Content
@@ -15,11 +15,13 @@ project-ascension-content   ← THIS skill: PA-specific knowledge, templates, in
 portfolio-voice             → voice pass (voice-profile.md)
   ↓ portfolio-voice internally hands off to:
 elements-of-style           → Strunk pass
+  ↓ then THIS skill invokes:
+humanizer                   → final AI-tell scrub (em-dash clouds, rule-of-three, -ing tails)
   ↓ then THIS skill prints the publish command owned by:
 blog-post                   → front matter schema, paths, `pnpm publish:post`
 ```
 
-This skill **does not replace** `blog-post` or `portfolio-voice`. It sits on top. It relies on `blog-post` for the file-path conventions, front-matter schema, and publish command; it relies on `portfolio-voice` for sentence-level voice and the Strunk handoff.
+This skill **does not replace** `blog-post`, `portfolio-voice`, or `humanizer`. It sits on top. It relies on `blog-post` for the file-path conventions, front-matter schema, and publish command; on `portfolio-voice` for sentence-level voice and the Strunk handoff; and on `humanizer` for the final AI-tell scrub before publish.
 
 If the user asks for a _generic_ post (not about Project Ascension), stop and let `blog-post` own the workflow. This skill only runs when the post is about Project Ascension.
 
@@ -145,9 +147,23 @@ Invoke `portfolio-voice` with its **drafting behavior** (for a fresh draft) or *
 
 Do not attempt the voice pass yourself. Do not skip it. Do not reverse the order — facts and structure first, voice second, Strunk third. Reversing loses the voice to over-editing.
 
-### 8. Emit the publish command + review checklist
+### 8. Hand off to `humanizer`
 
-After `portfolio-voice` returns, print the publish command from `blog-post`:
+After `portfolio-voice` returns (with the Strunk pass already applied), invoke `humanizer` on the result. Strunk is concision-focused; it can shave away the asides, fragments, and opinionated tangents that `portfolio-voice` put in. `humanizer` catches the remaining AI tells — em-dash clouds (hard cap: 2 per 500 words), rule-of-three lists pretending to be insight, `-ing` tails, vague attributions, curly quotes, emoji-decorated bullets — and restores any personality Strunk bled out.
+
+Skill invocation:
+
+```
+Skill: humanizer
+```
+
+Pass the Strunk-cleaned markdown in the args. Point `humanizer` at the portfolio's existing devlogs in `content/blog/devlog-*/en.md` (and `docs/project-ascension/devlog.md §3.3` for the voice floor) as the voice sample. Apply rewrites that preserve meaning wholesale; for non-trivial rewrites, show the user before/after and let them veto.
+
+Order is **voice → Strunk → humanizer**, always. Skipping humanizer is how a technically clean devlog still ships reading like a product update.
+
+### 9. Emit the publish command + review checklist
+
+After `humanizer` returns, print the publish command from `blog-post`:
 
 ```bash
 pnpm publish:post --slug <slug> --dry-run   # preview the Lexical JSON
@@ -205,7 +221,8 @@ In every case: describe the conflict in plain terms, quote the relevant file/lin
 8. Draft to `content/blog/devlog-NNN-<hook>/en.md` following the §3 prose structure. Cite commits by hash or PR number.
 9. Run the `devlog.md §5` checklist against the draft. Fix anything that fails.
 10. Invoke `portfolio-voice` (drafting behavior). Let it hand off to Strunk.
-11. Print the publish command; end with the footer.
+11. Invoke `humanizer` on the Strunk-cleaned result for the final AI-tell pass.
+12. Print the publish command; end with the footer.
 
 ### Example 2 — "turn ADR 0020 into a post"
 
@@ -214,7 +231,7 @@ In every case: describe the conflict in plain terms, quote the relevant file/lin
 3. Verify the ADR is still in force: run its Verification line against current code. If it fails, STOP — the ADR is stale before the post is even drafted.
 4. Find a concrete opening scene. The ADR's captures / the related commit message usually have one ("the day I realized the greedy path was dominating"). If none exists, ask the user.
 5. Draft 600–1200 words in adr-narrative shape: opening scene → the choice → why not the obvious thing → what it bought us → what it cost → link to the ADR.
-6. Invoke `portfolio-voice`. Print the publish command. Footer.
+6. Invoke `portfolio-voice`, then `humanizer`. Print the publish command. Footer.
 
 ### Example 3 — "write a marketing post about Project Ascension"
 
@@ -247,16 +264,16 @@ From the game repo:
 
 ## Next step
 
-After drafting, always hand off to the voice + Strunk chain:
+After drafting, always hand off to the voice + Strunk + humanizer chain:
 
 ```
-Body draft ready with citations and invariants checked. Handing off to portfolio-voice for the voice + Strunk pass.
+Body draft ready with citations and invariants checked. Handing off to portfolio-voice for the voice + Strunk pass, then humanizer for the final AI-tell scrub.
 
 Options:
-A) Run `portfolio-voice` on the draft now (Recommended — mandatory per composition contract)
+A) Run `portfolio-voice` on the draft now, then `humanizer` on the result (Recommended — mandatory per composition contract)
 B) Let me review the raw body first before the voice pass
 ```
 
-Default to A. The post is not shippable until `portfolio-voice` and its Strunk handoff have both run.
+Default to A. The post is not shippable until `portfolio-voice` (with its Strunk handoff) **and** `humanizer` have both run.
 
-After `portfolio-voice` returns, print the publish command and the review footer — do not run `pnpm publish:post`. That is always the author's step.
+After `humanizer` returns, print the publish command and the review footer — do not run `pnpm publish:post`. That is always the author's step.

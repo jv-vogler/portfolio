@@ -1,6 +1,6 @@
 ---
 name: blog-post
-description: Draft a blog post for the portfolio and publish it to Payload. Use when the user says any of "write a blog post", "draft a post", "new post about X", "/new-post", "blog post about X", or anything similar. Orchestrates topic refinement, outlining, drafting in `content/blog/<slug>/en.md`, applying `portfolio-voice` (voice layer) and `elements-of-style:writing-clearly-and-concisely` (Strunk rules), and printing the publish command.
+description: Draft a blog post for the portfolio and publish it to Payload. Use when the user says any of "write a blog post", "draft a post", "new post about X", "/new-post", "blog post about X", or anything similar. Orchestrates topic refinement, outlining, drafting in `content/blog/<slug>/en.md`, applying `portfolio-voice` (voice layer), `elements-of-style:writing-clearly-and-concisely` (Strunk rules), and `humanizer` (final AI-tell scrub), then printing the publish command.
 ---
 
 # Blog Post Authoring
@@ -22,8 +22,9 @@ You MUST step through these in order. Create a task per item via TaskCreate if t
 3. **Outline** — write front matter + H2 headings only into `en.md`
 4. **Draft each section** — flesh out the body **using `portfolio-voice`** (mandatory — see §4)
 5. **Apply `elements-of-style:writing-clearly-and-concisely`** to the full prose (mandatory)
-6. **Offer cover image + PT translation** (optional)
-7. **Print the publish command** — do not run it for the user
+6. **Apply `humanizer`** — final scrub for AI tells (mandatory — see §6)
+7. **Offer cover image + PT translation** (optional)
+8. **Print the publish command** — do not run it for the user
 
 ## 1. Confirm scope and slug
 
@@ -115,7 +116,21 @@ Skill: elements-of-style:writing-clearly-and-concisely
 
 Pass the current markdown body in the args. Apply every suggested revision that preserves the voice profile's habits (em-dashes, fragments, parentheticals, strikethrough jokes are all intentional — Strunk may flag them; keep them). Show the user the before/after of any non-trivial changes and let them override.
 
-## 6. Cover image + PT translation (optional)
+## 6. Apply humanizer (mandatory)
+
+After Strunk trims the prose, invoke `humanizer` as the final scrub. Strunk's job is concision; it can bleed the voice out by cutting the tangents, asides, and opinionated fragments `portfolio-voice` deliberately put in. `humanizer` catches the remaining AI tells (em-dash clouds, rule-of-three lists, `-ing` tails, vague attributions, "testament to"-style puffery, curly quotes, emoji-decorated bullets) and restores the personality Strunk may have bled out.
+
+Skill invocation:
+
+```
+Skill: humanizer
+```
+
+Pass the Strunk-cleaned markdown body in the args. Tell `humanizer` to treat the user's own prior posts in `content/blog/*/en.md` as the voice sample (or point it at `docs/voice-profile.md` if one exists in the package you're drafting for). Apply its rewrites wholesale where they preserve meaning; for any non-trivial rewrite, show the user before/after and let them veto.
+
+Voice → Strunk → Humanizer runs in this order, always. Reversing either hop loses the voice. Skipping humanizer is how the "technically clean but reads AI-generated" posts slip through.
+
+## 7. Cover image + PT translation (optional)
 
 **Cover image:**
 
@@ -130,7 +145,7 @@ Pass the current markdown body in the args. Apply every suggested revision that 
 - Translate the body idiomatically, not word-for-word.
 - If the user declines, Payload's fallback logic serves the EN post on PT routes automatically.
 
-## 7. Publish command
+## 8. Publish command
 
 When the draft is complete, tell the user exactly one of:
 
@@ -147,7 +162,7 @@ Do not run the command yourself unless the user explicitly asks.
 - **Never `git add` or `git commit` anything under `content/`** — the directory is gitignored on purpose.
 - **Never edit `src/seed/publish.ts` or `src/collections/Posts.ts` from this skill.** Schema changes are a separate task. If a required field is missing or the script fails, stop and surface the error to the user.
 - **Never invent new markdown features.** If something doesn't render, write a note in the post and flag the gap rather than hacking around it.
-- **Never skip step 4's `portfolio-voice` invocation or step 5's Strunk pass.** Both are mandatory for anything shipped on the portfolio — one paragraph or a ten-page essay, the chain runs the same way.
+- **Never skip step 4's `portfolio-voice` invocation, step 5's Strunk pass, or step 6's `humanizer` pass.** All three are mandatory for anything shipped on the portfolio — one paragraph or a ten-page essay, the chain runs the same way.
 - **Never invent facts.** If you are unsure about a claim (a date, a number, a library behavior, a quote), mark it `[verify: <claim>]` inline and list it under `## Claims to verify` at the end. Handoff belongs to the author, not to confident-sounding guesswork.
 
 ## Verification after publish
