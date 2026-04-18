@@ -62,8 +62,9 @@ Use this flow when producing a fresh draft.
    Bad: `[placeholder:screenshot of game]`
 
 6. **Never invent facts.** If a claim needs verification (a number, a date, an API surface, a library behavior, a quote), mark it inline as `[verify: <claim>]` and list every such claim at the end of the draft under a `## Claims to verify` section. Better to surface doubt than to publish a hallucination.
-7. **Close with the Strunk pass.** After the voice draft is ready, invoke `elements-of-style:writing-clearly-and-concisely` on the full prose. This is the handoff — see **Next step** below.
-8. **Print the publish command** at the end (the one the `blog-post` skill uses). Do not run it.
+7. **Never fabricate personal content.** Feelings, anecdotes, taste, autobiography, formative moments, opinions about games or books or films or life events — if the voice profile does not evidence it and the repo does not document it, **do not invent it**. Drop in a `[placeholder: <what the author should fill in>]` block describing what belongs there. Fake personal hooks ("X taught me that Y is life", "I've always loved Z", "there's something magical about W") read as instantly artificial, even when surrounded by prose that otherwise passes. The opening and closing are where this trap sits hardest — if in doubt, placeholder it and keep moving.
+8. **Close with the Strunk pass.** After the voice draft is ready, invoke `elements-of-style:writing-clearly-and-concisely` on the full prose. This is the handoff — see **Next step** below.
+9. **Print the publish command** at the end (the one the `blog-post` skill uses). Do not run it.
 
 ## Polishing behavior (existing posts)
 
@@ -72,9 +73,10 @@ Use this flow when the user hands over an existing draft and wants it rewritten 
 1. **Read the target file.** Note the structure, the claims, any placeholder markers, any code samples.
 2. **Read `voice-profile.md`.**
 3. **Rewrite sentence by sentence toward the profile.** Do not restructure the post. Do not add sections. Do not remove sections. The structure is the author's; the voice is what you are adjusting.
-4. **Preserve placeholder markers and code blocks exactly.** Do not paraphrase a `[placeholder:...]` marker into prose. Do not reformat code fences or change their language tag.
+4. **Preserve placeholder markers and code blocks exactly.** Do not paraphrase a `[placeholder:...]` marker into prose. Do not reformat code fences or change their language tag. Personal-content placeholders (`[placeholder: personal opening hook — ...]`) are especially load-bearing: they exist precisely because the author wants to fill them in themselves. Never attempt to "draft a candidate" inside one.
 5. **Preserve every `[verify: ...]` marker.** If you notice a new claim that needs verification, add a fresh marker; do not strip existing ones.
-6. **Close with the Strunk pass** — invoke `elements-of-style:writing-clearly-and-concisely` on the polished draft.
+6. **Flag fabricated personal content for replacement.** If the existing draft contains invented autobiography or sentimental hooks ("X taught me Y", "I've always believed…", "there's something about Z"), replace those lines with a `[placeholder: ...]` block describing what belongs there. Do not swap in a different fabrication.
+7. **Close with the Strunk pass** — invoke `elements-of-style:writing-clearly-and-concisely` on the polished draft.
 
 ## Deriving the profile (first run only)
 
@@ -111,10 +113,14 @@ Stop and ask the user, rather than guessing, when:
 ## Hard rules
 
 - **Never invent facts.** `[verify: ...]` is the only honest thing to do when unsure.
+- **Never fabricate personal content.** No invented feelings, anecdotes, taste, formative moments, or opinions about external media. `[placeholder: <what the author should fill in>]` is the only honest move. The cheesiest failure mode is the "X taught me that Y is life" cold open — avoid it categorically.
+- **No setup-undercut pacing.** The pattern "I did X. But there's more to it than X." is AI filler; the second sentence announces its own function instead of just saying the thing. Either state both reasons in one sentence ("I picked X because Y, and because Z"), or drop the announcer line and pivot directly.
+- **No "announcer" prose.** Phrases that narrate their own purpose — "Here's the thing:", "But that's only part of it.", "What's interesting is...", "The real question is..." — are filler. Say the thing instead of announcing that you're about to say it.
 - **Never use em-dash clouds.** Three or more em-dashes clustered in one paragraph reads as AI prose, regardless of the rest of the voice. Spread tangents across parentheticals, commas, or separate sentences.
 - **Never open with "Let's explore", "In this post we'll", "dive in", or similar.** The profile lists what the author actually opens with; use those shapes instead.
 - **Never restructure a post when polishing.** Voice work is sentence-level. Restructure is a separate request.
 - **Never skip the Strunk pass.** Voice work and Strunk rules are orthogonal — both must run before the draft is considered done.
+- **Always invoke `humanizer` after Strunk.** The pipeline is voice → Strunk → humanizer, and the last step catches the AI tells Strunk and voice both miss (-ing tail phrases, rule-of-three lists, "testament to", curly quotes, promotional register).
 
 ## Next step
 

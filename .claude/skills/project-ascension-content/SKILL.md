@@ -110,6 +110,8 @@ Read the sources the matched prompt names. In practice:
 
 **Every technical claim the draft makes must be backed by one of:** a file path with a line range, a commit hash, a `docs/project-ascension/` doc section, or an ADR number. Unverifiable claims get a `[verify: <claim>]` inline marker and a `## Claims to verify` section at the end of the draft (inherited behavior from `portfolio-voice`).
 
+**Never fabricate personal content.** Technical claims need file/commit citations; personal claims need the author. Do not invent the author's history with games ("FFT taught me X"), their formative experiences, their opinions about external media, their emotional journey with a bug, or any autobiographical hook the content package does not record. Use `[placeholder: <specific thing the author should write>]` blocks for openings, closings, and any sentence that requires the author's actual voice. This rule is especially important for series intros and narrative posts, where the opening hook is where AI-fabricated voice is most obvious. See `portfolio-voice` Hard Rules for full treatment.
+
 ### 4. Check invariants before writing
 
 Before the first sentence of body prose:
