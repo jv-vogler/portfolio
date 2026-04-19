@@ -79,8 +79,8 @@ Use its **drafting behavior** (not polishing behavior) since this is a fresh pos
 
 `portfolio-voice` also owns:
 
-- Placeholder markers for media — use `[placeholder:screenshot of <specific thing>]`, `[placeholder:gif of …]`, `[placeholder:diagram of …]`, `[placeholder:code snippet of …]`. Never generic.
-- `[verify: <claim>]` markers for facts that need checking, collected under a `## Claims to verify` section at the end of the draft.
+- Placeholder tags for media — use `<placeholder>screenshot of <specific thing></placeholder>`, `<placeholder>gif of …</placeholder>`, `<placeholder>diagram of …</placeholder>`, `<placeholder>code snippet of …</placeholder>`. Never generic. Block form (tags on their own lines) for author-written prose sections. See `portfolio-voice §5`.
+- `<verify>the claim</verify>` tags for facts that need checking, collected under a `## Claims to verify` section at the end of the draft. The pre-publish guard in `src/seed/publish.ts` refuses to ship any file that still contains either tag.
 
 With voice loaded, write the body one H2 section at a time. Favor concrete examples and code over abstraction. Code fences must include a language tag — our renderer uses Shiki highlighting and plain fences render as gray blocks:
 
@@ -163,7 +163,7 @@ Do not run the command yourself unless the user explicitly asks.
 - **Never edit `src/seed/publish.ts` or `src/collections/Posts.ts` from this skill.** Schema changes are a separate task. If a required field is missing or the script fails, stop and surface the error to the user.
 - **Never invent new markdown features.** If something doesn't render, write a note in the post and flag the gap rather than hacking around it.
 - **Never skip step 4's `portfolio-voice` invocation, step 5's Strunk pass, or step 6's `humanizer` pass.** All three are mandatory for anything shipped on the portfolio — one paragraph or a ten-page essay, the chain runs the same way.
-- **Never invent facts.** If you are unsure about a claim (a date, a number, a library behavior, a quote), mark it `[verify: <claim>]` inline and list it under `## Claims to verify` at the end. Handoff belongs to the author, not to confident-sounding guesswork.
+- **Never invent facts.** If you are unsure about a claim (a date, a number, a library behavior, a quote), mark it `<verify>the claim</verify>` inline and list it under `## Claims to verify` at the end. Handoff belongs to the author, not to confident-sounding guesswork. The pre-publish guard in `src/seed/publish.ts` refuses to ship any file containing `<placeholder>` or `<verify>`.
 
 ## Verification after publish
 

@@ -108,9 +108,9 @@ Read the sources the matched prompt names. In practice:
 - Then read the relevant `FEATURE_*.md` and — only if needed — the actual `.gd` source under `game/src/`. Quote short excerpts with `file:line` citations.
 - For devlogs and postmortems, read `_captures/*.md` in the window plus the git log. Captures are the narrative spine; commits are the ground truth.
 
-**Every technical claim the draft makes must be backed by one of:** a file path with a line range, a commit hash, a `docs/project-ascension/` doc section, or an ADR number. Unverifiable claims get a `[verify: <claim>]` inline marker and a `## Claims to verify` section at the end of the draft (inherited behavior from `portfolio-voice`).
+**Every technical claim the draft makes must be backed by one of:** a file path with a line range, a commit hash, a `docs/project-ascension/` doc section, or an ADR number. Unverifiable claims get a `<verify>the claim</verify>` inline marker and a `## Claims to verify` section at the end of the draft (inherited behavior from `portfolio-voice`). The tag matches `<placeholder>` on purpose — one grep pattern, one visual signal, one pre-publish guard blocks both.
 
-**Never fabricate personal content.** Technical claims need file/commit citations; personal claims need the author. Do not invent the author's history with games ("FFT taught me X"), their formative experiences, their opinions about external media, their emotional journey with a bug, or any autobiographical hook the content package does not record. Use `[placeholder: <specific thing the author should write>]` blocks for openings, closings, and any sentence that requires the author's actual voice. This rule is especially important for series intros and narrative posts, where the opening hook is where AI-fabricated voice is most obvious. See `portfolio-voice` Hard Rules for full treatment.
+**Never fabricate personal content.** Technical claims need file/commit citations; personal claims need the author. Do not invent the author's history with games ("FFT taught me X"), their formative experiences, their opinions about external media, their emotional journey with a bug, or any autobiographical hook the content package does not record. Use block `<placeholder>...</placeholder>` tags for openings, closings, and any sentence that requires the author's actual voice. This rule is especially important for series intros and narrative posts, where the opening hook is where AI-fabricated voice is most obvious. See `portfolio-voice` Hard Rules for full treatment.
 
 ### 4. Check invariants before writing
 
@@ -128,14 +128,27 @@ Use the front-matter schema and folder convention owned by `blog-post`. Do not i
 
 The draft goes in `content/blog/<slug>/en.md` (the `content/` directory is gitignored; drafts never touch the repo). Follow the matched template for frontmatter and section order. Pad nothing — if a section has nothing to say, drop it (this is explicit in `devlog.md §3.2`).
 
-Use placeholder markers for media, as `portfolio-voice` will expect them:
+Use placeholder tags for anything the author will fill in, as `portfolio-voice` expects. All placeholders use `<placeholder>...</placeholder>` tags (HTML-style — visually distinct in raw markdown, easy to grep, survives the Markdown-to-Lexical pipeline).
 
-- `[placeholder:screenshot of <specific thing>]`
-- `[placeholder:gif of <specific thing>]`
-- `[placeholder:diagram of <specific thing>]`
-- `[placeholder:code snippet of <what>]`
+**Inline media placeholders:**
 
-Specific, not generic. `[placeholder:screenshot of battle UI with AP preview active]` is right; `[placeholder:screenshot of game]` is wrong.
+- `<placeholder>screenshot of <specific thing></placeholder>`
+- `<placeholder>gif of <specific thing></placeholder>`
+- `<placeholder>diagram of <specific thing></placeholder>`
+- `<placeholder>code snippet of <what></placeholder>`
+
+Specific, not generic. `<placeholder>screenshot of battle UI with AP preview active</placeholder>` is right; `<placeholder>screenshot of game</placeholder>` is wrong.
+
+**Block placeholders** for author-fill-in prose (personal openings, closings, reflective passages). Put opening and closing tags on their own lines:
+
+```
+<placeholder>
+Personal opening — 2-4 sentences on why this decision mattered to you.
+Do not let Claude draft inside this block.
+</placeholder>
+```
+
+See `portfolio-voice` SKILL drafting behavior §5 for the full placeholder contract.
 
 ### 6. Self-check against the matched prompt's constraints
 
@@ -145,7 +158,7 @@ If a check fails, revise once and try again. Don't emit a draft that fails a che
 
 ### 7. Hand off to `portfolio-voice`
 
-Invoke `portfolio-voice` with its **drafting behavior** (for a fresh draft) or **polishing behavior** (if the user handed over an existing draft). `portfolio-voice` reads `voice-profile.md`, rewrites sentence-by-sentence toward João's voice, preserves your placeholder and `[verify:]` markers, and then internally hands off to `elements-of-style:writing-clearly-and-concisely` for the Strunk pass.
+Invoke `portfolio-voice` with its **drafting behavior** (for a fresh draft) or **polishing behavior** (if the user handed over an existing draft). `portfolio-voice` reads `voice-profile.md`, rewrites sentence-by-sentence toward João's voice, preserves your `<placeholder>` and `<verify>` tags, and then internally hands off to `elements-of-style:writing-clearly-and-concisely` for the Strunk pass.
 
 Do not attempt the voice pass yourself. Do not skip it. Do not reverse the order — facts and structure first, voice second, Strunk third. Reversing loses the voice to over-editing.
 
@@ -187,7 +200,7 @@ These are non-negotiable. Most are inherited from the content package and `portf
 
 1. **Never contradict an accepted ADR.** If the draft would say something that an ADR already ruled out, **STOP and surface the conflict**. The whole value of ADRs is that they are immutable — don't write around one.
 2. **Never contradict a Design Invariant in `GAME_DESIGN.md`.** Same rule. The ten hard rules in §"Design Invariants" govern the game's shape; a post that fudges one is wrong, not clever.
-3. **Every technical claim cites a file path, a commit hash, or a doc section.** If the citation cannot be produced, mark the claim `[verify: <claim>]` and collect it under `## Claims to verify`. Publishing a hallucination is worse than shipping a flagged uncertainty.
+3. **Every technical claim cites a file path, a commit hash, or a doc section.** If the citation cannot be produced, mark the claim `<verify>the claim</verify>` and collect it under `## Claims to verify`. Publishing a hallucination is worse than shipping a flagged uncertainty. The pre-publish guard in `src/seed/publish.ts` refuses to ship any file containing `<placeholder>` or `<verify>` — both tags are load-bearing.
 4. **Use canonical terms from the context pack exactly.** Do not substitute synonyms. "Intent" not "strategy." "Composite scoring path" not "heuristic." The packs list their anti-terms explicitly.
 5. **First person, singular.** Past tense for what happened; present tense for how the code works. No "we" unless someone else actually contributed.
 6. **No AI tells.** No em-dash clouds (cap: 2 per 500 words), no "let's explore", no "in this post we'll", no "in conclusion", no "stay tuned", no "exciting things ahead", no tricolons pretending to be insight.

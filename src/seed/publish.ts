@@ -229,6 +229,60 @@ function validatePt(slug: string, d: Record<string, unknown>): PtFrontMatter {
   return out;
 }
 
+// ─── Unresolved-marker guard ─────────────────────────────────────────────
+// Refuses to publish when a draft still carries authoring tags that are
+// meant to be resolved before the post ships:
+//   <placeholder>...</placeholder>   author-written prose the LLM must not fill
+//   <verify>...</verify>             unverified factual claim
+// Both use the same HTML-tag shape on purpose: one grep pattern, one visual
+// signal, one guard. Dry-run prints a warning and continues so the author can
+// still preview the Lexical conversion while iterating.
+
+type MarkerHit = { line: number; snippet: string };
+
+function scanMarkers(body: string): MarkerHit[] {
+  const hits: MarkerHit[] = [];
+  const lines = body.split(/\r?\n/);
+  const pattern = /<(?:placeholder|verify)\b/i;
+  for (let i = 0; i < lines.length; i++) {
+    if (pattern.test(lines[i])) {
+      hits.push({ line: i + 1, snippet: lines[i].trim().slice(0, 120) });
+    }
+  }
+  return hits;
+}
+
+function reportMarkers(slug: string, file: string, hits: MarkerHit[]): string {
+  const header = `[${slug}] ${file}: ${hits.length} unresolved marker${hits.length === 1 ? "" : "s"} found`;
+  const body = hits.map((h) => `    line ${h.line}: ${h.snippet}`).join("\n");
+  return `${header}\n${body}`;
+}
+
+function checkUnresolvedMarkers(
+  slug: string,
+  enRaw: string,
+  ptRaw: string | null,
+  dryRun: boolean,
+): void {
+  const reports: string[] = [];
+  const enHits = scanMarkers(enRaw);
+  if (enHits.length > 0) reports.push(reportMarkers(slug, "en.md", enHits));
+  if (ptRaw !== null) {
+    const ptHits = scanMarkers(ptRaw);
+    if (ptHits.length > 0) reports.push(reportMarkers(slug, "pt.md", ptHits));
+  }
+  if (reports.length === 0) return;
+
+  const joined = reports.join("\n");
+  if (dryRun) {
+    console.warn(`  ⚠️  Unresolved markers (dry-run continues):\n${joined}`);
+    return;
+  }
+  throw new Error(
+    `Unresolved markers present — resolve them before publishing, or re-run with --dry-run to preview:\n${joined}`,
+  );
+}
+
 // ─── Cover image discovery ────────────────────────────────────────────────
 
 function findCover(postDir: string): { filePath: string; ext: string } | null {
@@ -310,17 +364,22 @@ async function publishOne(payload: Payload, slug: string, args: CliArgs): Promis
   const enPath = path.join(postDir, "en.md");
   if (!fs.existsSync(enPath)) throw new Error(`[${slug}] en.md not found`);
 
-  const { data: enData, body: enBody } = parseFrontMatter(fs.readFileSync(enPath, "utf-8"));
+  const enRaw = fs.readFileSync(enPath, "utf-8");
+  const { data: enData, body: enBody } = parseFrontMatter(enRaw);
   const enFm = validateEn(slug, enData);
 
   const ptPath = path.join(postDir, "pt.md");
   let ptFm: PtFrontMatter | null = null;
   let ptBody: string | null = null;
+  let ptRaw: string | null = null;
   if (fs.existsSync(ptPath)) {
-    const parsed = parseFrontMatter(fs.readFileSync(ptPath, "utf-8"));
+    ptRaw = fs.readFileSync(ptPath, "utf-8");
+    const parsed = parseFrontMatter(ptRaw);
     ptFm = validatePt(slug, parsed.data);
     ptBody = parsed.body;
   }
+
+  checkUnresolvedMarkers(slug, enRaw, ptRaw, args.dryRun);
 
   const cover = findCover(postDir);
   const coverId = cover ? await upsertCover(payload, enFm, ptFm, cover, args.dryRun) : null;
