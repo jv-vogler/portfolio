@@ -23,12 +23,15 @@ When the user is drafting from scratch, `blog-post` orchestrates and `portfolio-
 
 The cached profile lives at `voice-profile.md` alongside this file. Read it on every invocation. It is the source of truth for:
 
-- Sentence rhythm and length patterns
-- Register and vocabulary
-- Typical opening and closing moves
-- Punctuation habits (real ones, not invented ones)
-- Anti-patterns — phrases and tics that read as AI prose
-- Verbatim example sentences to calibrate tone
+- **Craft principles** — the Strunk / King / Williams & Colomb rules that shape sentence choices (omit needless words, active voice, positive form, adverb-averse, old-before-new, characters-as-subjects, emphatic-end)
+- **Sentence-hook variety** — the discipline against repeated openers ("Since", "While", "Additionally" etc. capped at one per paragraph; no two consecutive sentences with the same onset)
+- **Ten structural markers** — fake-reader archetype, strikethrough-as-punchline, structural callbacks, signaled borrowed jokes, boring/real/gamer triptych, deadpan ellipses, gradual backpedal, meta-asides, dark humor via absurd specifics, the mandatory "not a silver bullet" tradeoff beat
+- **Rhythm, register, pronouns** — when `we` / `you` / `I` are load-bearing; when staccato short sentences help and when they're a tic
+- **Opening and closing shapes** — scene, confrontation, or flat — each with verbatim calibration passages
+- **Punctuation habits** — em-dash discipline, parentheticals, strikethrough, ellipses, ALL CAPS, exclamation points
+- **Humanizer-tell taxonomy** — the AI-isms the profile actively avoids (-ing tails, rule-of-three, "testament to", promotional register, em-dash clouds, announcer prose, curly quotes), with counter-examples from the corpus
+- **Profanity ceiling** — where the line is
+- **What the skill owns vs what the author owns** — skill handles structure and defaults; author tunes headings, puns, and personality-heavy asides
 
 If the profile does not exist yet, see **Deriving the profile** below.
 

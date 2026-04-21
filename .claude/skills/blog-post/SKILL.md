@@ -67,7 +67,7 @@ coverAlt: "Describe the cover image in one short phrase"
 
 ## 4. Draft each section
 
-**Before writing the first sentence, invoke `portfolio-voice`.** It loads the cached voice profile and owns sentence-level voice decisions — openings, closings, punctuation habits, anti-patterns. Voice must be applied from the first sentence; drafting generically and "voice-ifying later" is explicitly out of policy (see the portfolio-voice skill for the reasoning).
+**Before writing the first sentence, invoke `portfolio-voice`.** It loads the cached voice profile and owns sentence-level decisions: craft principles (Strunk / King / Williams & Colomb rules), sentence-hook variety, rhythm, pronouns, opening and closing shapes, punctuation habits, the ten structural markers, and the humanizer-tell taxonomy. Voice must be applied from the first sentence; drafting generically and "voice-ifying later" is explicitly out of policy (see the portfolio-voice skill for the reasoning).
 
 Skill invocation:
 
