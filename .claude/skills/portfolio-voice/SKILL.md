@@ -28,7 +28,6 @@ The cached profile lives at `voice-profile.md` alongside this file. Read it on e
 - **Ten structural markers** — fake-reader archetype, strikethrough-as-punchline, structural callbacks, signaled borrowed jokes, boring/real/gamer triptych, deadpan ellipses, gradual backpedal, meta-asides, dark humor via absurd specifics, the mandatory "not a silver bullet" tradeoff beat
 - **Rhythm, register, pronouns** — when `we` / `you` / `I` are load-bearing; when staccato short sentences help and when they're a tic
 - **Opening and closing shapes** — scene, confrontation, or flat — each with verbatim calibration passages
-- **Punctuation habits** — em-dash discipline, parentheticals, strikethrough, ellipses, ALL CAPS, exclamation points
 - **Humanizer-tell taxonomy** — the AI-isms the profile actively avoids (-ing tails, rule-of-three, "testament to", promotional register, em-dash clouds, announcer prose, curly quotes), with counter-examples from the corpus
 - **Profanity ceiling** — where the line is
 - **What the skill owns vs what the author owns** — skill handles structure and defaults; author tunes headings, puns, and personality-heavy asides
@@ -104,9 +103,8 @@ If `voice-profile.md` does not exist, stop and ask the user to point at 2–5 re
    - Vocabulary register (casual/technical/dry — with examples)
    - Typical opening move (2–5 verbatim openings from the references)
    - Typical closing move (2–3 verbatim closings)
-   - Punctuation quirks (real ones — em-dash use, parentheticals, strikethrough, ellipses, ALL CAPS)
+   - Punctuation quirks (real ones parentheticals, strikethrough, ellipses, ALL CAPS)
    - Rhetorical moves the author actually uses (fake Q&A, pop culture drops, thematic headings, etc.)
-   - Anti-patterns the author does NOT use (phrases to avoid, AI-isms, em-dash clouds, corporate hedging)
    - 3–5 verbatim sentences to calibrate against
 3. Do not re-derive on subsequent runs. Only re-derive if the user explicitly asks ("refresh the voice profile", "I've written a few more posts, update the profile").
 
@@ -132,7 +130,6 @@ Stop and ask the user, rather than guessing, when:
 - **Never fabricate personal content.** No invented feelings, anecdotes, taste, formative moments, or opinions about external media. A `<placeholder>...</placeholder>` tag is the only honest move. The cheesiest failure mode is the "X taught me that Y is life" cold open — avoid it categorically.
 - **No setup-undercut pacing.** The pattern "I did X. But there's more to it than X." is AI filler; the second sentence announces its own function instead of just saying the thing. Either state both reasons in one sentence ("I picked X because Y, and because Z"), or drop the announcer line and pivot directly.
 - **No "announcer" prose.** Phrases that narrate their own purpose — "Here's the thing:", "But that's only part of it.", "What's interesting is...", "The real question is..." — are filler. Say the thing instead of announcing that you're about to say it.
-- **Never use em-dash clouds.** Three or more em-dashes clustered in one paragraph reads as AI prose, regardless of the rest of the voice. Spread tangents across parentheticals, commas, or separate sentences.
 - **Never open with "Let's explore", "In this post we'll", "dive in", or similar.** The profile lists what the author actually opens with; use those shapes instead.
 - **Never restructure a post when polishing.** Voice work is sentence-level. Restructure is a separate request.
 - **Never skip the Strunk pass.** Voice work and Strunk rules are orthogonal — both must run before the draft is considered done.
