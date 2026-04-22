@@ -4,6 +4,23 @@
 
 @plugin "@tailwindcss/typography";
 
+/* Tailwind Typography injects literal backticks around inline <code> via
+   ::before / ::after, and bolds them. Strip the backticks and keep the pill
+   style defined above. Placed outside @layer so it outranks the plugin. */
+.prose :where(code):not(:where([class~="not-prose"] *, pre *))::before,
+.prose :where(code):not(:where([class~="not-prose"] *, pre *))::after {
+  content: "" !important;
+}
+.prose :where(code):not(:where([class~="not-prose"] *, pre *)) {
+  background-color: color-mix(in oklab, var(--muted) 70%, transparent) !important;
+  color: var(--foreground) !important;
+  padding: 0.15em 0.4em !important;
+  margin: 0 0.15em !important;
+  border-radius: calc(var(--radius) - 2px) !important;
+  font-weight: 500 !important;
+  font-size: 0.9em !important;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
@@ -107,6 +124,7 @@
       "liga" 1,
       "calt" 1;
   }
+
   html {
     scroll-behavior: smooth;
   }
