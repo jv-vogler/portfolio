@@ -2,9 +2,9 @@
 title: "How to configure Claude Code for any language"
 description: "A short guide to giving Claude Code the tooling it needs — LSPs, MCPs, language skills, auto mode — so it can self-correct."
 publishedDate: "2026-04-21"
-status: "draft"
+status: "published"
 tags: [claude-code, tooling, ai, lsp, developer-experience]
-featured: false
+featured: true
 ---
 
 I mostly work with TypeScript and GDScript, but lately Claude Code has been pulling towards new horizons with Elixir and Rust projects, which I'd never touched before. This post is about what I had to bolt on to make it work.
@@ -76,8 +76,8 @@ claude mcp add godot -- npx @coding-solo/godot-mcp
 
 References:
 
-- https://github.com/minami110/claude-godot-tools/tree/main
-- https://github.com/Coding-Solo/godot-mcp
+- [https://github.com/minami110/claude-godot-tools/tree/main](https://github.com/minami110/claude-godot-tools/tree/main)
+- [https://github.com/Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp)
 
 With both installed (plus extras for VSCode and GDUnit, a testing framework), Claude stopped inventing node names. It reads the scene tree, sees that `Player` has a `HealthBar` child of type `ProgressBar`, and calls it correctly the first time. My prompts went from "here's the scene structure, the player is at `/root/Main/Player`, it has a signal called…" to "add a damage flash when health drops."
 
@@ -104,8 +104,8 @@ claude plugin install elixir-ls-lsp@claude-plugins-official
 
 References:
 
-- https://github.com/oliver-kriska/claude-elixir-phoenix
-- https://github.com/anthropics/claude-plugins-official
+- [https://github.com/oliver-kriska/claude-elixir-phoenix](https://github.com/oliver-kriska/claude-elixir-phoenix)
+- [https://github.com/anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official)
 
 Put together, the harness now does what I would do if I knew Elixir.
 
@@ -132,7 +132,7 @@ claude plugin install rust-skills@rust-skills
 
 References:
 
-- https://github.com/actionbook/rust-skills
+- [https://github.com/actionbook/rust-skills](https://github.com/actionbook/rust-skills)
 
 The Rust compiler is already famously good at feedback. The LSP on top tightened the loop from "write → `cargo check` → read errors → fix" into "write → know it's wrong before you finish writing". Fewer round trips, and a published crate I couldn't have reviewed line-by-line.
 
@@ -156,10 +156,10 @@ Hopefully this will make your development way smoother with agentic engineering,
 
 ## References
 
-- https://github.com/anthropics/claude-plugins-official
-- https://github.com/minami110/claude-godot-tools/tree/main
-- https://github.com/Coding-Solo/godot-mcp
-- https://github.com/oliver-kriska/claude-elixir-phoenix
-- https://github.com/actionbook/rust-skills
-- https://github.com/anthropics/claude-code/issues/18125#issuecomment-3843601648
-- https://martinfowler.com/articles/harness-engineering.html
+- [https://github.com/anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official)
+- [https://github.com/minami110/claude-godot-tools/tree/main](https://github.com/minami110/claude-godot-tools/tree/main)
+- [https://github.com/Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp)
+- [https://github.com/oliver-kriska/claude-elixir-phoenix](https://github.com/oliver-kriska/claude-elixir-phoenix)
+- [https://github.com/actionbook/rust-skills](https://github.com/actionbook/rust-skills)
+- [https://github.com/anthropics/claude-code/issues/18125#issuecomment-3843601648](https://github.com/anthropics/claude-code/issues/18125#issuecomment-3843601648)
+- [https://martinfowler.com/articles/harness-engineering.html](https://martinfowler.com/articles/harness-engineering.html)
