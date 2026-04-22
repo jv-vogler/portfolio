@@ -85,7 +85,15 @@ These are the deep ones — the things that separate a post that "sounds like Jo
 
 ## Rhythm
 
-Wide mix. Clause-heavy setups get punctured by short lines — but short lines are punctuation, not a default. Over-clustering them ("The fix. Was easy. Like this.") reads worse than one flat sentence. Fragments and one-word paragraphs work when they're the payoff of a longer build; they don't work as a rhythm section.
+Default to medium-to-long sentences with real connective tissue between clauses. Clause-heavy setups get punctured by short lines — but short lines are punctuation, not a default. A paragraph where every sentence could stand alone as a line of marketing copy has had its connective tissue cut, not written.
+
+**Concrete floor:** no more than two consecutive sentences under eight words. Three in a row is staccato — rewrite.
+
+**The em-dash trap.** When reducing em-dashes, reach for parentheticals and commas first. Semicolons next. Periods are the last resort. Splitting "It doesn't reveal the whole battle — you have to pick who to scan — but when you do…" into three full-stop sentences trades one AI-tell (em-dash cloud) for a worse one (staccato cluster). The natural fix is almost always a comma, a parenthetical, or a single em-dash kept in place — not a full stop.
+
+**Fragments earn their keep by sitting after a long build.** "Yup." after two paragraphs of setup is a punchline. A floating fragment under a full sentence it barely modifies ("First time I've touched the language." appended to "I recently joined a _secret_ Elixir codebase at work.") is edit-pass residue — fold it back into the previous sentence with a comma or an em-dash aside.
+
+Over-clustering short sentences ("The fix. Was easy. Like this.") reads worse than one flat sentence.
 
 One-word paragraphs that do land: "Yup." / "Phew!" / "WHAAAT?" — always as reactions, never as statements.
 
