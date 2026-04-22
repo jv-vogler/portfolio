@@ -11,14 +11,19 @@ import { useEffect, useState } from "react";
 
 const NAME = "JV Vogler";
 
-/** Per-character stagger delay (seconds). */
 const CHAR_STAGGER = 0.08;
-/** Duration of each letter's fade-up (seconds). */
 const CHAR_FADE_DURATION = 0.5;
-/** Pause after all letters have risen before unblurring (seconds). */
 const PAUSE_BEFORE_UNBLUR = 0.15;
-/** Duration of the blur → sharp transition (seconds). */
 const UNBLUR_DURATION = 3.0;
+
+/** ms/character for typing animations. */
+const TYPING_SPEED_MS = 35;
+/** Gap between comment end and tagline start (ms). */
+const TYPING_GAP_MS = 300;
+/** Delay from cascade end before comment starts (ms). */
+const COMMENT_START_OFFSET_MS = 200;
+/** Delay from tagline start before the latest-post card appears (ms). */
+const POST_CARD_OFFSET_MS = 0;
 
 /** Pre-computed per-character metadata. */
 const NAME_CHARS = (() => {
@@ -73,27 +78,25 @@ export function Hero({ latestPost }: HeroProps) {
 
   // ── Comment: typing (starts right after cascade, while still unblurring) ───
   const cascadeEndMs = ((NON_SPACE_COUNT - 1) * CHAR_STAGGER + CHAR_FADE_DURATION) * 1000;
-  const commentStart = cascadeEndMs + 200;
+  const commentStart = cascadeEndMs + COMMENT_START_OFFSET_MS;
   const { displayedText: commentDisplay } = useTypingAnimation({
     text: comment,
-    speed: 35,
+    speed: TYPING_SPEED_MS,
     startDelay: commentStart,
     enabled: !prefersReducedMotion,
   });
 
   // ── Tagline: typing (after comment) ────────────────────────
-  const taglineStart = commentStart + comment.length * 35 + 300;
+  const taglineStart = commentStart + comment.length * TYPING_SPEED_MS + TYPING_GAP_MS;
   const { displayedText: taglineDisplay } = useTypingAnimation({
     text: tagline,
-    speed: 35,
+    speed: TYPING_SPEED_MS,
     startDelay: taglineStart,
     enabled: !prefersReducedMotion,
   });
 
   // Delay for the latest-post card (seconds)
-  const latestPostDelay = prefersReducedMotion
-    ? 0
-    : (taglineStart + tagline.length * 35 + 400) / 1000;
+  const latestPostDelay = prefersReducedMotion ? 0 : (taglineStart + POST_CARD_OFFSET_MS) / 1000;
 
   return (
     <section className="dot-grid relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden bg-[oklch(0.18_0.01_180)]">
