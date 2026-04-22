@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "title": "JV Vogler — Software Engineer",
+    "description": "Who are we, really?"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "heading": "I'm a Software Engineer",
+    "paragraph": "Hi! I am JV and I'm constantly learning and improving to deliver outstanding web experiences. Currently I love to work on web applications using technologies such as React, TypeScript, Next.js, Tailwind CSS, and more.",
+    "cta": "Portfolio",
+    "comment": "// building things since I can remember",
+    "tagline": "Software Engineer | Builder of Interactive Experiences"
+  },
+  "experience": {
+    "heading": "Experience",
+    "description": "Technologies and tools I work with daily.",
+    "category": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Tools & Platform"
+    }
+  },
+  "portfolio": {
+    "heading": "Portfolio",
+    "description": "A journey through the projects that shaped me as a developer.",
+    "viewProject": "View Project",
+    "noProjects": "No projects yet. Check back soon!",
+    "featured": "Featured",
+    "backToPortfolio": "Back to portfolio",
+    "techStack": "Tech Stack",
+    "liveDemo": "Live Demo",
+    "viewCode": "View Code",
+    "learnMore": "Learn More",
+    "caseStudy": {
+      "heading": "Case Study"
+    },
+    "prevProject": "Previous",
+    "nextProject": "Next",
+    "projectNavigation": "Project navigation"
+  },
+  "skills": {
+    "heading": "How I Build",
+    "description": "Technologies and tools I use to bring ideas to life."
+  },
+  "contact": {
+    "heading": "Contact",
+    "description": "Use the form below to get in touch with me!",
+    "terminalCommand": "echo \"Let's build something together\"",
+    "terminalOutput": "Ready to collaborate? Drop me a message below.",
+    "name": "Name",
+    "namePlaceholder": "Anakin Skywalker",
+    "email": "Email",
+    "emailPlaceholder": "lordvader@websith.com",
+    "message": "Message",
+    "messagePlaceholder": "Enter your message",
+    "submit": "Submit",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again.",
+    "validation": {
+      "required": "Required field",
+      "nameMin": "Needs at least 2 characters",
+      "messageMin": "Needs at least 20 characters",
+      "emailFormat": "Needs to be a valid email"
+    }
+  },
+  "blog": {
+    "heading": "Blog",
+    "description": "Thoughts, tutorials, and insights on web development.",
+    "noPosts": "No posts yet. Check back soon!",
+    "readMore": "Read more",
+    "backToList": "Back to all posts",
+    "filterByTag": "Filter by tag",
+    "allTags": "All",
+    "featured": "Featured",
+    "readingTime": "{minutes} min read",
+    "updated": "Updated {date}",
+    "relatedPosts": "Related Posts",
+    "sharePost": "Share post",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied!",
+    "tableOfContents": "Table of Contents",
+    "backToTop": "Back to top",
+    "rss": "RSS Feed",
+    "focusedReading": "Focused reading",
+    "exitFocusedReading": "Exit focused reading"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist.",
+    "backHome": "Go back home"
+  },
+  "a11y": {
+    "navigationMenu": "Navigation menu",
+    "authorPhoto1": "Author's photo",
+    "authorPhoto2": "Author's silhouette with code in the background",
+    "thumbnail": "Project's screenshot",
+    "toggleTheme": "Toggle theme",
+    "toggleLanguage": "Toggle language",
+    "skipToContent": "Skip to content",
+    "desktopNav": "Main navigation",
+    "mobileNav": "Mobile navigation",
+    "opensInNewTab": "opens in a new tab",
+    "closeMenu": "Close menu",
+    "homeLink": "JV Vogler — Home"
+  },
+  "about": {
+    "heading": "About Me",
+    "metaDescription": "Learn more about JV Vogler — a software engineer passionate about building great web experiences.",
+    "elevatorPitch": "I'm a software engineer who loves turning ideas into polished, interactive web experiences. From game dev roots to modern web — I build things that feel alive.",
+    "location": "Brazil",
+    "learnMore": "Learn more about me",
+    "reachOut": "or reach out",
+    "viewPortfolio": "View my work",
+    "readBlog": "Read my blog"
+  },
+  "commandPalette": {
+    "placeholder": "Search…",
+    "navigation": "Navigation",
+    "posts": "Blog Posts",
+    "social": "Social",
+    "actions": "Actions",
+    "noResults": "No results found.",
+    "toggleTheme": "Toggle theme",
+    "toggleLanguage": "Switch language",
+    "projects": "Projects"
+  }
+}

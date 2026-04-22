@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "title": "JV Vogler — Engenheiro de Software",
+    "description": "Quem somos nós, realmente?"
+  },
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "portfolio": "Portfólio",
+    "blog": "Blog",
+    "contact": "Contato"
+  },
+  "hero": {
+    "heading": "Sou um Engenheiro de Software",
+    "paragraph": "Olá! Sou o JV e estou constantemente aprendendo e melhorando para entregar experiências web excepcionais. Atualmente eu amo trabalhar em aplicações web usando tecnologias como React, TypeScript, Next.js, Tailwind CSS, e mais.",
+    "cta": "Portfólio",
+    "comment": "// construindo coisas desde que me lembro",
+    "tagline": "Engenheiro de Software | Criador de Experiências Interativas"
+  },
+  "experience": {
+    "heading": "Experiência",
+    "description": "Tecnologias e ferramentas com as quais trabalho diariamente.",
+    "category": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Ferramentas & Plataforma"
+    }
+  },
+  "portfolio": {
+    "heading": "Portfólio",
+    "description": "Uma jornada pelos projetos que me moldaram como desenvolvedor.",
+    "viewProject": "Ver Projeto",
+    "noProjects": "Nenhum projeto ainda. Volte em breve!",
+    "featured": "Destaque",
+    "backToPortfolio": "Voltar ao portfólio",
+    "techStack": "Tecnologias",
+    "liveDemo": "Demo",
+    "viewCode": "Ver Código",
+    "learnMore": "Saiba Mais",
+    "caseStudy": {
+      "heading": "Estudo de Caso"
+    },
+    "prevProject": "Anterior",
+    "nextProject": "Próximo",
+    "projectNavigation": "Navegação de projetos"
+  },
+  "skills": {
+    "heading": "Como Eu Construo",
+    "description": "Tecnologias e ferramentas que uso para dar vida a ideias."
+  },
+  "contact": {
+    "heading": "Contato",
+    "description": "Use o formulário abaixo para entrar em contato comigo!",
+    "terminalCommand": "echo \"Vamos construir algo juntos\"",
+    "terminalOutput": "Pronto para colaborar? Me mande uma mensagem abaixo.",
+    "name": "Nome",
+    "namePlaceholder": "Anakin Skywalker",
+    "email": "Email",
+    "emailPlaceholder": "lordvader@websith.com",
+    "message": "Mensagem",
+    "messagePlaceholder": "Digite sua mensagem",
+    "submit": "Enviar",
+    "success": "Mensagem enviada com sucesso!",
+    "error": "Falha ao enviar mensagem. Por favor, tente novamente.",
+    "validation": {
+      "required": "Campo obrigatório",
+      "nameMin": "Precisa de pelo menos 2 caracteres",
+      "messageMin": "Precisa de pelo menos 20 caracteres",
+      "emailFormat": "Precisa ser um email válido"
+    }
+  },
+  "blog": {
+    "heading": "Blog",
+    "description": "Pensamentos, tutoriais e insights sobre desenvolvimento web.",
+    "noPosts": "Nenhum post ainda. Volte em breve!",
+    "readMore": "Leia mais",
+    "backToList": "Voltar para todos os posts",
+    "filterByTag": "Filtrar por tag",
+    "allTags": "Todas",
+    "featured": "Destaque",
+    "readingTime": "{minutes} min de leitura",
+    "updated": "Atualizado em {date}",
+    "relatedPosts": "Posts Relacionados",
+    "sharePost": "Compartilhar",
+    "copyLink": "Copiar link",
+    "linkCopied": "Link copiado!",
+    "tableOfContents": "Índice",
+    "backToTop": "Voltar ao topo",
+    "rss": "Feed RSS",
+    "focusedReading": "Leitura focada",
+    "exitFocusedReading": "Sair da leitura focada"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados."
+  },
+  "notFound": {
+    "title": "Página Não Encontrada",
+    "description": "A página que você está procurando não existe.",
+    "backHome": "Voltar para o início"
+  },
+  "a11y": {
+    "navigationMenu": "Menu de navegação",
+    "authorPhoto1": "Foto do autor",
+    "authorPhoto2": "Silhueta do autor com código no fundo",
+    "thumbnail": "Captura de tela do projeto",
+    "toggleTheme": "Alternar tema",
+    "toggleLanguage": "Alternar idioma",
+    "skipToContent": "Pular para o conteúdo",
+    "desktopNav": "Navegação principal",
+    "mobileNav": "Navegação mobile",
+    "opensInNewTab": "abre em uma nova aba",
+    "closeMenu": "Fechar menu",
+    "homeLink": "JV Vogler — Início"
+  },
+  "about": {
+    "heading": "Sobre Mim",
+    "metaDescription": "Saiba mais sobre JV Vogler — um engenheiro de software apaixonado por criar ótimas experiências web.",
+    "elevatorPitch": "Sou um engenheiro de software que ama transformar ideias em experiências web interativas e polidas. Das raízes em game dev à web moderna — eu construo coisas que ganham vida.",
+    "location": "Brasil",
+    "learnMore": "Saiba mais sobre mim",
+    "reachOut": "ou entre em contato",
+    "viewPortfolio": "Ver meu trabalho",
+    "readBlog": "Ler meu blog"
+  },
+  "commandPalette": {
+    "placeholder": "Buscar…",
+    "navigation": "Navegação",
+    "posts": "Posts do Blog",
+    "social": "Social",
+    "actions": "Ações",
+    "noResults": "Nenhum resultado encontrado.",
+    "toggleTheme": "Alternar tema",
+    "toggleLanguage": "Alternar idioma",
+    "projects": "Projetos"
+  }
+}
