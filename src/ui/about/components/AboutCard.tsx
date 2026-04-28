@@ -97,7 +97,7 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
                   href={item.url}
                   target={isMailto ? undefined : "_blank"}
                   rel={isMailto ? undefined : "noopener noreferrer"}
-                  className="flex size-10 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  className="flex size-10 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-colors hover:text-foreground"
                   variants={prefersReducedMotion ? undefined : fadeInUp}
                   aria-label={item.label}
                 >
@@ -111,7 +111,7 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
           <div className="flex flex-col items-end gap-1">
             <Link
               href="/about"
-              className="text-sm font-medium text-foreground transition-colors hover:text-muted-foreground"
+              className="text-sm font-medium text-foreground transition-colors hover:underline"
             >
               {t("learnMore")} &rarr;
             </Link>

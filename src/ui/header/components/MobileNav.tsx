@@ -67,7 +67,8 @@ export function MobileNav({ isFocused = false }: { isFocused?: boolean }) {
 
         {/* Header / branding */}
         <div className="flex items-center gap-3 border-b border-border/60 px-5 py-4">
-          <div className="flex size-8 items-center justify-center rounded-md bg-accent text-sm font-bold text-foreground">
+          {/* JV brand chip — the one accent moment for the mobile sheet (Principle 5). */}
+          <div className="flex size-8 items-center justify-center rounded-md bg-primary text-sm font-bold text-primary-foreground">
             JV
           </div>
           <div>

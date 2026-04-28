@@ -62,9 +62,7 @@ export function SpotlightCard({ post }: SpotlightCardProps) {
               </span>
             </div>
 
-            <CardTitle className="text-2xl transition-colors group-hover:text-muted-foreground sm:text-3xl">
-              {post.title}
-            </CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl">{post.title}</CardTitle>
             <CardDescription className="text-base">{post.description}</CardDescription>
           </CardHeader>
 

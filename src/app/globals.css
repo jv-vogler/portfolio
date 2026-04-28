@@ -42,10 +42,12 @@
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  /* Neutral focus ring derived from --foreground at reduced opacity.
-     Decoupled from --primary so the brand green is reserved for one
-     intentional moment per viewport (Principle 5). */
-  --ring: oklch(0.708 0 0 / 60%);
+  /* Crisp paper-cream focus ring. Decoupled from --primary so the brand
+     green is reserved for one intentional moment per viewport (Principle
+     5). Full alpha here because the base layer applies outline-ring/50
+     globally — a /60% token would land below the WCAG 2.2 SC 2.4.11
+     focus-appearance threshold against the ink background. */
+  --ring: oklch(0.85 0 0);
   --radius: 0.625rem;
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
