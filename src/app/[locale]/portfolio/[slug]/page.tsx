@@ -128,26 +128,6 @@ export default async function PortfolioDetailPage({
             }}
           />
 
-          {/* HUD corner brackets */}
-          <div className="pointer-events-none absolute inset-0 z-20">
-            <div
-              className="absolute top-0 left-0 h-5 w-5 border-t-2 border-l-2"
-              style={{ borderColor: accent, opacity: 0.5 }}
-            />
-            <div
-              className="absolute top-0 right-0 h-5 w-5 border-t-2 border-r-2"
-              style={{ borderColor: accent, opacity: 0.5 }}
-            />
-            <div
-              className="absolute bottom-0 left-0 h-5 w-5 border-b-2 border-l-2"
-              style={{ borderColor: accent, opacity: 0.5 }}
-            />
-            <div
-              className="absolute bottom-0 right-0 h-5 w-5 border-b-2 border-r-2"
-              style={{ borderColor: accent, opacity: 0.5 }}
-            />
-          </div>
-
           {project.thumbnail ? (
             <Image
               src={project.thumbnail.url}

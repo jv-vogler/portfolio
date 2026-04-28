@@ -198,26 +198,6 @@ function ProjectCard({
         }}
         onMouseLeave={() => setHovered(false)}
       >
-        {/* HUD corner brackets */}
-        <div className="pointer-events-none absolute inset-0 z-20">
-          <div
-            className="absolute top-0 left-0 h-5 w-5 border-t-2 border-l-2"
-            style={{ borderColor: accentColor, opacity: hovered ? 0.9 : 0.4 }}
-          />
-          <div
-            className="absolute top-0 right-0 h-5 w-5 border-t-2 border-r-2"
-            style={{ borderColor: accentColor, opacity: hovered ? 0.9 : 0.4 }}
-          />
-          <div
-            className="absolute bottom-0 left-0 h-5 w-5 border-b-2 border-l-2"
-            style={{ borderColor: accentColor, opacity: hovered ? 0.9 : 0.4 }}
-          />
-          <div
-            className="absolute bottom-0 right-0 h-5 w-5 border-b-2 border-r-2"
-            style={{ borderColor: accentColor, opacity: hovered ? 0.9 : 0.4 }}
-          />
-        </div>
-
         {/* Top accent bar */}
         <div
           className="h-0.5 w-full"
