@@ -69,7 +69,7 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
 
           <div>
             <h2 className="text-2xl font-bold text-foreground sm:text-3xl">JV Vogler</h2>
-            <p className="text-lg text-primary">Software Engineer</p>
+            <p className="text-lg text-muted-foreground">Software Engineer</p>
             <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
               <MapPin className="size-3.5" />
               {t("location")}

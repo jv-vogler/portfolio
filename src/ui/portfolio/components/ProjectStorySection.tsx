@@ -109,6 +109,7 @@ function HeroLayout({ project, reducedMotion, chapter, narrative }: Props) {
         )}
         <div className="absolute inset-0 bg-linear-to-t from-background via-background/50 to-transparent" />
         <div className="relative z-10 w-full px-6 pb-[12vh] sm:px-10 lg:px-16">
+          {/* Chapter marker — the one intentional accent moment for this viewport (Principle 5). */}
           <motion.span
             style={reducedMotion ? undefined : { y: chapterY, opacity: chapterOpacity }}
             className="mb-4 block text-sm font-medium tracking-widest text-primary uppercase"
