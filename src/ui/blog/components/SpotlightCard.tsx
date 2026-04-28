@@ -35,7 +35,7 @@ export function SpotlightCard({ post }: SpotlightCardProps) {
                 src={post.coverImage.heroUrl ?? post.coverImage.url}
                 alt={post.coverImage.alt}
                 fill
-                className="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105"
+                className="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105 motion-safe:group-focus-within:scale-105"
                 sizes="(max-width: 768px) 100vw, 896px"
                 priority
               />

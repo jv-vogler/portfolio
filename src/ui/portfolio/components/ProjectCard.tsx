@@ -37,7 +37,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 src={project.thumbnail.url}
                 alt={project.thumbnail.alt ?? project.title}
                 fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                className="object-cover transition-transform duration-300 group-hover:scale-105 motion-safe:group-focus-within:scale-105"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             ) : (
@@ -62,7 +62,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
             <div className="flex items-center gap-1 text-sm font-medium text-primary">
               {t("viewProject")}
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight
+                className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 motion-safe:group-focus-within:translate-x-1"
+                aria-hidden="true"
+              />
             </div>
           </CardContent>
         </Card>

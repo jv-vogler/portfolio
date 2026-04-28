@@ -220,7 +220,7 @@ function ProjectCard({
                 src={project.thumbnail.url}
                 alt={project.thumbnail.alt ?? project.title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                className="object-cover transition-transform duration-500 group-hover:scale-110 motion-safe:group-focus-within:scale-110"
                 sizes={
                   isProfessional
                     ? "(max-width: 768px) 100vw, 100vw"

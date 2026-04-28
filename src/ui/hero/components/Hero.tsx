@@ -108,12 +108,18 @@ export function Hero({ latestPost }: HeroProps) {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center px-6 text-center">
-        {/* Comment line */}
-        <p className="mb-6 h-5 font-mono text-sm text-[oklch(0.65_0.24_155)] sm:text-base">
+        {/* Comment line — visible animation hidden from SR; canonical text below. */}
+        <p
+          aria-hidden="true"
+          className="mb-6 h-5 font-mono text-sm text-[oklch(0.65_0.24_155)] sm:text-base"
+        >
           {commentDisplay}
         </p>
+        <span className="sr-only">{comment}</span>
 
-        {/* Name – blurred cascade up, then snap to sharp */}
+        {/* Name – blurred cascade up, then snap to sharp.
+            aria-label provides the canonical name; per-character spans are
+            hidden from SR so partial cascade states never leak. */}
         <h1
           ref={scope}
           className="mb-3 font-sans font-bold text-[oklch(0.98_0_0)]"
@@ -127,6 +133,7 @@ export function Hero({ latestPost }: HeroProps) {
           {NAME_CHARS.map((meta, i) => (
             <motion.span
               key={i}
+              aria-hidden="true"
               initial={prefersReducedMotion ? undefined : { y: 24, opacity: 0 }}
               animate={prefersReducedMotion ? undefined : { y: 0, opacity: 1 }}
               transition={{
@@ -153,10 +160,14 @@ export function Hero({ latestPost }: HeroProps) {
           }}
         />
 
-        {/* Tagline */}
-        <p className="mb-8 h-8 font-mono text-sm text-[oklch(0.7_0_0)] sm:text-base md:text-lg">
+        {/* Tagline — visible animation hidden from SR; canonical text below. */}
+        <p
+          aria-hidden="true"
+          className="mb-8 h-8 font-mono text-sm text-[oklch(0.7_0_0)] sm:text-base md:text-lg"
+        >
           {taglineDisplay}
         </p>
+        <span className="sr-only">{tagline}</span>
 
         {/* CTA */}
         <motion.div

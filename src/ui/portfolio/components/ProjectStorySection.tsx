@@ -48,23 +48,22 @@ function ProjectTitle({
   className?: string;
 }) {
   const { push } = useViewTransitionRouter();
+  const href = `/portfolio/${slug}`;
 
   return (
     <h3 className={`w-fit ${className ?? ""}`}>
-      <span
-        onClick={() => push(`/portfolio/${slug}`)}
-        className="cursor-pointer transition-colors hover:text-muted-foreground"
-        role="link"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            push(`/portfolio/${slug}`);
-          }
+      <a
+        href={href}
+        onClick={(e) => {
+          // Allow modifier-clicks (open in new tab, etc.) to use default behaviour.
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+          e.preventDefault();
+          push(href);
         }}
+        className="cursor-pointer rounded-sm outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         {children}
-      </span>
+      </a>
     </h3>
   );
 }

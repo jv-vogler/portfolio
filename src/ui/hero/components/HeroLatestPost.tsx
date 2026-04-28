@@ -63,7 +63,10 @@ export function HeroLatestPost({ post, delay = 1.5 }: HeroLatestPostProps) {
           </div>
         </div>
 
-        <ArrowRight className="h-4 w-4 shrink-0 text-[oklch(0.65_0.24_155)] transition-transform group-hover:translate-x-1" />
+        <ArrowRight
+          className="h-4 w-4 shrink-0 text-[oklch(0.65_0.24_155)] transition-transform group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1"
+          aria-hidden="true"
+        />
       </Link>
     </motion.div>
   );
