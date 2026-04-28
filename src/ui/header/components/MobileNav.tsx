@@ -67,7 +67,7 @@ export function MobileNav({ isFocused = false }: { isFocused?: boolean }) {
 
         {/* Header / branding */}
         <div className="flex items-center gap-3 border-b border-border/60 px-5 py-4">
-          <div className="flex size-8 items-center justify-center rounded-md bg-primary text-sm font-bold text-primary-foreground">
+          <div className="flex size-8 items-center justify-center rounded-md bg-accent text-sm font-bold text-foreground">
             JV
           </div>
           <div>

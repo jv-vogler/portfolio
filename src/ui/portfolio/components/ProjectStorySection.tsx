@@ -53,7 +53,7 @@ function ProjectTitle({
     <h3 className={`w-fit ${className ?? ""}`}>
       <span
         onClick={() => push(`/portfolio/${slug}`)}
-        className="cursor-pointer transition-colors hover:text-primary"
+        className="cursor-pointer transition-colors hover:text-muted-foreground"
         role="link"
         tabIndex={0}
         onKeyDown={(e) => {
