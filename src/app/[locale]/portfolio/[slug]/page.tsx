@@ -75,7 +75,7 @@ export default async function PortfolioDetailPage({
         {/* Back button */}
         <PortfolioBackButton />
 
-        {/* HUD chapter label + title */}
+        {/* Chapter marker + title */}
         <div className="mb-8">
           <div className="mb-3 flex items-center gap-3">
             <span
@@ -113,7 +113,7 @@ export default async function PortfolioDetailPage({
           )}
         </div>
 
-        {/* Screenshot with HUD styling */}
+        {/* Screenshot frame */}
         <div
           className="relative mb-8 aspect-video w-full overflow-hidden rounded-xl"
           style={{

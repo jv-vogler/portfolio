@@ -249,7 +249,7 @@ function ProjectCard({
 
         {/* Content */}
         <div className="relative p-6">
-          {/* HUD chapter label */}
+          {/* Chapter marker */}
           <div className="mb-3 flex items-center gap-3">
             <span
               className="shrink-0 font-mono text-xs uppercase tracking-[0.25em]"
