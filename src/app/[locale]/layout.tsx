@@ -14,7 +14,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
-import { Fraunces, JetBrains_Mono } from "next/font/google";
+import { Spectral, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import "../globals.css";
@@ -23,12 +23,13 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-// Fraunces — archival variable serif (Klim-adjacent character; free).
-// Used for both body and display, leaning on optical sizing + axes for hierarchy.
-const fraunces = Fraunces({
+// Spectral — editorial screen serif with high contrast and old-style character.
+// ExtraBold (800) for display, Regular/Light for body; old-style numerals via onum.
+const spectral = Spectral({
   subsets: ["latin"],
-  axes: ["opsz", "SOFT", "WONK"],
-  variable: "--font-fraunces",
+  weight: ["300", "400", "600", "700", "800"],
+  style: ["normal", "italic"],
+  variable: "--font-spectral",
   display: "swap",
 });
 
@@ -131,7 +132,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className="dark">
-      <body className={`${fraunces.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body className={`${spectral.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <PersonJsonLd
           name="JV Vogler"
           jobTitle="Frontend Developer"

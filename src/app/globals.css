@@ -136,10 +136,10 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  /* Fraunces is the archival serif used for both body and display.
+  /* Spectral is the archival display + body serif.
      `font-sans` is kept as the Tailwind utility name to avoid renaming every
-     consumer; the underlying family is now a serif by intent. */
-  --font-sans: var(--font-fraunces), ui-serif, Georgia, Cambria, "Times New Roman", serif;
+     consumer; the underlying family is a serif by intent. */
+  --font-sans: var(--font-spectral), ui-serif, Georgia, Cambria, "Times New Roman", serif;
   --font-mono:
     var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
@@ -172,6 +172,10 @@
 
   html {
     scroll-behavior: smooth;
+  }
+  body {
+    font-optical-sizing: auto;
+    font-feature-settings: "kern" 1, "onum" 1;
   }
   ::selection {
     background-color: var(--primary);
@@ -217,13 +221,7 @@
   }
 }
 
-/* Dot-grid texture system */
-.dot-grid {
-  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
-  background-size: 40px 40px;
-  color: oklch(0.8 0 0 / 0.04);
-}
-
+/* Dot-grid texture — confined to the skill constellation surface */
 .dot-grid-dense {
   background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
   background-size: 32px 32px;
