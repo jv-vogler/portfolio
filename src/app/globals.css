@@ -22,7 +22,6 @@
   /* Wrap long tokens (filenames, hashes, URLs) inside the prose column
      instead of overflowing horizontally on narrow viewports. Scoped to
      inline code only — `pre *` is excluded above so code blocks still scroll. */
-  word-break: break-word !important;
   overflow-wrap: anywhere !important;
 }
 

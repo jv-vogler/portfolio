@@ -102,7 +102,7 @@ export function Header() {
             onClick={togglePalette}
             aria-label={tCmd("placeholder")}
             className={cn(
-              "h-8 w-8 transition-all duration-500 ease-in-out sm:hidden",
+              "transition-all duration-500 ease-in-out sm:hidden",
               isFocused && "pointer-events-none opacity-0",
             )}
             tabIndex={isFocused ? -1 : undefined}
