@@ -8,28 +8,20 @@ import { Separator } from "@/ui/components/ui/separator";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/ui/components/ui/sheet";
 import { LocaleSwitcher } from "@/ui/header/components/LocaleSwitcher";
 import { AnimatePresence, type Variants, motion } from "framer-motion";
-import {
-  BookOpen,
-  Briefcase,
-  ExternalLink,
-  Github,
-  Globe,
-  Home,
-  Linkedin,
-  Mail,
-  Menu,
-  User,
-} from "lucide-react";
+import { ExternalLink, Github, Globe, Linkedin, Mail, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const NAV_ICONS: Record<string, React.ReactNode> = {
-  home: <Home className="size-4" />,
-  about: <User className="size-4" />,
-  portfolio: <Briefcase className="size-4" />,
-  blog: <BookOpen className="size-4" />,
-  contact: <Mail className="size-4" />,
+/* Hand-numbered marginalia, matching the § NN markers on the page sections.
+   Replaces a generic Lucide icon-per-link grid with the notebook's own
+   indexing language — labels are tools, not decoration. */
+const NAV_NUMERALS: Record<string, string> = {
+  home: "00",
+  about: "01",
+  portfolio: "02",
+  blog: "03",
+  contact: "04",
 };
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
@@ -97,22 +89,29 @@ export function MobileNav({ isFocused = false }: { isFocused?: boolean }) {
 
                   const linkClass = `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-primary/10 text-primary"
+                      ? "bg-primary/10 text-foreground"
                       : "text-muted-foreground hover:bg-accent hover:text-foreground"
                   }`;
+
+                  const numeral = (
+                    <span
+                      aria-hidden="true"
+                      className="w-6 shrink-0 font-mono text-xs tabular-nums tracking-[0.15em] text-muted-foreground"
+                    >
+                      {NAV_NUMERALS[link.label]}
+                    </span>
+                  );
 
                   return (
                     <motion.li key={link.label} variants={itemVariants}>
                       {isRoute ? (
                         <Link href={link.href} onClick={() => setOpen(false)} className={linkClass}>
-                          <span className={isActive ? "text-primary" : "text-muted-foreground"}>
-                            {NAV_ICONS[link.label]}
-                          </span>
+                          {numeral}
                           {t(link.label)}
                         </Link>
                       ) : (
                         <a href={link.href} onClick={() => setOpen(false)} className={linkClass}>
-                          <span className="text-muted-foreground">{NAV_ICONS[link.label]}</span>
+                          {numeral}
                           {t(link.label)}
                         </a>
                       )}

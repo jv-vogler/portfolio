@@ -15,7 +15,7 @@ export function ContactSection() {
     <section
       ref={sectionRef}
       id="contact"
-      className="dot-grid relative py-16 sm:py-24"
+      className="relative py-16 sm:py-24"
       aria-labelledby="contact-heading"
     >
       <div className="mx-auto max-w-3xl px-6">
@@ -24,13 +24,16 @@ export function ContactSection() {
           animate={isInView ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.5 }}
         >
-          <h2
-            id="contact-heading"
-            className="mb-4 text-center text-3xl font-bold text-foreground sm:text-4xl"
-          >
+          <h2 id="contact-heading" className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
+            <span
+              aria-hidden="true"
+              className="mr-3 font-mono text-lg font-normal text-muted-foreground sm:text-xl"
+            >
+              § 03
+            </span>
             {t("heading")}
           </h2>
-          <p className="mb-12 text-center text-muted-foreground">{t("description")}</p>
+          <p className="mb-12 text-muted-foreground">{t("description")}</p>
 
           <div className="mx-auto max-w-lg">
             <ContactForm />

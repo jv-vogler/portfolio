@@ -44,7 +44,15 @@ export function SkillConstellation() {
   return (
     <section ref={containerRef} className="dot-grid-dense relative min-h-screen py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">{t("heading")}</h2>
+        <h2 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">
+          <span
+            aria-hidden="true"
+            className="mr-3 font-mono text-xl font-normal text-muted-foreground sm:text-2xl"
+          >
+            § 02
+          </span>
+          {t("heading")}
+        </h2>
         <p className="mb-16 max-w-xl text-lg text-muted-foreground">{t("description")}</p>
 
         {/* Constellation — desktop */}
