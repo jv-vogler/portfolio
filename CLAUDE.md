@@ -91,3 +91,29 @@ pnpm dlx shadcn@latest add <component>   # outputs to src/ui/components/ui/
 | Writing copy, blog posts, any prose        | `/elements-of-style:writing-clearly-and-concisely`                            |
 | Drafting a new blog post for the portfolio | `blog-post` skill — draft → writing-skills review → `pnpm publish:post`       |
 | Library/framework docs lookup              | `context7` MCP — use before guessing API surface                              |
+
+## Design Context
+
+Full version: `.impeccable.md` at repo root. The summary below is what every conversation needs in context.
+
+**Audience (primary):** hiring eyes — recruiters, eng leads scanning in 60-90s. The site itself is the proof of craft. **Secondary:** devs reading the blog for tutorials in João's voice.
+
+**Personality:** precise · playful · opinionated. Voice profile is canonical for prose: `.claude/skills/portfolio-voice/voice-profile.md`.
+
+**Aesthetic north star: Engineer's lab notebook.** Archival serif display + functional mono, asymmetric grid, hand-numbered sections, marginalia and footnotes treated as real structure (not decoration), citations that look like real citations. Adjacent to the current terminal-coded vibe but not the same — mono is a tool, not a costume.
+
+**Theme:** dark-only (hard-coded `<html className="dark">` stays). Background tinted ink-black. Foreground paper-cream (warm off-white, never `oklch(0.985 0 0)`). Accent green at `oklch(0.65 0.24 155)` appears at most once per viewport — section numbers, the hero name, a single emphasized link. Not on every CTA/hover/focus.
+
+**Typography:** Poppins is on the impeccable reflex-reject list — replace at the next typography pass with a distinctive archival serif (e.g. Tiempos / Suisse Works / Pangram-Klim picks) and a more characterful mono (e.g. Berkeley Mono / MD IO). Modular ~1.25 scale, fluid `clamp()` on display, body capped 65-72ch.
+
+**Anti-references (must NOT look like):** dev-portfolio templates, Vercel-with-gradients, AI-startup glassmorphism, Medium-descended blog templates, centered-everything landing pages with rounded-rectangle feature cards, terminal-skin-cosplay (mono everywhere, blinking cursors on every label).
+
+**Five principles, in priority order:**
+
+1. **Long-form is the centerpiece.** Body type designed first. Hero serves the blog/projects, not vice versa.
+2. **Marginalia is structure, not decoration.** Section numbers, footnotes, side annotations are real semantic content. If they could be removed unnoticed, they don't belong.
+3. **Type does the heavy lifting.** Hierarchy from typographic contrast, not from chrome. If a component needs a card to stand out, the type is failing.
+4. **Asymmetric over centered.** Default to left-aligned, intentionally unbalanced. Centering must earn itself.
+5. **Quiet by default, loud once.** One moment of intensity per screen. The accent at full saturation appears at most once per viewport.
+
+**Accessibility:** WCAG 2.2 AA on contrast, focus, motion. Respect `prefers-reduced-motion` everywhere new motion is added. Color is never the only signal.
