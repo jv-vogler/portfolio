@@ -19,7 +19,7 @@ export function PortfolioBackButton() {
   return (
     <button
       onClick={handleBack}
-      className="mb-8 inline-flex items-center gap-2 text-sm text-[oklch(0.65_0_0)] transition-colors hover:text-[oklch(0.85_0_0)] cursor-pointer"
+      className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
     >
       <ArrowLeft className="h-4 w-4" />
       {t("backToPortfolio")}

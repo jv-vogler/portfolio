@@ -110,7 +110,7 @@ function HeroLayout({ project, reducedMotion, chapter, narrative }: Props) {
           {/* Chapter marker — the one intentional accent moment for this viewport (Principle 5). */}
           <motion.span
             style={reducedMotion ? undefined : { y: chapterY, opacity: chapterOpacity }}
-            className="mb-4 block text-sm font-medium tracking-widest text-primary uppercase"
+            className="mb-4 block text-sm font-medium tracking-widest text-muted-foreground uppercase"
           >
             {chapter}
           </motion.span>
@@ -174,7 +174,7 @@ function LeftLayout({ project, reducedMotion, chapter, narrative }: Props) {
           <motion.div
             style={reducedMotion ? undefined : { y: textY, opacity: textOpacity, x: textX }}
           >
-            <span className="mb-4 block text-sm font-medium tracking-widest text-primary uppercase">
+            <span className="mb-4 block text-sm font-medium tracking-widest text-muted-foreground uppercase">
               {chapter}
             </span>
             <ProjectTitle
@@ -216,7 +216,7 @@ function RightCompactLayout({ project, reducedMotion, chapter, narrative }: Prop
           <motion.div
             style={reducedMotion ? undefined : { y: textY, opacity: textOpacity, x: textX }}
           >
-            <span className="mb-4 block text-sm font-medium tracking-widest text-primary uppercase">
+            <span className="mb-4 block text-sm font-medium tracking-widest text-muted-foreground uppercase">
               {chapter}
             </span>
             <ProjectTitle
@@ -282,12 +282,12 @@ function FullBleedLayout({ project, reducedMotion, chapter, narrative }: Props) 
             />
           </motion.div>
         )}
-        <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-background/70" />
         <motion.div
           style={reducedMotion ? undefined : { y: cardY, opacity: cardOpacity }}
-          className="relative z-10 mx-6 max-w-2xl rounded-2xl bg-card/80 p-8 shadow-2xl ring-1 ring-border/30 backdrop-blur-lg sm:mx-0 sm:p-12"
+          className="relative z-10 mx-6 max-w-2xl rounded-2xl border border-border bg-card p-8 sm:mx-0 sm:p-12"
         >
-          <span className="mb-4 block text-sm font-medium tracking-widest text-primary uppercase">
+          <span className="mb-4 block text-sm font-medium tracking-widest text-muted-foreground uppercase">
             {chapter}
           </span>
           <ProjectTitle
@@ -326,7 +326,7 @@ function CenterLayout({ project, reducedMotion, chapter, narrative }: Props) {
         <div className="mx-auto max-w-3xl px-6 text-center">
           <motion.span
             style={reducedMotion ? undefined : { y: chapterY, opacity: chapterOpacity }}
-            className="mb-6 block text-sm font-medium tracking-widest text-primary uppercase"
+            className="mb-6 block text-sm font-medium tracking-widest text-muted-foreground uppercase"
           >
             {chapter}
           </motion.span>
