@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { formatDate } from "@/lib/date";
 import { Badge } from "@/ui/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/components/ui/card";
-import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
+import { fadeInUp } from "@/ui/lib/motion";
 import { formatTag } from "@/ui/blog/utils/formatTag";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, RefreshCw } from "lucide-react";
@@ -44,14 +44,15 @@ export function BlogList({ posts }: BlogListProps) {
     <div>
       {featuredPost && <SpotlightCard post={featuredPost} />}
 
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="grid gap-6"
-      >
-        {regularPosts.map((post) => (
-          <motion.div key={post.slug} variants={fadeInUp}>
+      <div className="grid gap-6">
+        {regularPosts.map((post, i) => (
+          <motion.div
+            key={post.slug}
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: i * 0.05 }}
+          >
             <Link href={`/blog/${post.slug}`} className="group block">
               <Card className="transition-colors hover:border-foreground/30">
                 <CardHeader className="pb-3">
@@ -115,7 +116,7 @@ export function BlogList({ posts }: BlogListProps) {
             </Link>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -84,6 +84,7 @@
     "sharePost": "Compartilhar",
     "copyLink": "Copiar link",
     "linkCopied": "Link copiado!",
+    "copyFailed": "Falha ao copiar — selecione e copie manualmente",
     "tableOfContents": "Índice",
     "backToTop": "Voltar ao topo",
     "rss": "Feed RSS",

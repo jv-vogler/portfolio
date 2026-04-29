@@ -72,7 +72,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
                 className={cn(
                   "block py-1 text-sm leading-snug transition-colors",
                   activeId === heading.id
-                    ? "font-medium text-primary"
+                    ? "font-medium text-foreground"
                     : "text-muted-foreground hover:text-foreground",
                 )}
                 onClick={(e) => {
@@ -112,7 +112,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
                   className={cn(
                     "block py-1 text-sm leading-snug transition-colors",
                     activeId === heading.id
-                      ? "font-medium text-primary"
+                      ? "font-medium text-foreground"
                       : "text-muted-foreground hover:text-foreground",
                   )}
                   onClick={() => setIsOpen(false)}

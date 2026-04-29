@@ -8,8 +8,6 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
-export const revalidate = 3600;
-
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jvogler.vercel.app";
 
 export async function generateMetadata({

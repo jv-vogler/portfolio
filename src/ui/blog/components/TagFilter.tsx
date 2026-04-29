@@ -21,6 +21,14 @@ export function TagFilter({ tags }: TagFilterProps) {
 
   const activeTags = searchParams.getAll("tag");
 
+  const buildHref = useCallback(
+    (params: URLSearchParams) => {
+      const qs = params.toString();
+      return qs ? `${pathname}?${qs}` : pathname;
+    },
+    [pathname],
+  );
+
   const toggleTag = useCallback(
     (tag: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -28,28 +36,26 @@ export function TagFilter({ tags }: TagFilterProps) {
 
       params.delete("tag");
       if (current.includes(tag)) {
-        // Remove tag
         for (const t of current) {
           if (t !== tag) params.append("tag", t);
         }
       } else {
-        // Add tag
         for (const t of current) {
           params.append("tag", t);
         }
         params.append("tag", tag);
       }
 
-      router.replace(`${pathname}?${params.toString()}` as never);
+      router.replace(buildHref(params) as never);
     },
-    [searchParams, pathname, router],
+    [searchParams, router, buildHref],
   );
 
   const clearAll = useCallback(() => {
     const params = new URLSearchParams(searchParams.toString());
     params.delete("tag");
-    router.replace(`${pathname}?${params.toString()}` as never);
-  }, [searchParams, pathname, router]);
+    router.replace(buildHref(params) as never);
+  }, [searchParams, router, buildHref]);
 
   if (tags.length === 0) return null;
 

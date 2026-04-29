@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Link2 } from "lucide-react";
+import { AlertCircle, Link2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { useState } from "react";
@@ -13,8 +13,10 @@ type AnchorHeadingProps = {
   className?: string;
 };
 
+type CopyStatus = "idle" | "copied" | "failed";
+
 export function AnchorHeading({ id, level, children, className }: AnchorHeadingProps) {
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<CopyStatus>("idle");
   const t = useTranslations("blog");
   const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
 
@@ -24,7 +26,6 @@ export function AnchorHeading({ id, level, children, className }: AnchorHeadingP
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(url);
       } else {
-        // Fallback for browsers without Clipboard API
         const textarea = document.createElement("textarea");
         textarea.value = url;
         textarea.style.position = "fixed";
@@ -32,17 +33,21 @@ export function AnchorHeading({ id, level, children, className }: AnchorHeadingP
         document.body.appendChild(textarea);
         textarea.focus();
         textarea.select();
-        document.execCommand("copy");
+        const ok = document.execCommand("copy");
         document.body.removeChild(textarea);
+        if (!ok) throw new Error("execCommand copy returned false");
       }
-      // Update URL hash without triggering scroll
       history.replaceState(null, "", `#${id}`);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setStatus("copied");
+      setTimeout(() => setStatus("idle"), 2000);
     } catch {
-      // Graceful fail — do nothing
+      setStatus("failed");
+      setTimeout(() => setStatus("idle"), 3000);
     }
   };
+
+  const label =
+    status === "copied" ? t("linkCopied") : status === "failed" ? t("copyFailed") : t("copyLink");
 
   return (
     <Tag id={id} className={cn("group scroll-mt-24", className)}>
@@ -50,13 +55,18 @@ export function AnchorHeading({ id, level, children, className }: AnchorHeadingP
       <button
         type="button"
         onClick={handleCopy}
-        aria-label={copied ? t("linkCopied") : t("copyLink")}
+        aria-label={label}
+        title={status === "failed" ? label : undefined}
         className={cn(
           "ml-2 inline-flex translate-y-[-1px] items-center opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100",
-          "rounded text-muted-foreground hover:text-primary",
+          "rounded hover:text-foreground",
+          status === "failed" ? "text-destructive opacity-100" : "text-muted-foreground",
         )}
       >
-        <Link2 className="size-4" />
+        {status === "failed" ? <AlertCircle className="size-4" /> : <Link2 className="size-4" />}
+        <span role="status" aria-live="polite" className="sr-only">
+          {status === "idle" ? "" : label}
+        </span>
       </button>
     </Tag>
   );
