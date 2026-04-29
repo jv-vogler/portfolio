@@ -31,7 +31,7 @@ export function HeroLatestPost({ post, delay = 1.5 }: HeroLatestPostProps) {
     >
       <Link
         href={`/blog/${post.slug}` as "/blog/[slug]"}
-        className="group mx-auto flex max-w-lg items-center gap-4 rounded-lg border border-[oklch(0.65_0.24_155/0.2)] bg-[oklch(0.14_0.01_180/0.6)] px-4 py-3 backdrop-blur-sm transition-colors hover:border-[oklch(0.65_0.24_155/0.4)] hover:bg-[oklch(0.14_0.01_180/0.8)]"
+        className="group flex max-w-lg items-center gap-4 rounded-lg border border-border px-4 py-3 transition-colors hover:border-white/20"
       >
         {thumbnailUrl && (
           <div className="relative hidden h-14 w-20 shrink-0 overflow-hidden rounded sm:block">
@@ -46,13 +46,11 @@ export function HeroLatestPost({ post, delay = 1.5 }: HeroLatestPostProps) {
         )}
 
         <div className="min-w-0 flex-1">
-          <p className="truncate font-mono text-sm font-medium text-[oklch(0.95_0_0)]">
-            {post.title}
-          </p>
-          <div className="mt-1 flex items-center gap-2 font-mono text-xs text-[oklch(0.6_0_0)]">
+          <p className="truncate font-sans text-sm font-semibold text-foreground">{post.title}</p>
+          <div className="mt-1 flex items-center gap-2 font-sans text-xs text-muted-foreground">
             <Clock className="h-3 w-3" />
             <span>{t("readingTime", { minutes: post.readingTime })}</span>
-            <span className="text-[oklch(0.65_0.24_155)]">·</span>
+            <span className="text-muted-foreground">·</span>
             <span>
               {new Date(post.date).toLocaleDateString(locale, {
                 year: "numeric",
@@ -64,7 +62,7 @@ export function HeroLatestPost({ post, delay = 1.5 }: HeroLatestPostProps) {
         </div>
 
         <ArrowRight
-          className="h-4 w-4 shrink-0 text-[oklch(0.65_0.24_155)] transition-transform group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1"
+          className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1"
           aria-hidden="true"
         />
       </Link>

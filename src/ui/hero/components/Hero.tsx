@@ -4,7 +4,6 @@ import type { Blog } from "@/core/blog";
 import { Link } from "@/i18n/routing";
 import { HeroLatestPost } from "@/ui/hero/components/HeroLatestPost";
 import { Button } from "@/ui/components/ui/button";
-import { useTypingAnimation } from "@/ui/lib/useTypingAnimation";
 import { motion, useAnimate, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -15,15 +14,6 @@ const CHAR_STAGGER = 0.08;
 const CHAR_FADE_DURATION = 0.5;
 const PAUSE_BEFORE_UNBLUR = 0.15;
 const UNBLUR_DURATION = 3.0;
-
-/** ms/character for typing animations. */
-const TYPING_SPEED_MS = 35;
-/** Gap between comment end and tagline start (ms). */
-const TYPING_GAP_MS = 300;
-/** Delay from cascade end before comment starts (ms). */
-const COMMENT_START_OFFSET_MS = 200;
-/** Delay from tagline start before the latest-post card appears (ms). */
-const POST_CARD_OFFSET_MS = 0;
 
 /** Pre-computed per-character metadata. */
 const NAME_CHARS = (() => {
@@ -36,6 +26,7 @@ const NAME_CHARS = (() => {
 })();
 
 const NON_SPACE_COUNT = NAME_CHARS.filter((c) => !c.isSpace).length;
+const CASCADE_END = (NON_SPACE_COUNT - 1) * CHAR_STAGGER + CHAR_FADE_DURATION;
 
 type HeroPost = Pick<
   Blog.Post,
@@ -61,8 +52,7 @@ export function Hero({ latestPost }: HeroProps) {
   useEffect(() => {
     if (prefersReducedMotion) return;
 
-    const cascadeEnd = (NON_SPACE_COUNT - 1) * CHAR_STAGGER + CHAR_FADE_DURATION;
-    const unblurStart = cascadeEnd + PAUSE_BEFORE_UNBLUR;
+    const unblurStart = CASCADE_END + PAUSE_BEFORE_UNBLUR;
 
     const timer = setTimeout(() => {
       animate(
@@ -76,115 +66,92 @@ export function Hero({ latestPost }: HeroProps) {
     return () => clearTimeout(timer);
   }, [prefersReducedMotion, animate, scope]);
 
-  // ── Comment: typing (starts right after cascade, while still unblurring) ───
-  const cascadeEndMs = ((NON_SPACE_COUNT - 1) * CHAR_STAGGER + CHAR_FADE_DURATION) * 1000;
-  const commentStart = cascadeEndMs + COMMENT_START_OFFSET_MS;
-  const { displayedText: commentDisplay } = useTypingAnimation({
-    text: comment,
-    speed: TYPING_SPEED_MS,
-    startDelay: commentStart,
-    enabled: !prefersReducedMotion,
-  });
-
-  // ── Tagline: typing (after comment) ────────────────────────
-  const taglineStart = commentStart + comment.length * TYPING_SPEED_MS + TYPING_GAP_MS;
-  const { displayedText: taglineDisplay } = useTypingAnimation({
-    text: tagline,
-    speed: TYPING_SPEED_MS,
-    startDelay: taglineStart,
-    enabled: !prefersReducedMotion,
-  });
-
-  // Delay for the latest-post card (seconds)
-  const latestPostDelay = prefersReducedMotion ? 0 : (taglineStart + POST_CARD_OFFSET_MS) / 1000;
+  // Latest post card eases in just after the name lands.
+  const latestPostDelay = prefersReducedMotion ? 0 : CASCADE_END + 0.5;
 
   return (
-    <section className="dot-grid relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden bg-[oklch(0.18_0.01_180)]">
-      {/* Tinted charcoal background with teal hue */}
-      <div className="absolute inset-0 bg-[oklch(0.14_0.01_180)]" />
-
-      {/* Dot grid overlay */}
-      <div className="dot-grid pointer-events-none absolute inset-0" />
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center px-6 text-center">
-        {/* Comment line — visible animation hidden from SR; canonical text below. */}
-        <p
+    <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden bg-background">
+      {/* Asymmetric content — left-anchored, lab notebook layout */}
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl items-start gap-8 px-6 py-24">
+        {/* Marginalia column — section marker, hidden on mobile */}
+        <aside
           aria-hidden="true"
-          className="mb-6 h-5 font-mono text-sm text-[oklch(0.65_0.24_155)] sm:text-base"
+          className="hidden lg:flex shrink-0 flex-col items-center gap-3 self-start pt-2"
         >
-          {commentDisplay}
-        </p>
-        <span className="sr-only">{comment}</span>
+          <span className="font-mono text-xs tracking-[0.3em] text-muted-foreground">§ 00</span>
+          <div
+            className="w-px"
+            style={{
+              height: "7rem",
+              background: "linear-gradient(to bottom, oklch(1 0 0 / 0.1), transparent)",
+            }}
+          />
+          <span
+            className="font-mono text-[9px] uppercase tracking-[0.25em] text-muted-foreground"
+            style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+          >
+            intro
+          </span>
+        </aside>
 
-        {/* Name – blurred cascade up, then snap to sharp.
-            aria-label provides the canonical name; per-character spans are
-            hidden from SR so partial cascade states never leak. */}
-        <h1
-          ref={scope}
-          className="mb-3 font-sans font-bold text-[oklch(0.98_0_0)]"
-          style={{
-            fontSize: "clamp(3rem, 12vw, 12rem)",
-            lineHeight: 1,
-            filter: prefersReducedMotion ? "none" : "blur(24px)",
-          }}
-          aria-label={NAME}
-        >
-          {NAME_CHARS.map((meta, i) => (
-            <motion.span
-              key={i}
-              aria-hidden="true"
-              initial={prefersReducedMotion ? undefined : { y: 24, opacity: 0 }}
-              animate={prefersReducedMotion ? undefined : { y: 0, opacity: 1 }}
-              transition={{
-                duration: CHAR_FADE_DURATION,
-                delay: meta.isSpace ? 0 : meta.nonSpaceIdx * CHAR_STAGGER,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="inline-block"
-            >
-              {meta.isSpace ? "\u00A0" : meta.char}
-            </motion.span>
-          ))}
-        </h1>
+        {/* Main content */}
+        <div className="flex flex-col items-start">
+          {/* Comment line — static, lets the name cascade carry the intensity. */}
+          <p className="mb-6 font-mono text-sm text-muted-foreground sm:text-base">{comment}</p>
 
-        {/* Accent underline – expands after name sharpens */}
-        <motion.div
-          className="mb-6 h-px"
-          initial={{ width: 0, opacity: 0 }}
-          animate={nameSharp ? { width: "60%", opacity: 1 } : { width: 0, opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, oklch(0.65 0.24 155 / 0.5), transparent)",
-          }}
-        />
+          {/* Name – blurred cascade up, then snap to sharp.
+              aria-label provides the canonical name; per-character spans are
+              hidden from SR so partial cascade states never leak. */}
+          <h1
+            ref={scope}
+            className="mb-6 font-sans font-bold text-foreground"
+            style={{
+              fontSize: "clamp(3rem, 12vw, 12rem)",
+              lineHeight: 1,
+              filter: prefersReducedMotion ? "none" : "blur(24px)",
+            }}
+            aria-label={NAME}
+          >
+            {NAME_CHARS.map((meta, i) => (
+              <motion.span
+                key={i}
+                aria-hidden="true"
+                initial={prefersReducedMotion ? undefined : { y: 24, opacity: 0 }}
+                animate={prefersReducedMotion ? undefined : { y: 0, opacity: 1 }}
+                transition={{
+                  duration: CHAR_FADE_DURATION,
+                  delay: meta.isSpace ? 0 : meta.nonSpaceIdx * CHAR_STAGGER,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="inline-block"
+              >
+                {meta.isSpace ? " " : meta.char}
+              </motion.span>
+            ))}
+          </h1>
 
-        {/* Tagline — visible animation hidden from SR; canonical text below. */}
-        <p
-          aria-hidden="true"
-          className="mb-8 h-8 font-mono text-sm text-[oklch(0.7_0_0)] sm:text-base md:text-lg"
-        >
-          {taglineDisplay}
-        </p>
-        <span className="sr-only">{tagline}</span>
+          {/* Tagline — static, secondary to the name. */}
+          <p className="mb-8 font-sans text-sm text-muted-foreground sm:text-base md:text-lg">
+            {tagline}
+          </p>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={nameSharp ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-10 mt-2"
-        >
-          <Link href="/#portfolio">
-            <Button size="lg" className="rounded-full px-8 font-semibold">
-              {t("cta")}
-            </Button>
-          </Link>
-        </motion.div>
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={nameSharp ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-10 mt-2"
+          >
+            <Link href="/#portfolio">
+              <Button size="lg" className="rounded-sm px-8 font-medium tracking-wide">
+                {t("cta")}
+              </Button>
+            </Link>
+          </motion.div>
 
-        {/* Featured/latest blog post */}
-        {latestPost && <HeroLatestPost post={latestPost} delay={latestPostDelay} />}
+          {/* Featured/latest blog post */}
+          {latestPost && <HeroLatestPost post={latestPost} delay={latestPostDelay} />}
+        </div>
       </div>
     </section>
   );
