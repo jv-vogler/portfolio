@@ -66,9 +66,14 @@ export function ProjectShowcaseGrid({ projects }: ProjectShowcaseGridProps) {
   });
 
   return (
-    <section className="py-32" aria-label="Featured projects">
+    <section className="py-32" aria-labelledby="portfolio-showcase-heading">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">{t("heading")}</h2>
+        <h2
+          id="portfolio-showcase-heading"
+          className="mb-4 text-4xl font-bold text-foreground sm:text-5xl"
+        >
+          {t("heading")}
+        </h2>
         <p className="mb-16 max-w-xl text-lg text-muted-foreground">{t("description")}</p>
 
         {/* Personal projects — 2-col curved-monitor grid */}

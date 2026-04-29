@@ -61,9 +61,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-primary/20 bg-background" />
       </div>
 
-      <section id="portfolio">
+      <div id="portfolio">
         <PortfolioReelSection />
-      </section>
+      </div>
 
       <SkillsSection />
 
