@@ -32,7 +32,7 @@ export function Experience({ skills }: ExperienceProps) {
           if (!categorySkills.length) return null;
           return (
             <div key={category}>
-              <h3 className="mb-6 text-lg font-semibold text-primary">
+              <h3 className="mb-6 text-lg font-semibold text-foreground">
                 {t(`category.${category}`)}
               </h3>
               <motion.div

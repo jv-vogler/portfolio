@@ -26,7 +26,7 @@ export async function RelatedPosts({ posts, locale }: RelatedPostsProps) {
           <li key={post.slug}>
             <Link
               href={`/blog/${post.slug}`}
-              className="group flex flex-col gap-2 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-accent/30"
+              className="group flex flex-col gap-2 rounded-lg border border-border bg-card p-4 transition-colors hover:border-foreground/30 hover:bg-accent/30"
             >
               {post.coverImage?.thumbnailUrl && (
                 <div className="relative aspect-video w-full overflow-hidden rounded-md">
@@ -39,7 +39,7 @@ export async function RelatedPosts({ posts, locale }: RelatedPostsProps) {
                   />
                 </div>
               )}
-              <h3 className="line-clamp-2 text-sm font-medium leading-snug group-hover:text-primary">
+              <h3 className="line-clamp-2 text-sm font-medium leading-snug group-hover:text-foreground">
                 {post.title}
               </h3>
               <div className="mt-auto flex items-center gap-2 text-xs text-muted-foreground">

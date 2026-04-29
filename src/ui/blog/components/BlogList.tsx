@@ -53,7 +53,7 @@ export function BlogList({ posts }: BlogListProps) {
         {regularPosts.map((post) => (
           <motion.div key={post.slug} variants={fadeInUp}>
             <Link href={`/blog/${post.slug}`} className="group block">
-              <Card className="transition-colors hover:border-primary/50">
+              <Card className="transition-colors hover:border-foreground/30">
                 <CardHeader className="pb-3">
                   <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1">
@@ -74,7 +74,7 @@ export function BlogList({ posts }: BlogListProps) {
 
                   <div className="flex gap-4">
                     <div className="flex-1">
-                      <CardTitle className="text-xl transition-colors group-hover:text-primary">
+                      <CardTitle className="text-xl transition-colors group-hover:text-foreground">
                         {post.title}
                       </CardTitle>
                       <CardDescription className="mt-1 text-base">
@@ -105,7 +105,7 @@ export function BlogList({ posts }: BlogListProps) {
                         </Badge>
                       ))}
                     </div>
-                    <span className="inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+                    <span className="inline-flex items-center gap-1 text-sm font-medium text-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                       {t("readMore")}
                       <ArrowRight className="size-4" />
                     </span>

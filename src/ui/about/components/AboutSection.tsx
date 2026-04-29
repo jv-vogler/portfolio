@@ -62,7 +62,7 @@ export function AboutSection({ items, profileImage }: AboutSectionProps) {
           <div className="space-y-8">
             {items.map((item, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <h3 className="mb-2 text-lg font-medium italic text-primary">{item.question}</h3>
+                <h3 className="mb-2 text-lg font-medium italic text-foreground">{item.question}</h3>
                 <p className="leading-relaxed text-muted-foreground">{item.answer}</p>
               </motion.div>
             ))}
