@@ -1,0 +1,44 @@
+/**
+ * Payload seed script — populates the database with initial content.
+ *
+ * Usage:
+ *   pnpm seed
+ *
+ * Make sure your .env.local (or .env) contains DATABASE_URL / POSTGRES_URL
+ * and PAYLOAD_SECRET before running.
+ */
+
+import config from "@payload-config";
+import { getPayload } from "payload";
+
+import { seedBlog } from "./blog";
+import { seedPortfolio } from "./portfolio";
+import { seedSkills } from "./skills";
+
+async function main() {
+  const force = process.argv.includes("--force");
+
+  console.log(`🌱 Starting seed${force ? " (--force: existing data will be deleted)" : ""}...\n`);
+
+  const payload = await getPayload({ config });
+
+  // ── Phase 4: Blog posts ──────────────────────────────────────────────────
+  console.log("📚 Seeding blog posts...");
+  await seedBlog(payload, { force });
+
+  // ── Phase 6: Portfolio projects ──────────────────────────────────────────
+  console.log("\n🗂️  Seeding portfolio projects...");
+  await seedPortfolio(payload, { force });
+
+  // ── Phase 7: Skills ──────────────────────────────────────────────────────
+  console.log("\n🛠️  Seeding skills...");
+  await seedSkills(payload, { force });
+
+  console.log("\n✅ Seed complete!");
+  process.exit(0);
+}
+
+main().catch((err) => {
+  console.error("\n❌ Seed failed:", err);
+  process.exit(1);
+});

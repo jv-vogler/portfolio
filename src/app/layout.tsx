@@ -1,0 +1,21 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | JV Vogler",
+    default: "JV Vogler — Frontend Developer",
+  },
+  description:
+    "Portfolio of JV Vogler, a frontend developer specializing in modern web technologies.",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return children;
+}
