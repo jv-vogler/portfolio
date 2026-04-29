@@ -162,8 +162,7 @@
        which Tailwind v4 inlines into utilities rather than emitting a real CSS
        custom property, so var(--font-mono) resolves to nothing at runtime. */
     font-family:
-      var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      monospace;
+      var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-variant-ligatures: common-ligatures;
     font-feature-settings:
       "liga" 1,
@@ -175,7 +174,9 @@
   }
   body {
     font-optical-sizing: auto;
-    font-feature-settings: "kern" 1, "onum" 1;
+    font-feature-settings:
+      "kern" 1,
+      "onum" 1;
   }
   ::selection {
     background-color: var(--primary);
@@ -227,4 +228,3 @@
   background-size: 32px 32px;
   color: oklch(0.8 0 0 / 0.06);
 }
-
