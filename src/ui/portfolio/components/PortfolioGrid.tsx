@@ -19,15 +19,21 @@ export function PortfolioGrid({ projects }: PortfolioGridProps) {
       aria-labelledby="portfolio-heading"
       className="mx-auto max-w-6xl px-4 py-20"
     >
-      <div className="mb-12 text-center">
+      <div className="mb-12">
+        <span
+          aria-hidden="true"
+          className="mb-3 block font-mono text-xs tracking-widest text-muted-foreground uppercase"
+        >
+          § 01 — Index
+        </span>
         <h2 id="portfolio-heading" className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
           {t("heading")}
         </h2>
-        <p className="text-muted-foreground">{t("description")}</p>
+        <p className="max-w-2xl text-muted-foreground">{t("description")}</p>
       </div>
 
       {projects.length === 0 ? (
-        <p className="text-center text-muted-foreground">{t("noProjects")}</p>
+        <p className="text-muted-foreground">{t("noProjects")}</p>
       ) : (
         <motion.div
           variants={staggerContainer}

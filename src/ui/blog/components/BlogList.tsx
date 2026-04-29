@@ -31,7 +31,7 @@ export function BlogList({ posts }: BlogListProps) {
 
   if (posts.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-center">
+      <div className="border-t border-border/40 py-20">
         <p className="text-muted-foreground text-lg">{t("noPosts")}</p>
       </div>
     );

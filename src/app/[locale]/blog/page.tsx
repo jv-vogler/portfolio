@@ -58,8 +58,14 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
 
   return (
     <section aria-labelledby="blog-heading" className="container mx-auto max-w-4xl px-4 py-20">
-      <MotionSection className="mb-12 text-center">
-        <div className="relative inline-block">
+      <MotionSection className="mb-12">
+        <span
+          aria-hidden="true"
+          className="mb-3 block font-mono text-xs tracking-widest text-muted-foreground uppercase"
+        >
+          § 02 — Notebook
+        </span>
+        <div className="flex items-start gap-4">
           <h1 id="blog-heading" className="mb-4 text-4xl font-bold">
             {t("heading")}
           </h1>
@@ -67,14 +73,14 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
             href="/feed.xml"
             aria-label={t("rss")}
             title={t("rss")}
-            className="absolute -right-8 top-1 text-muted-foreground transition-colors hover:text-orange-500"
+            className="mt-2 text-muted-foreground transition-colors hover:text-orange-500"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Rss className="h-5 w-5" />
           </a>
         </div>
-        <p className="text-lg text-muted-foreground">{t("description")}</p>
+        <p className="max-w-2xl text-lg text-muted-foreground">{t("description")}</p>
       </MotionSection>
 
       <Suspense>
