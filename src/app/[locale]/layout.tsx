@@ -25,15 +25,15 @@ export function generateStaticParams() {
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "600"],
   variable: "--font-poppins",
-  display: "optional",
+  display: "swap",
 });
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
   variable: "--font-fira-code",
-  display: "optional",
+  display: "swap",
 });
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jvogler.vercel.app";

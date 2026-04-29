@@ -102,7 +102,6 @@ function HeroLayout({ project, reducedMotion, chapter, narrative }: Props) {
               fill
               className="object-cover"
               sizes="100vw"
-              priority
             />
           </motion.div>
         )}
