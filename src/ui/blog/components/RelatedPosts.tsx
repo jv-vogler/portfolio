@@ -26,7 +26,7 @@ export async function RelatedPosts({ posts, locale }: RelatedPostsProps) {
           <li key={post.slug}>
             <Link
               href={`/blog/${post.slug}`}
-              className="group flex flex-col gap-2 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-accent/30"
+              className="group flex flex-col gap-2 rounded-lg border border-border bg-card p-4 transition-colors hover:border-foreground/30 hover:bg-accent/30"
             >
               {post.coverImage?.thumbnailUrl && (
                 <div className="relative aspect-video w-full overflow-hidden rounded-md">
@@ -34,12 +34,12 @@ export async function RelatedPosts({ posts, locale }: RelatedPostsProps) {
                     src={post.coverImage.thumbnailUrl}
                     alt={post.coverImage.alt}
                     fill
-                    className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-105"
+                    className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-105 motion-safe:group-focus-within:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
               )}
-              <h3 className="line-clamp-2 text-sm font-medium leading-snug group-hover:text-primary">
+              <h3 className="line-clamp-2 text-sm font-medium leading-snug group-hover:text-foreground">
                 {post.title}
               </h3>
               <div className="mt-auto flex items-center gap-2 text-xs text-muted-foreground">

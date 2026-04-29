@@ -1,7 +1,7 @@
 "use client";
 
 import { useFocusedReading } from "@/ui/blog/context/FocusedReadingContext";
-import { Check, Link2, Linkedin, Share2, Twitter } from "lucide-react";
+import { AlertCircle, Check, Link2, Linkedin, Share2, Twitter } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
@@ -14,7 +14,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
   const { isFocused } = useFocusedReading();
   const t = useTranslations("blog");
   const tA11y = useTranslations("a11y");
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "failed">("idle");
   // Start as false so server and initial client render agree (no navigator on server).
   // Set to true after mount only if the Web Share API is actually available.
   const [hasNativeShare, setHasNativeShare] = useState(false);
@@ -33,7 +33,6 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(url);
       } else {
-        // Fallback
         const textarea = document.createElement("textarea");
         textarea.value = url;
         textarea.style.position = "fixed";
@@ -41,13 +40,15 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
         document.body.appendChild(textarea);
         textarea.focus();
         textarea.select();
-        document.execCommand("copy");
+        const ok = document.execCommand("copy");
         document.body.removeChild(textarea);
+        if (!ok) throw new Error("execCommand copy returned false");
       }
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setCopyStatus("copied");
+      setTimeout(() => setCopyStatus("idle"), 2000);
     } catch {
-      // Graceful fail
+      setCopyStatus("failed");
+      setTimeout(() => setCopyStatus("idle"), 3000);
     }
   };
 
@@ -99,13 +100,25 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
       <button
         type="button"
         onClick={handleCopyLink}
-        aria-label={t("copyLink")}
+        aria-label={
+          copyStatus === "copied"
+            ? t("linkCopied")
+            : copyStatus === "failed"
+              ? t("copyFailed")
+              : t("copyLink")
+        }
         className={buttonClass}
+        data-status={copyStatus}
       >
-        {copied ? (
+        {copyStatus === "copied" ? (
           <>
-            <Check className="size-4 text-green-500" />
+            <Check className="size-4 text-primary" />
             {t("linkCopied")}
+          </>
+        ) : copyStatus === "failed" ? (
+          <>
+            <AlertCircle className="size-4 text-destructive" />
+            {t("copyFailed")}
           </>
         ) : (
           <>
@@ -113,6 +126,13 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
             {t("copyLink")}
           </>
         )}
+        <span role="status" aria-live="polite" className="sr-only">
+          {copyStatus === "copied"
+            ? t("linkCopied")
+            : copyStatus === "failed"
+              ? t("copyFailed")
+              : ""}
+        </span>
       </button>
     </div>
   );

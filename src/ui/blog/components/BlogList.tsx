@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { formatDate } from "@/lib/date";
 import { Badge } from "@/ui/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/components/ui/card";
-import { fadeInUp, staggerContainer } from "@/ui/lib/motion";
+import { fadeInUp } from "@/ui/lib/motion";
 import { formatTag } from "@/ui/blog/utils/formatTag";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, RefreshCw } from "lucide-react";
@@ -31,7 +31,7 @@ export function BlogList({ posts }: BlogListProps) {
 
   if (posts.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-center">
+      <div className="border-t border-border/40 py-20">
         <p className="text-muted-foreground text-lg">{t("noPosts")}</p>
       </div>
     );
@@ -44,16 +44,17 @@ export function BlogList({ posts }: BlogListProps) {
     <div>
       {featuredPost && <SpotlightCard post={featuredPost} />}
 
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="grid gap-6"
-      >
-        {regularPosts.map((post) => (
-          <motion.div key={post.slug} variants={fadeInUp}>
+      <div className="grid gap-6">
+        {regularPosts.map((post, i) => (
+          <motion.div
+            key={post.slug}
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: i * 0.05 }}
+          >
             <Link href={`/blog/${post.slug}`} className="group block">
-              <Card className="transition-colors hover:border-primary/50">
+              <Card className="transition-colors hover:border-foreground/30">
                 <CardHeader className="pb-3">
                   <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1">
@@ -74,7 +75,7 @@ export function BlogList({ posts }: BlogListProps) {
 
                   <div className="flex gap-4">
                     <div className="flex-1">
-                      <CardTitle className="text-xl transition-colors group-hover:text-primary">
+                      <CardTitle className="text-xl transition-colors group-hover:text-foreground">
                         {post.title}
                       </CardTitle>
                       <CardDescription className="mt-1 text-base">
@@ -105,7 +106,7 @@ export function BlogList({ posts }: BlogListProps) {
                         </Badge>
                       ))}
                     </div>
-                    <span className="inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+                    <span className="inline-flex items-center gap-1 text-sm font-medium text-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                       {t("readMore")}
                       <ArrowRight className="size-4" />
                     </span>
@@ -115,7 +116,7 @@ export function BlogList({ posts }: BlogListProps) {
             </Link>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

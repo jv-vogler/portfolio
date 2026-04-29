@@ -44,7 +44,15 @@ export function SkillConstellation() {
   return (
     <section ref={containerRef} className="dot-grid-dense relative min-h-screen py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">{t("heading")}</h2>
+        <h2 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">
+          <span
+            aria-hidden="true"
+            className="mr-3 font-mono text-xl font-normal text-muted-foreground sm:text-2xl"
+          >
+            § 02
+          </span>
+          {t("heading")}
+        </h2>
         <p className="mb-16 max-w-xl text-lg text-muted-foreground">{t("description")}</p>
 
         {/* Constellation — desktop */}
@@ -93,8 +101,8 @@ export function SkillConstellation() {
               isHovered={hoveredNode === node.id}
               isConnected={connectedNodes.has(node.id)}
               reducedMotion={!!prefersReducedMotion}
-              onHover={() => setHoveredNode(node.id)}
-              onLeave={() => setHoveredNode(null)}
+              onActivate={() => setHoveredNode(node.id)}
+              onDeactivate={() => setHoveredNode(null)}
             />
           ))}
         </div>
@@ -138,8 +146,8 @@ function ConstellationNodeEl({
   isHovered,
   isConnected,
   reducedMotion,
-  onHover,
-  onLeave,
+  onActivate,
+  onDeactivate,
 }: {
   node: ConstellationNode;
   index: number;
@@ -148,14 +156,16 @@ function ConstellationNodeEl({
   isHovered: boolean;
   isConnected: boolean;
   reducedMotion: boolean;
-  onHover: () => void;
-  onLeave: () => void;
+  onActivate: () => void;
+  onDeactivate: () => void;
 }) {
   const color = CLUSTER_COLORS[node.cluster];
 
   return (
-    <motion.div
-      className="absolute flex -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-center gap-1.5"
+    <motion.button
+      type="button"
+      aria-label={node.label}
+      className="absolute flex -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-center gap-1.5 rounded-full bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       style={{
         left: `${node.x}%`,
         top: `${node.y}%`,
@@ -179,8 +189,24 @@ function ConstellationNodeEl({
               delay: index * 0.08,
             }),
       }}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
+      onMouseEnter={onActivate}
+      onMouseLeave={onDeactivate}
+      onFocus={onActivate}
+      onBlur={onDeactivate}
+      onClick={() => {
+        // Toggle on click for touch / keyboard activation parity.
+        if (isHovered) {
+          onDeactivate();
+        } else {
+          onActivate();
+        }
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          onDeactivate();
+          (e.currentTarget as HTMLButtonElement).blur();
+        }
+      }}
     >
       <div
         className="flex size-14 items-center justify-center rounded-full border transition-shadow"
@@ -190,11 +216,13 @@ function ConstellationNodeEl({
           backgroundColor: `color-mix(in oklch, ${color} 20%, var(--background))`,
         }}
       >
-        <span style={{ color }}>
+        <span style={{ color }} aria-hidden="true">
           <TechIcon slug={node.slug} size={28} />
         </span>
       </div>
-      <span className="whitespace-nowrap text-xs font-medium text-foreground/80">{node.label}</span>
-    </motion.div>
+      <span className="whitespace-nowrap text-xs font-medium text-foreground/80" aria-hidden="true">
+        {node.label}
+      </span>
+    </motion.button>
   );
 }

@@ -38,9 +38,9 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
         whileHover={prefersReducedMotion ? undefined : { scale: 1.01 }}
         transition={{ duration: 0.2 }}
       >
-        {/* Diagonal teal accent */}
+        {/* Diagonal accent — quieted to muted neutral */}
         <div
-          className="absolute top-0 right-0 size-32 bg-primary/20"
+          className="absolute top-0 right-0 size-32 bg-accent/40"
           style={{
             clipPath: "polygon(100% 0, 0 0, 100% 100%)",
           }}
@@ -49,9 +49,9 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
 
         {/* Top row: photo + identity */}
         <div className="mb-8 flex items-center gap-6">
-          {/* Profile photo with teal ring */}
+          {/* Profile photo with neutral ring */}
           <motion.div
-            className="shrink-0 overflow-hidden rounded-full ring-4 ring-primary/30"
+            className="shrink-0 overflow-hidden rounded-full ring-4 ring-border"
             initial={prefersReducedMotion ? undefined : { clipPath: "circle(0%)" }}
             whileInView={prefersReducedMotion ? undefined : { clipPath: "circle(50%)" }}
             viewport={{ once: true }}
@@ -69,7 +69,7 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
 
           <div>
             <h2 className="text-2xl font-bold text-foreground sm:text-3xl">JV Vogler</h2>
-            <p className="text-lg text-primary">Software Engineer</p>
+            <p className="text-lg text-muted-foreground">Software Engineer</p>
             <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
               <MapPin className="size-3.5" />
               {t("location")}
@@ -97,7 +97,7 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
                   href={item.url}
                   target={isMailto ? undefined : "_blank"}
                   rel={isMailto ? undefined : "noopener noreferrer"}
-                  className="flex size-10 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground"
+                  className="flex size-11 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-colors hover:text-foreground"
                   variants={prefersReducedMotion ? undefined : fadeInUp}
                   aria-label={item.label}
                 >
@@ -111,13 +111,13 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
           <div className="flex flex-col items-end gap-1">
             <Link
               href="/about"
-              className="text-sm font-medium text-primary transition-colors hover:text-primary/80"
+              className="text-sm font-medium text-foreground transition-colors hover:underline"
             >
               {t("learnMore")} &rarr;
             </Link>
             <a
               href="#contact"
-              className="text-sm text-muted-foreground transition-colors hover:text-primary"
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });

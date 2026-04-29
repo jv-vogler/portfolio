@@ -84,6 +84,7 @@
     "sharePost": "Share post",
     "copyLink": "Copy link",
     "linkCopied": "Link copied!",
+    "copyFailed": "Copy failed — select and copy manually",
     "tableOfContents": "Table of Contents",
     "backToTop": "Back to top",
     "rss": "RSS Feed",

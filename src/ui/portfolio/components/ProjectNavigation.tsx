@@ -19,7 +19,10 @@ export async function ProjectNavigation({ prevProject, nextProject }: ProjectNav
             href={`/portfolio/${prevProject.slug}`}
             className="group flex items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
-            <ArrowLeft className="size-4 shrink-0 transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft
+              className="size-4 shrink-0 transition-transform group-hover:-translate-x-1 motion-safe:group-focus-visible:-translate-x-1"
+              aria-hidden="true"
+            />
             <span className="flex flex-col">
               <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60">
                 {t("prevProject")}
@@ -42,7 +45,10 @@ export async function ProjectNavigation({ prevProject, nextProject }: ProjectNav
               </span>
               <span className="font-medium text-foreground">{nextProject.title}</span>
             </span>
-            <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-1" />
+            <ArrowRight
+              className="size-4 shrink-0 transition-transform group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1"
+              aria-hidden="true"
+            />
           </Link>
         ) : (
           <div />

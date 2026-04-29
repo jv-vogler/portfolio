@@ -75,7 +75,7 @@ export default async function PortfolioDetailPage({
         {/* Back button */}
         <PortfolioBackButton />
 
-        {/* HUD chapter label + title */}
+        {/* Chapter marker + title */}
         <div className="mb-8">
           <div className="mb-3 flex items-center gap-3">
             <span
@@ -113,7 +113,7 @@ export default async function PortfolioDetailPage({
           )}
         </div>
 
-        {/* Screenshot with HUD styling */}
+        {/* Screenshot frame */}
         <div
           className="relative mb-8 aspect-video w-full overflow-hidden rounded-xl"
           style={{
@@ -127,26 +127,6 @@ export default async function PortfolioDetailPage({
               background: `linear-gradient(90deg, transparent 5%, ${accent} 50%, transparent 95%)`,
             }}
           />
-
-          {/* HUD corner brackets */}
-          <div className="pointer-events-none absolute inset-0 z-20">
-            <div
-              className="absolute top-0 left-0 h-5 w-5 border-t-2 border-l-2"
-              style={{ borderColor: accent, opacity: 0.5 }}
-            />
-            <div
-              className="absolute top-0 right-0 h-5 w-5 border-t-2 border-r-2"
-              style={{ borderColor: accent, opacity: 0.5 }}
-            />
-            <div
-              className="absolute bottom-0 left-0 h-5 w-5 border-b-2 border-l-2"
-              style={{ borderColor: accent, opacity: 0.5 }}
-            />
-            <div
-              className="absolute bottom-0 right-0 h-5 w-5 border-b-2 border-r-2"
-              style={{ borderColor: accent, opacity: 0.5 }}
-            />
-          </div>
 
           {project.thumbnail ? (
             <Image

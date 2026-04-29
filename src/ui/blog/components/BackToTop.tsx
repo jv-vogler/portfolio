@@ -36,7 +36,7 @@ export function BackToTop() {
           animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
           exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
-          className="fixed bottom-6 right-6 z-40 flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-md transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="fixed bottom-6 right-6 z-40 flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-md transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <ChevronUp className="size-5" />
         </motion.button>

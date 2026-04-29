@@ -19,37 +19,69 @@
   border-radius: calc(var(--radius) - 2px) !important;
   font-weight: 500 !important;
   font-size: 0.9em !important;
+  /* Wrap long tokens (filenames, hashes, URLs) inside the prose column
+     instead of overflowing horizontally on narrow viewports. Scoped to
+     inline code only — `pre *` is excluded above so code blocks still scroll. */
+  overflow-wrap: anywhere !important;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Colorways:
+   - Backgrounds (ink): lightness 0.145–0.269 with chroma 0.008 at hue 155
+     (brand-aligned tint, perceptually neutral but coherent with the accent).
+   - Foregrounds (paper-cream): lightness 0.96 with chroma 0.012 at hue 85
+     (warm off-white, replaces the flat oklch(0.985 0 0)). Muted variant
+     keeps lightness 0.708 with the same warmth.
+   - Brand green (--primary): oklch(0.65 0.24 155) — used as the one accent
+     moment per viewport (Principle 5).
+
+   Opacity-step convention (when applying /xx alpha to tokens):
+     /5   — barely-there hairlines, dot-grid texture
+     /10  — borders, dividers, faint surfaces (default border alpha)
+     /20  — subtle accent edges (e.g. ring-primary/20)
+     /30  — softened ring/border under panels
+     /40  — header/footer borders, secondary chrome
+     /50  — scrims (use --overlay token, not bg-black/50)
+     /60  — translucent surfaces over imagery
+     /80  — backdrop-blurred bars (sticky header, footer)
+   Stay on this ladder. If a value falls between steps, pick the next step
+   up rather than introducing /15, /25, etc. */
 :root {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --background: oklch(0.145 0.008 155);
+  --foreground: oklch(0.96 0.012 85);
+  --card: oklch(0.205 0.008 155);
+  --card-foreground: oklch(0.96 0.012 85);
+  --popover: oklch(0.205 0.008 155);
+  --popover-foreground: oklch(0.96 0.012 85);
   --primary: oklch(0.65 0.24 155);
-  --primary-foreground: oklch(0.145 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.145 0.008 155);
+  --secondary: oklch(0.269 0.008 155);
+  --secondary-foreground: oklch(0.96 0.012 85);
+  --muted: oklch(0.269 0.008 155);
+  --muted-foreground: oklch(0.708 0.008 85);
+  --accent: oklch(0.269 0.008 155);
+  --accent-foreground: oklch(0.96 0.012 85);
   --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
+  --destructive-foreground: oklch(0.96 0.012 85);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.65 0.24 155);
+  /* Crisp paper-cream focus ring. Decoupled from --primary so the brand
+     green is reserved for one intentional moment per viewport (Principle
+     5). Full alpha here because the base layer applies outline-ring/50
+     globally — a /60% token would land below the WCAG 2.2 SC 2.4.11
+     focus-appearance threshold against the ink background. */
+  --ring: oklch(0.85 0 0);
+  /* Modal/sheet scrim. Tokenised so dialog and sheet share one source of
+     truth instead of hard-coding bg-black/50 in each primitive. */
+  --overlay: oklch(0 0 0 / 0.5);
   --radius: 0.625rem;
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar: oklch(0.205 0.008 155);
+  --sidebar-foreground: oklch(0.96 0.012 85);
   --sidebar-primary: oklch(0.65 0.24 155);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-primary-foreground: oklch(0.96 0.012 85);
+  --sidebar-accent: oklch(0.269 0.008 155);
+  --sidebar-accent-foreground: oklch(0.96 0.012 85);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
@@ -79,6 +111,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
 
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -103,9 +136,20 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  /* Spectral is the archival display + body serif.
+     `font-sans` is kept as the Tailwind utility name to avoid renaming every
+     consumer; the underlying family is a serif by intent. */
+  --font-sans: var(--font-spectral), ui-serif, Georgia, Cambria, "Times New Roman", serif;
   --font-mono:
-    var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Modular ~1.25 scale with fluid clamp on display sizes.
+     Body sizes stay fixed; only display steps interpolate viewport-to-viewport. */
+  --text-display-sm: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  --text-display-md: clamp(1.875rem, 1.4rem + 2.4vw, 2.75rem);
+  --text-display-lg: clamp(2.25rem, 1.6rem + 3.2vw, 3.75rem);
+  --text-display-xl: clamp(3rem, 2rem + 5vw, 5.5rem);
+  --text-display-2xl: clamp(3.75rem, 2.4rem + 6.8vw, 7rem);
 }
 
 @layer base {
@@ -114,11 +158,11 @@
   }
   pre,
   code {
-    /* Reference --font-fira-code directly: --font-mono lives inside @theme inline
+    /* Reference --font-jetbrains-mono directly: --font-mono lives inside @theme inline
        which Tailwind v4 inlines into utilities rather than emitting a real CSS
        custom property, so var(--font-mono) resolves to nothing at runtime. */
     font-family:
-      var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-variant-ligatures: common-ligatures;
     font-feature-settings:
       "liga" 1,
@@ -127,6 +171,12 @@
 
   html {
     scroll-behavior: smooth;
+  }
+  body {
+    font-optical-sizing: auto;
+    font-feature-settings:
+      "kern" 1,
+      "onum" 1;
   }
   ::selection {
     background-color: var(--primary);
@@ -172,30 +222,9 @@
   }
 }
 
-/* Dot-grid texture system */
-.dot-grid {
-  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
-  background-size: 40px 40px;
-  color: oklch(0.8 0 0 / 0.04);
-}
-
+/* Dot-grid texture — confined to the skill constellation surface */
 .dot-grid-dense {
   background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
   background-size: 32px 32px;
   color: oklch(0.8 0 0 / 0.06);
-}
-
-/* Blinking cursor for terminal effects */
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-.animate-blink {
-  animation: blink 1s step-end infinite;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { Navigation } from "@/core/navigation";
-import { Link } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import { useFocusedReading } from "@/ui/blog/context/FocusedReadingContext";
 import { FocusedReadingToggle } from "@/ui/blog/components/FocusedReadingToggle";
 import { useCommandPalette } from "@/ui/components/CommandPaletteProvider";
@@ -23,6 +23,16 @@ export function Header() {
   const tCmd = useTranslations("commandPalette");
   const { toggle: togglePalette } = useCommandPalette();
   const { isFocused, isBlogPost } = useFocusedReading();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  const handleBrandClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!isHome) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  };
 
   return (
     <header
@@ -32,6 +42,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link
           href="/"
+          onClick={handleBrandClick}
           className={cn(
             "text-lg font-bold text-foreground transition-all duration-500 ease-in-out",
             isFocused && "pointer-events-none -translate-x-2 opacity-0",
@@ -102,7 +113,7 @@ export function Header() {
             onClick={togglePalette}
             aria-label={tCmd("placeholder")}
             className={cn(
-              "h-8 w-8 transition-all duration-500 ease-in-out sm:hidden",
+              "transition-all duration-500 ease-in-out sm:hidden",
               isFocused && "pointer-events-none opacity-0",
             )}
             tabIndex={isFocused ? -1 : undefined}

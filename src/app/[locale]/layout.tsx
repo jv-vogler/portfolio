@@ -14,7 +14,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
-import { Fira_Code, Poppins } from "next/font/google";
+import { Spectral, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import "../globals.css";
@@ -23,17 +23,22 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-const poppins = Poppins({
+// Spectral — editorial screen serif with high contrast and old-style character.
+// ExtraBold (800) for display, Regular/Light for body; old-style numerals via onum.
+const spectral = Spectral({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "optional",
+  weight: ["300", "400", "600", "700", "800"],
+  style: ["normal", "italic"],
+  variable: "--font-spectral",
+  display: "swap",
 });
 
-const firaCode = Fira_Code({
+// JetBrains Mono — characterful free mono (Berkeley-adjacent rhythm).
+// Replaces Fira Code; ligatures retained via font-feature-settings in globals.css.
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-fira-code",
-  display: "optional",
+  variable: "--font-jetbrains-mono",
+  display: "swap",
 });
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://jvogler.vercel.app";
@@ -127,7 +132,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className="dark">
-      <body className={`${poppins.variable} ${firaCode.variable} font-sans antialiased`}>
+      <body className={`${spectral.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <PersonJsonLd
           name="JV Vogler"
           jobTitle="Frontend Developer"

@@ -7,6 +7,7 @@
     "context7@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
     "chrome-devtools-mcp@claude-plugins-official": true,
-    "elements-of-style@superpowers-marketplace": true
+    "elements-of-style@superpowers-marketplace": true,
+    "impeccable@impeccable": true
   }
 }

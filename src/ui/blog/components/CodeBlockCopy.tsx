@@ -66,7 +66,7 @@ export function CodeBlockCopy({ code, language, highlightedHtml }: CodeBlockCopy
           aria-label={copied ? "Code copied!" : "Copy code"}
           className="absolute right-2 top-2 rounded border border-[#44475a] bg-[#282a36] p-1.5 text-[#6272a4] opacity-0 shadow-sm transition-opacity hover:text-[#f8f8f2] focus-visible:opacity-100 group-hover:opacity-100"
         >
-          {copied ? <Check className="size-3.5 text-green-500" /> : <Copy className="size-3.5" />}
+          {copied ? <Check className="size-3.5 text-primary" /> : <Copy className="size-3.5" />}
         </button>
       </div>
     </div>
