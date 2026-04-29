@@ -19,6 +19,11 @@
   border-radius: calc(var(--radius) - 2px) !important;
   font-weight: 500 !important;
   font-size: 0.9em !important;
+  /* Wrap long tokens (filenames, hashes, URLs) inside the prose column
+     instead of overflowing horizontally on narrow viewports. Scoped to
+     inline code only — `pre *` is excluded above so code blocks still scroll. */
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));

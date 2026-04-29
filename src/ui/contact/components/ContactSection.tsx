@@ -18,7 +18,7 @@ export function ContactSection() {
       className="dot-grid relative py-16 sm:py-24"
       aria-labelledby="contact-heading"
     >
-      <div className="mx-auto max-w-[800px] px-6">
+      <div className="mx-auto max-w-3xl px-6">
         <motion.div
           initial={prefersReducedMotion ? undefined : { opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : undefined}

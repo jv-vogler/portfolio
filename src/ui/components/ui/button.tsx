@@ -23,10 +23,13 @@ const buttonVariants = cva(
         xs: "h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
-        "icon-xs": "size-6 rounded-md [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm": "size-8",
-        "icon-lg": "size-10",
+        // Icon variants: visual `size-*` is preserved for component density,
+        // while `min-h-11 min-w-11` enforces a 44×44 hit area to satisfy
+        // WCAG 2.2 SC 2.5.8 (Enhanced AAA) and Apple/Google touch guidelines.
+        icon: "size-9 min-h-11 min-w-11",
+        "icon-xs": "size-6 min-h-11 min-w-11 rounded-md [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "size-8 min-h-11 min-w-11",
+        "icon-lg": "size-10 min-h-11 min-w-11",
       },
     },
     defaultVariants: {

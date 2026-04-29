@@ -134,7 +134,7 @@ export function MobileNav({ isFocused = false }: { isFocused?: boolean }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${item.label} — ${tA11y("opensInNewTab")}`}
-                className="flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="flex size-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               >
                 {SOCIAL_ICONS[item.slug] ?? <ExternalLink className="size-4" />}
               </a>

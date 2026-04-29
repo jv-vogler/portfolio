@@ -97,7 +97,7 @@ export function AboutCard({ profileImage, elevatorPitch }: AboutCardProps) {
                   href={item.url}
                   target={isMailto ? undefined : "_blank"}
                   rel={isMailto ? undefined : "noopener noreferrer"}
-                  className="flex size-10 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-colors hover:text-foreground"
+                  className="flex size-11 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-colors hover:text-foreground"
                   variants={prefersReducedMotion ? undefined : fadeInUp}
                   aria-label={item.label}
                 >
